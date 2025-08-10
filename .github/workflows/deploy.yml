@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '23.11.1'
-          cache-dependency-path: './frontend/pnpm-lock.yaml'
+          cache-dependency-path: './pnpm-lock.yaml'
           cache: 'pnpm'
 
       - name: Install Dependencies
