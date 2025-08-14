@@ -24,41 +24,40 @@ docker run -p 8080:80 --name mfe-orchestrator-hub lory1990/microfrontend-orchest
 
 3. Once the page loads you can enter your `email`, `password` and first project name to start using the Hub
 
-> Remember that this configuration is for test porposes only. If you want to run the container in a test / production enviroment follow the [Docker Compose Installation](./docker-compose.md) guide.
+> Remember that this configuration is for test purposes only. If you want to run the container in a test / production environment follow the [Docker Compose Installation](./docker-compose.md) guide.
 
 ## Container variables
-| Variabile | Valore | Descrizione |
-|-----------|--------|-------------|
-| `FRONTEND_URL` | `http://localhost:3000` | URL dell’applicazione frontend. |
-| `REGISTRATION_ALLOWED` | `false` | Se `true` permette la registrazione di nuovi utenti. |
-| `ALLOW_EMBEDDED_LOGIN` | `true` | Se `true` abilita il sistema di login all'interno dell'applicazione |
-| `MICROFRONTEND_HOST_FOLDER`| `/var/microfrontends` | Cartella contenente i microfrontend host. |
-| `NOSQL_DATABASE_URL` | `mongodb://localhost:27017/microfrontend-orchestrator` | URL di connessione al database MongoDB. |
-| `REDIS_URL` | `redis://localhost:6379` | URL di connessione al server Redis. |
-| `REDIS_PASSWORD` | *(vuoto)* | Password per l’accesso a Redis (se impostata). |
-| `EMAIL_SMTP_HOST` | `smtp.example.com` | Host del server SMTP per inviare email. |
-| `EMAIL_SMTP_PORT` | `587` | Porta del server SMTP (es. 587 per TLS). |
-| `EMAIL_SMTP_SECURE` | `false` | Se `true` usa connessione sicura (SSL/TLS). |
-| `EMAIL_SMTP_USER` | *(vuoto)* | Nome utente per autenticazione SMTP. |
-| `EMAIL_SMTP_PASSWORD` | *(vuoto)* | Password per autenticazione SMTP. |
-| `EMAIL_SMTP_FROM` | `no-reply@example.com` | Indirizzo email del mittente. |
-| `JWT_SECRET` | `your-secret-key-here` | Chiave segreta per generazione e validazione JWT. |
-| `AUTH0_DOMAIN` | *(vuoto)* | Dominio Auth0 del tenant. |
-| `AUTH0_CLIENT_ID` | *(vuoto)* | Client ID dell’applicazione in Auth0. |
-| `AUTH0_CLIENT_SECRET` | *(vuoto)* | Secret dell’applicazione in Auth0. |
-| `AUTH0_AUDIENCE` | *(vuoto)* | API Audience configurato in Auth0. |
-| `AUTH0_SECRET` | *(vuoto)* | Secret per la validazione dei token Auth0. |
-| `AZURE_ENTRAID_TENANT_ID` | *(vuoto)* | ID del tenant Azure Entra ID. |
-| `AZURE_ENTRAID_CLIENT_ID` | *(vuoto)* | Client ID dell’applicazione registrata in Azure. |
-| `AZURE_ENTRAID_CLIENT_SECRET` | *(vuoto)* | Secret dell’applicazione registrata in Azure. |
-| `AZURE_ENTRAID_REDIRECT_URI` | *(vuoto)* | URI di redirect per l’autenticazione Azure. |
-| `AZURE_ENTRAID_AUTHORITY` | `https://login.microsoftonline.com` | URL dell’autorità di autenticazione. |
-| `AZURE_ENTRAID_SCOPES` | `openid profile email` | Scopes richiesti durante il login. |
-| `AZURE_ENTRAID_API_AUDIENCE` | *(vuoto)* | Identificatore dell’API protetta in Azure. |
-| `GOOGLE_CLIENT_ID` | *(vuoto)* | Client ID per autenticazione Google OAuth. |
-| `GOOGLE_CLIENT_SECRET` | *(vuoto)* | Client Secret per autenticazione Google OAuth. |
-| `GOOGLE_REDIRECT_URI` | *(vuoto)* | URI di redirect per Google OAuth. |
-| `GOOGLE_AUTH_SCOPE` | `https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile` | Scopes richiesti per ottenere email e profilo Google. |
-| `ALLOWED_ORIGINS` | *(vuoto)* | Lista di URL consentiti per le richieste cross-origin. |
-| `LOG_LEVEL` | `info` *(debug/info/warn/error)* | Livello di log. |
-
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `FRONTEND_URL` | `http://localhost:3000` | URL of the frontend application. |
+| `REGISTRATION_ALLOWED` | `false` | If `true`, allows new user registration. |
+| `ALLOW_EMBEDDED_LOGIN` | `true` | If `true`, enables the login system within the application. |
+| `MICROFRONTEND_HOST_FOLDER`| `/var/microfrontends` | Folder containing the host microfrontends. |
+| `NOSQL_DATABASE_URL` | `mongodb://localhost:27017/microfrontend-orchestrator` | MongoDB database connection URL. |
+| `REDIS_URL` | `redis://localhost:6379` | Redis server connection URL. |
+| `REDIS_PASSWORD` | *(empty)* | Password for Redis access (if set). |
+| `EMAIL_SMTP_HOST` | `smtp.example.com` | SMTP server host for sending emails. |
+| `EMAIL_SMTP_PORT` | `587` | SMTP server port (e.g., 587 for TLS). |
+| `EMAIL_SMTP_SECURE` | `false` | If `true`, uses secure connection (SSL/TLS). |
+| `EMAIL_SMTP_USER` | *(empty)* | Username for SMTP authentication. |
+| `EMAIL_SMTP_PASSWORD` | *(empty)* | Password for SMTP authentication. |
+| `EMAIL_SMTP_FROM` | `no-reply@example.com` | Sender email address. |
+| `JWT_SECRET` | `your-secret-key-here` | Secret key for JWT generation and validation. |
+| `AUTH0_DOMAIN` | *(empty)* | Auth0 tenant domain. |
+| `AUTH0_CLIENT_ID` | *(empty)* | Client ID of the Auth0 application. |
+| `AUTH0_CLIENT_SECRET` | *(empty)* | Client secret of the Auth0 application. |
+| `AUTH0_AUDIENCE` | *(empty)* | API Audience configured in Auth0. |
+| `AUTH0_SECRET` | *(empty)* | Secret for Auth0 token validation. |
+| `AZURE_ENTRAID_TENANT_ID` | *(empty)* | Azure Entra ID tenant ID. |
+| `AZURE_ENTRAID_CLIENT_ID` | *(empty)* | Client ID of the registered Azure application. |
+| `AZURE_ENTRAID_CLIENT_SECRET` | *(empty)* | Client secret of the registered Azure application. |
+| `AZURE_ENTRAID_REDIRECT_URI` | *(empty)* | Redirect URI for Azure authentication. |
+| `AZURE_ENTRAID_AUTHORITY` | `https://login.microsoftonline.com` | Authentication authority URL. |
+| `AZURE_ENTRAID_SCOPES` | `openid profile email` | Required scopes during login. |
+| `AZURE_ENTRAID_API_AUDIENCE` | *(empty)* | Protected API identifier in Azure. |
+| `GOOGLE_CLIENT_ID` | *(empty)* | Client ID for Google OAuth authentication. |
+| `GOOGLE_CLIENT_SECRET` | *(empty)* | Client secret for Google OAuth authentication. |
+| `GOOGLE_REDIRECT_URI` | *(empty)* | Redirect URI for Google OAuth. |
+| `GOOGLE_AUTH_SCOPE` | `https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile` | Required scopes to get Google email and profile. |
+| `ALLOWED_ORIGINS` | *(empty)* | List of allowed URLs for cross-origin requests. |
+| `LOG_LEVEL` | `info` *(debug/info/warn/error)* | Logging level. |
