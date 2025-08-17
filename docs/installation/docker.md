@@ -53,7 +53,6 @@ docker run -p 8080:80 --name mfe-orchestrator-hub lory1990/microfrontend-orchest
 | `AZURE_ENTRAID_SCOPES` | `openid profile email` | Required scopes during login. |
 | `AZURE_ENTRAID_API_AUDIENCE` | *(empty)* | Protected API identifier in Azure. |
 | `GOOGLE_CLIENT_ID` | *(empty)* | Client ID for Google OAuth authentication. |
-| `GOOGLE_CLIENT_SECRET` | *(empty)* | Client secret for Google OAuth authentication. |
 | `GOOGLE_REDIRECT_URI` | *(empty)* | Redirect URI for Google OAuth. |
 | `GOOGLE_AUTH_SCOPE` | `https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile` | Required scopes to get Google email and profile. |
 | `ALLOWED_ORIGINS` | *(empty)* | List of allowed URLs for cross-origin requests comma separated. |
