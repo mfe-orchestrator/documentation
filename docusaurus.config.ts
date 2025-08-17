@@ -54,7 +54,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/mfe-orchestrator-hub/documentation',
+            'https://github.com/mfe-orchestrator-hub/documentation/blob/main',
         },
         blog: {
           showReadingTime: true,

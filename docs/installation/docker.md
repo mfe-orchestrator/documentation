@@ -48,7 +48,6 @@ docker run -p 8080:80 --name mfe-orchestrator-hub lory1990/microfrontend-orchest
 | `AUTH0_AUDIENCE` | *(empty)* | API Audience configured in Auth0. |
 | `AZURE_ENTRAID_TENANT_ID` | *(empty)* | Azure Entra ID tenant ID. |
 | `AZURE_ENTRAID_CLIENT_ID` | *(empty)* | Client ID of the registered Azure application. |
-| `AZURE_ENTRAID_CLIENT_SECRET` | *(empty)* | Client secret of the registered Azure application. |
 | `AZURE_ENTRAID_REDIRECT_URI` | *(empty)* | Redirect URI for Azure authentication. |
 | `AZURE_ENTRAID_AUTHORITY` | `https://login.microsoftonline.com` | Authentication authority URL. |
 | `AZURE_ENTRAID_SCOPES` | `openid profile email` | Required scopes during login. |
