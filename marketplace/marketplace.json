@@ -1,0 +1,84 @@
+[
+    {
+        "name": "Vite - remote Template",
+        "description": "Template for remote microfrontends using Vite",
+        "version": "1.0.0",
+        "author": "Lorenzo De Francesco",
+        "license": "MIT",
+        "githubRepo": "https://github.com/mfe-orchestrator-hub/template-vite-remote",
+        "tags": [
+            "vite",
+            "remote"
+        ],
+        "type": "remote",
+        "compiler": "vite",
+        "framework": "React",
+        "icon": "ViteIcon"        
+    },
+    {
+        "name": "Vite - host Template",
+        "comingSoon": true,
+        "description": "Template for host microfrontends using Vite",
+        "tags": [
+            "vite",
+            "host"
+        ],
+        "type": "host",
+        "compiler": "vite",
+        "framework": "React",
+        "icon": "ViteIcon"
+        
+    },
+    {
+        "name": "Webpack - remote Template",
+        "comingSoon": true,
+        "description": "Template for remote microfrontends using Webpack",
+        "tags": [
+            "webpack",
+            "remote"
+        ],
+        "type": "remote",
+        "compiler": "webpack",
+        "framework": "React",
+        "icon": "WebpackIcon"
+    },
+    {
+        "name": "Webpack - host Template",
+        "comingSoon": true,
+        "description": "Template for host microfrontends using Webpack",
+        "tags": [
+            "webpack",
+            "host"
+        ],
+        "type": "host",
+        "compiler": "webpack",
+        "framework": "React",
+        "icon": "WebpackIcon"
+    },
+    {
+        "name": "Web Component - remote Template",
+        "comingSoon": true,
+        "description": "Template for remote microfrontends using Web Component",
+        "tags": [
+            "webcomponent",
+            "remote"
+        ],
+        "type": "remote",
+        "compiler": "webcomponent",
+        "framework": "React",
+        "icon": "WebComponentIcon"
+    },
+    {
+        "name": "Web Component - host Template",
+        "comingSoon": true,
+        "description": "Template for host microfrontends using Web Component",
+        "tags": [
+            "webcomponent",
+            "host"
+        ],
+        "type": "host",
+        "compiler": "webcomponent",
+        "framework": "React",
+        "icon": "WebComponentIcon"
+    }
+]
