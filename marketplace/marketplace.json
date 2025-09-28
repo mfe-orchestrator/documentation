@@ -13,7 +13,7 @@
         "type": "remote",
         "compiler": "vite",
         "framework": "React",
-        "icon": "ViteIcon"        
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/vite-logo.png"        
     },
     {
         "name": "Vite - host Template",
@@ -26,7 +26,7 @@
         "type": "host",
         "compiler": "vite",
         "framework": "React",
-        "icon": "ViteIcon"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/vite-logo.png"
         
     },
     {
@@ -40,7 +40,7 @@
         "type": "remote",
         "compiler": "webpack",
         "framework": "React",
-        "icon": "WebpackIcon"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
         "name": "Webpack - host Template",
@@ -53,7 +53,7 @@
         "type": "host",
         "compiler": "webpack",
         "framework": "React",
-        "icon": "WebpackIcon"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
         "name": "Web Component - remote Template",
@@ -66,7 +66,7 @@
         "type": "remote",
         "compiler": "webcomponent",
         "framework": "React",
-        "icon": "WebComponentIcon"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webcomponents.png"
     },
     {
         "name": "Web Component - host Template",
@@ -79,6 +79,6 @@
         "type": "host",
         "compiler": "webcomponent",
         "framework": "React",
-        "icon": "WebComponentIcon"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webcomponents.png"
     }
 ]
