@@ -7,6 +7,7 @@
         "author": "Lorenzo De Francesco",
         "license": "MIT",
         "repo": "https://github.com/mfe-orchestrator-hub/template-vite-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator-hub/template-vite-remote/archive/refs/heads/main.zip",
         "tags": [
             "template"
         ],
