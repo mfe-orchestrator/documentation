@@ -5,7 +5,7 @@
         "version": "1.0.0",
         "author": "Lorenzo De Francesco",
         "license": "MIT",
-        "githubRepo": "https://github.com/mfe-orchestrator-hub/template-vite-remote",
+        "repo": "https://github.com/mfe-orchestrator-hub/template-vite-remote",
         "tags": [
             "vite",
             "remote"
