@@ -59,7 +59,8 @@
     {
         "name": "Web Component - remote Template",
         "slug": "webcomponent-remote-react",
-        "comingSoon": true,
+        "repo": "https://github.com/mfe-orchestrator-hub/template-webcomponent-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator-hub/template-webcomponent-remote/archive/refs/heads/main.zip",
         "description": "Template for remote microfrontends using Web Component",
         "tags": [
             "template"
