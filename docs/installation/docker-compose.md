@@ -17,7 +17,7 @@ Before you begin, ensure you have the following prerequisites:
 
 ## Start the configuration container
 
-1. Download the follwoing [docker-compose.yaml](https://github.com/lory1990/micro-frontend-orchestrator-hub/blob/main/docker-compose.yaml) file or create a `docker-compose.yaml` file with the following content:
+1. Download the follwoing [docker-compose.yaml](https://github.com/mfe-orchestrator/mfe-orchestrator/blob/main/docker-compose.yaml) file or create a `docker-compose.yaml` file with the following content:
 
 ```
 services:

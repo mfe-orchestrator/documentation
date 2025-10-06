@@ -15,14 +15,14 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://mfe-orchestrator-hub.github.io',
+  url: 'https://mfe-orchestrator.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/documentation',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'mfe-orchestrator-hub', // Usually your GitHub org/user name.
+  organizationName: 'mfe-orchestrator', // Usually your GitHub org/user name.
   projectName: 'Microfrontend Orchestrator', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -54,7 +54,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/mfe-orchestrator-hub/documentation/blob/main',
+            'https://github.com/mfe-orchestrator/documentation/blob/main',
         },
         blog: {
           showReadingTime: true,
@@ -65,7 +65,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/mfe-orchestrator-hub/documentation',
+            'https://github.com/mfe-orchestrator/documentation',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -96,7 +96,7 @@ const config: Config = {
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/mfe-orchestrator-hub',
+          href: 'https://github.com/mfe-orchestrator',
           label: 'GitHub',
           position: 'right',
         },

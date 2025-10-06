@@ -6,15 +6,15 @@
         "version": "1.0.0",
         "author": "Lorenzo De Francesco",
         "license": "MIT",
-        "repo": "https://github.com/mfe-orchestrator-hub/template-vite-remote",
-        "zipUrl": "https://github.com/mfe-orchestrator-hub/template-vite-remote/archive/refs/heads/main.zip",
+        "repo": "https://github.com/mfe-orchestrator/template-vite-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-vite-remote/archive/refs/heads/main.zip",
         "tags": [
             "template"
         ],
         "type": "remote",
         "compiler": "vite",
         "framework": "React",
-        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/vite-logo.png"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
         "name": "Vite - host Template",
@@ -27,7 +27,7 @@
         "type": "host",
         "compiler": "vite",
         "framework": "React",
-        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/vite-logo.png"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
 
     },
     {
@@ -41,7 +41,7 @@
         "type": "remote",
         "compiler": "webpack",
         "framework": "React",
-        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webpack-logo.png"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
         "name": "Webpack - host Template",
@@ -54,13 +54,13 @@
         "type": "host",
         "compiler": "webpack",
         "framework": "React",
-        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webpack-logo.png"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
         "name": "Web Component - remote Template",
         "slug": "webcomponent-remote-react",
-        "repo": "https://github.com/mfe-orchestrator-hub/template-webcomponent-remote",
-        "zipUrl": "https://github.com/mfe-orchestrator-hub/template-webcomponent-remote/archive/refs/heads/main.zip",
+        "repo": "https://github.com/mfe-orchestrator/template-webcomponent-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-webcomponent-remote/archive/refs/heads/main.zip",
         "description": "Template for remote microfrontends using Web Component",
         "tags": [
             "template"
@@ -68,7 +68,7 @@
         "type": "remote",
         "compiler": "webcomponent",
         "framework": "React",
-        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webcomponents.png"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webcomponents.png"
     },
     {
         "name": "Web Component - host Template",
@@ -81,6 +81,6 @@
         "type": "host",
         "compiler": "webcomponent",
         "framework": "React",
-        "icon": "https://raw.githubusercontent.com/mfe-orchestrator-hub/documentation/refs/heads/main/marketplace/webcomponents.png"
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webcomponents.png"
     }
 ]
