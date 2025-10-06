@@ -6,7 +6,7 @@ sidebar_position: 2
 
 This page provides instructions to install MFE Orchestrator Hub using Docker Compose.
 
-You can find the official docker repo on [dockerhub](https://hub.docker.com/r/lory1990/microfrontend-orchestrator-hub)
+You can find the official docker repo on [dockerhub](https://hub.docker.com/r/lory1990/mfe-orchestrator-hub)
 
 ## Prerequisites
 
@@ -53,9 +53,9 @@ services:
       timeout: 5s
       retries: 5
 
-  microfrontend-orchestrator-hub:
-    image: lory1990/microfrontend-orchestrator-hub:latest
-    container_name: microfrontend-orchestrator-hub
+  mfe-orchestrator:
+    image: lory1990/mfe-orchestrator:latest
+    container_name: mfe-orchestrator
     restart: always
     ports:
       - '8080:80'

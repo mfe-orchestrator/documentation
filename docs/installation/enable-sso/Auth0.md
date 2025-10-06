@@ -49,7 +49,7 @@ If you are using docker comse add those variables to `docker-compose.yml` file u
 
 ```yaml
 services:
-  microfrontend-orchestrator-hub:
+  mfe-orchestrator:
     environment:
       - AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
       - AUTH0_ISSUER=${AUTH0_ISSUER}

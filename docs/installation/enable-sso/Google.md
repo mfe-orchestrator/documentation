@@ -52,7 +52,7 @@ If you are using Docker Compose, add these variables to your `docker-compose.yml
 
 ```yaml
 services:
-  microfrontend-orchestrator-hub:
+  mfe-orchestrator:
     environment:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI}

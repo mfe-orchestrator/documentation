@@ -41,7 +41,7 @@ If you are using Docker Compose, add these variables to your `docker-compose.yml
 
 ```yaml
 services:
-  microfrontend-orchestrator-hub:
+  mfe-orchestrator:
     environment:
       - AZURE_ENTRAID_TENANT_ID=${AZURE_ENTRAID_TENANT_ID}
       - AZURE_ENTRAID_CLIENT_ID=${AZURE_ENTRAID_CLIENT_ID}
