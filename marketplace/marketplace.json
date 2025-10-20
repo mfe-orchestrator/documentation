@@ -19,8 +19,10 @@
     {
         "name": "Vite - host Template",
         "slug": "vite-host-react",
-        "comingSoon": true,
+        "version": "1.0.0",
         "description": "Template for host microfrontends using Vite",
+        "repo": "https://github.com/mfe-orchestrator/template-vite-host",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-vite-host/archive/refs/heads/main.zip",
         "tags": [
             "template"
         ],
@@ -28,7 +30,6 @@
         "compiler": "vite",
         "framework": "React",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
-
     },
     {
         "name": "Webpack - remote Template",
