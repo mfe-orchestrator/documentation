@@ -14,7 +14,6 @@
         "type": "remote",
         "compiler": "vite",
         "framework": "React",
-        "pipelineFolder": "remote/vite",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
@@ -30,7 +29,6 @@
         "type": "host",
         "compiler": "vite",
         "framework": "React",
-        "pipelineFolder": "host/vite",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
