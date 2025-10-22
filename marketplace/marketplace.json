@@ -12,6 +12,7 @@
             "template"
         ],
         "type": "remote",
+        "entryPoint": "assets/remoteEntry.js",
         "compiler": "vite",
         "framework": "React",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
@@ -27,6 +28,7 @@
             "template"
         ],
         "type": "host",
+        "entryPoint": "assets/remoteEntry.js",
         "compiler": "vite",
         "framework": "React",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
