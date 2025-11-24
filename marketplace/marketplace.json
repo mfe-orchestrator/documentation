@@ -44,12 +44,12 @@
         "type": "host",
         "entryPoint": "assets/remoteEntry.js",
         "compiler": "vite",
-        "framework": "React",
+        "framework": "Angular",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
         "name": "Vite & Angular - remote Template",
-        "slug": "vite-remote-react",
+        "slug": "vite-remote-angular",
         "description": "Template for remote microfrontends using Vite",
         "version": "1.0.0",
         "author": "Lorenzo De Francesco",
@@ -60,7 +60,7 @@
         "type": "remote",
         "entryPoint": "assets/remoteEntry.js",
         "compiler": "vite",
-        "framework": "React",
+        "framework": "Angular",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
@@ -74,7 +74,7 @@
         "type": "host",
         "entryPoint": "assets/remoteEntry.js",
         "compiler": "vite",
-        "framework": "React",
+        "framework": "Vue",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
@@ -90,7 +90,7 @@
         "type": "remote",
         "entryPoint": "assets/remoteEntry.js",
         "compiler": "vite",
-        "framework": "React",
+        "framework": "Vue",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
@@ -122,6 +122,60 @@
         "type": "host",
         "compiler": "webpack",
         "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
+    },
+    {
+        "name": "Webpack & Angular - remote Template",
+        "slug": "webpack-remote-angular",
+        "comingSoon" : true,
+        "description": "Template for remote microfrontends using Webpack",
+        "tags": [
+            "template"
+        ],
+        "entryPoint": "remoteEntry.js",
+        "type": "remote",
+        "compiler": "webpack",
+        "framework": "Angular",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
+    },
+    {
+        "name": "Webpack & Angular - host Template",
+        "slug": "webpack-host-angular",
+        "comingSoon" : true,
+        "description": "Template for host microfrontends using Webpack",
+        "tags": [
+            "template"
+        ],
+        "type": "host",
+        "compiler": "webpack",
+        "framework": "Angular",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
+    },
+    {
+        "name": "Webpack & Vue - remote Template",
+        "slug": "webpack-remote-vue",
+        "comingSoon" : true,
+        "description": "Template for remote microfrontends using Webpack",
+        "tags": [
+            "template"
+        ],
+        "entryPoint": "remoteEntry.js",
+        "type": "remote",
+        "compiler": "webpack",
+        "framework": "Vue",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
+    },
+    {
+        "name": "Webpack & Vue - host Template",
+        "slug": "webpack-host-vue",
+        "comingSoon" : true,
+        "description": "Template for host microfrontends using Webpack",
+        "tags": [
+            "template"
+        ],
+        "type": "host",
+        "compiler": "webpack",
+        "framework": "Vue",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
