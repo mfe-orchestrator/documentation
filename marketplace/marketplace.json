@@ -50,10 +50,12 @@
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
-        "name": "Webpack - host Template",
+        "name": "Webpack & React - host Template",
         "slug": "webpack-host-react",
-        "comingSoon": true,
+        "version": "1.0.0",
         "description": "Template for host microfrontends using Webpack",
+        "repo": "https://github.com/mfe-orchestrator/template-webpack-react-host",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-react-host/archive/refs/heads/main.zip",
         "tags": [
             "template"
         ],
