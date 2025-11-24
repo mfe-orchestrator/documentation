@@ -34,6 +34,66 @@
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
+        "name": "Vite & Angular - host Template",
+        "slug": "vite-host-angular",
+        "comingSoon": true,
+        "description": "Template for host microfrontends using Vite",
+        "tags": [
+            "template"
+        ],
+        "type": "host",
+        "entryPoint": "assets/remoteEntry.js",
+        "compiler": "vite",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
+    },
+    {
+        "name": "Vite & Angular - remote Template",
+        "slug": "vite-remote-react",
+        "description": "Template for remote microfrontends using Vite",
+        "version": "1.0.0",
+        "author": "Lorenzo De Francesco",
+        "license": "MIT",
+        "tags": [
+            "template"
+        ],
+        "type": "remote",
+        "entryPoint": "assets/remoteEntry.js",
+        "compiler": "vite",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
+    },
+    {
+        "name": "Vite & Vue - host Template",
+        "slug": "vite-host-vue",
+        "comingSoon": true,
+        "description": "Template for host microfrontends using Vite",
+        "tags": [
+            "template"
+        ],
+        "type": "host",
+        "entryPoint": "assets/remoteEntry.js",
+        "compiler": "vite",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
+    },
+    {
+        "name": "Vite & Vue - remote Template",
+        "slug": "vite-remote-vue",
+        "description": "Template for remote microfrontends using Vite",
+        "version": "1.0.0",
+        "author": "Lorenzo De Francesco",
+        "license": "MIT",
+        "tags": [
+            "template"
+        ],
+        "type": "remote",
+        "entryPoint": "assets/remoteEntry.js",
+        "compiler": "vite",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
+    },
+    {
         "name": "Webpack & React - remote Template",
         "slug": "webpack-remote-react",
         "version": "1.0.0",
