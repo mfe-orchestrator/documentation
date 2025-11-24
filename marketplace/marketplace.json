@@ -1,6 +1,6 @@
 [
     {
-        "name": "Vite - remote Template",
+        "name": "Vite & React - remote Template",
         "slug": "vite-remote-react",
         "description": "Template for remote microfrontends using Vite",
         "version": "1.0.0",
@@ -18,7 +18,7 @@
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
-        "name": "Vite - host Template",
+        "name": "Vite & React - host Template",
         "slug": "vite-host-react",
         "version": "1.0.0",
         "description": "Template for host microfrontends using Vite",
@@ -34,13 +34,16 @@
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/vite-logo.png"
     },
     {
-        "name": "Webpack - remote Template",
+        "name": "Webpack & React - remote Template",
         "slug": "webpack-remote-react",
-        "comingSoon": true,
+        "version": "1.0.0",
         "description": "Template for remote microfrontends using Webpack",
+        "repo": "https://github.com/mfe-orchestrator/template-webpack-react-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-react-remote/archive/refs/heads/main.zip",
         "tags": [
             "template"
         ],
+        "entryPoint": "remoteEntry.js",
         "type": "remote",
         "compiler": "webpack",
         "framework": "React",
