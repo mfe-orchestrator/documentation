@@ -81,7 +81,7 @@
         "name": "Vite & Vue - remote Template",
         "slug": "vite-remote-vue",
         "description": "Template for remote microfrontends using Vite",
-        "version": "1.0.0",
+        "comingSoon": true,
         "author": "Lorenzo De Francesco",
         "license": "MIT",
         "tags": [
