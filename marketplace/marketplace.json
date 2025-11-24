@@ -180,7 +180,7 @@
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webpack-logo.png"
     },
     {
-        "name": "Web Component - remote Template",
+        "name": "Web Component & React - remote Template",
         "slug": "webcomponent-remote-react",
         "repo": "https://github.com/mfe-orchestrator/template-webcomponent-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webcomponent-remote/archive/refs/heads/main.zip",
@@ -194,7 +194,7 @@
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webcomponents.png"
     },
     {
-        "name": "Web Component - host Template",
+        "name": "Web Component & React - host Template",
         "slug": "webcomponent-host-react",
         "comingSoon": true,
         "description": "Template for host microfrontends using Web Component",
