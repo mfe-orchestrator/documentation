@@ -50,6 +50,7 @@
     {
         "name": "Vite & Angular - remote Template",
         "slug": "vite-remote-angular",
+        "comingSoon": true,
         "description": "Template for remote microfrontends using Vite",
         "version": "1.0.0",
         "author": "Lorenzo De Francesco",
