@@ -24,6 +24,11 @@ for production traffic splitting.
 Open the microfrontend, expand **Canary release** and turn on **Enable canary**. You then
 configure two independent things: **who** gets the canary, and **what** the canary is.
 
+In the current release the section is marked *Coming soon* and its switch is disabled, so the
+settings below cannot yet be edited from the console:
+
+![The Canary Settings section of the microfrontend form, disabled and marked Coming soon](../assets/microfrontend-canary.png)
+
 ### Who — the canary type
 
 | Type | Behaviour |
@@ -65,6 +70,8 @@ version of that deployment.
 
 This page currently shows a *Coming soon* notice: enrolment is not yet manageable from the
 console.
+
+![The Canary Users page showing a Coming soon notice](../assets/canary-users.png)
 
 ## Practical advice
 

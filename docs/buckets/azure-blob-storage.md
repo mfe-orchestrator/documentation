@@ -79,6 +79,8 @@ grants more than is needed. Contributor at container scope is the right level.
 Go to **Settings → Storages → New Storage** and select **Azure Blob Storage**. The fields depend on
 the **Authentication Type** you pick:
 
+![The three authentication types offered for Azure Blob Storage](../assets/storage-form-azure-auth-types.png)
+
 **Connection String**
 
 | Field | Value |
@@ -106,6 +108,8 @@ the **Authentication Type** you pick:
 | **Client ID** | Application (client) ID |
 | **Client Secret** | The secret value from step C3 |
 | **Path** | Optional prefix inside the container |
+
+![The Azure Blob Storage form with Connection String selected](../assets/storage-form-azure-blob.png)
 
 Save.
 

@@ -68,6 +68,8 @@ MFE Orchestrator to `assets/remoteEntry.js`.
 This is the part MFE Orchestrator generates. Open **Integration → Frontend integration**, select
 your host, and copy the **Vite** tab:
 
+![The Vite tab of the Integration page, with the remotes of the selected host filled in](../assets/integration-vite.png)
+
 ```js
 // vite.config.js
 import { defineConfig } from 'vite';

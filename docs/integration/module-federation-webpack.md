@@ -47,6 +47,8 @@ customised `output.publicPath` or the filename.
 
 Open **Integration → Frontend integration**, select your host and copy the **Webpack** tab:
 
+![The Webpack tab of the Integration page, using the name@url remote syntax](../assets/integration-webpack.png)
+
 ```js
 // webpack.config.js
 const { ModuleFederationPlugin } = require('webpack').container;

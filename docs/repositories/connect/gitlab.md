@@ -18,11 +18,11 @@ This guide will walk you through connecting your GitLab repositories to MFE Orch
 ## Step 1: Navigate to Code Repositories
 
 1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator
-![alt text](./assets/azure-dev-ops-image.png)
+![The Code Repositories page](../../assets/code-repositories.png)
 2. Click the **Add Repository** button
-![alt text](./assets/azure-dev-ops-image-1.png)
+![The Add Repository dialog, listing the available providers](../../assets/add-repository-provider.png)
 3. Select **GitLab** as your provider
-![alt text](./assets/gitlab-image.png)
+![The GitLab connection form](../../assets/repository-form-gitlab.png)
 
 ## Step 2: Create a Personal Access Token (PAT)
 
@@ -63,23 +63,28 @@ In the **Scopes** section of the token creation dialog, configure the following 
 
    > *This grants complete read/write access to the API, including all groups and projects, the container registry, and the package registry - required for full integration with MFE Orchestrator*
 
-**2. Configure Read Repository Scope**
+**2. Configure Read User Scope**
+   1. Find the **read_user** checkbox in the scopes list
+   2. Check the **read_user** checkbox
+
+   > *This grants read access to your user information - used to identify the account the connection belongs to*
+
+**3. Configure Read Repository Scope**
    1. Scroll down to find the **read_repository** checkbox
    2. Check the **read_repository** checkbox
 
    > *This grants read-only access to repositories - required for fetching repository content*
 
-**3. Configure Write Repository Scope**
-   1. Continue scrolling to find the **write_repository** checkbox
-   2. Check the **write_repository** checkbox
-
-   > *This grants read-write access to repositories - required for managing deployments and commits*
-
 :::tip Quick Check
 After selecting all scopes, verify that you have checked:
--  api
--  read_repository
--  write_repository
+
+- `api`
+- `read_user`
+- `read_repository`
+
+These are the three scopes the connection screen lists next to the form. Writes — pushing a
+template into a new repository, committing a generated configuration — go through the API, which
+the `api` scope already covers.
 :::
 
 ### 2.4 Generate the Token

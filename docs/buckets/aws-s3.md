@@ -93,6 +93,8 @@ Go to **Settings → Storages → New Storage** and select **Amazon S3**:
 | **Secret Access Key** | From step 3 |
 | **Region** | The bucket's region, e.g. `eu-west-1` |
 
+![The New Storage form with the Amazon S3 credential fields](../assets/storage-form-aws-s3.png)
+
 Save.
 
 ## Step 5: Point a microfrontend at it

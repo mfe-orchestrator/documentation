@@ -18,11 +18,11 @@ This guide will walk you through connecting your Azure DevOps repositories to MF
 ## Step 1: Navigate to Code Repositories
 
 1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator
-![alt text](./assets/azure-dev-ops-image.png)
+![The Code Repositories page](../../assets/code-repositories.png)
 2. Click the **Add Repository** button
-![alt text](./assets/azure-dev-ops-image-1.png)
+![The Add Repository dialog, listing the available providers](../../assets/add-repository-provider.png)
 3. Select **Azure DevOps** as your provider
-![alt text](./assets/azure-dev-ops-image-2.png)
+![The Azure DevOps connection form](../../assets/repository-form-azure.png)
 
 ## Step 2: Create a Personal Access Token (PAT)
 
@@ -75,11 +75,21 @@ In the **Scopes** section of the token creation dialog, configure the following 
 
    > *This grants access to release pipelines and deployment information - required for managing releases and deployment workflows*
 
+**4. Configure Variable Groups Scope**
+   1. Find the **Variable Groups** section in the scopes list
+   2. Select **Read, create, & manage**
+
+   > *This lets MFE Orchestrator create the `MFE_ORCHESTRATOR_SECRETS` variable group where the API key its pipeline uses is stored*
+
 :::tip Quick Check
 After selecting all scopes, verify that you have:
-- ✅ Code: Read, write & manage
-- ✅ Build: Read, write & manage
-- ✅ Release: Read, write & manage
+
+- Code: Read, write & manage
+- Build: Read, write & manage
+- Release: Read, write & manage
+- Variable Groups: Read, create, & manage
+
+The connection screen lists the same four next to the form.
 :::
 
 ### 2.4 Generate the Token

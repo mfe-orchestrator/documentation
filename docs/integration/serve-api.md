@@ -141,6 +141,11 @@ GET <API_BASE>/serve/code?framework={vite|webpack}&microfrontendId={id}&deployme
 Returns `{ "code": "..." }` containing the generated bundler configuration for that host — the same
 text the Integration page displays.
 
+The console's **CURL** tab shows the runtime-discovery call for the selected environment, with your
+ids already substituted:
+
+![The CURL tab of the Integration page](../assets/integration-curl.png)
+
 Unlike the rest of this page, this endpoint requires authentication. It is a convenience for
 tooling, not something your application calls at runtime.
 

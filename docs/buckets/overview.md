@@ -14,6 +14,8 @@ while MFE Orchestrator continues to handle versioning, deployments and serving.
 
 Buckets live under **Settings → Storages**.
 
+![The Storages page of a project with no bucket configured yet](../assets/storages-empty.png)
+
 ## Why use your own bucket
 
 | | MFE Orchestrator Hub | Your bucket |

@@ -85,6 +85,8 @@ Go to **Settings → Storages → New Storage** and select **Google Cloud Storag
 | **Authentication Type** | **Service Account** |
 | **Service Account Credentials** | Paste the **entire contents** of the JSON key file |
 
+![The New Storage form with the Google Cloud Storage fields](../assets/storage-form-gcs.png)
+
 Paste the whole JSON document, not just the private key — the platform reads `client_email` and
 `private_key` out of it.
 
