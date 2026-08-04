@@ -34,18 +34,17 @@
   --docusaurus-highlighted-code-line-bg: hsl(217.2 32.6% 17.5%);
 }
 
-/* Navbar call to action towards the hosted console */
+/* Navbar link towards the hosted console */
 .navbar__cta {
-  padding: 0.4rem 0.9rem;
-  border-radius: 8px;
-  background: linear-gradient(100deg, hsl(262 83% 58%), hsl(272 83% 50%));
-  color: #fff !important;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 6px;
+  color: var(--ifm-color-primary) !important;
   font-weight: 600;
-  transition: filter 150ms ease;
 }
 
 .navbar__cta:hover {
-  filter: brightness(1.08);
+  background: hsl(262 83% 66% / 0.1);
   text-decoration: none;
 }
 

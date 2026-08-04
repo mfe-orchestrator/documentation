@@ -25,15 +25,6 @@ export default defineConfig({
   ],
 });`;
 
-const RUNTIME_CONFIG = `<!-- one build, configured per environment -->
-<script src="<API_BASE>/serve/global-variables/<envId>/index.js">
-</script>
-
-<script>
-  // ready before your bundle runs — no loading state
-  window.globalConfig.API_URL // → https://api.example.com
-</script>`;
-
 type Stat = {value: string; label: string};
 
 const STATS: Stat[] = [
@@ -44,88 +35,84 @@ const STATS: Stat[] = [
   {value: '1 click', label: 'Rollback'},
 ];
 
-type Feature = {
+type Card = {
   icon: string;
   title: string;
   description: string;
   to: string;
+  cta?: string;
   badge?: string;
 };
 
-const FEATURES: Feature[] = [
+const START_HERE: Card[] = [
+  {
+    icon: '🚀',
+    title: 'First steps',
+    description:
+      'Create an account, connect a repository and get your first microfrontend created for you. About five minutes.',
+    to: '/docs/intro',
+    cta: 'Start the tutorial',
+  },
+  {
+    icon: '🧠',
+    title: 'Core concepts',
+    description:
+      'Projects, environments, microfrontends, deployments and how they relate. The ten minutes that save you an hour later.',
+    to: '/docs/core-concepts',
+    cta: 'Read the model',
+  },
+  {
+    icon: '🔧',
+    title: 'Run it yourself',
+    description:
+      'Install the platform on your own infrastructure with Docker, Docker Compose or Terraform.',
+    to: '/docs/self-hosting/docker',
+    cta: 'Installation guides',
+  },
+];
+
+const CAPABILITIES: Card[] = [
   {
     icon: '🧩',
-    title: 'Module Federation, generated',
+    title: 'Generated Module Federation config',
     description:
-      'Declare which host loads which remotes, and the console writes the exact Vite or Webpack configuration for you — with real URLs, already pointing at what is deployed.',
+      'Declare which host loads which remotes and the console produces the Vite or Webpack configuration, with URLs pointing at what is deployed.',
     to: '/docs/integration/overview',
   },
   {
     icon: '📦',
     title: 'Immutable deployments',
     description:
-      'A deployment is a snapshot of every microfrontend, variable and storage setting. Editing is not deploying: your drafts never leak into production by accident.',
+      'A deployment is a snapshot of every microfrontend, variable and storage setting. Editing is not deploying: drafts stay drafts until you deploy.',
     to: '/docs/deployments/overview',
   },
   {
     icon: '⏪',
-    title: 'Rollback in seconds',
+    title: 'Rollback and redeploy',
     description:
-      'A bad release is one click away from being yesterday’s release. Reactivate any previous snapshot without rebuilding or re-tagging anything.',
+      'Reactivate a previous snapshot without rebuilding or re-tagging. The version that was live yesterday is still there.',
     to: '/docs/deployments/rollback-and-redeploy',
   },
   {
     icon: '🌍',
-    title: 'One build, every stage',
+    title: 'Environments and domains',
     description:
-      'Dev, UAT, production and as many stages as you need. Allowed domains resolve the right environment per request, so a single artifact serves them all.',
+      'As many stages as you need. Allowed domains resolve the environment per request, so one artifact can serve all of them.',
     to: '/docs/environments/domains',
   },
   {
     icon: '🎛️',
     title: 'Runtime configuration',
     description:
-      'Change API URLs and feature flags per environment and have them live immediately — no rebuild, no redeploy of your host application.',
+      'Per-environment variables served to the browser at boot, so the same build talks to the right API without a rebuild.',
     to: '/docs/integration/runtime-configuration',
   },
   {
     icon: '☁️',
-    title: 'Bring your own storage',
+    title: 'Hosting options',
     description:
-      'Keep artifacts on the hub, in your own AWS S3, Azure Blob or Google Cloud Storage bucket, or on the CDN you already pay for. Your files, your rules.',
+      'Keep artifacts on the hub, in your own S3, Azure Blob or Google Cloud Storage bucket, or on a CDN you already run.',
     to: '/docs/buckets/overview',
-  },
-];
-
-const SECONDARY_FEATURES: Feature[] = [
-  {
-    icon: '⚡',
-    title: 'Templates that ship',
-    description:
-      'Pick a template, get a repository with a working build and a pipeline already wired.',
-    to: '/docs/templates/templates-library',
-  },
-  {
-    icon: '🔁',
-    title: 'CI/CD native',
-    description:
-      'API keys plus ready-made pipelines for GitHub Actions, GitLab CI and Azure Pipelines.',
-    to: '/docs/ci-cd/api-keys',
-  },
-  {
-    icon: '🐤',
-    title: 'Canary releases',
-    description:
-      'Serve a new version to a slice of traffic, without touching your host application.',
-    to: '/docs/microfrontends/canary-releases',
-    badge: 'Experimental',
-  },
-  {
-    icon: '👥',
-    title: 'Teams and roles',
-    description:
-      'Admin, Editor and Viewer per project — invite the whole team without handing over the keys.',
-    to: '/docs/project-settings/users-and-roles',
   },
 ];
 
@@ -137,43 +124,149 @@ type Step = {
 
 const STEPS: Step[] = [
   {
-    title: 'Connect your repository',
+    title: 'Connect a repository',
     description:
-      'GitHub, GitLab or Azure DevOps. Your code never leaves your own provider.',
+      'GitHub, GitLab or Azure DevOps. Your code stays with your provider.',
     to: '/docs/repositories/connect/github',
   },
   {
     title: 'Create a microfrontend',
     description:
-      'Choose a template and the platform creates the repo, the configuration and the pipeline.',
+      'Pick a template and the platform creates the repository, the configuration and the pipeline.',
     to: '/docs/microfrontends/create-a-microfrontend',
   },
   {
     title: 'Publish a version',
     description:
-      'Push a tag. The pipeline builds and uploads the artifact where you told it to.',
+      'Push a tag. The pipeline builds and uploads the artifact where you configured it.',
     to: '/docs/microfrontends/versions-and-builds',
   },
   {
     title: 'Deploy and integrate',
     description:
-      'Snapshot the environment, copy the generated configuration into your host, and you are live.',
+      'Snapshot the environment, then copy the generated configuration into your host.',
     to: '/docs/deployments/overview',
   },
 ];
 
-const PAINS: string[] = [
-  'Remote URLs hardcoded in five host repositories',
-  'A version bump means a host rebuild and a coordinated release',
-  'Nobody is quite sure which version production is actually serving',
-  'Rolling back means reverting commits and waiting for CI',
-];
+type DocSection = {
+  title: string;
+  links: {label: string; to: string}[];
+};
 
-const GAINS: string[] = [
-  'One console holds the whole graph of hosts and remotes',
-  'Bump a version, deploy the environment — the host stays untouched',
-  'Every environment shows its active deployment, down to the variable',
-  'Rollback is reactivating the previous snapshot: seconds, not commits',
+const DOC_SECTIONS: DocSection[] = [
+  {
+    title: 'Getting started',
+    links: [
+      {label: "Let's start", to: '/docs/intro'},
+      {label: 'Core concepts', to: '/docs/core-concepts'},
+      {label: 'Templates library', to: '/docs/templates/templates-library'},
+    ],
+  },
+  {
+    title: 'Microfrontends',
+    links: [
+      {label: 'Overview', to: '/docs/microfrontends/overview'},
+      {
+        label: 'Create a microfrontend',
+        to: '/docs/microfrontends/create-a-microfrontend',
+      },
+      {label: 'Hosts and remotes', to: '/docs/microfrontends/host-and-remotes'},
+      {
+        label: 'Versions and builds',
+        to: '/docs/microfrontends/versions-and-builds',
+      },
+      {label: 'Hosting options', to: '/docs/microfrontends/hosting-options'},
+      {label: 'Canary releases', to: '/docs/microfrontends/canary-releases'},
+    ],
+  },
+  {
+    title: 'Environments',
+    links: [
+      {label: 'Overview', to: '/docs/environments/overview'},
+      {label: 'Allowed domains', to: '/docs/environments/domains'},
+      {
+        label: 'Environment variables',
+        to: '/docs/environments/environment-variables',
+      },
+    ],
+  },
+  {
+    title: 'Deployments',
+    links: [
+      {label: 'Overview', to: '/docs/deployments/overview'},
+      {
+        label: 'Rollback and redeploy',
+        to: '/docs/deployments/rollback-and-redeploy',
+      },
+    ],
+  },
+  {
+    title: 'Integration',
+    links: [
+      {label: 'Overview', to: '/docs/integration/overview'},
+      {label: 'Vite', to: '/docs/integration/module-federation-vite'},
+      {label: 'Webpack', to: '/docs/integration/module-federation-webpack'},
+      {
+        label: 'Runtime configuration',
+        to: '/docs/integration/runtime-configuration',
+      },
+      {label: 'Serve API', to: '/docs/integration/serve-api'},
+    ],
+  },
+  {
+    title: 'Storage',
+    links: [
+      {label: 'Overview', to: '/docs/buckets/overview'},
+      {label: 'AWS S3', to: '/docs/buckets/aws-s3'},
+      {label: 'Azure Blob Storage', to: '/docs/buckets/azure-blob-storage'},
+      {
+        label: 'Google Cloud Storage',
+        to: '/docs/buckets/google-cloud-storage',
+      },
+    ],
+  },
+  {
+    title: 'Repositories',
+    links: [
+      {label: 'GitHub', to: '/docs/repositories/connect/github'},
+      {label: 'GitLab', to: '/docs/repositories/connect/gitlab'},
+      {label: 'Azure DevOps', to: '/docs/repositories/connect/azure.dev-ops'},
+    ],
+  },
+  {
+    title: 'CI/CD',
+    links: [
+      {label: 'API keys', to: '/docs/ci-cd/api-keys'},
+      {label: 'GitHub Actions', to: '/docs/ci-cd/github-actions'},
+      {label: 'GitLab CI', to: '/docs/ci-cd/gitlab-ci'},
+      {label: 'Azure Pipelines', to: '/docs/ci-cd/azure-pipelines'},
+      {label: 'Manual upload', to: '/docs/ci-cd/manual-upload'},
+    ],
+  },
+  {
+    title: 'Project settings',
+    links: [
+      {label: 'Projects', to: '/docs/project-settings/projects'},
+      {label: 'Users and roles', to: '/docs/project-settings/users-and-roles'},
+    ],
+  },
+  {
+    title: 'Self-hosting',
+    links: [
+      {label: 'Docker', to: '/docs/self-hosting/docker'},
+      {label: 'Docker Compose', to: '/docs/self-hosting/docker-compose'},
+      {label: 'Terraform', to: '/docs/self-hosting/terraform'},
+      {
+        label: 'Environment variables',
+        to: '/docs/self-hosting/environment-variables',
+      },
+      {
+        label: 'External resources',
+        to: '/docs/self-hosting/use-external-resources',
+      },
+    ],
+  },
 ];
 
 function Hero() {
@@ -182,30 +275,33 @@ function Hero() {
       <div className={styles.heroGlow} aria-hidden="true" />
       <div className={styles.heroInner}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>
-            Open source · Module Federation native
-          </span>
+          <span className={styles.eyebrow}>Documentation</span>
           <Heading as="h1" className={styles.heroTitle}>
-            Microfrontends, <span className={styles.gradientText}>finally
-            under control</span>.
+            The <span className={styles.gradientText}>control plane</span> for
+            your microfrontends
           </Heading>
           <p className={styles.heroSubtitle}>
-            MFE Orchestrator is the control plane for microfrontend
-            architectures: versions, environments, deployments and rollbacks in
-            one console — for React, Angular or anything else your teams ship.
+            MFE Orchestrator keeps versions, environments, deployments and
+            rollbacks of a microfrontend architecture in one place — and
+            generates the Module Federation configuration your host application
+            needs. These pages cover both the hosted console and the
+            self-hosted platform.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.buttonPrimary} to={CONSOLE_URL}>
-              Start free →
+            <Link className={styles.buttonPrimary} to="/docs/intro">
+              Get started →
             </Link>
-            <Link className={styles.buttonGhost} to="/docs/intro">
-              Get started in 5 min
+            <Link className={styles.buttonGhost} to="/docs/core-concepts">
+              Core concepts
+            </Link>
+            <Link className={styles.buttonQuiet} to={CONSOLE_URL}>
+              Open the console ↗
             </Link>
           </div>
           <ul className={styles.heroNotes}>
-            <li>Free hosted console</li>
-            <li>Self-host with Docker or Terraform</li>
-            <li>No lock-in: your code stays in your repo</li>
+            <li>Hosted console or self-hosted</li>
+            <li>GitHub, GitLab and Azure DevOps</li>
+            <li>Vite and Webpack</li>
           </ul>
         </div>
         <div className={styles.heroVisual}>
@@ -234,53 +330,7 @@ function Hero() {
   );
 }
 
-function ValueProp() {
-  return (
-    <section className={styles.section}>
-      <div className={styles.sectionHead}>
-        <span className={styles.kicker}>Why it exists</span>
-        <Heading as="h2" className={styles.sectionTitle}>
-          Microfrontends scale teams. Then they stop scaling.
-        </Heading>
-        <p className={styles.sectionLead}>
-          Splitting the frontend is the easy part. What breaks is everything
-          around it: who serves which version, in which environment, and how you
-          get back when it goes wrong.
-        </p>
-      </div>
-      <div className={styles.compare}>
-        <div className={styles.compareCard} data-tone="pain">
-          <h3 className={styles.compareTitle}>Without a control plane</h3>
-          <ul className={styles.compareList}>
-            {PAINS.map((item) => (
-              <li key={item}>
-                <span className={styles.markPain} aria-hidden="true">
-                  ✕
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.compareCard} data-tone="gain">
-          <h3 className={styles.compareTitle}>With MFE Orchestrator</h3>
-          <ul className={styles.compareList}>
-            {GAINS.map((item) => (
-              <li key={item}>
-                <span className={styles.markGain} aria-hidden="true">
-                  ✓
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeatureCard({icon, title, description, to, badge}: Feature) {
+function EntryCard({icon, title, description, to, cta, badge}: Card) {
   return (
     <Link className={styles.featureCard} to={to}>
       <span className={styles.featureIcon} aria-hidden="true">
@@ -291,33 +341,52 @@ function FeatureCard({icon, title, description, to, badge}: Feature) {
         {badge && <span className={styles.featureBadge}>{badge}</span>}
       </h3>
       <p className={styles.featureDescription}>{description}</p>
-      <span className={styles.featureLink}>Learn more →</span>
+      <span className={styles.featureLink}>{cta ?? 'Read the docs'} →</span>
     </Link>
   );
 }
 
-function Features() {
+function StartHere() {
   return (
     <section className={styles.section}>
       <div className={styles.sectionHead}>
-        <span className={styles.kicker}>Platform</span>
+        <span className={styles.kicker}>Start here</span>
         <Heading as="h2" className={styles.sectionTitle}>
-          Everything a microfrontend needs after <code>npm run build</code>
+          Three ways in
         </Heading>
         <p className={styles.sectionLead}>
-          Not a bundler, not a framework. The layer that decides what is live,
-          where, and for whom.
+          Depending on whether you want to try the platform, understand it, or
+          run it on your own infrastructure.
         </p>
       </div>
       <div className={styles.featureGrid}>
-        {FEATURES.map((feature) => (
-          <FeatureCard key={feature.title} {...feature} />
+        {START_HERE.map((card) => (
+          <EntryCard key={card.title} {...card} />
         ))}
       </div>
-      <div className={styles.featureGridSmall}>
-        {SECONDARY_FEATURES.map((feature) => (
-          <FeatureCard key={feature.title} {...feature} />
-        ))}
+    </section>
+  );
+}
+
+function Capabilities() {
+  return (
+    <section className={styles.sectionAlt}>
+      <div className={styles.sectionInner}>
+        <div className={styles.sectionHead}>
+          <span className={styles.kicker}>What the platform does</span>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Everything a microfrontend needs after <code>npm run build</code>
+          </Heading>
+          <p className={styles.sectionLead}>
+            Not a bundler and not a framework — the layer that decides what is
+            live, where, and for whom.
+          </p>
+        </div>
+        <div className={styles.featureGrid}>
+          {CAPABILITIES.map((card) => (
+            <EntryCard key={card.title} {...card} />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -325,70 +394,61 @@ function Features() {
 
 function HowItWorks() {
   return (
-    <section className={styles.sectionAlt}>
-      <div className={styles.sectionInner}>
-        <div className={styles.sectionHead}>
-          <span className={styles.kicker}>How it works</span>
-          <Heading as="h2" className={styles.sectionTitle}>
-            From empty project to live microfrontend
-          </Heading>
-          <p className={styles.sectionLead}>
-            Four steps. The console does the plumbing you would otherwise write
-            by hand.
-          </p>
-        </div>
-        <ol className={styles.steps}>
-          {STEPS.map((step, index) => (
-            <li className={styles.step} key={step.title}>
-              <span className={styles.stepNumber}>{index + 1}</span>
-              <div>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepDescription}>{step.description}</p>
-                <Link className={styles.inlineLink} to={step.to}>
-                  Read the guide →
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ol>
+    <section className={styles.section}>
+      <div className={styles.sectionHead}>
+        <span className={styles.kicker}>The short path</span>
+        <Heading as="h2" className={styles.sectionTitle}>
+          From empty project to live microfrontend
+        </Heading>
+        <p className={styles.sectionLead}>
+          Four steps, each with a guide. The console handles the plumbing in
+          between.
+        </p>
       </div>
+      <ol className={styles.steps}>
+        {STEPS.map((step, index) => (
+          <li className={styles.step} key={step.title}>
+            <span className={styles.stepNumber}>{index + 1}</span>
+            <div>
+              <h3 className={styles.stepTitle}>{step.title}</h3>
+              <p className={styles.stepDescription}>{step.description}</p>
+              <Link className={styles.inlineLink} to={step.to}>
+                Read the guide →
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
 
-function RuntimeSection() {
+function DocIndex() {
   return (
-    <section className={styles.section}>
-      <div className={styles.split}>
-        <div>
-          <span className={styles.kicker}>Build once</span>
-          <Heading as="h2" className={styles.sectionTitleLeft}>
-            Stop rebuilding to change a URL
+    <section className={styles.sectionAlt}>
+      <div className={styles.sectionInner}>
+        <div className={styles.sectionHead}>
+          <span className={styles.kicker}>Reference</span>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Browse the documentation
           </Heading>
-          <p className={styles.sectionLeadLeft}>
-            Environment variables live in the platform and are served to the
-            browser at boot. The same artifact that runs in UAT runs in
-            production — pointing at the right API, with the right flags on.
+          <p className={styles.sectionLead}>
+            Every section of the manual, one click away.
           </p>
-          <ul className={styles.checkList}>
-            <li>Per-environment values, resolved from the active deployment</li>
-            <li>Blocking script in <code>&lt;head&gt;</code>: no loading state, no race</li>
-            <li>Or fetch the whole environment in a single API call</li>
-          </ul>
-          <Link className={styles.buttonPrimary} to="/docs/integration/runtime-configuration">
-            See the integration guide →
-          </Link>
         </div>
-        <div className={styles.codeCard}>
-          <div className={styles.codeCardBar}>
-            <span className={styles.dot} data-dot="red" />
-            <span className={styles.dot} data-dot="amber" />
-            <span className={styles.dot} data-dot="green" />
-            <span className={styles.codeCardTitle}>index.html</span>
-          </div>
-          <CodeBlock language="html" className={styles.codeBlock}>
-            {RUNTIME_CONFIG}
-          </CodeBlock>
+        <div className={styles.docGrid}>
+          {DOC_SECTIONS.map((section) => (
+            <div className={styles.docColumn} key={section.title}>
+              <h3 className={styles.docColumnTitle}>{section.title}</h3>
+              <ul className={styles.docList}>
+                {section.links.map((link) => (
+                  <li key={link.to}>
+                    <Link to={link.to}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -398,7 +458,6 @@ function RuntimeSection() {
 const LOGOS = [
   {src: 'img/logos/vite-logo.png', alt: 'Vite'},
   {src: 'img/logos/webpack-logo.png', alt: 'Webpack'},
-  {src: 'img/logos/single-spa.png', alt: 'single-spa'},
   {src: 'img/logos/webcomponents.png', alt: 'Web Components'},
 ];
 
@@ -414,87 +473,82 @@ function Ecosystem() {
   return (
     <section className={styles.sectionNarrow}>
       <p className={styles.ecosystemLabel}>
-        Framework agnostic. Works with the tools you already chose.
+        Templates ship for Vite, Webpack and Web Components. The platform itself
+        serves whatever your build produces.
       </p>
       <div className={styles.logoRow}>
         {LOGOS.map((logo) => (
           <Logo key={logo.alt} {...logo} />
         ))}
       </div>
+      <Link className={styles.inlineLink} to="/docs/templates/templates-library">
+        See the templates library →
+      </Link>
     </section>
   );
 }
 
 function Hosting() {
   return (
-    <section className={styles.sectionAlt}>
-      <div className={styles.sectionInner}>
-        <div className={styles.sectionHead}>
-          <span className={styles.kicker}>Two ways to run it</span>
-          <Heading as="h2" className={styles.sectionTitle}>
-            Hosted for speed, self-hosted for control
-          </Heading>
+    <section className={styles.section}>
+      <div className={styles.sectionHead}>
+        <span className={styles.kicker}>Two ways to run it</span>
+        <Heading as="h2" className={styles.sectionTitle}>
+          Hosted console or your own infrastructure
+        </Heading>
+      </div>
+      <div className={styles.planGrid}>
+        <div className={styles.planCard}>
+          <h3 className={styles.planTitle}>Hosted console</h3>
+          <p className={styles.planSubtitle}>
+            Nothing to install, always up to date
+          </p>
+          <ul className={styles.checkList}>
+            <li>Sign in with email or Google SSO</li>
+            <li>Artifacts on the hub, or in your own bucket</li>
+            <li>Used throughout the tutorial</li>
+          </ul>
+          <Link className={styles.buttonGhostBlock} to={CONSOLE_URL}>
+            Open the console ↗
+          </Link>
         </div>
-        <div className={styles.planGrid}>
-          <div className={styles.planCard} data-featured="true">
-            <span className={styles.planTag}>Recommended</span>
-            <h3 className={styles.planTitle}>Cloud console</h3>
-            <p className={styles.planPrice}>
-              Free to start<span>no installation</span>
-            </p>
-            <ul className={styles.checkList}>
-              <li>Nothing to install, always up to date</li>
-              <li>Sign in with email or Google SSO</li>
-              <li>Artifacts on the hub, or in your own bucket</li>
-              <li>First microfrontend live in minutes</li>
-            </ul>
-            <Link className={styles.buttonPrimaryBlock} to={CONSOLE_URL}>
-              Open the console →
-            </Link>
-          </div>
-          <div className={styles.planCard}>
-            <span className={styles.planTagMuted}>Open source</span>
-            <h3 className={styles.planTitle}>Self-hosted</h3>
-            <p className={styles.planPrice}>
-              Your infrastructure<span>your data, your network</span>
-            </p>
-            <ul className={styles.checkList}>
-              <li>Docker, Docker Compose or Terraform</li>
-              <li>Bring your own MongoDB and object storage</li>
-              <li>SSO with Auth0, Microsoft Entra or Google</li>
-              <li>Air-gapped and on-prem friendly</li>
-            </ul>
-            <Link className={styles.buttonGhostBlock} to="/docs/self-hosting/docker">
-              Installation options →
-            </Link>
-          </div>
+        <div className={styles.planCard}>
+          <h3 className={styles.planTitle}>Self-hosted</h3>
+          <p className={styles.planSubtitle}>Your infrastructure, your data</p>
+          <ul className={styles.checkList}>
+            <li>Docker, Docker Compose or Terraform</li>
+            <li>Bring your own MongoDB and object storage</li>
+            <li>SSO with Auth0, Microsoft Entra or Google</li>
+          </ul>
+          <Link
+            className={styles.buttonGhostBlock}
+            to="/docs/self-hosting/docker">
+            Installation guides →
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-function FinalCta() {
+function Help() {
   return (
-    <section className={styles.ctaBand}>
-      <div className={styles.ctaInner}>
-        <Heading as="h2" className={styles.ctaTitle}>
-          Your next release does not have to be a coordination meeting.
-        </Heading>
-        <p className={styles.ctaLead}>
-          Connect a repository, create a microfrontend from a template, deploy.
-          You will know whether this fits your architecture before your coffee
-          gets cold.
-        </p>
-        <div className={styles.ctaActions}>
-          <Link className={styles.buttonPrimary} to={CONSOLE_URL}>
-            Start free →
-          </Link>
-          <Link className={styles.buttonGhost} to="/docs/intro">
-            Read the docs
+    <section className={styles.sectionNarrow}>
+      <div className={styles.helpPanel}>
+        <div>
+          <h2 className={styles.helpTitle}>Not sure where to start?</h2>
+          <p className={styles.helpText}>
+            The tutorial takes you from an empty account to a deployed
+            microfrontend. If something is missing or wrong in these pages, open
+            an issue — every page has an “Edit this page” link at the bottom.
+          </p>
+        </div>
+        <div className={styles.helpActions}>
+          <Link className={styles.buttonPrimary} to="/docs/intro">
+            Get started →
           </Link>
           <Link className={styles.buttonGhost} to={GITHUB_URL}>
-            Star on GitHub
+            GitHub ↗
           </Link>
         </div>
       </div>
@@ -505,17 +559,17 @@ function FinalCta() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="Microfrontends, finally under control"
-      description="MFE Orchestrator is the control plane for microfrontend architectures: versions, environments, immutable deployments, one-click rollback and generated Module Federation configuration — hosted or self-hosted.">
+      title="Documentation"
+      description="Documentation for MFE Orchestrator: the control plane for microfrontend architectures — versions, environments, deployments, rollback and generated Module Federation configuration, hosted or self-hosted.">
       <Hero />
       <main>
-        <ValueProp />
-        <Features />
+        <StartHere />
+        <Capabilities />
         <HowItWorks />
-        <RuntimeSection />
+        <DocIndex />
         <Ecosystem />
         <Hosting />
-        <FinalCta />
+        <Help />
       </main>
     </Layout>
   );
