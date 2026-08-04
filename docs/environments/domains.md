@@ -1,8 +1,10 @@
 ---
 sidebar_position: 2
+title: Allowed domains and environment resolution
+sidebar_label: Allowed domains
 ---
 
-# Allowed domains
+# Allowed domains and environment resolution
 
 **Allowed Domains** is the least obvious field on an environment, and the one that unlocks the
 cleanest integration. It lets MFE Orchestrator work out *which environment a browser request

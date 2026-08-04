@@ -1,8 +1,10 @@
 ---
 sidebar_position: 3
+title: Deploy with GitHub Actions
+sidebar_label: GitHub Actions
 ---
 
-# GitHub Actions
+# Deploy with GitHub Actions
 
 When MFE Orchestrator creates a repository from a template on GitHub, it commits a
 `.github/workflows/build-and-deploy.yml` workflow and creates the secret the workflow needs. This

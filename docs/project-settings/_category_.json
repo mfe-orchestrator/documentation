@@ -3,6 +3,7 @@
   "position": 12,
   "link": {
     "type": "generated-index",
+    "title": "Project settings and members",
     "description": "Manage the project itself and the people who have access to it."
   }
 }

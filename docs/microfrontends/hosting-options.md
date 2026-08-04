@@ -1,8 +1,10 @@
 ---
 sidebar_position: 3
+title: Microfrontend hosting options
+sidebar_label: Hosting options
 ---
 
-# Hosting options
+# Microfrontend hosting options
 
 Every microfrontend declares **where its files live**. This is the *hosting type*, set under
 **Hosting information** on the microfrontend form. It determines how MFE Orchestrator resolves

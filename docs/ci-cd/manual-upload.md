@@ -1,8 +1,10 @@
 ---
 sidebar_position: 2
+title: Upload a build from any CI system
+sidebar_label: Uploading a build
 ---
 
-# Uploading a build
+# Upload a build from any CI system
 
 Everything the provider-specific pipelines do reduces to one HTTP call. This page documents it, so
 you can publish from any CI system — or from your laptop when debugging.

@@ -3,6 +3,7 @@
   "position": 11,
   "link": {
     "type": "generated-index",
+    "title": "Publish from CI/CD pipelines",
     "description": "Authenticate machines and publish microfrontend builds from your pipelines."
   }
 }

@@ -1,8 +1,10 @@
 ---
 sidebar_position: 2
+title: Store builds on Amazon S3
+sidebar_label: Amazon S3
 ---
 
-# Amazon S3
+# Store builds on Amazon S3
 
 This page walks through connecting an S3 bucket to MFE Orchestrator.
 

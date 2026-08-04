@@ -1,8 +1,10 @@
 ---
 sidebar_position: 1
+title: Microfrontend templates library
+sidebar_label: Templates library
 ---
 
-# Templates library
+# Microfrontend templates library
 
 The templates library is the catalogue you pick from when creating a microfrontend. A template is a
 working Module Federation project — correct build configuration, a sample exposed component, and a

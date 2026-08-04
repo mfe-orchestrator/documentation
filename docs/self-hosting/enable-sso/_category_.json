@@ -3,6 +3,7 @@
   "position": 5,
   "link": {
     "type": "generated-index",
+    "title": "Enable SSO on a self-hosted instance",
     "description": "Enable single sign-on on a self-hosted MFE Orchestrator with Auth0, Microsoft Entra ID or Google."
   }
 }

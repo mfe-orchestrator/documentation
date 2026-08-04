@@ -1,7 +1,9 @@
 ---
 sidebar_position: 1
+title: Self-host with Docker
+sidebar_label: Docker
 ---
-# Docker
+# Self-host with Docker
 This page provides instructions to install MFE Orchestrator Hub using Docker.
 
 You can find the official docker repo on [dockerhub](https://hub.docker.com/r/lory1990/mfe-orchestrator)

@@ -1,8 +1,10 @@
 ---
 sidebar_position: 1
+title: Projects and access control
+sidebar_label: Projects
 ---
 
-# Projects
+# Projects and access control
 
 A **project** is the top-level container in MFE Orchestrator and the boundary for access control.
 Microfrontends, environments, storages, code repositories, API keys and members all belong to

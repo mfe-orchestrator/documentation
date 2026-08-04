@@ -1,8 +1,10 @@
 ---
 sidebar_position: 5
+title: Hosts and remotes in Module Federation
+sidebar_label: Hosts and remotes
 ---
 
-# Hosts and remotes
+# Hosts and remotes in Module Federation
 
 A microfrontend architecture is only an architecture once the pieces know about each other.
 This page covers how MFE Orchestrator models those relationships, and what it does with them.

@@ -1,4 +1,9 @@
-# GitHub
+---
+title: Connect a GitHub repository
+sidebar_label: GitHub
+---
+
+# Connect a GitHub repository
 
 This guide will walk you through connecting your GitHub repositories to MFE Orchestrator.
 

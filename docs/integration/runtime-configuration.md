@@ -1,8 +1,10 @@
 ---
 sidebar_position: 4
+title: Read runtime configuration in the browser
+sidebar_label: Runtime configuration
 ---
 
-# Runtime configuration
+# Read runtime configuration in the browser
 
 This page shows how to read an environment's [environment variables](../environments/environment-variables.md)
 from the browser, so a single build can be configured differently in each stage.

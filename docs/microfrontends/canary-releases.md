@@ -1,8 +1,10 @@
 ---
 sidebar_position: 6
+title: Canary releases for microfrontends
+sidebar_label: Canary releases
 ---
 
-# Canary releases
+# Canary releases for microfrontends
 
 A canary release serves a new version of a microfrontend to a fraction of your traffic while
 everyone else keeps the stable one. MFE Orchestrator can do this per microfrontend, without any

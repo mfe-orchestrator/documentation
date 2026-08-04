@@ -3,6 +3,7 @@
   "position": 8,
   "link": {
     "type": "generated-index",
+    "title": "Storage for microfrontend builds",
     "description": "Store microfrontend builds in your own object storage: Amazon S3, Azure Blob Storage or Google Cloud Storage."
   }
 }

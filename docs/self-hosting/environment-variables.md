@@ -1,8 +1,10 @@
 ---
 sidebar_position: 4
+title: Container environment variables
+sidebar_label: Environment variables
 ---
 
-# Environment Variables
+# Container environment variables
 
 Environment variables allow you to configure the MFE Orchestrator container according to your specific needs. These variables control various aspects of the application, from database connections to authentication providers and email services.
 

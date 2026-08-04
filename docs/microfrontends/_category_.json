@@ -3,6 +3,7 @@
   "position": 4,
   "link": {
     "type": "generated-index",
+    "title": "Manage microfrontends",
     "description": "Register, version, host and wire together the microfrontends of your project."
   }
 }

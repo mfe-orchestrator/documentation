@@ -1,4 +1,9 @@
-# Azure AD (Entra ID)
+---
+title: Enable SSO with Microsoft Entra ID
+sidebar_label: Azure AD (Entra ID)
+---
+
+# Enable SSO with Microsoft Entra ID
 
 This guide will walk you through the process of enabling Azure Active Directory (Azure AD) authentication for your MFE Orchestrator instance.
 

@@ -1,8 +1,10 @@
 ---
 sidebar_position: 2
+title: Project members and roles
+sidebar_label: Members and roles
 ---
 
-# Members and roles
+# Project members and roles
 
 Access to MFE Orchestrator is granted per project. A user can be a member of several projects, with
 a different role in each.

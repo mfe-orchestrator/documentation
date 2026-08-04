@@ -1,8 +1,10 @@
 ---
 sidebar_position: 4
+title: Store builds on Google Cloud Storage
+sidebar_label: Google Cloud Storage
 ---
 
-# Google Cloud Storage
+# Store builds on Google Cloud Storage
 
 MFE Orchestrator authenticates to Google Cloud Storage with a **service account JSON key**.
 

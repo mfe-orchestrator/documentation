@@ -1,8 +1,10 @@
 ---
 sidebar_position: 3
+title: Runtime environment variables
+sidebar_label: Environment variables
 ---
 
-# Environment variables
+# Runtime environment variables
 
 Environment variables in MFE Orchestrator are **runtime** configuration: `key`/`value` pairs
 scoped to an environment, read by the browser after the bundle has loaded.

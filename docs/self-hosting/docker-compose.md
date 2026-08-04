@@ -1,8 +1,10 @@
 ---
 sidebar_position: 2
+title: Self-host with Docker Compose
+sidebar_label: Docker Compose
 ---
 
-# Docker Compose
+# Self-host with Docker Compose
 
 This page provides instructions to install MFE Orchestrator Hub using Docker Compose.
 

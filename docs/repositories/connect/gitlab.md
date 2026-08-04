@@ -1,4 +1,9 @@
-# GitLab
+---
+title: Connect a GitLab repository
+sidebar_label: GitLab
+---
+
+# Connect a GitLab repository
 
 This guide will walk you through connecting your GitLab repositories to MFE Orchestrator.
 

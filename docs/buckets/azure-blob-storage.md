@@ -1,8 +1,10 @@
 ---
 sidebar_position: 3
+title: Store builds on Azure Blob Storage
+sidebar_label: Azure Blob Storage
 ---
 
-# Azure Blob Storage
+# Store builds on Azure Blob Storage
 
 MFE Orchestrator supports three ways of authenticating against Azure Blob Storage. Pick one and
 follow the matching section.

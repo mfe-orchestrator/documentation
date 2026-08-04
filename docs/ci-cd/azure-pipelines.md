@@ -1,8 +1,10 @@
 ---
 sidebar_position: 4
+title: Deploy with Azure Pipelines
+sidebar_label: Azure Pipelines
 ---
 
-# Azure Pipelines
+# Deploy with Azure Pipelines
 
 When MFE Orchestrator creates a repository from a template in Azure DevOps, it commits an
 `azure-pipelines.yml`, creates the pipeline definition, and stores the deploy key in a variable

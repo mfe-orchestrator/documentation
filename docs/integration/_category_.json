@@ -3,6 +3,7 @@
   "position": 7,
   "link": {
     "type": "generated-index",
+    "title": "Integrate microfrontends into your app",
     "description": "Consume a deployment from your application: Module Federation configuration, runtime variables and the public serve API."
   }
 }

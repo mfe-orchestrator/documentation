@@ -1,8 +1,10 @@
 ---
 sidebar_position: 3
+title: Core concepts and object model
+sidebar_label: Core concepts
 ---
 
-# Core Concepts
+# Core concepts and object model
 
 Before diving into the individual features, it helps to understand the handful of objects
 MFE Orchestrator is built around. Everything you do in the console — and every call you make

@@ -1,4 +1,9 @@
-# Auth0
+---
+title: Enable SSO with Auth0
+sidebar_label: Auth0
+---
+
+# Enable SSO with Auth0
 
 This guide will walk you through the process of enabling Auth0 authentication for your MFE Orchestrator instance.
 

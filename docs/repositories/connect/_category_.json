@@ -3,6 +3,7 @@
   "position": 2,
   "link": {
     "type": "generated-index",
+    "title": "Connect a Git provider",
     "description": "Connect GitHub, GitLab or Azure DevOps to MFE Orchestrator so it can read your repositories and scaffold new microfrontends into them."
   }
 }

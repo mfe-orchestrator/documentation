@@ -1,8 +1,10 @@
 ---
 sidebar_position: 5
+title: Serve API reference
+sidebar_label: Serve API
 ---
 
-# Serve API
+# Serve API reference
 
 The serve API is the public, unauthenticated surface your applications talk to. Every endpoint
 answers from the **active deployment** of the resolved environment.

@@ -1,8 +1,11 @@
 ---
 sidebar_position: 2
+title: Module Federation with Vite
+sidebar_label: Vite
+description: Wire an MFE Orchestrator deployment into a Vite host with @originjs/vite-plugin-federation, using the configuration the console generates.
 ---
 
-# Vite
+# Module Federation with Vite
 
 MFE Orchestrator generates configuration for
 [`@originjs/vite-plugin-federation`](https://github.com/originjs/vite-plugin-federation), the

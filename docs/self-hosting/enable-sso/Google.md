@@ -1,4 +1,9 @@
-# Google 
+---
+title: Enable SSO with Google
+sidebar_label: Google
+---
+
+# Enable SSO with Google
 
 This guide will walk you through the process of enabling Google OAuth authentication for your MFE Orchestrator instance.
 

@@ -1,8 +1,10 @@
 ---
 sidebar_position: 5
+title: Deploy with GitLab CI
+sidebar_label: GitLab CI
 ---
 
-# GitLab CI
+# Deploy with GitLab CI
 
 When MFE Orchestrator creates a repository from a template in GitLab, it commits a `.gitlab-ci.yml`
 and creates a group-level CI/CD variable holding the deploy key.

@@ -1,8 +1,10 @@
 ---
 sidebar_position: 1
+title: API keys for CI/CD
+sidebar_label: API keys
 ---
 
-# API keys
+# API keys for CI/CD
 
 An API key authenticates a machine — a CI pipeline, a deploy script, an automation job — against a
 single project. Keys live under **Settings → API Keys**.

@@ -1,8 +1,10 @@
 ---
 sidebar_position: 4
+title: Microfrontend versions and builds
+sidebar_label: Versions and builds
 ---
 
-# Versions and builds
+# Microfrontend versions and builds
 
 A microfrontend is only useful once there are artifacts to serve. This page describes how a
 version comes into existence, and the two ways to trigger one.

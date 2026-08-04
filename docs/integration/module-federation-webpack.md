@@ -1,8 +1,11 @@
 ---
 sidebar_position: 3
+title: Module Federation with Webpack
+sidebar_label: Webpack
+description: Wire an MFE Orchestrator deployment into a Webpack 5 host with ModuleFederationPlugin, using the configuration the console generates.
 ---
 
-# Webpack
+# Module Federation with Webpack
 
 MFE Orchestrator generates configuration for Webpack 5's built-in
 `ModuleFederationPlugin`. No extra dependency is needed — Module Federation ships with Webpack 5.

@@ -1,4 +1,9 @@
-# Azure DevOps
+---
+title: Connect an Azure DevOps repository
+sidebar_label: Azure DevOps
+---
+
+# Connect an Azure DevOps repository
 
 This guide will walk you through connecting your Azure DevOps repositories to MFE Orchestrator.
 
