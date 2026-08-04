@@ -93,6 +93,11 @@ offers the versions known to the platform, plus a **Custom version** option for 
 directly — useful for Custom URL microfrontends, where the platform has no upload history to
 list.
 
+![The Version field listing the uploaded versions and a Custom version option](../assets/microfrontend-version-select.png)
+
+Before anything has been uploaded there is nothing to list, so the field starts out as a plain text
+box and only becomes a list once the platform has seen its first version.
+
 Then [deploy](../deployments/overview.md) the environments you want to move.
 
 ## Continuous deployment

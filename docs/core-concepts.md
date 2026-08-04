@@ -68,6 +68,8 @@ Hosts and remotes are wired together by declaring parent/child relations in the 
 MFE Orchestrator turns those relations into the `remotes` block of your Module Federation
 configuration.
 
+![The microfrontends of a project, drawn as a host with its remotes](./assets/microfrontends-diagram-view.png)
+
 Each microfrontend has a `slug` (unique per project), a `version`, and a **hosting type** that
 tells the platform where its files actually live. See
 [Microfrontends → Hosting options](./microfrontends/hosting-options.md).
@@ -109,6 +111,8 @@ affect what your users see. Those changes sit in the project configuration until
 Deployments are numbered per environment (`#1`, `#2`, `#3` …) and exactly one of them is
 **active** at any time. Because a snapshot is immutable, rolling back is just a matter of
 re-activating an older one. See [Deployments](./deployments/overview.md).
+
+![A deployment snapshot with the versions and variables it froze](./assets/deployments-overview.png)
 
 ### API key
 

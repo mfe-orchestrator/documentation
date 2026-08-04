@@ -64,10 +64,11 @@ You can filter the list by free-text search and by status.
 | **Code repository** | Optional link to a GitHub / GitLab / Azure DevOps repository, which enables the **Build** action |
 | **Canary** | Optional progressive rollout configuration — see [Canary releases](./canary-releases.md) |
 
-:::caution The slug is part of your public URLs
-Changing a slug changes the serve URLs for that microfrontend and the remote name in generated
-Module Federation configs. Any host that has not been re-deployed will keep pointing at the old
-name. Pick a slug you can live with.
+:::caution The slug is fixed at creation
+The slug appears in your serve URLs and becomes the remote name in generated Module Federation
+configs, so the console does not let you change it afterwards — the field is read-only when you
+edit a microfrontend. Getting a different slug means creating a new microfrontend and re-pointing
+its consumers. Pick one you can live with.
 :::
 
 ## Where to go next
