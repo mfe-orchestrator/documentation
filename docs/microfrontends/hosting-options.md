@@ -14,6 +14,13 @@ a request for `remoteEntry.js` into actual bytes.
 
 There are three options.
 
+![Choosing a hosting type on the microfrontend form](../assets/microfrontend-hosting-type.png)
+
+:::note
+**Custom Source** only appears in the list once the project has at least one
+[storage](../buckets/overview.md) configured.
+:::
+
 ## MFE Orchestrator Hub
 
 The platform stores the build itself. You upload a ZIP of your `dist` folder and MFE

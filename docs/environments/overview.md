@@ -27,6 +27,13 @@ Click **New Environment** and fill in:
 | **Color** | Used to tag the environment throughout the console |
 | **Allowed Domains** | The domains your app is served from — see [Allowed domains](./domains.md) |
 
+![The Create New Environment dialog](../assets/environment-dialog.png)
+
+The environments of a project are listed together, with their slug, production flag, allowed
+domains and colour. Drag a row to change the order they appear in throughout the console:
+
+![The Environments page listing dev, uat and prod](../assets/environments-list.png)
+
 When you set up a project through the wizard you are offered a set of **default environments**
 to start from, and you can add your own alongside them.
 

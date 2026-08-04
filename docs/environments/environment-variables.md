@@ -37,12 +37,16 @@ API_URL=…dev   API_URL=…uat   API_URL=…com
 
 ## Managing variables
 
-Open **Environment Variables** in the sidebar, pick an environment from the selector, and use
-**Add Variable**. Each variable is a `key` and a `value`; keys are unique per environment.
+Open **Environment Variables** in the sidebar and use **Add Variable**. Each variable is a `key`
+with one value per environment; keys are unique per environment.
 
-The same key typically exists in every environment with a different value. Creating a variable
-from this page creates it for the selected environment — remember to add it to the others before
-you deploy them, or the code reading it will find `undefined`.
+![The Environment Variables page, one column per environment](../assets/environment-variables-list.png)
+
+The dialog asks for the key once and then for its value in each environment, which is the shape
+you almost always want — the same key with a different value per stage. Leave a value empty and
+the code reading it in that environment will find `undefined`.
+
+![The Add Variable dialog, with a value per environment](../assets/environment-variable-dialog.png)
 
 :::caution Not a secret store
 Environment variables are served to the browser by a **public, unauthenticated** endpoint. Anyone

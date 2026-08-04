@@ -27,6 +27,11 @@ A typical setup looks like this:
              payments     (remote of a remote)
 ```
 
+In the console the same graph looks like this — `payments` is a remote of `cart`, which is
+itself a remote of `shell`:
+
+![Diagram view showing the relation graph between host and remotes](../assets/microfrontends-diagram-view.png)
+
 Nothing stops a remote from being a host of other remotes, and nothing stops a remote from
 having several parents — a shared design-system remote consumed by three hosts is a perfectly
 normal shape.

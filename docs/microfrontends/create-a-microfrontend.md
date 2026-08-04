@@ -101,5 +101,7 @@ Clicking a microfrontend opens the same form in edit mode, organised into sectio
 | Code repository | The linked repository |
 | Danger zone | Delete this microfrontend |
 
+![The microfrontend form, with general information, hosting and canary sections](../assets/microfrontend-form.png)
+
 Remember that edits take effect for your users only after the next
 [deployment](../deployments/overview.md).

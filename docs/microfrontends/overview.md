@@ -36,9 +36,17 @@ corner:
 
 - **Diagram view** — the microfrontend graph, showing which host loads which remotes. Nodes can
   be dragged; their position and size are saved per microfrontend.
+
+  ![Diagram view: a shell host with catalog, cart and account remotes](../assets/microfrontends-diagram-view.png)
+
 - **Grid view** — a card per microfrontend, showing version, repository, storage and canary
   badges at a glance.
+
+  ![Grid view: one card per microfrontend](../assets/microfrontends-grid-view.png)
+
 - **Table view** — a dense list, best when a project has many microfrontends.
+
+  ![Table view: name, slug, version, hosting and canary in one row per microfrontend](../assets/microfrontends-table-view.png)
 
 You can filter the list by free-text search and by status.
 

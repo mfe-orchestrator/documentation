@@ -52,6 +52,8 @@ The wizard remembers where you got to, so you can leave and resume.
 The project selector sits in the console header. Everything below it — microfrontends, deployments,
 settings — follows the selection.
 
+![The project switcher, which also creates a new project](../assets/project-switcher.png)
+
 If a page looks empty, check the selected project before anything else. It is the most common cause
 of "my microfrontends disappeared".
 
@@ -80,6 +82,8 @@ Under **Project Information** you will find:
 
 The **ID** is what you need for the serve API and for `project-id` headers — this is where to copy
 it from.
+
+![The Settings page: project information, configuration counts and danger zone](../assets/project-settings.png)
 
 :::caution The slug is part of your storage paths
 Artifacts are stored under `<projectSlug>-<projectId>/…`. The id keeps paths unique regardless, but

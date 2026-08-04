@@ -55,6 +55,13 @@ Open the environment and type a domain into **Allowed Domains**, pressing `Enter
 each one. Add every hostname the environment is genuinely reachable at, including `www`
 variants and any vanity domains.
 
+![The Allowed Domains field on the environment dialog](../assets/environment-dialog.png)
+
+The domains of every environment are visible together on the Environments page, which is the
+quickest way to spot a stage that is still missing one:
+
+![The Environments page showing the allowed domains of each environment](../assets/environments-list.png)
+
 ## Which endpoints use it
 
 Domain resolution applies to the endpoints that do not name an environment:

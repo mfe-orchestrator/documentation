@@ -28,6 +28,8 @@ first — there is nothing to integrate against until then.
 Pick the **host** microfrontend from the selector at the top: the generated configuration is
 always from the point of view of one host, listing its remotes.
 
+![The Integration page generating a Vite Module Federation config for the shell host](../assets/integration-frontend.png)
+
 ## The two integration models
 
 There are two quite different ways to consume MFE Orchestrator, and the right choice depends on

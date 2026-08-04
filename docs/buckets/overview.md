@@ -86,9 +86,14 @@ makes rollback instant: nothing is overwritten or deleted on a new release.
 
 1. Go to **Settings → Storages** and click **New Storage**.
 2. Give it a **Name** and pick the **Provider**.
+
+   ![Choosing a storage provider](../assets/storage-providers.png)
+
 3. Fill in the provider-specific credentials — see the per-provider pages.
 4. Optionally set a **Path** prefix inside the bucket.
 5. Save.
+
+![The New Storage form, showing the Amazon S3 credential fields](../assets/storage-dialog.png)
 
 :::caution The provider cannot be changed later
 A storage's provider type is fixed at creation. To move from S3 to GCS, create a new storage and

@@ -14,6 +14,8 @@ from the browser, so a single build can be configured differently in each stage.
 The console generates both snippets with your ids already substituted, under
 **Integration → Environment variables**.
 
+![The Integration page's Environment Variables tab, with both snippets filled in](../assets/integration-environment-variables.png)
+
 ## Option 1: the generated script
 
 MFE Orchestrator can serve your variables as a JavaScript file that assigns them to

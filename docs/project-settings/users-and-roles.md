@@ -45,9 +45,14 @@ project, or limit Editor membership and let Admins handle production.
 ## Inviting a member
 
 1. Go to **Settings → Team Members** and click **Invite user**.
+
+   ![The Project Members page](../assets/team-members.png)
+
 2. Enter their **email address**.
 3. Choose a **role**.
 4. **Send invitation**.
+
+   ![The invite dialog, asking for an email address and a role](../assets/invite-user-dialog.png)
 
 An email goes out with an invitation link. The invitee follows it, signs in or registers, and joins
 the project with the role you chose.

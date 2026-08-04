@@ -14,7 +14,12 @@ re-upload. It is re-activating a snapshot that already exists.
 1. Open **Deployments** and select the affected environment.
 2. Find the last known-good deployment in **History**.
 3. Expand it and check its microfrontend versions and variables are what you expect.
-4. Open the row's actions menu and choose **Redeploy**.
+4. Choose **Redeploy** on that deployment.
+
+![An older deployment expanded in History, with its versions, variables and the Redeploy action](../assets/deployments-history.png)
+
+Comparing the two snapshots above is the whole point: `#2` is serving `catalog` at `2.2.0`,
+while `#1` — one click away — still holds `2.1.0`.
 
 That deployment becomes active again, the broken one is deactivated, and the serve endpoints
 immediately answer from the restored snapshot.

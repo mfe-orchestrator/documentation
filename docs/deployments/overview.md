@@ -63,6 +63,8 @@ The page has two parts:
 **History** — every previous deployment of this environment, newest first, with the same detail
 and a **Redeploy** action.
 
+![The Deployments page: active deployment expanded above the history](../assets/deployments-overview.png)
+
 Inspecting an old deployment answers "what exactly was live last Tuesday?" without archaeology
 through Git.
 

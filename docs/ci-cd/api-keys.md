@@ -14,9 +14,14 @@ single project. Keys live under **Settings → API Keys**.
 ## Creating a key
 
 1. Go to **Settings → API Keys** and click **Create API Key**.
+
+   ![The API Keys page of a project with no keys yet](../assets/api-keys.png)
+
 2. Give it a **Name** describing where it will be used, e.g. *catalog GitHub Actions*.
 3. Pick an **Expiration Date**. The key expires at the end of the selected day.
 4. Click **Create Key**.
+
+   ![The Create API Key dialog, with a name and an expiry date](../assets/api-key-dialog.png)
 
 The key is displayed once, in a dialog with a **Copy & Close** button.
 
