@@ -33,3 +33,26 @@
   /* Code block styling */
   --docusaurus-highlighted-code-line-bg: hsl(217.2 32.6% 17.5%);
 }
+
+/* Navbar call to action towards the hosted console */
+.navbar__cta {
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  background: linear-gradient(100deg, hsl(262 83% 58%), hsl(272 83% 50%));
+  color: #fff !important;
+  font-weight: 600;
+  transition: filter 150ms ease;
+}
+
+.navbar__cta:hover {
+  filter: brightness(1.08);
+  text-decoration: none;
+}
+
+@media (max-width: 996px) {
+  /* Inside the mobile drawer the button styling gets in the way */
+  .navbar-sidebar .navbar__cta {
+    display: inline-block;
+    margin: 0.5rem 0.75rem;
+  }
+}

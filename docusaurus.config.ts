@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'MFE Orchestrator',
-  tagline: 'Orchestrating is Super Easy',
+  tagline: 'The control plane for your microfrontends',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -92,7 +92,17 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Documentation',
+        },
+        {
+          to: '/docs/intro',
+          label: 'Get started',
+          position: 'left',
+        },
+        {
+          to: '/docs/self-hosting/docker',
+          label: 'Self-hosting',
+          position: 'left',
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
@@ -100,17 +110,77 @@ const config: Config = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          href: 'https://console.mfe-orchestrator.dev',
+          label: 'Open the console',
+          position: 'right',
+          className: 'navbar__cta',
+        },
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Product',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Get started',
               to: '/docs/intro',
+            },
+            {
+              label: 'Core concepts',
+              to: '/docs/core-concepts',
+            },
+            {
+              label: 'Templates library',
+              to: '/docs/templates/templates-library',
+            },
+            {
+              label: 'Open the console',
+              href: 'https://console.mfe-orchestrator.dev',
+            },
+          ],
+        },
+        {
+          title: 'Platform',
+          items: [
+            {
+              label: 'Microfrontends',
+              to: '/docs/microfrontends/overview',
+            },
+            {
+              label: 'Environments',
+              to: '/docs/environments/overview',
+            },
+            {
+              label: 'Deployments',
+              to: '/docs/deployments/overview',
+            },
+            {
+              label: 'Integration',
+              to: '/docs/integration/overview',
+            },
+          ],
+        },
+        {
+          title: 'Run it yourself',
+          items: [
+            {
+              label: 'Docker',
+              to: '/docs/self-hosting/docker',
+            },
+            {
+              label: 'Terraform',
+              to: '/docs/self-hosting/terraform',
+            },
+            {
+              label: 'CI/CD',
+              to: '/docs/ci-cd/api-keys',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/mfe-orchestrator',
             },
           ],
         },
