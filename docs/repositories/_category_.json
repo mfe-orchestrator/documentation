@@ -3,6 +3,6 @@
   "position": 9,
   "link": {
     "type": "generated-index",
-    "description": "All about code repositories"
+    "description": "How MFE Orchestrator integrates with the Git provider that hosts your microfrontend code."
   }
 }

@@ -1,8 +1,11 @@
 ---
 sidebar_position: 1
+title: Storage overview
+sidebar_label: Overview
+description: Connect object storage you own — Amazon S3, Azure Blob Storage or Google Cloud Storage — so microfrontend builds are stored in your cloud account instead of on the platform.
 ---
 
-# Overview
+# Storage overview
 
 A **bucket** — a *storage* in the console — is a connection to object storage you own. With one
 configured, microfrontend builds are stored in your own cloud account instead of on the platform,

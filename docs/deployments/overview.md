@@ -1,8 +1,11 @@
 ---
 sidebar_position: 1
+title: Deployments overview
+sidebar_label: Overview
+description: A deployment in MFE Orchestrator is an immutable snapshot of every microfrontend, variable and storage setting an environment needs, activated when you press Deploy.
 ---
 
-# Overview
+# Deployments overview
 
 A **deployment** is an immutable snapshot of everything an environment needs, taken at the moment
 you press **Deploy** and activated for your users.

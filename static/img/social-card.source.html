@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: "Liberation Sans", "DejaVu Sans", sans-serif;
+    background: #0b0a12;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    width: 900px; height: 900px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(262 83% 66% / 0.42) 0%, hsl(262 83% 66% / 0.10) 42%, transparent 68%);
+    top: -380px; right: -240px;
+  }
+  .glow2 {
+    position: absolute;
+    width: 620px; height: 620px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(190 90% 55% / 0.20) 0%, transparent 66%);
+    bottom: -320px; left: -160px;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(hsl(0 0% 100% / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 100% / 0.045) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(160deg, #000 0%, transparent 70%);
+  }
+  .inner {
+    position: relative;
+    height: 100%;
+    padding: 76px 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 21px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: hsl(262 83% 82%);
+    font-weight: 700;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 34px; height: 3px;
+    background: hsl(262 83% 66%);
+    border-radius: 2px;
+  }
+  h1 {
+    font-size: 82px;
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    max-width: 930px;
+  }
+  h1 .accent {
+    background: linear-gradient(95deg, hsl(262 83% 74%), hsl(190 90% 62%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  p.sub {
+    margin-top: 26px;
+    font-size: 30px;
+    line-height: 1.42;
+    color: hsl(250 14% 76%);
+    max-width: 860px;
+  }
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .mark {
+    width: 52px; height: 52px;
+    border-radius: 13px;
+    background: linear-gradient(140deg, hsl(262 83% 66%), hsl(262 83% 46%));
+    position: relative;
+    flex: none;
+  }
+  .mark span {
+    position: absolute;
+    background: #fff;
+    border-radius: 2px;
+  }
+  .mark span:nth-child(1) { width: 15px; height: 15px; top: 11px; left: 11px; }
+  .mark span:nth-child(2) { width: 15px; height: 15px; top: 11px; right: 11px; opacity: 0.55; }
+  .mark span:nth-child(3) { width: 15px; height: 15px; bottom: 11px; left: 11px; opacity: 0.55; }
+  .mark span:nth-child(4) { width: 15px; height: 15px; bottom: 11px; right: 11px; }
+  .url {
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 23px;
+    color: hsl(250 12% 62%);
+  }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="glow2"></div>
+  <div class="grid"></div>
+  <div class="inner">
+    <div class="eyebrow">Documentation</div>
+    <div>
+      <h1>The <span class="accent">control plane</span><br>for your microfrontends</h1>
+      <p class="sub">Versions, environments, deployments and rollbacks — plus the Module Federation config your host needs.</p>
+    </div>
+    <div class="foot">
+      <div class="brand">
+        <div class="mark"><span></span><span></span><span></span><span></span></div>
+        MFE Orchestrator
+      </div>
+      <div class="url">mfe-orchestrator.dev</div>
+    </div>
+  </div>
+</body>
+</html>

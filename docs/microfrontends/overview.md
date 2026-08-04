@@ -1,8 +1,11 @@
 ---
 sidebar_position: 1
+title: Microfrontends overview
+sidebar_label: Overview
+description: How the Microfrontends page of the MFE Orchestrator console lists, groups and gives you access to every microfrontend registered in a project.
 ---
 
-# Overview
+# Microfrontends overview
 
 The **Microfrontends** page is the home screen of the console and the place where you spend
 most of your time. It lists every microfrontend registered in the current project, together

@@ -1,8 +1,11 @@
 ---
 sidebar_position: 1
+title: Integration overview
+sidebar_label: Overview
+description: How your application consumes what you deployed with MFE Orchestrator — Module Federation configuration, runtime variables and the serve API.
 ---
 
-# Overview
+# Integration overview
 
 So far everything has happened inside MFE Orchestrator. This section is about the other side:
 how your application actually consumes what you deployed.

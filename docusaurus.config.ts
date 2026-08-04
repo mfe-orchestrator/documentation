@@ -31,9 +31,12 @@ const config: Config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
+  // The documentation is written in English only. Adding a locale here without
+  // translations under i18n/<locale>/ publishes a duplicate of the English
+  // pages under /<locale>/, which search engines treat as duplicate content.
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'it'],
+    locales: ['en'],
   },
 
   plugins: [
@@ -56,31 +59,26 @@ const config: Config = {
           editUrl:
             'https://github.com/mfe-orchestrator/documentation/blob/main',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/mfe-orchestrator/documentation',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        // No blog: nothing links to it and it only carried the Docusaurus
+        // sample posts, which were indexable. Set this back to an options
+        // object when there is something to publish.
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
+        },
+        sitemap: {
+          // Let crawlers prioritise pages that actually changed.
+          lastmod: 'date',
+          changefreq: null,
+          priority: null,
         },
       } satisfies Preset.Options,
     ],
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // Rendered from static/img/social-card.source.html at 1200x630.
+    image: 'img/social-card.png',
     navbar: {
       title: 'MFE Orchestrator',
       logo: { 
