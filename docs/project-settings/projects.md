@@ -2,6 +2,8 @@
 sidebar_position: 1
 title: Projects and access control
 sidebar_label: Projects
+description: A project is the top-level container and the access-control boundary in MFE Orchestrator. What belongs in one, and how to decide where to draw the line.
+keywords: [projects, access control, boundary, settings]
 ---
 
 # Projects and access control

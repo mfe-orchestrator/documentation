@@ -2,6 +2,8 @@
 sidebar_position: 4
 title: Read runtime configuration in the browser
 sidebar_label: Runtime configuration
+description: Read an environment's variables from the browser so a single build can be configured per stage, using the generated snippet or a direct call to the serve API.
+keywords: [runtime configuration, environment variables, browser, single build]
 ---
 
 # Read runtime configuration in the browser

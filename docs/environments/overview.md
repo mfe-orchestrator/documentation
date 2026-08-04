@@ -3,6 +3,7 @@ sidebar_position: 1
 title: Environments overview
 sidebar_label: Overview
 description: Environments are the deployment stages of a project in MFE Orchestrator — dev, uat, prod — and the boundary where versions and runtime configuration diverge.
+keywords: [environments, dev uat prod, deployment stages, runtime configuration]
 ---
 
 # Environments overview

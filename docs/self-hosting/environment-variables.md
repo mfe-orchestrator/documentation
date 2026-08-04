@@ -2,6 +2,8 @@
 sidebar_position: 4
 title: Container environment variables
 sidebar_label: Environment variables
+description: "Every environment variable that configures the MFE Orchestrator container: database connections, authentication providers, email services and more."
+keywords: [environment variables, container configuration, self-hosting, reference]
 ---
 
 # Container environment variables

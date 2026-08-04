@@ -1,6 +1,8 @@
 ---
 title: Connect an Azure DevOps repository
 sidebar_label: Azure DevOps
+description: Connect an Azure DevOps organization to MFE Orchestrator with a Personal Access Token, so it can read your repositories and scaffold new microfrontends into them.
+keywords: [azure devops, personal access token, repository, connection]
 ---
 
 # Connect an Azure DevOps repository

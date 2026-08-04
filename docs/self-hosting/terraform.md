@@ -2,6 +2,8 @@
 sidebar_position: 3
 title: Self-host with Terraform
 sidebar_label: Terraform
+description: Install MFE Orchestrator Hub with Terraform against Docker infrastructure as code, including the prerequisites and the variables the configuration expects.
+keywords: [terraform, infrastructure as code, self-hosting, docker, installation]
 ---
 
 # Self-host with Terraform

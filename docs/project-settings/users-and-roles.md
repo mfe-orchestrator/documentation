@@ -2,6 +2,8 @@
 sidebar_position: 2
 title: Project members and roles
 sidebar_label: Members and roles
+description: "Access is granted per project: a user can belong to several with a different role in each. What Admin, Editor and Viewer can do, and how to invite members."
+keywords: [members, roles, permissions, invitations, access control]
 ---
 
 # Project members and roles

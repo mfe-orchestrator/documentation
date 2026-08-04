@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+description: Roll back by re-activating a deployment snapshot that already exists — no rebuild, no revert commit, no re-upload — and redeploy when configuration changes.
+keywords: [rollback, redeploy, deployment history, snapshot, incident recovery]
 ---
 
 # Rollback and redeploy

@@ -2,6 +2,8 @@
 sidebar_position: 5
 title: Serve API reference
 sidebar_label: Serve API
+description: Reference for the public, unauthenticated serve API your applications call. Every endpoint answers from the active deployment of the resolved environment.
+keywords: [serve api, rest api, endpoints, active deployment, remoteEntry]
 ---
 
 # Serve API reference

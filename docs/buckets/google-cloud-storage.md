@@ -2,6 +2,8 @@
 sidebar_position: 4
 title: Store builds on Google Cloud Storage
 sidebar_label: Google Cloud Storage
+description: Connect a Google Cloud Storage bucket to MFE Orchestrator with a service account JSON key, so microfrontend builds are stored in your own Google Cloud project.
+keywords: [google cloud storage, gcs, service account, object storage]
 ---
 
 # Store builds on Google Cloud Storage

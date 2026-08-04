@@ -2,6 +2,8 @@
 sidebar_position: 3
 title: Deploy with GitHub Actions
 sidebar_label: GitHub Actions
+description: The build-and-deploy workflow MFE Orchestrator commits when it scaffolds a GitHub repository, the secret it creates, and how to add one by hand.
+keywords: [github actions, workflow, ci cd, secrets, deploy]
 ---
 
 # Deploy with GitHub Actions

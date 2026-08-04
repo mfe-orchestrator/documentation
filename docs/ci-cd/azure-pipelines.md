@@ -2,6 +2,8 @@
 sidebar_position: 4
 title: Deploy with Azure Pipelines
 sidebar_label: Azure Pipelines
+description: The azure-pipelines.yml MFE Orchestrator commits when it scaffolds an Azure DevOps repository, the variable group it creates, and how to add a pipeline by hand.
+keywords: [azure pipelines, azure devops, ci cd, variable group, deploy key]
 ---
 
 # Deploy with Azure Pipelines

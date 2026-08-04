@@ -2,6 +2,8 @@
 sidebar_position: 6
 title: Canary releases for microfrontends
 sidebar_label: Canary releases
+description: Serve a new version of a microfrontend to a fraction of your traffic while everyone else keeps the stable one, without any change to your host application.
+keywords: [canary release, progressive rollout, traffic split, versions]
 ---
 
 # Canary releases for microfrontends

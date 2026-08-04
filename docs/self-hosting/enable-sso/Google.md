@@ -1,6 +1,8 @@
 ---
 title: Enable SSO with Google
 sidebar_label: Google
+description: Create a Google OAuth 2.0 client and point a self-hosted MFE Orchestrator at it, so users sign in with their Google account.
+keywords: [google oauth, sso, authentication, self-hosting]
 ---
 
 # Enable SSO with Google

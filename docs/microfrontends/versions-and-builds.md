@@ -2,6 +2,8 @@
 sidebar_position: 4
 title: Microfrontend versions and builds
 sidebar_label: Versions and builds
+description: How a microfrontend version comes into existence, what a version string means to the platform, and the two ways to produce and upload build artifacts.
+keywords: [versions, builds, artifacts, tags, upload]
 ---
 
 # Microfrontend versions and builds

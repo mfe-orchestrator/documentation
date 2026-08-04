@@ -11,6 +11,9 @@ importers:
       '@docusaurus/core':
         specifier: 3.9.2
         version: 3.9.2(@mdx-js/react@3.1.0(@types/react@19.1.9)(react@19.1.1))(acorn@8.15.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.6.3)
+      '@docusaurus/plugin-content-docs':
+        specifier: 3.9.2
+        version: 3.9.2(@mdx-js/react@3.1.0(@types/react@19.1.9)(react@19.1.1))(acorn@8.15.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.6.3)
       '@docusaurus/plugin-google-gtag':
         specifier: ^3.9.2
         version: 3.9.2(@mdx-js/react@3.1.0(@types/react@19.1.9)(react@19.1.1))(acorn@8.15.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.6.3)

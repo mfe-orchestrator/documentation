@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+description: Add a microfrontend from a template, which scaffolds a repository and a build pipeline for you, or by registering code that already exists elsewhere.
+keywords: [create microfrontend, templates, scaffolding, registration]
 ---
 
 # Create a microfrontend

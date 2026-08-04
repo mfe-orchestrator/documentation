@@ -2,6 +2,8 @@
 sidebar_position: 5
 title: Hosts and remotes in Module Federation
 sidebar_label: Hosts and remotes
+description: How MFE Orchestrator models the parent and child relationships between hosts and remotes, and how it turns that graph into Module Federation configuration.
+keywords: [host, remotes, module federation, relation graph, diagram view]
 ---
 
 # Hosts and remotes in Module Federation

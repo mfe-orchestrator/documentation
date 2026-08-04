@@ -2,6 +2,8 @@
 sidebar_position: 1
 title: Self-host with Docker
 sidebar_label: Docker
+description: Run MFE Orchestrator Hub as a single Docker container from the official image on Docker Hub, and the environment variables it needs to start.
+keywords: [docker, self-hosting, installation, container]
 ---
 # Self-host with Docker
 This page provides instructions to install MFE Orchestrator Hub using Docker.

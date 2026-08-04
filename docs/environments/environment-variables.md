@@ -2,6 +2,8 @@
 sidebar_position: 3
 title: Runtime environment variables
 sidebar_label: Environment variables
+description: Runtime key/value pairs scoped to an environment and read by the browser after the bundle has loaded, so a single build can be configured differently in each stage.
+keywords: [environment variables, runtime configuration, per environment config]
 ---
 
 # Runtime environment variables

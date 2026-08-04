@@ -3,6 +3,7 @@ sidebar_position: 3
 title: Module Federation with Webpack
 sidebar_label: Webpack
 description: Wire an MFE Orchestrator deployment into a Webpack 5 host with ModuleFederationPlugin, using the configuration the console generates.
+keywords: [webpack, module federation, ModuleFederationPlugin, remotes, host]
 ---
 
 # Module Federation with Webpack

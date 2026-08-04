@@ -2,6 +2,8 @@
 sidebar_position: 3
 title: Microfrontend hosting options
 sidebar_label: Hosting options
+description: "Every microfrontend declares where its files live: the MFE Orchestrator hub, a storage bucket you own, or a URL you already serve. What each option changes."
+keywords: [hosting type, hub, bucket, custom url, remoteEntry]
 ---
 
 # Microfrontend hosting options

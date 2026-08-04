@@ -2,6 +2,8 @@
 sidebar_position: 2
 title: Upload a build from any CI system
 sidebar_label: Uploading a build
+description: The single HTTP endpoint every pipeline reduces to, so you can publish a microfrontend build from any CI system, or from your laptop when debugging.
+keywords: [upload build, rest api, api key, publish version, ci cd]
 ---
 
 # Upload a build from any CI system

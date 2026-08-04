@@ -1,6 +1,8 @@
 ---
 title: Enable SSO with Microsoft Entra ID
 sidebar_label: Azure AD (Entra ID)
+description: Register an application in Microsoft Entra ID (Azure AD) and point a self-hosted MFE Orchestrator at it, so users sign in with their organisation account.
+keywords: [entra id, azure ad, sso, oauth, authentication]
 ---
 
 # Enable SSO with Microsoft Entra ID

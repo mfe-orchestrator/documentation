@@ -1,6 +1,8 @@
 ---
 title: Enable SSO with Auth0
 sidebar_label: Auth0
+description: Configure an Auth0 application and point a self-hosted MFE Orchestrator at it, so users sign in with Auth0 instead of an email and password.
+keywords: [auth0, sso, oauth, authentication, self-hosting]
 ---
 
 # Enable SSO with Auth0

@@ -2,6 +2,8 @@
 sidebar_position: 2
 title: Self-host with Docker Compose
 sidebar_label: Docker Compose
+description: Install MFE Orchestrator Hub with Docker Compose, bringing up MongoDB, Redis and the application together from the official image on Docker Hub.
+keywords: [docker compose, self-hosting, installation, mongodb, redis]
 ---
 
 # Self-host with Docker Compose

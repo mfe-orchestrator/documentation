@@ -2,6 +2,8 @@
 sidebar_position: 3
 title: Store builds on Azure Blob Storage
 sidebar_label: Azure Blob Storage
+description: Authenticate MFE Orchestrator against Azure Blob Storage with a connection string, a shared key or a service principal, and store microfrontend builds there.
+keywords: [azure blob storage, connection string, shared key, service principal]
 ---
 
 # Store builds on Azure Blob Storage

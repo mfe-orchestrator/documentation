@@ -3,6 +3,7 @@ sidebar_position: 1
 title: Storage overview
 sidebar_label: Overview
 description: Connect object storage you own — Amazon S3, Azure Blob Storage or Google Cloud Storage — so microfrontend builds are stored in your cloud account instead of on the platform.
+keywords: [object storage, buckets, amazon s3, azure blob storage, google cloud storage]
 ---
 
 # Storage overview

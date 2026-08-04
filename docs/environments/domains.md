@@ -2,6 +2,8 @@
 sidebar_position: 2
 title: Allowed domains and environment resolution
 sidebar_label: Allowed domains
+description: Allowed Domains lets MFE Orchestrator work out which environment a browser request belongs to from its origin, so one artifact can serve every stage.
+keywords: [allowed domains, environment resolution, origin, multi environment]
 ---
 
 # Allowed domains and environment resolution

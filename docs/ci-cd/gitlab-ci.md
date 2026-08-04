@@ -2,6 +2,8 @@
 sidebar_position: 5
 title: Deploy with GitLab CI
 sidebar_label: GitLab CI
+description: The .gitlab-ci.yml MFE Orchestrator commits when it scaffolds a GitLab repository, the group-level CI/CD variable it creates, and how to add a pipeline by hand.
+keywords: [gitlab ci, pipeline, ci cd, ci variables, deploy]
 ---
 
 # Deploy with GitLab CI

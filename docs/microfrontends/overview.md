@@ -3,6 +3,7 @@ sidebar_position: 1
 title: Microfrontends overview
 sidebar_label: Overview
 description: How the Microfrontends page of the MFE Orchestrator console lists, groups and gives you access to every microfrontend registered in a project.
+keywords: [microfrontends, console, host, remote, versions]
 ---
 
 # Microfrontends overview
