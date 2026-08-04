@@ -1,0 +1,8 @@
+{
+  "label": "Templates",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Scaffold new microfrontends from ready-made templates."
+  }
+}

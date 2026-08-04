@@ -1,0 +1,88 @@
+---
+sidebar_position: 3
+---
+
+# Environment variables
+
+Environment variables in MFE Orchestrator are **runtime** configuration: `key`/`value` pairs
+scoped to an environment, read by the browser after the bundle has loaded.
+
+:::info Not to be confused with…
+These are the variables of *your application*. The variables that configure the MFE Orchestrator
+container itself are documented under
+[Self Hosting → Environment Variables](../self-hosting/environment-variables.md).
+:::
+
+## Why runtime and not build time
+
+A variable baked in at build time (`import.meta.env.VITE_API_URL`, `process.env.API_URL`) makes
+the artifact environment-specific. Promoting a build from UAT to production then means rebuilding
+it, which means the thing you tested is not the thing you shipped.
+
+Serving the values at runtime instead means one artifact travels through every stage, and the
+stage supplies its own configuration:
+
+```
+        one build of catalog@1.4.0
+                   │
+    ┌──────────────┼──────────────┐
+    ▼              ▼              ▼
+   dev            uat            prod
+API_URL=…dev   API_URL=…uat   API_URL=…com
+```
+
+## Managing variables
+
+Open **Environment Variables** in the sidebar, pick an environment from the selector, and use
+**Add Variable**. Each variable is a `key` and a `value`; keys are unique per environment.
+
+The same key typically exists in every environment with a different value. Creating a variable
+from this page creates it for the selected environment — remember to add it to the others before
+you deploy them, or the code reading it will find `undefined`.
+
+:::caution Not a secret store
+Environment variables are served to the browser by a **public, unauthenticated** endpoint. Anyone
+who knows your project and environment id can read them. Never put API secrets, private keys,
+database credentials or tokens here. Use them for public configuration only: API base URLs,
+feature flags, tracking ids, public keys.
+:::
+
+## Reading them in your application
+
+Variables are exposed in two forms. The full details, including examples, are in
+[Runtime configuration](../integration/runtime-configuration.md); in short:
+
+**As a script that populates `window.globalConfig`** — add it to your `index.html` before your
+bundle:
+
+```html
+<script src="<API_BASE>/serve/global-variables/<environmentId>/index.js"></script>
+```
+
+```js
+const apiUrl = window.globalConfig?.API_URL
+```
+
+**As JSON**, if you prefer to fetch them yourself:
+
+```js
+const vars = await fetch('<API_BASE>/serve/global-variables/<environmentId>')
+  .then(r => r.json())
+```
+
+The console's **Integration → Environment variables** tab shows both snippets with your ids
+already filled in.
+
+## Variables and deployments
+
+Like everything else, variables are captured in the deployment snapshot. Adding or changing a
+variable does not affect a running environment until you deploy.
+
+This is deliberate: it means a configuration change is as auditable and as reversible as a code
+change. Rolling back a deployment rolls back its variables along with its versions.
+
+:::tip
+If you have changed a variable and your application still reads the old value, check that you
+have deployed. The serve endpoints always answer from the **active deployment**, never from the
+current draft configuration.
+:::

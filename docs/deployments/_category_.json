@@ -1,0 +1,8 @@
+{
+  "label": "Deployments",
+  "position": 6,
+  "link": {
+    "type": "generated-index",
+    "description": "Snapshot your configuration, activate it, and roll it back."
+  }
+}

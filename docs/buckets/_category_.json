@@ -1,8 +1,8 @@
 {
   "label": "Buckets",
-  "position": 3,
+  "position": 8,
   "link": {
     "type": "generated-index",
-    "description": "How to handle Buckets"
+    "description": "Store microfrontend builds in your own object storage: Amazon S3, Azure Blob Storage or Google Cloud Storage."
   }
 }

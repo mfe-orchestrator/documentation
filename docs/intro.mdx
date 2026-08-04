@@ -143,3 +143,31 @@ This process usually takes a few seconds. You'll see a success message once ever
 
 **Congratulations!** 🎉 You've successfully created your first microfrontend. You can now start developing, deploying, and managing your application through MFE Orchestrator.
 
+## Next steps
+
+Your microfrontend exists, but there are a few more pieces before it is serving traffic. The
+shortest path from here:
+
+1. **[Understand the model](./core-concepts.md)** — projects, environments, deployments and how they
+   relate. Ten minutes that will save you an hour later.
+2. **[Publish a version](./microfrontends/versions-and-builds.md)** — push a tag and let the
+   generated pipeline build and upload your first artifact.
+3. **[Set up your environments](./environments/overview.md)** — the stages your microfrontend moves
+   through, plus the [allowed domains](./environments/domains.md) that let one build serve them all.
+4. **[Deploy](./deployments/overview.md)** — snapshot the configuration and make it live. Remember:
+   editing is not deploying.
+5. **[Integrate](./integration/overview.md)** — copy the generated Module Federation configuration
+   into your host application.
+
+### Going further
+
+- **[Hosting options](./microfrontends/hosting-options.md)** — keep artifacts on the hub, in
+  [your own bucket](./buckets/overview.md), or on your existing CDN
+- **[Runtime configuration](./integration/runtime-configuration.md)** — configure the same build
+  differently per environment, without a rebuild
+- **[CI/CD](./ci-cd/api-keys.md)** — API keys and pipelines for
+  [GitHub](./ci-cd/github-actions.md), [GitLab](./ci-cd/gitlab-ci.md) and
+  [Azure DevOps](./ci-cd/azure-pipelines.md)
+- **[Members and roles](./project-settings/users-and-roles.md)** — invite your team
+- **[Self hosting](./self-hosting/docker.md)** — run the platform on your own infrastructure
+

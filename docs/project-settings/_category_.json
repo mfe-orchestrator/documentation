@@ -1,0 +1,8 @@
+{
+  "label": "Project & Members",
+  "position": 12,
+  "link": {
+    "type": "generated-index",
+    "description": "Manage the project itself and the people who have access to it."
+  }
+}
