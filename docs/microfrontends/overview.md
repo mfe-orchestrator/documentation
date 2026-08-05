@@ -62,7 +62,7 @@ You can filter the list by free-text search and by status.
 | **Hosting type** | Where the files live — see [Hosting options](./hosting-options.md) |
 | **Entry Point** | The file a consumer loads. Defaults to `index.js`; Vite Module Federation builds typically use `assets/remoteEntry.js` |
 | **Code repository** | Optional link to a GitHub / GitLab / Azure DevOps repository, which enables the **Build** action |
-| **Canary** | Optional progressive rollout configuration — see [Canary releases](./canary-releases.md) |
+| **Canary** | Progressive rollout configuration — *coming soon*, see [Canary releases](./canary-releases.mdx) |
 
 :::caution The slug is fixed at creation
 The slug appears in your serve URLs and becomes the remote name in generated Module Federation
@@ -77,4 +77,4 @@ its consumers. Pick one you can live with.
 - [Hosting options](./hosting-options.md) — hub, your own bucket, or an external URL
 - [Versions and builds](./versions-and-builds.md) — how a version gets created and uploaded
 - [Hosts and remotes](./host-and-remotes.md) — wiring the graph
-- [Canary releases](./canary-releases.md) — progressive rollout
+- [Canary releases](./canary-releases.mdx) — progressive rollout, *coming soon*

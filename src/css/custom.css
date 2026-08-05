@@ -55,3 +55,21 @@
     margin: 0.5rem 0.75rem;
   }
 }
+
+/* Flags a sidebar entry whose feature has not shipped yet, so readers see it
+   before they open the page. Set with `sidebar_class_name` in front matter,
+   which puts the class on the list item — hence the badge on the link inside. */
+.sidebar-coming-soon > .menu__link::after {
+  content: 'soon';
+  flex: 0 0 auto;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 999px;
+  background: hsl(38 92% 50%);
+  color: hsl(26 83% 14%);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}

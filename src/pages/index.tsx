@@ -218,7 +218,10 @@ const DOC_SECTIONS: DocSection[] = [
         to: '/docs/microfrontends/versions-and-builds',
       },
       {label: 'Hosting options', to: '/docs/microfrontends/hosting-options'},
-      {label: 'Canary releases', to: '/docs/microfrontends/canary-releases'},
+      {
+        label: 'Canary releases (coming soon)',
+        to: '/docs/microfrontends/canary-releases',
+      },
     ],
   },
   {

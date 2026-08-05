@@ -97,7 +97,7 @@ Clicking a microfrontend opens the same form in edit mode, organised into sectio
 | --- | --- |
 | General information | Name, slug, description, version, continuous deployment |
 | Hosting information | Hosting type, entry point, storage or URL |
-| Canary release | Progressive rollout settings |
+| Canary release | Progressive rollout settings — disabled, *coming soon* |
 | Code repository | The linked repository |
 | Danger zone | Delete this microfrontend |
 
