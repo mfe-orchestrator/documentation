@@ -1,0 +1,93 @@
+---
+sidebar_position: 1
+title: "Quick start: from zero to rollback in 10 minutes"
+sidebar_label: Quick start
+description: The shortest path through MFE Orchestrator on the free hosted console — create a microfrontend, publish a version, deploy it, integrate the host, and roll back. No installation required.
+keywords: [quick start, quickstart, getting started, tutorial, rollback, microfrontends]
+---
+
+import Link from '@docusaurus/Link';
+
+# Quick start: from zero to rollback in 10 minutes
+
+This is the golden path: the fewest steps that take you from nothing to a deployed
+microfrontend — and back, because a deploy you cannot undo is not one you should trust.
+It uses the **free hosted console**, so there is nothing to install.
+
+:::info Prefer your own infrastructure?
+Everything below also works on a [self-hosted installation](./self-hosting/docker-compose.md).
+Run through it on the console first — it is the fastest way to judge whether the platform
+fits — and move to self-hosting when you need the bundles to stay in your network.
+:::
+
+## 1. Create an account — no install
+
+Open **[console.mfe-orchestrator.dev](https://console.mfe-orchestrator.dev)** and register with
+email or Google SSO, then name your first project. That is the whole setup.
+
+Details: [Get started with MFE Orchestrator](./intro.mdx)
+
+## 2. Connect a repository and create a microfrontend
+
+1. In **Settings → Code Repositories**, connect GitHub, GitLab or Azure DevOps.
+2. Back on the home page, choose **Add New Microfrontend**, pick a template, and give it a
+   name and a slug.
+
+The console creates the repository from the template, with the build pipeline already in it.
+
+Details: [Connect GitHub](./repositories/connect/github.md) ·
+[Create a microfrontend](./microfrontends/create-a-microfrontend.md)
+
+## 3. Publish a version
+
+On the microfrontend's card, choose **Build**, pick the branch and type a version — say
+`1.0.0`. The console creates a Git tag with that name; your pipeline triggers on the tag,
+builds, and uploads the artifact. When it finishes, `1.0.0` appears in the version list.
+
+Details: [Versions and builds](./microfrontends/versions-and-builds.md)
+
+## 4. Deploy
+
+Select version `1.0.0` on the microfrontend, then press **Deploy** on your environment.
+This captures an immutable snapshot — versions, variables, storage configuration — and
+activates it. Remember the platform's one rule: **editing is not deploying**. Nothing your
+users see changes until you press Deploy.
+
+Details: [Deployments overview](./deployments/overview.md)
+
+## 5. Integrate your host
+
+The console generates the Module Federation configuration (Vite or Webpack) your host
+application needs, with entry URLs pointing at whatever each environment currently serves.
+Copy it once; from then on, releases never touch the host again.
+
+Details: [Integration overview](./integration/overview.md)
+
+## 6. Roll back
+
+Publish and deploy a `1.0.1`, then pretend it broke:
+
+1. Open **Deployments → History** for the environment.
+2. Expand the previous snapshot and check its versions.
+3. Press **Redeploy**.
+
+The old snapshot is active again — no rebuild, no revert commit, no pipeline wait. This is
+the moment the platform earns its keep, and it took one click.
+
+Details: [Rollback and redeploy](./deployments/rollback-and-redeploy.md)
+
+---
+
+## Where to go next
+
+- **[Core concepts](./core-concepts.md)** — projects, environments, deployments and how they
+  relate. Ten minutes that save you an hour later.
+- **[Environments and domains](./environments/domains.md)** — one build serving DEV, UAT and
+  PROD, resolved per request.
+- **[Runtime configuration](./integration/runtime-configuration.md)** — per-environment
+  variables without a rebuild.
+- **[Self-hosting](./self-hosting/docker-compose.md)** — Docker Compose, Docker or Terraform,
+  with your own MongoDB and object storage.
+
+If MFE Orchestrator is useful to you, a
+[star on GitHub](https://github.com/mfe-orchestrator) helps the project get found.

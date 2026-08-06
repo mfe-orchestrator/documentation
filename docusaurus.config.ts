@@ -96,8 +96,8 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          to: '/docs/intro',
-          label: 'Get started',
+          to: '/docs/quick-start',
+          label: 'Quick start',
           position: 'left',
         },
         {
@@ -125,6 +125,10 @@ const config: Config = {
         {
           title: 'Product',
           items: [
+            {
+              label: 'Quick start',
+              to: '/docs/quick-start',
+            },
             {
               label: 'Get started',
               to: '/docs/intro',
