@@ -1,12 +1,19 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Global styles, mapped onto the shared MFE Orchestrator design system
+ * (@mfe-orchestrator/design-system/theme.css) so the documentation matches the
+ * console and the public website. Docusaurus styles through Infima variables,
+ * so the design tokens are translated here rather than imported directly:
+ *
+ *   font          Montserrat
+ *   primary       hsl(262 83% 66%)  (violet, same light and dark)
+ *   light bg      white   / foreground hsl(222 30% 16%)
+ *   dark bg       hsl(220 26% 14%) / surface hsl(220 22% 17%)
+ *   radius        0.75rem
  */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..700;1,300..700&display=swap");
 
-/* You can override the default Infima variables here. */
 :root {
-  /* Primary color palette (light mode) - lilla */
+  /* Primary palette — design system --primary and its active/hover ramp */
   --ifm-color-primary: hsl(262 83% 66%);
   --ifm-color-primary-dark: hsl(262 83% 60%);
   --ifm-color-primary-darker: hsl(262 83% 54%);
@@ -14,14 +21,30 @@
   --ifm-color-primary-light: hsl(262 83% 72%);
   --ifm-color-primary-lighter: hsl(262 83% 78%);
   --ifm-color-primary-lightest: hsl(262 83% 85%);
+
+  /* Typography */
+  --ifm-font-family-base: "Montserrat", "system-ui", sans-serif;
+  --ifm-heading-font-family: "Montserrat", "system-ui", sans-serif;
+
+  /* Light theme — design system :root tokens */
+  --ifm-background-color: hsl(0 0% 100%);
+  --ifm-font-color-base: hsl(222 30% 16%);
+  --ifm-color-content-secondary: hsl(222 12% 40%);
+  --ifm-hr-border-color: hsl(262 20% 93%);
+  --ifm-toc-border-color: hsl(262 20% 90%);
+
+  /* Radius — design system --radius */
+  --ifm-global-radius: 0.75rem;
+  --ifm-button-border-radius: 0.75rem;
+  --ifm-card-border-radius: 0.875rem;
 
   /* Code block styling */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: hsl(210 40% 96.1%);
+  --docusaurus-highlighted-code-line-bg: hsl(240 20% 96%);
 }
 
 [data-theme='dark'] {
-  /* Primary color palette (dark mode) - lilla */
+  /* Primary stays the same violet in dark mode, as in the design system */
   --ifm-color-primary: hsl(262 83% 66%);
   --ifm-color-primary-dark: hsl(262 83% 60%);
   --ifm-color-primary-darker: hsl(262 83% 54%);
@@ -30,21 +53,31 @@
   --ifm-color-primary-lighter: hsl(262 83% 78%);
   --ifm-color-primary-lightest: hsl(262 83% 85%);
 
+  /* Dark theme — design system .dark tokens */
+  --ifm-background-color: hsl(220 26% 14%);
+  --ifm-background-surface-color: hsl(220 22% 17%);
+  --ifm-font-color-base: hsl(210 40% 98%);
+  --ifm-color-content-secondary: hsl(217 10% 70%);
+  --ifm-hr-border-color: hsl(220 15% 22%);
+  --ifm-toc-border-color: hsl(220 15% 25%);
+
   /* Code block styling */
-  --docusaurus-highlighted-code-line-bg: hsl(217.2 32.6% 17.5%);
+  --docusaurus-highlighted-code-line-bg: hsl(220 15% 25%);
 }
 
-/* Navbar link towards the hosted console */
+/* Navbar link towards the hosted console, styled like the design system's
+ * primary button so the docs carry the same call to action as the website. */
 .navbar__cta {
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--ifm-color-primary);
-  border-radius: 6px;
-  color: var(--ifm-color-primary) !important;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid hsl(262 83% 66%);
+  border-radius: 0.75rem;
+  background: hsl(262 83% 66%);
+  color: hsl(0 0% 100%) !important;
   font-weight: 600;
 }
 
 .navbar__cta:hover {
-  background: hsl(262 83% 66% / 0.1);
+  background: hsl(262 83% 58%);
   text-decoration: none;
 }
 

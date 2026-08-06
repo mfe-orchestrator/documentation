@@ -88,11 +88,11 @@ type Card = {
 const START_HERE: Card[] = [
   {
     icon: '🚀',
-    title: 'First steps',
+    title: 'Quick start',
     description:
-      'Create an account, connect a repository and get your first microfrontend created for you. About five minutes.',
-    to: '/docs/intro',
-    cta: 'Start the tutorial',
+      'From zero to a deployed microfrontend — and a one-click rollback — on the free hosted console. About ten minutes, nothing to install.',
+    to: '/docs/quick-start',
+    cta: 'Start the quick start',
   },
   {
     icon: '🧠',
@@ -199,6 +199,7 @@ const DOC_SECTIONS: DocSection[] = [
   {
     title: 'Getting started',
     links: [
+      {label: 'Quick start', to: '/docs/quick-start'},
       {label: "Let's start", to: '/docs/intro'},
       {label: 'Core concepts', to: '/docs/core-concepts'},
       {label: 'Templates library', to: '/docs/templates/templates-library'},
@@ -329,8 +330,8 @@ function Hero() {
             self-hosted platform.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.buttonPrimary} to="/docs/intro">
-              Get started →
+            <Link className={styles.buttonPrimary} to="/docs/quick-start">
+              Quick start →
             </Link>
             <Link className={styles.buttonGhost} to="/docs/core-concepts">
               Core concepts
@@ -579,14 +580,15 @@ function Help() {
         <div>
           <h2 className={styles.helpTitle}>Not sure where to start?</h2>
           <p className={styles.helpText}>
-            The tutorial takes you from an empty account to a deployed
-            microfrontend. If something is missing or wrong in these pages, open
-            an issue — every page has an “Edit this page” link at the bottom.
+            The quick start takes you from an empty account to a deployed
+            microfrontend — and back with a rollback. If something is missing or
+            wrong in these pages, open an issue — every page has an “Edit this
+            page” link at the bottom.
           </p>
         </div>
         <div className={styles.helpActions}>
-          <Link className={styles.buttonPrimary} to="/docs/intro">
-            Get started →
+          <Link className={styles.buttonPrimary} to="/docs/quick-start">
+            Quick start →
           </Link>
           <Link className={styles.buttonGhost} to={GITHUB_URL}>
             GitHub ↗
