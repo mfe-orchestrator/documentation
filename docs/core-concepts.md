@@ -12,6 +12,11 @@ Before diving into the individual features, it helps to understand the handful o
 MFE Orchestrator is built around. Everything you do in the console — and every call you make
 to the API — maps onto one of them.
 
+:::tip Prefer a picture?
+[Architecture](./architecture.md) draws the same objects as running components: the orchestrator,
+its database, the storage options and how a deployment reaches each environment.
+:::
+
 ## The object model
 
 ```

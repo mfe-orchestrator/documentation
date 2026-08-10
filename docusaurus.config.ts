@@ -48,6 +48,13 @@ const config: Config = {
     locales: ['en'],
   },
 
+  // Architecture diagrams are written as ```mermaid fences so they stay
+  // diffable and follow the site theme, instead of shipping as flat images.
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   plugins: [
     [
       '@docusaurus/plugin-google-gtag',
@@ -233,6 +240,9 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    mermaid: {
+      theme: {light: 'neutral', dark: 'dark'},
     },
   } satisfies Preset.ThemeConfig,
 };
