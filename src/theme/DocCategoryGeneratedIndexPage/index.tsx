@@ -5,6 +5,7 @@ import type {WrapperProps} from '@docusaurus/types';
 import Head from '@docusaurus/Head';
 import {useCurrentSidebarCategory} from '@docusaurus/plugin-content-docs/client';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {absoluteUrl} from '@site/src/seo/absoluteUrl';
 
 type Props = WrapperProps<typeof DocCategoryGeneratedIndexPageType>;
 
@@ -18,14 +19,14 @@ export default function DocCategoryGeneratedIndexPageWrapper(
   const {categoryGeneratedIndex} = props;
   const category = useCurrentSidebarCategory();
   const {siteConfig} = useDocusaurusContext();
-  const {url: siteUrl, baseUrl, title: siteTitle} = siteConfig;
+  const {url: siteUrl, baseUrl, title: siteTitle, trailingSlash} = siteConfig;
 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: categoryGeneratedIndex.title,
     description: categoryGeneratedIndex.description,
-    url: siteUrl + categoryGeneratedIndex.permalink,
+    url: absoluteUrl(siteUrl, categoryGeneratedIndex.permalink, trailingSlash),
     inLanguage: 'en',
     isPartOf: {
       '@type': 'WebSite',
@@ -36,7 +37,13 @@ export default function DocCategoryGeneratedIndexPageWrapper(
     hasPart: category.items.flatMap((item) =>
       item.type === 'html' || !('href' in item) || !item.href
         ? []
-        : [{'@type': 'WebPage', name: item.label, url: siteUrl + item.href}],
+        : [
+            {
+              '@type': 'WebPage',
+              name: item.label,
+              url: absoluteUrl(siteUrl, item.href, trailingSlash),
+            },
+          ],
     ),
   };
 

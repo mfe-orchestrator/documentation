@@ -21,6 +21,14 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/documentation',
 
+  // GitHub Pages serves every page from <path>/index.html and 301s /<path> to
+  // /<path>/. Left unset, Docusaurus emits sitemap entries, canonicals and
+  // internal links without the slash, so every URL we hand to Google is a
+  // redirect and the page it lands on points its canonical back at the
+  // redirecting URL. Emitting the slash ourselves matches what the host
+  // actually serves.
+  trailingSlash: true,
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'mfe-orchestrator', // Usually your GitHub org/user name.
