@@ -5,6 +5,7 @@ import type {WrapperProps} from '@docusaurus/types';
 import Head from '@docusaurus/Head';
 import {useDoc} from '@docusaurus/plugin-content-docs/client';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {absoluteUrl} from '@site/src/seo/absoluteUrl';
 
 type Props = WrapperProps<typeof LayoutType>;
 
@@ -16,10 +17,16 @@ type Props = WrapperProps<typeof LayoutType>;
 export default function LayoutWrapper(props: Props): ReactNode {
   const {metadata, frontMatter} = useDoc();
   const {siteConfig} = useDocusaurusContext();
-  const {url: siteUrl, baseUrl, title: siteTitle, themeConfig} = siteConfig;
+  const {
+    url: siteUrl,
+    baseUrl,
+    title: siteTitle,
+    themeConfig,
+    trailingSlash,
+  } = siteConfig;
 
   const siteHome = siteUrl + baseUrl;
-  const pageUrl = siteUrl + metadata.permalink;
+  const pageUrl = absoluteUrl(siteUrl, metadata.permalink, trailingSlash);
   const socialCard = siteHome + (themeConfig.image as string);
   const keywords = frontMatter.keywords ?? [];
 
