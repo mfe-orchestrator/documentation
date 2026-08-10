@@ -23,53 +23,52 @@ Artifacts — the actual microfrontend bundles — live outside the database, ei
 orchestrator's own storage or in a cloud bucket you own.
 
 ```mermaid
-flowchart LR
-    subgraph yours["Your development workflow"]
-        direction TB
-        repo["Git repository<br/>GitHub · GitLab · Azure DevOps"]
-        ci["CI/CD pipeline<br/>GitHub Actions · GitLab CI · Azure Pipelines"]
-        repo --> ci
+flowchart TB
+    subgraph clients["Who talks to it"]
+        direction LR
+        people["Console users"]
+        ci["CI/CD pipeline<br/>GitHub Actions · GitLab CI · Azure Pipelines<br/>authenticated with an API key"]
+        browser["Host application in the browser<br/>Module Federation shell + remotes"]
     end
 
     subgraph orch["MFE Orchestrator — one container"]
-        direction TB
+        direction LR
         console["Console<br/>React SPA"]
-        mgmt["Management API<br/>authenticated: session or API key"]
+        mgmt["Management API<br/>authenticated"]
         serve["Serve API<br/>public, unauthenticated"]
         storage["Storage layer<br/>resolves a version to bytes"]
-        console --> mgmt
-        mgmt --> storage
-        serve --> storage
     end
 
     subgraph state["State"]
-        direction TB
-        mongo[("MongoDB<br/>projects, environments, microfrontends,<br/>deployments, storages, members, API keys")]
+        direction LR
+        mongo[("MongoDB<br/>projects · environments · microfrontends<br/>deployments · storages · members · API keys")]
         redis[("Redis<br/>cache")]
     end
 
     subgraph artifacts["Where the bundles are stored"]
-        direction TB
+        direction LR
         internal["Internal storage<br/>MICROFRONTEND_HOST_FOLDER<br/>default /var/microfrontends"]
         s3["Amazon S3"]
         blob["Azure Blob Storage"]
         gcs["Google Cloud Storage"]
-        ext["Your CDN or static host<br/>hosting type: Custom URL"]
     end
 
-    subgraph browsers["Your users' browsers"]
-        direction TB
-        host["Host application<br/>Module Federation shell"]
-        remote["Remotes"]
-        host --> remote
+    subgraph optional["External services · optional"]
+        direction LR
+        idp["Identity providers<br/>Auth0 · Entra ID · Google<br/>or local login"]
+        smtp["SMTP<br/>invitations, password reset"]
     end
 
-    idp["Identity providers<br/>Auth0 · Azure Entra ID · Google · local login"]
-    smtp["SMTP server<br/>invitations, password reset"]
+    ext["Your CDN or static host<br/>hosting type: Custom URL"]
 
+    people --> console
+    console --> mgmt
     ci -->|"upload dist.zip + version"| mgmt
-    mgmt -->|"scaffold repo, inject pipeline, create deploy secret"| repo
+    browser -->|"GET /serve/all/:projectId/:envSlug"| serve
+    browser -->|"GET .../remoteEntry.js"| serve
 
+    mgmt --> storage
+    serve --> storage
     mgmt --> mongo
     mgmt --> redis
     serve --> mongo
@@ -79,14 +78,12 @@ flowchart LR
     mgmt -.-> idp
     mgmt -.-> smtp
 
-    storage <-->|"write on upload · read on request"| internal
-    storage <-->|"your credentials, private bucket"| s3
+    storage <-->|"write on upload<br/>read on request"| internal
+    storage <-->|"your credentials<br/>bucket stays private"| s3
     storage <--> blob
     storage <--> gcs
 
-    host -->|"GET /serve/all/:projectId/:envSlug"| serve
-    host -->|"GET .../remoteEntry.js"| serve
-    remote -.->|"fetched directly, the platform only hands out the URL"| ext
+    browser -.->|"fetched directly: the platform only hands out the URL"| ext
 ```
 
 A few things worth reading off the diagram:
@@ -102,6 +99,10 @@ A few things worth reading off the diagram:
   [API key](./ci-cd/api-keys.md).
 - **Artifacts are not in the database.** MongoDB holds configuration and deployment snapshots;
   bundles live on disk or in object storage.
+- **Git providers are reached from the management API**, not shown above to keep the picture
+  readable: with a [repository](./repositories/connect/github.md) connected, the platform scaffolds
+  a repo from a template, injects a build pipeline and creates the deploy secret that pipeline
+  needs.
 
 ## Deployments across environments
 
@@ -112,19 +113,12 @@ while you stage `1.4.0` in `uat` from the same project.
 
 ```mermaid
 flowchart TB
-    subgraph cfg["Project configuration — mutable drafts"]
-        direction LR
-        sel["Microfrontends<br/>+ selected version<br/>+ hosting config"]
-        varsdev["Variables (dev)"]
-        varsuat["Variables (uat)"]
-        varsprod["Variables (prod)"]
-        st["Storage configuration"]
-    end
+    cfg["Project configuration — mutable drafts<br/>microfrontends with their selected version and hosting config<br/>environment variables, per environment · storage configuration"]
 
-    subgraph dev["Environment: dev"]
+    subgraph prod["Environment: prod · isProduction"]
         direction TB
-        devA["Deployment 12 · ACTIVE<br/>catalog 1.5.0 · checkout 0.9.1"]
-        devH["Deployments 11, 10, … · history<br/>redeployable"]
+        prodA["Deployment 3 · ACTIVE<br/>catalog 1.2.0 · checkout 0.8.4"]
+        prodH["Deployments 2, 1 · history<br/>redeployable"]
     end
 
     subgraph uat["Environment: uat"]
@@ -133,10 +127,10 @@ flowchart TB
         uatH["Deployments 4, 3, … · history<br/>redeployable"]
     end
 
-    subgraph prod["Environment: prod · isProduction"]
+    subgraph dev["Environment: dev"]
         direction TB
-        prodA["Deployment 3 · ACTIVE<br/>catalog 1.2.0 · checkout 0.8.4"]
-        prodH["Deployments 2, 1 · history<br/>redeployable"]
+        devA["Deployment 12 · ACTIVE<br/>catalog 1.5.0 · checkout 0.9.1"]
+        devH["Deployments 11, 10, … · history<br/>redeployable"]
     end
 
     cfg -->|"Deploy dev"| dev
