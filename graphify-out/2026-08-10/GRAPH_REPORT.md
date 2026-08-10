@@ -1,16 +1,16 @@
-# Graph Report - documentation  (2026-08-10)
+# Graph Report - documentation  (2026-08-06)
 
 ## Corpus Check
-- 69 files · ~401,798 words
+- 66 files · ~401,371 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 930 nodes · 984 edges · 165 communities (95 shown, 70 thin omitted)
+- 923 nodes · 979 edges · 163 communities (93 shown, 70 thin omitted)
 - Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c7c7a4b6`
+- Built from commit: `fc71b610`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -241,7 +241,7 @@
 - **First Storage Creation Onboarding Flow** — docs_assets_storages_empty_storages_page, docs_assets_storages_empty_empty_state_pattern, docs_assets_storages_empty_new_storage_cta, docs_assets_storages_empty_first_storage_onboarding_rationale [INFERRED 0.85]
 - **Project Members screen: manage members via invite, role badges, and card listing** — docs_assets_team_members_project_members_management, docs_assets_team_members_invite_user_action, docs_assets_team_members_owner_role, docs_assets_team_members_member_card_layout [EXTRACTED 1.00]
 
-## Communities (165 total, 70 thin omitted)
+## Communities (163 total, 70 thin omitted)
 
 ### Community 0 - "Canary Releases & Product Concepts"
 Cohesion: 0.11
@@ -252,8 +252,8 @@ Cohesion: 0.15
 Nodes (13): API key, Code repository, Core concepts and object model, Deployment, Environment, Environment variable, Members and roles, Microfrontend (+5 more)
 
 ### Community 2 - "Docusaurus Package Config"
-Cohesion: 0.05
-Nodes (38): browserslist, development, production, dependencies, clsx, @docusaurus/core, @docusaurus/faster, @docusaurus/plugin-content-docs (+30 more)
+Cohesion: 0.06
+Nodes (35): browserslist, development, production, dependencies, clsx, @docusaurus/core, @docusaurus/plugin-content-docs, @docusaurus/plugin-google-gtag (+27 more)
 
 ### Community 3 - "Docs Landing Page Components"
 Cohesion: 0.09
@@ -616,7 +616,7 @@ Cohesion: 0.40
 Nodes (4): External Redis Configuration, Introduction, MongoDB Configuration, Use an external MongoDB and Redis
 
 ## Knowledge Gaps
-- **506 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+501 more)
+- **504 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+499 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **70 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -630,10 +630,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `Core concepts and object model` connect `Deployments, Storage & CI/CD Docs` to `Canary Releases & Product Concepts`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **What connects `config`, `name`, `version` to the rest of the system?**
-  _530 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _528 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Canary Releases & Product Concepts` be split into smaller, more focused modules?**
   _Cohesion score 0.11497584541062802 - nodes in this community are weakly interconnected._
 - **Should `Docusaurus Package Config` be split into smaller, more focused modules?**
-  _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05555555555555555 - nodes in this community are weakly interconnected._
 - **Should `Docs Landing Page Components` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

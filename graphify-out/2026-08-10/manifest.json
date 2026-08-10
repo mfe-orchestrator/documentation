@@ -60,8 +60,8 @@
     "semantic_hash": "e550d818b4d90824996ab7bcf182c5f5"
   },
   "docusaurus.config.ts": {
-    "mtime": 1786352812.8910792,
-    "ast_hash": "a8cdb3ee5e7d39eee345c695b238e6c2",
+    "mtime": 1785995982.7919545,
+    "ast_hash": "235011f6c900351b9655f2dfb9b0544a",
     "semantic_hash": ""
   },
   "marketplace/marketplace.json": {
@@ -70,9 +70,9 @@
     "semantic_hash": "0c5aa9f66766f71947fd40f708e1ec17"
   },
   "package.json": {
-    "mtime": 1786352812.8913467,
-    "ast_hash": "3204ae086371c7621fa018a2aaf49a75",
-    "semantic_hash": ""
+    "mtime": 1785864535.3646438,
+    "ast_hash": "9712e3d70bcac4a1bf0f61282c246a89",
+    "semantic_hash": "9712e3d70bcac4a1bf0f61282c246a89"
   },
   "plugins/llms-txt.ts": {
     "mtime": 1785864535.3649232,
@@ -85,27 +85,27 @@
     "semantic_hash": "5bb078a18b33b10a9664a451e496939c"
   },
   "src/pages/index.tsx": {
-    "mtime": 1786352812.8426301,
+    "mtime": 1785996006.680734,
     "ast_hash": "297b32de4d4761acf1a728486e494e6d",
     "semantic_hash": ""
   },
   "src/theme/DocCategoryGeneratedIndexPage/index.tsx": {
-    "mtime": 1786352812.8933468,
-    "ast_hash": "b0c6e618f7786ecb1de7ca781f7b51a0",
-    "semantic_hash": ""
+    "mtime": 1785864535.3670406,
+    "ast_hash": "4f3d755575f515dade113e06dc22b2f5",
+    "semantic_hash": "4f3d755575f515dade113e06dc22b2f5"
   },
   "src/theme/DocItem/Layout/index.tsx": {
-    "mtime": 1786352812.893569,
-    "ast_hash": "03c88dfb83f5d88c1d566895013f0636",
-    "semantic_hash": ""
+    "mtime": 1785864535.3672237,
+    "ast_hash": "9511582c74aa653dc8a4d10d552cb93c",
+    "semantic_hash": "9511582c74aa653dc8a4d10d552cb93c"
   },
   "tsconfig.json": {
-    "mtime": 1786351743.360385,
+    "mtime": 1785859615.483146,
     "ast_hash": "88948dd765588c9f8af57142c9513916",
     "semantic_hash": "88948dd765588c9f8af57142c9513916"
   },
   ".github/workflows/deploy.yml": {
-    "mtime": 1786352812.8187664,
+    "mtime": 1785933356.9698045,
     "ast_hash": "5a5be3abfd767f232a95309763b9b109",
     "semantic_hash": "5a5be3abfd767f232a95309763b9b109"
   },
@@ -215,7 +215,7 @@
     "semantic_hash": "92e6faf70666bb0561c867e88f2d38e8"
   },
   "docs/intro.mdx": {
-    "mtime": 1786352812.8191237,
+    "mtime": 1785996009.126107,
     "ast_hash": "74253674d208da3f5240210808691e48",
     "semantic_hash": ""
   },
@@ -575,33 +575,18 @@
     "semantic_hash": "ec2a00592b33014e7955ebd8e378e095"
   },
   ".claude/settings.json": {
-    "mtime": 1786352812.8185275,
+    "mtime": 1785953597.4596224,
     "ast_hash": "e51077b6a7f1f67afc748f1a32a1557d",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1786352812.81892,
+    "mtime": 1785953597.4588664,
     "ast_hash": "82efb97a359f5c7290bf2513d14686be",
     "semantic_hash": ""
   },
   "docs/quick-start.mdx": {
-    "mtime": 1786352812.8192587,
+    "mtime": 1785995966.3642967,
     "ast_hash": "0689899669b10797077c6e821f6a0dac",
-    "semantic_hash": ""
-  },
-  ".claude/settings.local.json": {
-    "mtime": 1786351291.7648976,
-    "ast_hash": "52257e1733b624596afcfd84c7408f2c",
-    "semantic_hash": ""
-  },
-  "src/seo/absoluteUrl.ts": {
-    "mtime": 1786352812.8930929,
-    "ast_hash": "2067dfb66b96c72c6e89b0db77358a0e",
-    "semantic_hash": ""
-  },
-  "src/theme/DocBreadcrumbs/StructuredData/index.tsx": {
-    "mtime": 1786355638.135337,
-    "ast_hash": "23dbba080bdf64b734a02dcbcd4a1d66",
     "semantic_hash": ""
   }
 }
