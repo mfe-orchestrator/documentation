@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Module Federation with Vite
 sidebar_label: Vite
 description: Wire an MFE Orchestrator deployment into a Vite host with @originjs/vite-plugin-federation, using the configuration the console generates.
@@ -81,8 +81,14 @@ export default defineConfig({
       name: 'shell',
       filename: 'remoteEntry.js',
       remotes: {
-        'catalog': 'https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../catalog/assets/remoteEntry.js',
-        'cart': 'https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../cart/assets/remoteEntry.js'
+        'catalog': {
+          external: `import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))`,
+          externalType: 'promise'
+        },
+        'cart': {
+          external: `import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('cart'))`,
+          externalType: 'promise'
+        }
       },
       shared: ['react', 'react-dom', 'react-router-dom']
     })
@@ -98,15 +104,44 @@ export default defineConfig({
     }
   }
 });
+
+// ---------------------------------------------------------------------------
+// Host bootstrap: paste this at the very top of your entry point (src/main.js).
+// The remotes above ask the SDK for their url, so configure() has to run before
+// anything imports one of them.
+// Vite only exposes to the bundle the variables prefixed with VITE_.
+// ---------------------------------------------------------------------------
+/*
+import { configure } from '@mfe-orchestrator-hub/client'
+
+configure({
+  backendUrl: import.meta.env.VITE_MFE_BACKEND_URL,
+  projectId: import.meta.env.VITE_MFE_PROJECT_ID,
+  environment: import.meta.env.VITE_MFE_ENVIRONMENT
+})
+*/
 ```
 
-The `remotes` block is derived from your relation graph: one entry per child of the selected host,
-each pointing at a serve URL rather than a fixed CDN path.
+The `remotes` block is derived from your relation graph: one entry per child of the selected host.
+Note that it holds **no URL at all**. `externalType: 'promise'` tells the plugin that `external` is
+an expression resolving to the URL rather than the URL itself, so it is evaluated in your bundle at
+import time and the URL comes from the [client SDK](./client-sdk.md).
 
-Note what is **not** in those URLs: a version number and an environment. Both are resolved
-server-side from the active deployment, which is why this configuration survives version bumps and
-works unchanged across environments. See [Allowed domains](../environments/domains.md) for how the
+That is what keeps the resolution server-side: neither a version, nor an environment, nor a fixed
+CDN path is compiled into your host, so the configuration survives version bumps, works unchanged
+across environments, and lets a [canary release](../microfrontends/canary-releases.md) decide which
+version *this* browser receives. See [Allowed domains](../environments/domains.md) for how the
 environment is resolved.
+
+Two things you have to do yourself:
+
+```bash
+npm install @mfe-orchestrator-hub/client
+```
+
+and uncomment the bootstrap block at the bottom into your entry point, before anything imports a
+remote. The console emits it commented out precisely because it does not belong in `vite.config.js`.
+Vite only exposes variables prefixed with `VITE_` to the bundle, so name them as generated.
 
 ## Remote names
 

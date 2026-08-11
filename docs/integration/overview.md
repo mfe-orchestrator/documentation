@@ -35,15 +35,17 @@ always from the point of view of one host, listing its remotes.
 There are two quite different ways to consume MFE Orchestrator, and the right choice depends on
 how dynamic you need to be.
 
-### Build-time configuration
+### Generated bundler configuration
 
-You copy the generated `remotes` block into your bundler configuration and build. The remote
-**URLs** come from MFE Orchestrator, but they are baked into your host at build time.
+You copy the generated `remotes` block into your bundler configuration and build. What gets baked
+into your host is not a URL: it is a call into the [client SDK](./client-sdk.md), which asks the
+serve API for the URL of each remote at import time.
 
-- Simplest to set up; standard Module Federation with no extra runtime code
-- The URLs used contain no version numbers — they resolve versions server-side — so bumping a
-  remote's version is still just a deployment
-- Adding or removing a remote requires a host rebuild
+- Standard Module Federation, plus one `configure()` call in your entry point
+- No version, no environment and no CDN path compiled in, so bumping a remote's version — or
+  putting it behind a [canary release](../microfrontends/canary-releases.md) — is just a deployment
+- Which remotes the host knows about is still fixed at build time: adding or removing one requires
+  a host rebuild
 
 This is what the **Vite** and **Webpack** tabs give you. Start here.
 
@@ -58,9 +60,10 @@ dynamically.
 - Costs one HTTP request during startup
 
 This is what the `curl` tab hints at: a single call to `/serve/all/...` returns the whole
-environment — microfrontends with URLs and versions, plus the environment variables.
+environment — microfrontends with URLs and versions, plus the environment variables. The SDK's
+`manifest()` gives you the same thing without writing the fetch.
 
-Most teams start with build-time configuration and move to runtime discovery when the roster of
+Most teams start with the generated configuration and move to runtime discovery when the roster of
 remotes starts changing often.
 
 ## Inject in Repository
@@ -86,6 +89,8 @@ The complete reference is in [Serve API](./serve-api.md).
 
 ## Where to go next
 
+- [Client SDK](./client-sdk.md) — `@mfe-orchestrator-hub/client`, which the generated configuration
+  delegates remote resolution to
 - [Vite](./module-federation-vite.md) — `@originjs/vite-plugin-federation`
 - [Webpack](./module-federation-webpack.md) — `ModuleFederationPlugin`
 - [Runtime configuration](./runtime-configuration.md) — reading environment variables in the browser

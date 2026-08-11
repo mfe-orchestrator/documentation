@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Serve API reference
 sidebar_label: Serve API
 description: Reference for the public, unauthenticated serve API your applications call. Every endpoint answers from the active deployment of the resolved environment.
@@ -42,6 +42,7 @@ build to work in every environment.
 ```http
 GET <API_BASE>/serve/all/{environmentId}
 GET <API_BASE>/serve/all/{projectId}/{environmentSlug}
+    ?mfeSessionId=<uuid>&mfeDeviceId=<uuid>&mfeUserId=<optional>
 ```
 
 Returns the whole environment in one call: microfrontends with resolved URLs, and variables.
@@ -63,6 +64,14 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
       "nameToIntegrate": "catalog",
       "version": "1.4.0",
       "continuousDeployment": false
+    },
+    {
+      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js",
+      "slug": "checkout-new",
+      "name": "Checkout",
+      "nameToIntegrate": "checkoutnew",
+      "version": "1.5.0-rc1",
+      "continuousDeployment": true
     }
   ]
 }
@@ -70,6 +79,30 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
 
 `nameToIntegrate` is the Module Federation remote name — the slug with `/` and `-` stripped. Use it
 as the key when registering remotes dynamically.
+
+`version` is the version this response actually resolves to, which is not necessarily the
+deployment's version: a microfrontend running a
+[canary release](../microfrontends/canary-releases.md) reports the version *this caller* gets.
+
+`url` is resolved, and **already version-pinned when it needs to be**. The second entry above is on a
+version-based canary, so the version appears as a `_v/<version>/` path segment. Use the string as it
+is: never rebuild it, never strip that segment. The
+[client SDK](./client-sdk.md) does this correctly for you.
+
+### Identity parameters
+
+The three optional query parameters carry the identities a canary decision can be computed on:
+
+| Parameter | Identity |
+| --- | --- |
+| `mfeSessionId` | The browsing session — a *On Sessions* canary buckets on this |
+| `mfeDeviceId` | The device — a *Cookie Based* canary buckets on this |
+| `mfeUserId` | The logged-in user — a *On User* canary buckets on this |
+
+Send every one you have. They are not cookies and cannot be: module scripts are fetched with a fixed
+`same-origin` credentials mode, so the URL is the only channel — see
+[canary releases](../microfrontends/canary-releases.md#who--the-canary-type). Omitting them is
+supported; the split then falls back to a draw per page load instead of a sticky one.
 
 This is the endpoint to build runtime discovery on: one request at boot gives you the full roster
 and the configuration.
@@ -114,9 +147,41 @@ GET <API_BASE>/serve/mfe/files/{mfeId}/{path}                      # Referer req
 `{path}` is the file inside the build, for example `assets/remoteEntry.js` or
 `assets/index-4f2a.css`.
 
-The platform resolves the version from the active deployment and fetches the bytes according to the
-microfrontend's [hosting type](../microfrontends/hosting-options.md) — local disk, your bucket, or
-an external URL — then streams them back.
+Each of the three forms also accepts a version pinned into the path, immediately before `{path}`:
+
+```http
+GET <API_BASE>/serve/mfe/files/auto/{projectId}/{mfeSlug}/_v/{version}/{path}
+```
+
+The platform resolves the version — from the pinned segment when present, otherwise from the active
+deployment and any canary configuration — and fetches the bytes according to the microfrontend's
+[hosting type](../microfrontends/hosting-options.md) — local disk, your bucket, or an external URL —
+then streams them back. A pinned version is honoured only if that deployment can serve it: the
+deployed version, or the configured canary version.
+
+### The entry point redirect
+
+When a microfrontend is running a version-based canary and its **entry point** is requested at a
+*versionless* URL, the response is a `302` (uncacheable) to the same file under
+`/_v/<resolved-version>/`. This exists as a fallback for callers holding a raw URL; the URLs handed
+out by the manifest already carry the segment, so they never take the redirect.
+
+The redirect is sufficient for an **ES module**, whose relative imports resolve against the URL after
+redirects. It is not sufficient for a **classic script**: `document.currentScript.src` is the URL
+*before* redirects, so a webpack build with `publicPath: 'auto'` would derive its chunk base from the
+versionless URL and could mix two versions in one page. Take the manifest URL as it is and the
+question does not arise.
+
+### Version override
+
+```http
+GET <API_BASE>/serve/all/{projectId}/{environmentSlug}?mfeVersion=1.5.0-rc1
+GET <API_BASE>/serve/mfe/files/auto/{projectId}/{mfeSlug}/{path}?mfeVersion=1.5.0-rc1
+```
+
+`mfeVersion` forces a specific version, which is how you look at a canary without waiting to be
+drawn into it. It is accepted only when the value is one of the versions that deployment can serve,
+so it cannot reach an arbitrary build.
 
 ### Headers
 
@@ -124,9 +189,12 @@ an external URL — then streams them back.
 | --- | --- |
 | The file is the microfrontend's **entry point** | `Cache-Control: no-cache, no-store, must-revalidate`, `Pragma: no-cache`, `Expires: 0` |
 | Any other file | Cacheable |
-| All files | `Cross-Origin-Resource-Policy: cross-origin` |
+| All files | `Cross-Origin-Resource-Policy: cross-origin`, `x-mfe-version: <version>` |
 
 `Content-Type` is set from the extension for `.js`, `.css`, `.html` and `.xml`.
+
+`x-mfe-version` names the version those exact bytes came from. It is the only thing a browser is ever
+told about a canary, and the quickest way to check which side of a split a page landed on.
 
 The entry point being uncacheable is what makes a deployment take effect promptly: browsers
 re-fetch it, discover the new hashed chunk names inside, and load those from cache or network as
@@ -163,26 +231,29 @@ last row: deploy the environment to include it.
 
 ## Building runtime discovery
 
-Putting `/serve/all/...` together with dynamic remote loading:
+Use the [client SDK](./client-sdk.md). It calls this endpoint for you, once per page load, with the
+identity parameters generated and persisted, and returns URLs you can hand straight to your
+federation runtime:
 
 ```js
-// bootstrap.js
-const env = await fetch(`${API_BASE}/serve/all/${PROJECT_ID}/${ENV_SLUG}`)
-  .then(r => r.json())
+// src/main.js
+import { configure, remoteUrl, globalVariables } from '@mfe-orchestrator-hub/client'
 
-// runtime configuration
-window.globalConfig = Object.fromEntries(
-  (env.globalVariables ?? []).map(v => [v.key, v.value])
-)
+configure({ backendUrl: API_BASE, projectId: PROJECT_ID, environment: ENV_SLUG })
 
-// remotes, keyed by Module Federation name
-const remotes = Object.fromEntries(
-  (env.microfrontends ?? []).map(m => [m.nameToIntegrate, m.url])
-)
+window.globalConfig = await globalVariables()
 
-// register `remotes` with your Module Federation runtime, then start the app
+const catalog = await remoteUrl('catalog')   // already version-pinned, use as is
+
 await import('./App')
 ```
+
+The generated bundler configuration already goes through `remoteUrl()`, so in most hosts there is
+nothing to write beyond the `configure()` call.
+
+If you do call the endpoint yourself, remember what the SDK was written to get right: generate and
+persist a session id and a device id, send them on every manifest request, and pass each `url`
+through untouched.
 
 With this in place, adding a remote to the host is a deployment rather than a release: the roster
 is discovered, not compiled in.
