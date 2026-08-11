@@ -13,16 +13,26 @@ working Module Federation project — correct build configuration, a sample expo
 matching CI pipeline — so a new microfrontend is deployable within minutes rather than after an
 afternoon of bundler archaeology.
 
+## What the catalogue covers
+
+Fourteen templates, and every one of them is selectable — nothing in the catalogue is marked *Coming
+Soon* any more.
+
+The bulk of it is a full grid: **React, Vue and Angular**, each in a **Vite** and a **Webpack**
+flavour, each as a **host** and as a **remote**. Pick your framework and your bundler and the pair
+exists.
+
+Beyond the grid there is a **Web Component** host and remote for React, for the case where you would
+rather expose a custom element than a federated module and let any framework — or none — mount it.
+
 ## Browsing
 
 The library opens automatically when you click **Add New Microfrontend**. You can filter by:
 
-- **Framework** — React, Angular, …
-- **Compiler** — Vite, Webpack, …
+- **Framework** — React, Vue, Angular
+- **Compiler** — Vite, Webpack, Web Component
 - **Host type** — host or remote
 - **Free text** search by name
-
-Templates not yet available are shown with a **Coming Soon** badge and cannot be selected.
 
 Each card links to the template's repository via **View on GitHub**, so you can read exactly what
 you are about to get before committing to it.
@@ -71,6 +81,42 @@ federation({
 together with the build settings Module Federation requires (`target: 'esnext'`,
 `minify: false`, `cssCodeSplit: false`). These are easy to get wrong by hand and produce obscure
 runtime failures when you do.
+
+### Host templates come wired to the SDK
+
+A host template carries one thing a remote does not: the [client SDK](../integration/client-sdk.md)
+already integrated, in both places it has to be.
+
+Its federation config declares remotes in the promise form, so the URL is asked for at import time
+rather than compiled in — shown here in its Vite flavour, with Webpack using
+`promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))` instead:
+
+```js
+remotes: {
+  'catalog': {
+    external: `import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))`,
+    externalType: 'promise'
+  }
+}
+```
+
+and its entry point calls `configure()` before anything imports a remote:
+
+```js
+// src/main.js
+import { configure } from '@mfe-orchestrator-hub/client'
+
+configure({
+  backendUrl: import.meta.env.VITE_MFE_BACKEND_URL,
+  projectId: import.meta.env.VITE_MFE_PROJECT_ID,
+  environment: import.meta.env.VITE_MFE_ENVIRONMENT
+})
+```
+
+So a host scaffolded from a template already resolves its remotes through MFE Orchestrator, already
+honours [canary releases](../microfrontends/canary-releases.md), and needs only its three environment
+variables filled in. Starting a host from scratch means doing both of those by hand — see
+[Client SDK](../integration/client-sdk.md).
 
 ## What gets added on top
 
