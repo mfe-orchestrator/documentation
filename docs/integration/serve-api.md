@@ -26,26 +26,37 @@ be kept secret anyway. Do not put anything confidential in environment variables
 
 ## Addressing an environment
 
-Most endpoints come in two or three flavours, differing only in how the environment is identified:
+Most endpoints come in several flavours, differing only in how the environment is identified:
 
 | Form | Environment resolved from |
 | --- | --- |
 | `.../<environmentId>` | Explicit object id |
 | `.../<projectId>/<environmentSlug>` | Explicit project + slug — more readable, stable |
-| `.../auto/...` or `/<mfeId>` | The request's `Referer`, matched against [allowed domains](../environments/domains.md) |
+| `.../auto/<projectId>/...` or `/<mfeId>` | The request's `Referer`, matched against [allowed domains](../environments/domains.md) |
 
 Prefer the slug form in configuration you write by hand, and the `auto` form when you want one
 build to work in every environment.
+
+The `auto` form is only as reliable as the domain list behind it: the host's real domain has to be
+registered on exactly one environment of that project, otherwise the call answers
+*Environment not found*. That is the trade the `auto` form makes — one artifact everywhere, in
+exchange for a piece of configuration that lives in the console rather than in your build.
 
 ## Everything about an environment
 
 ```http
 GET <API_BASE>/serve/all/{environmentId}
 GET <API_BASE>/serve/all/{projectId}/{environmentSlug}
+GET <API_BASE>/serve/all/auto/{projectId}                # Referer or Host
     ?mfeSessionId=<uuid>&mfeDeviceId=<uuid>&mfeUserId=<optional>
 ```
 
 Returns the whole environment in one call: microfrontends with resolved URLs, and variables.
+
+The third form names no environment at all: the caller says only which project it belongs to, and
+the platform picks the environment whose allowed domains match the request. It is what the
+[client SDK](./client-sdk.md) calls when `configure()` was given no `environment`, and what lets one
+host build serve every stage.
 
 ```bash
 curl "<API_BASE>/serve/all/68f1a2.../prod"
@@ -112,10 +123,11 @@ and the configuration.
 ```http
 GET <API_BASE>/serve/global-variables/{environmentId}
 GET <API_BASE>/serve/global-variables/{projectId}/{environmentSlug}
+GET <API_BASE>/serve/global-variables/auto/{projectId}      # Referer or Host
 GET <API_BASE>/serve/global-variables/{environmentId}/index.js
 ```
 
-The first two return JSON; the third returns JavaScript that assigns `window.globalConfig` and is
+The first three return JSON; the last returns JavaScript that assigns `window.globalConfig` and is
 served as `application/javascript`, ready for a `<script src>` tag.
 
 See [Runtime configuration](./runtime-configuration.md) for usage.
@@ -125,7 +137,8 @@ See [Runtime configuration](./runtime-configuration.md) for usage.
 ```http
 GET <API_BASE>/serve/mfe/config/{projectId}/{environmentSlug}/{mfeSlug}
 GET <API_BASE>/serve/mfe/config/{environmentId}/{mfeSlug}
-GET <API_BASE>/serve/mfe/config/{mfeId}          # Referer required
+GET <API_BASE>/serve/mfe/config/auto/{projectId}/{mfeSlug}   # Referer or Host
+GET <API_BASE>/serve/mfe/config/{mfeId}                      # Referer required
 ```
 
 Returns a single entry in the same shape as the items in `microfrontends` above — the resolved URL
@@ -240,6 +253,8 @@ federation runtime:
 import { configure, remoteUrl, globalVariables } from '@mfe-orchestrator-hub/client'
 
 configure({ backendUrl: API_BASE, projectId: PROJECT_ID, environment: ENV_SLUG })
+// environment is optional: drop it and the SDK calls the auto form instead,
+// letting the domain decide which environment answers.
 
 window.globalConfig = await globalVariables()
 

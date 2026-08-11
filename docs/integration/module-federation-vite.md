@@ -117,7 +117,7 @@ import { configure } from '@mfe-orchestrator-hub/client'
 configure({
   backendUrl: import.meta.env.VITE_MFE_BACKEND_URL,
   projectId: import.meta.env.VITE_MFE_PROJECT_ID,
-  environment: import.meta.env.VITE_MFE_ENVIRONMENT
+  environment: import.meta.env.VITE_MFE_ENVIRONMENT   // optional
 })
 */
 ```
@@ -142,6 +142,14 @@ npm install @mfe-orchestrator-hub/client
 and uncomment the bootstrap block at the bottom into your entry point, before anything imports a
 remote. The console emits it commented out precisely because it does not belong in `vite.config.js`.
 Vite only exposes variables prefixed with `VITE_` to the bundle, so name them as generated.
+
+`VITE_MFE_ENVIRONMENT` is the one you can drop. Leave `environment` out of `configure()` and the SDK
+asks the serve API without a slug, letting the [allowed domains](../environments/domains.md) of your
+environments decide which one answers — so a single build, with a single `.env`, behaves correctly
+on every stage. The catch is that the domain each stage is served from must be registered on the
+matching environment, or the manifest request fails outright instead of falling back. Keep the
+variable if you would rather have the environment fixed at build time; the
+[client SDK page](./client-sdk.md#leaving-the-environment-out) walks through the trade-off.
 
 ## Remote names
 

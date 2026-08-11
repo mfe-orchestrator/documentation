@@ -96,7 +96,7 @@ import { configure } from '@mfe-orchestrator-hub/client'
 configure({
   backendUrl: process.env.MFE_BACKEND_URL,
   projectId: process.env.MFE_PROJECT_ID,
-  environment: process.env.MFE_ENVIRONMENT
+  environment: process.env.MFE_ENVIRONMENT   // optional
 })
 */
 ```
@@ -120,6 +120,13 @@ npm install @mfe-orchestrator-hub/client
 and uncomment the bootstrap block at the bottom into your entry point, before anything imports a
 remote. `process.env.MFE_*` only reaches the bundle if you expose it — `webpack.EnvironmentPlugin`
 is the shortest way.
+
+`MFE_ENVIRONMENT` is optional. Omit `environment` from `configure()` and the SDK asks the serve API
+without a slug, leaving the choice to the [allowed domains](../environments/domains.md) registered
+on your environments — one build, one set of variables, correct on every stage. In exchange, each
+stage's domain has to be registered on the right environment, or the manifest request fails rather
+than falling back to anything. See
+[leaving the environment out](./client-sdk.md#leaving-the-environment-out).
 
 :::note If you pin a remote by hand
 Webpack's static remote syntax is `name@url`, not a bare URL as Vite uses. You will not see it in

@@ -87,6 +87,12 @@ from the **active deployment** of the resolved environment:
 These endpoints are **public and unauthenticated** — they are meant to be called from browsers.
 The complete reference is in [Serve API](./serve-api.md).
 
+Each family can be addressed either with the environment named in the path, or through an `auto`
+form that carries only the project id and lets the platform resolve the environment from the
+request's domain. The second is what makes one host build usable in every stage, and what the SDK
+falls back to when `configure()` is called without an `environment` — at the cost of depending on
+the [allowed domains](../environments/domains.md) being right.
+
 ## Where to go next
 
 - [Client SDK](./client-sdk.md) — `@mfe-orchestrator-hub/client`, which the generated configuration
