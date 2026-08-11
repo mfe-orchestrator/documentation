@@ -47,8 +47,9 @@ and each of them is resolved to a concrete URL, based on that microfrontend's ho
 the version frozen in the deployment.
 
 The consequence worth internalising: **your host's build configuration does not contain version
-numbers or URLs**. It contains the remote names, and the URLs come from the deployment. Bumping
-a remote from `1.3.0` to `1.4.0` in production is a deployment, not a host rebuild.
+numbers or URLs**. It contains the remote names and a call into the
+[client SDK](../integration/client-sdk.md), which fetches the URLs at import time. Bumping a remote
+from `1.3.0` to `1.4.0` in production is a deployment, not a host rebuild.
 
 ## Remote naming
 

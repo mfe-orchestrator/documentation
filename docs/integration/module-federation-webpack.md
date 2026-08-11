@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: Module Federation with Webpack
 sidebar_label: Webpack
 description: Wire an MFE Orchestrator deployment into a Webpack 5 host with ModuleFederationPlugin, using the configuration the console generates.
@@ -47,7 +47,7 @@ customised `output.publicPath` or the filename.
 
 Open **Integration → Frontend integration**, select your host and copy the **Webpack** tab:
 
-![The Webpack tab of the Integration page, using the name@url remote syntax](../assets/integration-webpack.png)
+![The Webpack tab of the Integration page, with the remotes of the selected host filled in](../assets/integration-webpack.png)
 
 ```js
 // webpack.config.js
@@ -60,8 +60,8 @@ module.exports = {
       name: 'shell',
       filename: 'remoteEntry.js',
       remotes: {
-        'catalog': 'catalog@https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../catalog/remoteEntry.js',
-        'cart': 'cart@https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../cart/remoteEntry.js'
+        'catalog': `promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))`,
+        'cart': `promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('cart'))`
       },
       shared: {
         react: {
@@ -83,13 +83,49 @@ module.exports = {
     }),
   ],
 };
+
+// ---------------------------------------------------------------------------
+// Host bootstrap: paste this at the very top of your entry point (src/index.js).
+// The remotes above ask the SDK for their url, so configure() has to run before
+// anything imports one of them.
+// Expose the three variables to the bundle with webpack.EnvironmentPlugin.
+// ---------------------------------------------------------------------------
+/*
+import { configure } from '@mfe-orchestrator-hub/client'
+
+configure({
+  backendUrl: process.env.MFE_BACKEND_URL,
+  projectId: process.env.MFE_PROJECT_ID,
+  environment: process.env.MFE_ENVIRONMENT
+})
+*/
 ```
 
-Note the Webpack remote syntax — `name@url`, not a bare URL, as Vite uses. The generated config
-gets this right; it is worth knowing if you edit it by hand.
+`promise <expression>` is how `ModuleFederationPlugin` declares a remote whose URL is only known at
+runtime: the expression is inlined into your host bundle and awaited before the remote is used. The
+URL comes from the [client SDK](./client-sdk.md), which is referenced by bare specifier and resolved
+by your own bundler.
 
-The URLs contain neither a version nor an environment: both are resolved server-side from the
-active deployment. See [Allowed domains](../environments/domains.md).
+So the generated configuration contains **no URL** — no version, no environment, no CDN path. That is
+what keeps the resolution server-side and lets a
+[canary release](../microfrontends/canary-releases.md) decide which version this browser receives.
+See [Allowed domains](../environments/domains.md) for how the environment is resolved.
+
+Two things you have to do yourself:
+
+```bash
+npm install @mfe-orchestrator-hub/client
+```
+
+and uncomment the bootstrap block at the bottom into your entry point, before anything imports a
+remote. `process.env.MFE_*` only reaches the bundle if you expose it — `webpack.EnvironmentPlugin`
+is the shortest way.
+
+:::note If you pin a remote by hand
+Webpack's static remote syntax is `name@url`, not a bare URL as Vite uses. You will not see it in
+the generated configuration any more, but it is what you need if you ever hard-code a remote —
+along with the understanding that you have just frozen one version into your host.
+:::
 
 ## Remote names
 
