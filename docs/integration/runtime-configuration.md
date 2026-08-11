@@ -119,21 +119,22 @@ an object id:
 <API_BASE>/serve/global-variables/<projectId>/<environmentSlug>
 ```
 
-The JSON form of option 2 additionally accepts the environment-less `auto` address, which names only
-the project and lets the platform resolve the environment from the requesting domain, matched
-against [allowed domains](../environments/domains.md):
+Both forms additionally accept the environment-less `auto` address, which names only the project and
+lets the platform resolve the environment from the requesting domain, matched against
+[allowed domains](../environments/domains.md):
 
 ```
 <API_BASE>/serve/global-variables/auto/<projectId>
+<API_BASE>/serve/global-variables/auto/<projectId>/index.js
 ```
 
-That is the one to use when you want a single build to read the right variables in every stage,
-remembering that it only works if the domain is actually registered on the intended environment.
+That is what you want when a single build has to read the right variables in every stage, and it
+covers the static case too: a `<script src>` in an `index.html` that never names an environment
+still resolves, because the browser sends the page it is loading from and the platform reads the
+environment off that. The same `index.html` can therefore ship unchanged to every stage.
 
-The `index.js` script of option 1 has no such form: a `<script src>` in a static `index.html` must
-name the environment. If you want one `index.html` across environments, either inject the
-environment id or slug at deploy time, or move to option 2 and read the variables through
-`/serve/global-variables/auto/<projectId>` or `/serve/all/auto/<projectId>`.
+It only works if the domain is actually registered on the intended environment — an unregistered
+domain has nothing to resolve against and the request fails rather than falling back to a default.
 
 ## Where the values come from
 
