@@ -44,7 +44,7 @@ import { configure } from '@mfe-orchestrator-hub/client'
 configure({
   backendUrl: import.meta.env.VITE_MFE_BACKEND_URL,
   projectId: import.meta.env.VITE_MFE_PROJECT_ID,
-  environment: import.meta.env.VITE_MFE_ENVIRONMENT
+  environment: import.meta.env.VITE_MFE_ENVIRONMENT  // optional — see below
 })
 ```
 
@@ -59,16 +59,46 @@ it does not belong in the config file but in your entry point.
 
 ```ts
 interface OrchestratorConfig {
-  backendUrl: string   // ex. "https://console.mfe-orchestrator.dev/api"
+  backendUrl: string    // ex. "https://console.mfe-orchestrator.dev/api"
   projectId: string
-  environment: string  // environment slug, ex. "DEV"
+  environment?: string  // environment slug, ex. "DEV" — omit to resolve it from the domain
   userId?: string | (() => string | undefined | Promise<string | undefined>)
 }
 ```
 
-`userId` is the only optional field, and the only one the SDK does not know how to work out for
-itself. Pass it — as a value or as a getter, if the user is not known yet at bootstrap — when you
-want [On User](../microfrontends/canary-releases.md#who--the-canary-type) canary targeting to work.
+`backendUrl` and `projectId` are the two the SDK cannot do anything without. The other two are
+optional, for quite different reasons.
+
+`userId` is the field the SDK has no way of working out for itself. Pass it — as a value or as a
+getter, if the user is not known yet at bootstrap — when you want
+[On User](../microfrontends/canary-releases.md#who--the-canary-type) canary targeting to work.
+
+### Leaving the environment out
+
+`environment` is optional because the platform already knows how to work out which environment a
+browser request belongs to: it matches the domain the request came from against the
+[allowed domains](../environments/domains.md) registered on each of the project's environments.
+Omitting it makes the SDK call the `auto` form of the serve endpoints and delegate the choice to
+that mapping.
+
+The two options are a genuine trade-off rather than an old way and a new way.
+
+Passing the slug is **deterministic**. The environment is in the request path, so the answer cannot
+depend on where the page happens to be served from — which is what you want when the environment is
+known at build time anyway, when the host runs on a hostname you do not control, or when you are
+reproducing a problem and would rather remove a variable than add one.
+
+Omitting it buys you **one artifact for every stage**: no `VITE_MFE_ENVIRONMENT` to set per pipeline,
+and the same bundle behaving as DEV on `dev.example.com` and as production on `example.com`. The
+price is that resolution now depends on configuration that lives somewhere else. The domain the host
+is genuinely served from has to be registered, on the right environment and on exactly one of them.
+If it is not — a new vanity domain, a preview URL nobody added to the list, a stage that was stood
+up without touching the console — the manifest request fails with *Environment not found* rather
+than quietly picking a default, and no remote resolves on that page.
+
+So: omit it when your stages sit on stable domains you have already declared, and keep the domain
+list part of the checklist for standing up a new one. Pass it when you would rather have the answer
+fixed in the build than resolved per request.
 
 ## The API
 
@@ -117,6 +147,14 @@ GET {backendUrl}/serve/all/{projectId}/{environment}
     ?mfeSessionId=<uuid>&mfeDeviceId=<uuid>&mfeUserId=<optional>
 ```
 
+or, when `configure()` was called without an `environment`, the same request against the `auto`
+form, which carries no slug and lets the server resolve one from the domain:
+
+```http
+GET {backendUrl}/serve/all/auto/{projectId}
+    ?mfeSessionId=<uuid>&mfeDeviceId=<uuid>&mfeUserId=<optional>
+```
+
 The SDK sends **everything it has** and never tries to guess which one the server will use — that
 is what lets you change canary strategy in the console with no host-side change. Storage that throws
 (private browsing, storage disabled) falls back to an in-memory id for the lifetime of the page;
@@ -156,7 +194,9 @@ Full walkthroughs: [Vite](./module-federation-vite.md) and [Webpack](./module-fe
 
 ## Framework adapters
 
-Ergonomics only. If you need behaviour they do not have, it belongs in the core.
+Ergonomics only. If you need behaviour they do not have, it belongs in the core. The object each of
+them takes is the core's `OrchestratorConfig`, so `environment` is optional there too and can be
+left out of the examples below.
 
 ```tsx
 // React
@@ -198,6 +238,7 @@ bootstrapApplication(AppComponent, {
 ## Without the SDK
 
 You can still call [`/serve/all/...`](./serve-api.md#everything-about-an-environment) yourself and
-register remotes by hand. If you do, you own the parts the SDK was written for: generating and
+register remotes by hand, in either addressing form — with the environment slug in the path, or
+through `auto` and the domain. If you do, you own the parts the SDK was written for: generating and
 persisting the two ids, sending them on every manifest call, and passing the returned `url` through
 untouched.

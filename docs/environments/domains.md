@@ -49,6 +49,11 @@ active deployment.
 One artifact, every stage. The host built once and deployed to `uat.example.com` gets UAT
 remotes; the identical artifact on `example.com` gets production remotes.
 
+The same mechanism is what makes `environment` optional in the
+[client SDK](../integration/client-sdk.md): a `configure()` call without a slug asks the serve API
+in this environment-less form, and the answer comes from whichever environment claims the domain the
+page is on.
+
 ## Adding domains
 
 Open the environment and type a domain into **Allowed Domains**, pressing `Enter` or `,` after
@@ -68,12 +73,20 @@ Domain resolution applies to the endpoints that do not name an environment:
 
 | Endpoint | Resolution |
 | --- | --- |
+| `/serve/all/auto/:projectId` | From `Referer` (falls back to the request host) |
+| `/serve/global-variables/auto/:projectId` | From `Referer` (falls back to the request host) |
+| `/serve/mfe/config/auto/:projectId/:mfeSlug` | From `Referer` (falls back to the request host) |
 | `/serve/mfe/files/auto/:projectId/:mfeSlug/*` | From `Referer` (falls back to the request host) |
 | `/serve/mfe/files/:mfeId/*` | From `Referer` — **required** |
 | `/serve/mfe/config/:mfeId` | From `Referer` — **required** |
 
 Endpoints that name the environment explicitly — anything with `:environmentId` or
 `:environmentSlug` in the path — ignore the domain list.
+
+The first three are what the [client SDK](../integration/client-sdk.md) uses when `configure()` is
+called without an `environment`, which is the point at which the domain list stops being a
+convenience for asset URLs and becomes the thing your whole host depends on to find its remotes.
+Keep it accurate: registering the domain is part of standing up a new stage, not an afterthought.
 
 ## Troubleshooting
 

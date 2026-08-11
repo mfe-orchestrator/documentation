@@ -109,14 +109,22 @@ import { configure } from '@mfe-orchestrator-hub/client'
 configure({
   backendUrl: import.meta.env.VITE_MFE_BACKEND_URL,
   projectId: import.meta.env.VITE_MFE_PROJECT_ID,
-  environment: import.meta.env.VITE_MFE_ENVIRONMENT
+  environment: import.meta.env.VITE_MFE_ENVIRONMENT   // optional
 })
 ```
 
 So a host scaffolded from a template already resolves its remotes through MFE Orchestrator, already
-honours [canary releases](../microfrontends/canary-releases.md), and needs only its three environment
+honours [canary releases](../microfrontends/canary-releases.md), and needs only its environment
 variables filled in. Starting a host from scratch means doing both of those by hand — see
 [Client SDK](../integration/client-sdk.md).
+
+Only the first two are required. `VITE_MFE_ENVIRONMENT` can be left unset, in which case the SDK
+lets the server resolve the environment from the domain the page is served on — convenient when the
+same build goes to every stage, provided each stage's domain is registered under
+[allowed domains](../environments/domains.md). Templates ship the variable because being explicit is
+the safer default to hand someone on day one; see
+[leaving the environment out](../integration/client-sdk.md#leaving-the-environment-out) before you
+remove it.
 
 ## What gets added on top
 

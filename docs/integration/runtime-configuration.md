@@ -119,10 +119,22 @@ an object id:
 <API_BASE>/serve/global-variables/<projectId>/<environmentSlug>
 ```
 
-Unlike the microfrontend file endpoints, the variables endpoints do **not** resolve the
-environment from the request domain, so one of the two addressing forms is always required. If you
-want a single `index.html` across environments, inject the environment id or slug at deploy time,
-or read the variables through `/serve/all/<projectId>/<environmentSlug>`.
+Both forms additionally accept the environment-less `auto` address, which names only the project and
+lets the platform resolve the environment from the requesting domain, matched against
+[allowed domains](../environments/domains.md):
+
+```
+<API_BASE>/serve/global-variables/auto/<projectId>
+<API_BASE>/serve/global-variables/auto/<projectId>/index.js
+```
+
+That is what you want when a single build has to read the right variables in every stage, and it
+covers the static case too: a `<script src>` in an `index.html` that never names an environment
+still resolves, because the browser sends the page it is loading from and the platform reads the
+environment off that. The same `index.html` can therefore ship unchanged to every stage.
+
+It only works if the domain is actually registered on the intended environment — an unregistered
+domain has nothing to resolve against and the request fails rather than falling back to a default.
 
 ## Where the values come from
 
