@@ -47,7 +47,7 @@ flowchart TB
 
     subgraph artifacts["Where the bundles are stored"]
         direction LR
-        internal["Internal storage<br/>MICROFRONTEND_HOST_FOLDER<br/>default /var/microfrontends"]
+        internal["Internal storage<br/>MICROFRONTEND_HOST_FOLDER<br/>default /upload-microfrontends"]
         s3["Amazon S3"]
         blob["Azure Blob Storage"]
         gcs["Google Cloud Storage"]

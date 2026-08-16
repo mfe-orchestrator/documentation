@@ -16,6 +16,9 @@ re-upload. It is re-activating a snapshot that already exists.
 3. Expand it and check its microfrontend versions and variables are what you expect.
 4. Choose **Redeploy** on that deployment.
 
+**Redeploy** lives on the deployments in **History**, next to **View canary users**. The active
+deployment has no Redeploy button — re-activating what is already active would be a no-op.
+
 ![An older deployment expanded in History, with its versions, variables and the Redeploy action](../assets/deployments-history.png)
 
 Comparing the two snapshots above is the whole point: `#2` is serving `catalog` at `2.2.0`,
@@ -38,6 +41,12 @@ Everything in the snapshot, together:
 - Environment variables
 - Storage configuration
 
+The **canary enrolment** comes back with it too, but for a different reason: enrolment rows are
+stored per deployment, and the one you re-activate still holds its own. That is the list as it was
+on that deployment, which is not necessarily the list you had a minute ago — if you enrolled
+someone after the deployment you are rolling back to was replaced, check
+[canary users](../microfrontends/canary-releases.md#canary-users) afterwards.
+
 This matters when an incident has more than one cause. If a bad release changed both a version
 and a feature-flag variable, rolling back the deployment undoes both — you do not have to
 remember which variables moved.
@@ -59,13 +68,15 @@ Set the microfrontend's selected version back to the good one straight away. It 
 and prevents the next deployment from re-introducing the incident.
 :::
 
-## Redeploying the current configuration
+## Redeploy does not publish your edits
 
-**Redeploy** on the *active* deployment re-activates the same snapshot with a fresh timestamp. It
-does not pick up draft changes — for that, use **Deploy**, which takes a new snapshot.
+**Redeploy** re-activates an existing snapshot, with a fresh timestamp, exactly as it was stored.
+It never picks up draft changes: a version you selected, a variable you edited or a remote you
+rewired since that snapshot was taken are not in it.
 
-Redeploying an already-active snapshot is occasionally useful as a no-op that refreshes serving
-state, but if your goal is to publish edits, **Deploy** is the action you want.
+To publish edits you want **Deploy**, which takes a new snapshot of the current configuration. The
+two buttons sit on different things for that reason — **Deploy** at the top of the page, on the
+selected environment, and **Redeploy** inside a deployment of the history.
 
 ## Deployment numbering
 

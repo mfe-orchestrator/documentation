@@ -79,6 +79,20 @@ You should see the MFE Orchestrator containers up and running.
 Once deployed, you can access the applcation at http://localhost:8080
 
 
+## Pinned images
+
+The module names released image tags rather than floating ones, so a `terraform apply` run today
+and one run in three months bring up the same stack:
+
+| Container | Image |
+| --- | --- |
+| MFE Orchestrator | `lory1990/mfe-orchestrator:3.1.0` |
+| MongoDB | `mongo:8-noble` |
+| Redis | `redis:8.0.2-alpine` |
+
+Upgrading is deliberate: change the tag in `terraform/modules/microfronted-orchestrator-hub.tf` and
+apply again.
+
 ## Container Variables
 
 For a complete list of environment variables you can configure, please refer to the [Environment Variables](./environment-variables.md) page.

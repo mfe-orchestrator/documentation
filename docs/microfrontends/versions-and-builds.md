@@ -62,6 +62,11 @@ The **Build** action requires a linked code repository. It has no effect on micr
 without one.
 :::
 
+You do not have to leave the console to know how that run went: the
+[Build status](../deployments/build-status.md) page lists the latest run of every microfrontend of
+the project, reading it from GitHub Actions, GitLab pipelines or Azure DevOps, and updates while
+you watch.
+
 ## Uploading from CI
 
 The upload itself is a single authenticated call that takes a ZIP of your build output. The
@@ -112,7 +117,8 @@ deployment step or auto-select new versions. It is metadata your own tooling can
 reads `/serve/all/...` can, for example, choose to poll for updates on continuously deployed remotes
 and not on the others.
 
-If you want builds to reach an environment without a manual step, automate it in your pipeline by
-calling `POST <API_BASE>/deployment` after a successful upload. See
-[Uploading a build](../ci-cd/manual-upload.md).
+If you want builds to reach an environment without a manual step, the call to automate is
+`POST <API_BASE>/deployment` after a successful upload — but it is authenticated with a signed-in
+user's token, not with the CI API key, which only authorizes the upload. See
+[Uploading a build](../ci-cd/manual-upload.md#publishing-does-not-deploy).
 :::

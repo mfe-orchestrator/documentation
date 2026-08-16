@@ -94,8 +94,16 @@ meaningful.
 After a successful upload the version exists and is selectable, but nothing changes for your users.
 Select the version on the microfrontend and [deploy](../deployments/overview.md) the environment.
 
-Automating that step is possible — `POST /deployment` with a list of environment ids — and is a
-reasonable thing to do for a development environment. For production, the manual step is the point.
+:::caution An API key cannot deploy
+`POST /api/deployment` — the endpoint behind the **Deploy** button, which takes
+`{ "environmentIds": ["…"] }` — is authenticated with the token of a signed-in user. An API key
+authenticates the upload endpoint and nothing else, so a pipeline holding one can publish a version
+but cannot make it live. Automating the deployment of a development environment means driving that
+call with a user token of your own, obtained outside the CI key mechanism.
+:::
+
+For production the manual step is the point: the separation between *published* and *live* is the
+platform's main safety property.
 
 ## A generic pipeline step
 

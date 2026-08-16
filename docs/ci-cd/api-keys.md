@@ -44,6 +44,19 @@ When you create a key, put its expiry date in whatever calendar your team actual
 creating the new key first, updating the consumer, then deleting the old one.
 :::
 
+## What a key can call
+
+One endpoint: the [upload](#using-a-key) of a microfrontend version.
+
+```
+POST <API_BASE>/microfrontends/by-slug/:slug/upload/:version
+```
+
+Everything else on the API — creating a deployment, editing a microfrontend, reading the build
+status — is authenticated with the token of a signed-in user and answers an API key with an
+authentication error. So a pipeline can *publish* a version, and it cannot *deploy* it; see
+[publishing does not deploy](./manual-upload.md#publishing-does-not-deploy).
+
 ## Roles
 
 | Role | Intended for |
@@ -53,6 +66,12 @@ creating the new key first, updating the consumer, then deleting the old one.
 
 Keys created automatically when MFE Orchestrator scaffolds a repository are `MANAGER`, valid for one
 year.
+
+:::caution The role is not enforced on the upload
+The upload endpoint checks that the key is valid and which project it belongs to, not which role it
+carries — a `VIEWER` key uploads exactly like a `MANAGER` one. Treat the role as a label on the key
+and the *key itself* as the credential to protect.
+:::
 
 ## Keys created for you
 

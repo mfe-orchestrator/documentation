@@ -135,10 +135,11 @@ publish step per microfrontend, each with its own slug.
 **Tests before publishing** — add the step between build and publish. A failing test then stops the
 release, which is the behaviour you want.
 
-**Deploying automatically** — for a development environment, add a step calling
-`POST <API_BASE>/deployment` with the environment id after publishing. For production, leave the
-deployment manual; the separation between *published* and *live* is the platform's main safety
-property.
+**Deploying automatically** — the workflow cannot do it with the API key it already holds:
+`POST <API_BASE>/deployment` is authenticated with a signed-in user's token, while an API key
+authenticates the upload endpoint only. Automating a development environment therefore means
+supplying a user token of your own. For production, leave the deployment manual; the separation
+between *published* and *live* is the platform's main safety property.
 
 ## Troubleshooting
 

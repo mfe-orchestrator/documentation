@@ -183,17 +183,36 @@ carries a row enabling them, and everyone else — including every anonymous vis
 version. Because the decision is taken on `mfeUserId`, it follows that person onto any browser and
 any device.
 
-The list lives on the deployment and covers every microfrontend of it configured as *User*. Manage
-it from **Deployments → ⋯ → View canary users**:
+The list lives on the deployment and covers every microfrontend of it configured as *User*. Open a
+deployment under **Deployments** — the active one or any in the history — and press
+**View canary users**.
+
+![The canary users table with every row selected and the bulk enable, disable and remove actions](../assets/canary-users.png)
 
 - **Add** one or more user ids. Paste a list separated by commas, spaces or new lines to enrol a
-  whole group in one go.
-- **Toggle** a row to suspend someone without losing the entry.
+  whole group in one go; the input de-duplicates, so a list copied out of a spreadsheet or a query
+  result works as it is.
+- **Toggle** a row between *Canary* and *Excluded* to suspend someone without losing the entry.
 - **Remove** a row to send that person back to the stable version.
+- **Select rows** with the checkboxes to enable, disable or remove all of them at once — the same
+  three actions, applied to the selection.
+
+Removing a row and disabling it are different entries in the table and the same thing to the
+resolver: a user with no row and a user with a disabled row both get the stable version.
 
 The ids are the ones **your application** knows — whatever it passes to the client SDK as `userId`.
 They are opaque strings to the console, which is why the page shows them back rather than names or
 email addresses.
+
+### Enrolment survives a new deployment
+
+Enrolment is stored **per deployment**, which taken literally would mean that every deploy starts
+with nobody on the canary. It does not: creating a deployment copies the rows of the deployment the
+environment is serving right now into the new one, inside the transaction that creates it. Each row
+keeps its state, so someone you had disabled stays disabled rather than being re-enrolled.
+
+A [redeploy](../deployments/rollback-and-redeploy.md) is a different operation — it re-activates a
+deployment that already holds its own rows, so there is nothing to carry over.
 
 ### Telling the SDK who is logged in
 

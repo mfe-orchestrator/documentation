@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "title": "Self-host MFE Orchestrator",
-    "description": "Run MFE Orchestrator on your own infrastructure with Docker, Docker Compose or Terraform, and configure the container it ships in."
+    "description": "Run MFE Orchestrator on your own infrastructure with Docker, Docker Compose, Terraform or Helm, and configure the container it ships in."
   }
 }

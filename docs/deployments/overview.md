@@ -41,15 +41,20 @@ production snapshot was taken when `1.2.0` was selected, and it does not change 
 
 ## Creating a deployment
 
-Open **Deployments** in the sidebar, select an environment, and press **Deploy**.
-
-You can deploy several environments in one action — useful when you want `dev` and `uat` to move
-together.
+Open **Deployments** in the sidebar, select an environment in the selector, and press **Deploy**.
+The action applies to the environment currently selected — moving `dev` and `uat` together is two
+deployments, one after the other. (The API behind it, `POST /api/deployment`, takes a list of
+environment ids and creates them in one transaction.)
 
 Each deployment is numbered per environment: `#1`, `#2`, `#3` … The new deployment becomes
 **active**, and any previously active deployment for that environment is deactivated. Exactly one
 deployment is active per environment at any moment, and it is the one every serve endpoint answers
 from.
+
+One thing travels with the new deployment without being part of your draft configuration: the
+**canary enrolment** of the deployment being replaced is copied into the new one, inside the same
+transaction, so deploying never silently drops the users you enrolled. See
+[canary users](../microfrontends/canary-releases.md#canary-users).
 
 ## Reading the deployments page
 
@@ -57,16 +62,24 @@ The page has two parts:
 
 **Active deployment** — the snapshot currently serving this environment, expandable to show:
 
-- **Microfrontends** — each one with the version frozen in this snapshot
+- **Microfrontends** — one card each, with the version frozen in this snapshot and, when a canary
+  is configured, the share of traffic it takes, its type and its target version or URL
 - **Environment variables** — the values frozen in this snapshot
+- **View canary users** — the enrolment list of this deployment
 
 **History** — every previous deployment of this environment, newest first, with the same detail
-and a **Redeploy** action.
+plus a **Redeploy** action.
 
-![The Deployments page: active deployment expanded above the history](../assets/deployments-overview.png)
+![The Deployments page: active deployment expanded, with the canary of each microfrontend and the canary users button](../assets/deployments-overview.png)
 
 Inspecting an old deployment answers "what exactly was live last Tuesday?" without archaeology
 through Git.
+
+:::tip Which version is where
+The deployments page answers the question one environment at a time. For the whole project at a
+glance — every microfrontend, the version each environment serves, and whether its last CI run
+passed — use [Build status](./build-status.md).
+:::
 
 ## Promoting between environments
 
@@ -96,4 +109,5 @@ found* error, and the console's Integration page tells you to deploy first.
 ## Where to go next
 
 - [Rollback and redeploy](./rollback-and-redeploy.md)
+- [Build status](./build-status.md) — what is built, and what each environment serves
 - [Integration](../integration/overview.md) — consuming a deployment from your application

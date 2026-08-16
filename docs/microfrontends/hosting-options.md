@@ -30,7 +30,7 @@ Orchestrator extracts and serves it.
   own the disk.
 - **Where files land**: on the server filesystem, under
   `<MICROFRONTEND_HOST_FOLDER>/<projectSlug>-<projectId>/<microfrontendSlug>/<version>/`.
-  `MICROFRONTEND_HOST_FOLDER` defaults to `/var/microfrontends` — see
+  `MICROFRONTEND_HOST_FOLDER` defaults to `/upload-microfrontends` — see
   [Environment Variables](../self-hosting/environment-variables.md).
 - **Upload with**: the [upload endpoint](../ci-cd/manual-upload.md), used by the generated
   pipelines.
