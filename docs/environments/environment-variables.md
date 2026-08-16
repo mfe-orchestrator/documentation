@@ -64,7 +64,7 @@ Variables are exposed in two forms. The full details, including examples, are in
 bundle:
 
 ```html
-<script src="<API_BASE>/serve/global-variables/<environmentId>/index.js"></script>
+<script src="<API_BASE>/serve/global-variables/auto/<projectId>/index.js"></script>
 ```
 
 ```js
@@ -74,12 +74,14 @@ const apiUrl = window.globalConfig?.API_URL
 **As JSON**, if you prefer to fetch them yourself:
 
 ```js
-const vars = await fetch('<API_BASE>/serve/global-variables/<environmentId>')
+const vars = await fetch('<API_BASE>/serve/global-variables/auto/<projectId>')
   .then(r => r.json())
 ```
 
-The console's **Integration → Environment variables** tab shows both snippets with your ids
-already filled in.
+Neither address names an environment: the platform resolves it from the domain the page is
+served on, so one `index.html` covers every stage. The console's
+**Integration → Environment variables** tab shows both snippets with your project id already
+filled in.
 
 ## Variables and deployments
 

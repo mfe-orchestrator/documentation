@@ -25,7 +25,7 @@ MFE Orchestrator can serve your variables as a JavaScript file that assigns them
 <!doctype html>
 <html>
   <head>
-    <script src="<API_BASE>/serve/global-variables/<environmentId>/index.js"></script>
+    <script src="<API_BASE>/serve/global-variables/auto/<projectId>/index.js"></script>
   </head>
   <body>
     <div id="root"></div>
@@ -33,6 +33,11 @@ MFE Orchestrator can serve your variables as a JavaScript file that assigns them
   </body>
 </html>
 ```
+
+The address names your project and no environment: the platform works out which one answers from
+the domain the page is served on, so this `index.html` is the same file in every stage and a
+promotion never means editing it. [Addressing an environment explicitly](#addressing-an-environment-explicitly)
+covers the cases where you do want to name one.
 
 The served file looks like this:
 
@@ -95,7 +100,7 @@ environment.
 If you would rather control loading yourself:
 
 ```js
-const vars = await fetch('<API_BASE>/serve/global-variables/<environmentId>')
+const vars = await fetch('<API_BASE>/serve/global-variables/auto/<projectId>')
   .then(r => r.json())
 // [{ key: 'API_URL', value: 'https://api.example.com' }, …]
 ```
@@ -110,31 +115,31 @@ The trade-off is that your application now has an asynchronous startup dependenc
 reads configuration must wait for the fetch. Option 1 avoids that entirely, which is why it is the
 default recommendation.
 
-## Addressing an environment without its id
+## How `auto` resolves
 
-Both forms also accept a project id and environment slug, which are more readable and stable than
-an object id:
+The `auto` address used by both snippets above carries no environment. The platform reads the
+domain the request comes from — the browser sends the page it is loading from — and matches it
+against the [allowed domains](../environments/domains.md) of each environment.
+
+It only works if the domain is actually registered on the intended environment: an unregistered
+domain has nothing to resolve against and the request fails rather than falling back to a default.
+
+## Addressing an environment explicitly
+
+Name an environment when `auto` cannot decide for you — one domain serving several environments, a
+build whose stage is already known, a `curl` from a machine that is not the deployed host. The JSON
+form takes a project id and an environment slug, which are more readable and stable than an object
+id; the `index.js` form is addressed by environment id:
 
 ```
 <API_BASE>/serve/global-variables/<projectId>/<environmentSlug>
+<API_BASE>/serve/global-variables/<environmentId>
+<API_BASE>/serve/global-variables/<environmentId>/index.js
 ```
 
-Both forms additionally accept the environment-less `auto` address, which names only the project and
-lets the platform resolve the environment from the requesting domain, matched against
-[allowed domains](../environments/domains.md):
-
-```
-<API_BASE>/serve/global-variables/auto/<projectId>
-<API_BASE>/serve/global-variables/auto/<projectId>/index.js
-```
-
-That is what you want when a single build has to read the right variables in every stage, and it
-covers the static case too: a `<script src>` in an `index.html` that never names an environment
-still resolves, because the browser sends the page it is loading from and the platform reads the
-environment off that. The same `index.html` can therefore ship unchanged to every stage.
-
-It only works if the domain is actually registered on the intended environment — an unregistered
-domain has nothing to resolve against and the request fails rather than falling back to a default.
+The cost of naming an environment in an `index.html` is that the artifact stops being portable:
+promoting the build to the next stage becomes an edit of that file, which is exactly what `auto`
+exists to avoid. Prefer it for anything you ship.
 
 ## Where the values come from
 
