@@ -19,10 +19,13 @@ re-upload. It is re-activating a snapshot that already exists.
 **Redeploy** lives on the deployments in **History**, next to **View canary users**. The active
 deployment has no Redeploy button — re-activating what is already active would be a no-op.
 
-![An older deployment expanded in History, with its versions, variables and the Redeploy action](../assets/deployments-history.png)
+![The active deployment above an older one expanded in History, with its versions, variables and the Redeploy action](../assets/deployments-history.png)
 
-Comparing the two snapshots above is the whole point: `#2` is serving `catalog` at `2.2.0`,
-while `#1` — one click away — still holds `2.1.0`.
+Reading the two snapshots against each other is the whole point. Above, `#2` and `#1` carry the same
+versions, because nothing was edited between the two deployments — which is itself the answer to
+"did anything actually change?". When they differ, the line you are looking for is the version badge
+on a microfrontend card: `#2` serving `catalog` at `2.2.0` while `#1`, one click away, still holds
+`2.1.0`.
 
 That deployment becomes active again, the broken one is deactivated, and the serve endpoints
 immediately answer from the restored snapshot.
