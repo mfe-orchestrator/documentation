@@ -69,7 +69,7 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
   ],
   "microfrontends": [
     {
-      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../catalog/assets/remoteEntry.js",
+      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1.../prod/catalog/assets/remoteEntry.js",
       "slug": "catalog",
       "name": "Catalog",
       "nameToIntegrate": "catalog",
@@ -77,7 +77,7 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
       "continuousDeployment": false
     },
     {
-      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1.../checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js",
+      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1.../prod/checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js",
       "slug": "checkout-new",
       "name": "Checkout",
       "nameToIntegrate": "checkoutnew",
@@ -99,6 +99,10 @@ deployment's version: a microfrontend running a
 version-based canary, so the version appears as a `_v/<version>/` path segment. Use the string as it
 is: never rebuild it, never strip that segment. The
 [client SDK](./client-sdk.md) does this correctly for you.
+
+It also names the environment this response resolved to, whichever of the three forms above asked
+for it. The `auto` form therefore resolves the domain once, on this call: the file requests that
+follow already know their environment, and work from a host whose domain is registered nowhere.
 
 ### Identity parameters
 
