@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '23.11.1'
+          node-version: '22'
           cache-dependency-path: './pnpm-lock.yaml'
           cache: 'pnpm'
 
@@ -39,13 +39,16 @@ jobs:
         run: pnpm run build
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: './build'
+          # The build carries a .nojekyll, and v4 stopped shipping dotfiles by
+          # default: without this the deployed site loses it.
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
