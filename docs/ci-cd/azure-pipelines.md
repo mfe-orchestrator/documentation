@@ -118,6 +118,11 @@ before a pipeline can use it.
 | `microfrontendSlug` | The slug of the microfrontend to publish to |
 | `filePath` | The directory containing the build output |
 | `version` | The version to publish |
+| `domain` | Base URL of the installation to publish to |
+
+The generated pipeline resolves `domain` from a `MICROFRONTEND_ORCHESTRATOR_DOMAIN` pipeline or
+variable-group variable, falling back to the installation the repository was scaffolded from. Set
+that variable to point an existing repository at a different installation.
 
 :::info If the task is not available
 Install the extension from the Visual Studio Marketplace into your organization. If your

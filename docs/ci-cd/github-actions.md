@@ -57,13 +57,16 @@ jobs:
       with:
         apikey: ${{ secrets.MICROFRONTEND_ORCHESTRATOR_API_KEY }}
         microfrontend-slug: catalog
-        domain: https://console.mfe-orchestrator.dev
+        domain: ${{ vars.MICROFRONTEND_ORCHESTRATOR_DOMAIN || 'https://console.mfe-orchestrator.dev' }}
         file-path: './dist'
         version: ${{ inputs.version || github.ref_name }}
 ```
 
 The `microfrontend-slug` and `domain` values are substituted for you at scaffold time — the slug you
-chose, and the API base URL of the installation you created it from.
+chose, and the API base URL of the installation you created it from. The domain stays overridable
+afterwards: set a `MICROFRONTEND_ORCHESTRATOR_DOMAIN` repository variable
+(**Settings ▸ Secrets and variables ▸ Actions ▸ Variables**) and the workflow publishes there
+instead, without you having to edit the YAML.
 
 ## Two ways to trigger it
 
