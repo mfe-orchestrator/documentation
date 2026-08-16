@@ -195,6 +195,30 @@ The ids are the ones **your application** knows — whatever it passes to the cl
 They are opaque strings to the console, which is why the page shows them back rather than names or
 email addresses.
 
+### Telling the SDK who is logged in
+
+The host is the only place that knows this, so it has to hand it over. Three shapes, depending on
+when the user becomes known:
+
+```ts
+// Known at bootstrap
+configure({ backendUrl, projectId, userId: currentUser.id })
+
+// Known after an auth round trip — the getter is resolved right before the manifest request
+configure({ backendUrl, projectId, userId: () => authStore.getState().user?.id })
+
+// Changing while the page is alive: a login, a logout, an account switch
+import { setUserId } from '@mfe-orchestrator-hub/client'
+auth.onLogin(user => setUserId(user.id))
+auth.onLogout(() => setUserId(undefined))
+```
+
+[`setUserId()`](../integration/client-sdk.md#changing-the-user-without-a-reload) drops the memoised
+manifest, so the next remote resolved is decided on the new identity. What it cannot do is move a
+microfrontend that is **already on the page**: the federation runtime keeps the container it loaded,
+so an enrolment that arrives after the remote was imported takes effect on the next resolution or on
+a reload. Resolving your remotes behind your own auth guard avoids the question entirely.
+
 ## Limits worth knowing
 
 - **Based on URL canaries cannot be inspected the same way.** The split itself works exactly as

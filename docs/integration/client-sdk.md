@@ -73,7 +73,10 @@ optional, for quite different reasons.
 getter, if the user is not known yet at bootstrap — when you want
 [User](../microfrontends/canary-releases.md#who--the-canary-type) canary targeting to work: without
 it there is nobody to look up in the enrolment list, so that microfrontend serves everyone the
-stable version.
+stable version. A getter is resolved as late as possible, right before the manifest request is
+issued, so an auth round trip that finishes after bootstrap is still in time. When the user appears
+or changes later than that — a login, a logout, an account switch — use
+[`setUserId()`](#changing-the-user-without-a-reload).
 
 ### Leaving the environment out
 
@@ -108,6 +111,9 @@ fixed in the build than resolved per request.
 /** Call once, synchronously, before any remote is imported. Idempotent. */
 function configure(config: OrchestratorConfig): void
 
+/** Replaces the logged-in user mid-session and drops the memoised manifest. */
+function setUserId(userId: OrchestratorConfig['userId']): void
+
 /** The ready-to-use, version-pinned URL of a remote. Awaits the manifest internally. */
 function remoteUrl(slug: string): Promise<string>
 
@@ -131,6 +137,34 @@ version this browser is meant to receive. Never rebuild that URL by hand and nev
 segment: the entry point resolves its chunks relative to the URL it was loaded from, and a
 versionless URL can end up mixing two builds in one page. See
 [how the version reaches the browser](../microfrontends/canary-releases.md#how-the-version-reaches-the-browser).
+:::
+
+### Changing the user without a reload
+
+`configure()` is fixed for the page load: calling it again with a different configuration is ignored
+with a warning, because the manifest may already be in flight. The user is the one thing that
+legitimately changes while the page is alive, so it has its own call.
+
+```ts
+import { setUserId } from '@mfe-orchestrator-hub/client'
+
+auth.onLogin(user => setUserId(user.id))
+auth.onLogout(() => setUserId(undefined))  // no mfeUserId at all — back to the stable version
+```
+
+`setUserId()` does what a second `configure()` must not: it drops the memoised manifest, so the next
+`remoteUrl()`, `manifest()` or `globalVariables()` asks the server again and is answered for the new
+user. Setting the same value again is a no-op, so an auth store may call it on every emission without
+costing a request; a getter is always taken as a change, since what it returns is precisely what the
+SDK cannot know. A request already in flight is not cancelled — whoever is awaiting it still receives
+the manifest of the previous identity — and calling it before `configure()` throws.
+
+:::caution It does not reload the remotes already imported
+The federation runtime keeps the container it loaded, so a microfrontend already on the page stays on
+the version drawn for the previous user. Only the remotes resolved *after* the call see the new one.
+Either mount your remotes behind your own auth guard and set the user before the guard opens — nothing
+has resolved yet, so the whole page is decided on the right identity — or reload the page after the
+switch when it has to be consistent end to end.
 :::
 
 ## Identities
