@@ -88,15 +88,15 @@ build:
     - tags
 ```
 
-:::caution Add the publish step yourself
-Unlike the GitHub and Azure DevOps templates, the generated GitLab pipeline stops at **build** — it
-produces `dist/` as an artifact but does not publish it to MFE Orchestrator. Add the deploy job
-below to complete it.
+:::caution Host repositories stop at build
+Microfrontend repositories get the `deploy` stage below already committed. Host repositories do not
+— like their GitHub and Azure DevOps counterparts they build and containerise, but do not publish
+themselves to MFE Orchestrator. Add the job below if you want a host published as a remote too.
 :::
 
-## Adding the publish job
+## The publish job
 
-Append a `deploy` stage that uploads the built `dist/` on tags:
+A `deploy` stage uploads the built `dist/` on tags:
 
 ```yaml
 stages:
@@ -104,7 +104,7 @@ stages:
   - lint
   - test
   - build
-  - deploy          # ← add
+  - deploy
 
 deploy:
   stage: deploy
@@ -112,8 +112,8 @@ deploy:
   dependencies:
     - build
   variables:
-    MFE_SLUG: "catalog"
-    API_BASE: "https://console.mfe-orchestrator.dev/api"
+    MICROFRONTEND_SLUG: "catalog"
+    MICROFRONTEND_ORCHESTRATOR_DOMAIN: "https://console.mfe-orchestrator.dev"
   before_script:
     - apk add --no-cache curl zip
   script:
@@ -122,11 +122,16 @@ deploy:
       curl --fail --show-error --silent -X POST \
         -H "api-key: ${MICROFRONTEND_ORCHESTRATOR_API_KEY}" \
         -F "file=@dist.zip" \
-        "${API_BASE}/microfrontends/by-slug/${MFE_SLUG}/upload/${CI_COMMIT_TAG}"
-    - echo "published ${MFE_SLUG} ${CI_COMMIT_TAG}"
+        "${MICROFRONTEND_ORCHESTRATOR_DOMAIN%/}/api/microfrontends/by-slug/${MICROFRONTEND_SLUG}/upload/${CI_COMMIT_TAG}"
+    - echo "published ${MICROFRONTEND_SLUG} ${CI_COMMIT_TAG}"
   only:
     - tags
 ```
+
+In a scaffolded repository the two variables are filled in for you — your slug, and the installation
+you created the repository from. Both are plain job variables, so a **project** CI/CD variable of the
+same name wins over them: set `MICROFRONTEND_ORCHESTRATOR_DOMAIN` in the project settings to publish
+somewhere else without touching the YAML.
 
 Points worth noting:
 

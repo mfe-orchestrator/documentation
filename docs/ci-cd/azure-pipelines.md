@@ -136,7 +136,7 @@ organization does not permit third-party extensions, replace the task with a scr
     curl --fail --show-error --silent -X POST \
       -H "api-key: $(MICROFRONTEND_ORCHESTRATOR_API_KEY)" \
       -F "file=@$(Build.ArtifactStagingDirectory)/dist.zip" \
-      "https://console.mfe-orchestrator.dev/api/microfrontends/by-slug/catalog/upload/$(VERSION)"
+      "$(MICROFRONTEND_ORCHESTRATOR_DOMAIN_RESOLVED)/api/microfrontends/by-slug/catalog/upload/$(VERSION)"
   displayName: '🚀 Upload to MFE Orchestrator'
 ```
 :::
