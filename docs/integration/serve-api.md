@@ -110,14 +110,15 @@ The three optional query parameters carry the identities a canary decision can b
 
 | Parameter | Identity |
 | --- | --- |
-| `mfeSessionId` | The browsing session — a *On Sessions* canary buckets on this |
-| `mfeDeviceId` | The device — a *Cookie Based* canary buckets on this |
-| `mfeUserId` | The logged-in user — a *On User* canary buckets on this |
+| `mfeDeviceId` | The browser — a *Session* canary buckets on this |
+| `mfeUserId` | The logged-in user — a *User* canary looks this up in its enrolment list |
+| `mfeSessionId` | The browsing session — no canary strategy is computed on it, it is there for your own telemetry |
 
 Send every one you have. They are not cookies and cannot be: module scripts are fetched with a fixed
 `same-origin` credentials mode, so the URL is the only channel — see
 [canary releases](../microfrontends/canary-releases.md#who--the-canary-type). Omitting them is
-supported; the split then falls back to a draw per page load instead of a sticky one.
+supported: a *Session* canary then falls back to a draw per page load instead of a sticky one, and
+a *User* canary serves the stable version to everyone.
 
 This is the endpoint to build runtime discovery on: one request at boot gives you the full roster
 and the configuration.
@@ -127,12 +128,16 @@ and the configuration.
 ```http
 GET <API_BASE>/serve/global-variables/{environmentId}
 GET <API_BASE>/serve/global-variables/{projectId}/{environmentSlug}
-GET <API_BASE>/serve/global-variables/auto/{projectId}      # Referer or Host
+GET <API_BASE>/serve/global-variables/auto/{projectId}               # Referer or Host
 GET <API_BASE>/serve/global-variables/{environmentId}/index.js
+GET <API_BASE>/serve/global-variables/auto/{projectId}/index.js      # Referer or Host
 ```
 
-The first three return JSON; the last returns JavaScript that assigns `window.globalConfig` and is
-served as `application/javascript`, ready for a `<script src>` tag.
+The first three return JSON; the last two return JavaScript that assigns `window.globalConfig` and
+is served as `application/javascript`, ready for a `<script src>` tag.
+
+The `auto` form is the one to put in an `index.html`: it names no environment, so the same document
+works in every one of them.
 
 See [Runtime configuration](./runtime-configuration.md) for usage.
 

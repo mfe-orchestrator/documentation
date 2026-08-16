@@ -71,7 +71,9 @@ optional, for quite different reasons.
 
 `userId` is the field the SDK has no way of working out for itself. Pass it — as a value or as a
 getter, if the user is not known yet at bootstrap — when you want
-[On User](../microfrontends/canary-releases.md#who--the-canary-type) canary targeting to work.
+[User](../microfrontends/canary-releases.md#who--the-canary-type) canary targeting to work: without
+it there is nobody to look up in the enrolment list, so that microfrontend serves everyone the
+stable version.
 
 ### Leaving the environment out
 

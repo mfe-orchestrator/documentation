@@ -20,45 +20,63 @@ four things:
 
 | Field | Meaning |
 | --- | --- |
-| **Canary Percentage** | Share of traffic that should receive the canary, as a slider with 5, 10, 25 and 50 presets |
-| **Canary Type** | Which identity the split is computed on — *On Sessions*, *On User* or *Cookie Based* |
+| **Canary Type** | Who gets the canary — *Random*, *Session* or *User* |
+| **Canary Percentage** | Share of traffic that should receive the canary, as a slider with 5, 10, 25 and 50 presets. Not asked for by *User*, which enrols people instead of splitting traffic |
 | **Deployment Type** | What the canary is — *Based on Version* or *Based on URL* |
 | **Canary Version** / **Canary URL** | The target, depending on the deployment type |
 
 Canary configuration is part of the microfrontend, so like everything else it is captured in a
 [deployment](../deployments/overview.md) and only becomes live once you deploy. Expanding a
-deployment under **Deployments** shows a card per microfrontend with its stable version, the canary
-share and the two types — the quickest way to confirm what a deployment will actually do.
+deployment under **Deployments** shows a card per microfrontend with its stable version, the two
+types, and the canary share — or *Enrolled users*, for a *User* canary, which has no share. It is
+the quickest way to confirm what a deployment will actually do.
 
 ## Who — the canary type
 
-Every type is the same bucketing over a different **identity**. The identity travels in the query
-string of the calls your host makes to the serve API, and the [client SDK](../integration/client-sdk.md)
-generates, persists and sends it for you:
+The three types answer two different questions, and it is worth being clear about which one you are
+asking.
 
-| Canary Type | Identity | Where the host keeps it | Query parameter |
+| Canary Type | Who gets the canary | Sticky? |
+| --- | --- | --- |
+| **Random** | A share of every page load, drawn fresh each time | No — the same browser flips between versions on every refresh |
+| **Session** | A share of browsers, drawn once per browser | Yes — survives a reload, a new tab and a browser restart |
+| **User** | Only the users you enrol, no matter how many they are | Yes — it is a decision, not a draw |
+
+*Random* and *Session* are the same percentage split and differ only in whether the draw is
+remembered. *User* is not a split at all: the percentage plays no part in it.
+
+The identity the split is computed on travels in the query string of the calls your host makes to
+the serve API, and the [client SDK](../integration/client-sdk.md) generates, persists and sends it
+for you:
+
+| Query parameter | What it identifies | Where the host keeps it | Used by |
 | --- | --- | --- | --- |
-| **On Sessions** | The browsing session | `sessionStorage` | `mfeSessionId` |
-| **Cookie Based** | The device | `localStorage` (a first-party cookie of your own works just as well) | `mfeDeviceId` |
-| **On User** | The logged-in user | Supplied by your application | `mfeUserId` |
+| `mfeDeviceId` | The browser | `localStorage` | *Session* |
+| `mfeUserId` | The logged-in user | Supplied by your application | *User* |
+| `mfeSessionId` | The browsing session | `sessionStorage` | No canary strategy — the SDK still sends it, and exposes it, for your own telemetry |
 
 The host sends **every identity it holds** and is never told which one was used, nor the
 percentage, nor whether a canary exists at all. Switching a microfrontend from one type to another
 is therefore a console change only — nothing to redeploy on the host side.
 
-:::info "Cookie Based" does not use a cookie
-The name survives from the configuration model, not from the mechanism: **no cookie is involved
-anywhere in this feature, and none can be.** Microfrontends are loaded with a cross-site
-`import()`, and module scripts are fetched with a fixed `same-origin` credentials mode, so a cookie
-belonging to the MFE Orchestrator domain is never attached to those requests and a `Set-Cookie` on
-their responses is never stored. This is how module scripts are specified in every browser, not a
-Safari or ITP quirk — verified in Chromium with third-party cookies enabled and a
+:::info No cookie is involved, and none can be
+An earlier version of this feature had a *Cookie Based* type, and the name was misleading:
+**no cookie is involved anywhere here, and none can be.** Microfrontends are loaded with a
+cross-site `import()`, and module scripts are fetched with a fixed `same-origin` credentials mode,
+so a cookie belonging to the MFE Orchestrator domain is never attached to those requests and a
+`Set-Cookie` on their responses is never stored. This is how module scripts are specified in every
+browser, not a Safari or ITP quirk — verified in Chromium with third-party cookies enabled and a
 `SameSite=None; Secure` cookie already in the jar. The host page is the only place that can hold
 this state, and the URL is the only way to hand it over.
 
-*Cookie Based* means "an identity that outlives the browser session", and `localStorage` is the
-obvious place to keep it. If you would rather keep it in a first-party cookie of your own domain,
-read it yourself and pass it as `mfeDeviceId`.
+That is why *Session* means "an identity that outlives the browser session", kept in `localStorage`
+by the SDK. If you would rather keep it in a first-party cookie of your own domain, read it
+yourself and pass it as `mfeDeviceId`.
+
+The old *On Sessions* and *Cookie Based* types no longer exist. Microfrontends still configured with
+either of them — and the microfrontend snapshots inside deployments already shipped — are converted
+to *Session* automatically, by a migration the backend runs when it connects to the database.
+Nothing to do on your side.
 :::
 
 ## What — the deployment type
@@ -74,9 +92,12 @@ CDN — and you want to send a slice of traffic there without registering it as 
 
 ## How the split is computed
 
-The decision is **sticky**: there is no server-side state and no random draw per request. The
-identity and the microfrontend id are concatenated (`identity:microfrontendId`), hashed with FNV-1a
-into one of 100 buckets, and the request gets the canary when `bucket < percentage`.
+*Random* is what it says: a draw against the percentage, taken once per page load when the manifest
+is fetched, with nothing stored anywhere.
+
+*Session* is **sticky**, and gets there without server-side state and without a draw per request.
+The identity and the microfrontend id are concatenated (`identity:microfrontendId`), hashed with
+FNV-1a into one of 100 buckets, and the request gets the canary when `bucket < percentage`.
 
 Three properties follow from that, and they are the reason it is done this way:
 
@@ -93,12 +114,12 @@ actual over 4000 identities.
 
 ### When no identity arrives
 
-- **On Sessions** and **Cookie Based** fall back to a plain draw **per page load**. The page load
-  itself stays coherent, because the resolved version is pinned into the URL immediately — but the
-  next reload draws again. Stickiness is exactly what requires the host to send an identity, which
-  is what the SDK is for.
-- **On User** does not fall back. Without `mfeUserId` there is nobody to bucket, so every request
-  gets the stable version.
+- **Session** falls back to a plain draw **per page load**, which is to say it degrades into
+  *Random*. The page load itself stays coherent, because the resolved version is pinned into the URL
+  immediately — but the next reload draws again. Stickiness is exactly what requires the host to
+  send an identity, which is what the SDK is for.
+- **User** does not fall back. Without `mfeUserId` there is nobody to look up, so every request gets
+  the stable version. That is the intended behaviour for anonymous visitors, not a degradation.
 
 ## How the version reaches the browser
 
@@ -113,6 +134,14 @@ https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1…/checkout-n
 ```
 
 Use that URL verbatim. Never rebuild it, and never strip the `_v/<version>/` segment.
+
+**A microfrontend is many files, and they all come from one build.** The draw happens exactly once,
+on the entry point, and its result is pinned into that URL; every chunk imported from it inherits
+the `_v/<version>/` segment, because relative specifiers resolve against the entry point's URL. The
+server never draws again for the individual files — a file arriving without a version in its path
+is served the **deployed** version, not a fresh coin flip. With a *Random* canary that distinction
+is the whole ball game: redrawing per file would let one page load half of build A and half of
+build B.
 
 **Why a path segment and not a query parameter.** The entry point imports its chunks with relative
 specifiers (`./chunk.js`), which the browser resolves against the entry point's URL — and that
@@ -149,29 +178,39 @@ is the ground truth, and it is the only thing the browser is ever told about the
 
 ## Canary users
 
-For **On User** targeting, an explicit decision for one user on one microfrontend takes precedence
-over the percentage, in either direction — it can force a user *onto* the canary or keep them *out*
-of it. Everyone else is bucketed by `mfeUserId`, so the choice is stable for that person on any
-browser and any device.
+**User** targeting is an enrolment list, not a split. A user sees the canary when the deployment
+carries a row enabling them, and everyone else — including every anonymous visitor — gets the stable
+version. Because the decision is taken on `mfeUserId`, it follows that person onto any browser and
+any device.
 
-Those decisions are stored per deployment and are reached from
-**Deployments → ⋯ → View canary users**, but that page still shows a *Coming soon* notice:
-enrolment is not yet manageable from the console.
+The list lives on the deployment and covers every microfrontend of it configured as *User*. Manage
+it from **Deployments → ⋯ → View canary users**:
 
-![The Canary Users page showing a Coming soon notice](../assets/canary-users.png)
+- **Add** one or more user ids. Paste a list separated by commas, spaces or new lines to enrol a
+  whole group in one go.
+- **Toggle** a row to suspend someone without losing the entry.
+- **Remove** a row to send that person back to the stable version.
 
-Until it is, treat **On User** as "a stable split computed on your user id".
+The ids are the ones **your application** knows — whatever it passes to the client SDK as `userId`.
+They are opaque strings to the console, which is why the page shows them back rather than names or
+email addresses.
 
 ## Limits worth knowing
 
-- **Based on URL canaries are not sticky yet.** The identity bucketing runs, but the URL variant
-  has no version to pin, so the guarantees above about a coherent page load do not apply to it in
-  the same way. Prefer *Based on Version* when you can.
-- **Per-user overrides cannot be managed from the console yet** — see above.
+- **Based on URL canaries cannot be inspected the same way.** The split itself works exactly as
+  described — the type decides it, and *Session* is as sticky there as anywhere else — but there is
+  no version of ours in play: the host is simply handed one URL or the other. Nothing serves those
+  files, so they carry no `x-mfe-version` header and `?mfeVersion=` has nothing to force. Prefer
+  *Based on Version* when you want to watch a rollout rather than just perform one.
 - **The manifest is fetched once per page load and is not retried.** If that request fails, the
   remotes of that page load fail with it; the SDK clears its memo so the next call tries again.
 
 ## Practical advice
+
+**Pick the type before the percentage.** *Random* is for exercising both builds against the same
+browser — a smoke test you can refresh, and a poor fit for anything a user is halfway through.
+*Session* is what a rollout normally means. *User* is for a named group: your own team, one
+customer, a support case.
 
 **Pick a percentage you can read.** With a sticky split, the useful question is how many sessions
 you need before your dashboards say anything. 5% is a smoke test, 25% is a measurement, 50% is a
@@ -188,8 +227,8 @@ canary there is [rollback and redeploy](../deployments/rollback-and-redeploy.md)
 
 **Verify with the header, not by counting.** Before you trust a rollout, load the host twice — once
 in a normal window and once in a fresh private window — and read `x-mfe-version` on the entry point
-of each. Two different values is the split working. Use `?mfeVersion=` when you need to see the
-canary on demand rather than by luck.
+of each. Two different values is the split working. With a *Random* canary a plain refresh is
+enough. Use `?mfeVersion=` when you need to see the canary on demand rather than by luck.
 
 **Promote by making the canary the version.** Once you are convinced, set the microfrontend's
 version to what the canary was pointing at and turn the canary off. Nothing about the URLs your
