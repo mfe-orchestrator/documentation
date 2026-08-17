@@ -1,16 +1,16 @@
-# Graph Report - documentation  (2026-08-17)
+# Graph Report - documentation  (2026-08-16)
 
 ## Corpus Check
-- 75 files · ~439,190 words
+- 73 files · ~423,122 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1012 nodes · 1107 edges · 173 communities (102 shown, 71 thin omitted)
+- 991 nodes · 1079 edges · 169 communities (99 shown, 70 thin omitted)
 - Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fea269cd`
+- Built from commit: `222bbf23`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -182,10 +182,6 @@
 - [[_COMMUNITY_Architecture|Architecture]]
 - [[_COMMUNITY_Self-host with Docker|Self-host with Docker]]
 - [[_COMMUNITY_Build status|Build status]]
-- [[_COMMUNITY_Import repositories as microfrontends|Import repositories as microfrontends]]
-- [[_COMMUNITY_Dependency analysis and peer dependency alignment|Dependency analysis and peer dependency alignment]]
-- [[_COMMUNITY_Self-host on Kubernetes with Helm|Self-host on Kubernetes with Helm]]
-- [[_COMMUNITY_Self-host with Docker Compose|Self-host with Docker Compose]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `scripts` - 12 edges
@@ -249,7 +245,11 @@
 - **First Storage Creation Onboarding Flow** — docs_assets_storages_empty_storages_page, docs_assets_storages_empty_empty_state_pattern, docs_assets_storages_empty_new_storage_cta, docs_assets_storages_empty_first_storage_onboarding_rationale [INFERRED 0.85]
 - **Project Members screen: manage members via invite, role badges, and card listing** — docs_assets_team_members_project_members_management, docs_assets_team_members_invite_user_action, docs_assets_team_members_owner_role, docs_assets_team_members_member_card_layout [EXTRACTED 1.00]
 
-## Communities (173 total, 71 thin omitted)
+## Communities (169 total, 70 thin omitted)
+
+### Community 0 - "Canary Releases & Product Concepts"
+Cohesion: 0.10
+Nodes (15): Module Federation, Before you call it production, Prerequisites, Self-host with Docker Compose, Start the configuration container, Configuration, Health and scaling, Image version (+7 more)
 
 ### Community 1 - "Deployments, Storage & CI/CD Docs"
 Cohesion: 0.15
@@ -635,41 +635,25 @@ Nodes (7): Container variables, Image tags, Prerequisites, Self-host with Docker
 Cohesion: 0.22
 Nodes (9): API, Build status, Limits worth knowing, Live updates, Reading the table, Status badges, When a row has no runs, Where the runs come from (+1 more)
 
-### Community 169 - "Import repositories as microfrontends"
-Cohesion: 0.20
-Nodes (10): API, Before you start, Choosing what to import, Import, Import repositories as microfrontends, List what can be imported, Next steps, Partial results are the normal case (+2 more)
-
-### Community 170 - "Dependency analysis and peer dependency alignment"
-Cohesion: 0.22
-Nodes (9): Alignment issues, API, Applying the alignment, Choosing the branch, Configuration, Dependency analysis and peer dependency alignment, Limitations, Update status (+1 more)
-
-### Community 171 - "Self-host on Kubernetes with Helm"
-Cohesion: 0.22
-Nodes (9): Configuration, Health and scaling, Image version, Ingress, Install, MongoDB and Redis, Prerequisites, Self-host on Kubernetes with Helm (+1 more)
-
-### Community 172 - "Self-host with Docker Compose"
-Cohesion: 0.50
-Nodes (4): Before you call it production, Prerequisites, Self-host with Docker Compose, Start the configuration container
-
 ## Knowledge Gaps
-- **568 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+563 more)
+- **553 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+548 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **71 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **70 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Connect a GitLab repository` connect `Connect a GitLab repository` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
-- **Why does `Import repositories as microfrontends` connect `Import repositories as microfrontends` to `Canary Releases & Product Concepts`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `Connect an Azure DevOps repository` connect `Connect an Azure DevOps repository` to `Canary Releases & Product Concepts`?**
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **Why does `Container environment variables` connect `Available Variables` to `Canary Releases & Product Concepts`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `Deploy with Azure Pipelines` connect `Deploy with Azure Pipelines` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **What connects `config`, `name`, `version` to the rest of the system?**
-  _592 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _577 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Canary Releases & Product Concepts` be split into smaller, more focused modules?**
+  _Cohesion score 0.10213032581453634 - nodes in this community are weakly interconnected._
 - **Should `Docusaurus Package Config` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Docs Landing Page Components` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
-- **Should `Connect a GitLab repository` be split into smaller, more focused modules?**
-  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._

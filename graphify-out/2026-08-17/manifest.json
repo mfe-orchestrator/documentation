@@ -85,8 +85,8 @@
     "semantic_hash": "5bb078a18b33b10a9664a451e496939c"
   },
   "src/pages/index.tsx": {
-    "mtime": 1786895095.8648715,
-    "ast_hash": "18e16fc72997ecf781d5cc0a713594d3",
+    "mtime": 1786352812.8426301,
+    "ast_hash": "297b32de4d4761acf1a728486e494e6d",
     "semantic_hash": ""
   },
   "src/theme/DocCategoryGeneratedIndexPage/index.tsx": {
@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "docs/deployments/rollback-and-redeploy.md": {
-    "mtime": 1786894838.9558983,
-    "ast_hash": "d3273763db972667f2faf76551dba84e",
+    "mtime": 1786892815.4235902,
+    "ast_hash": "f55dbbd776e4f8e798e54b4511092354",
     "semantic_hash": ""
   },
   "docs/environments/domains.md": {
@@ -370,9 +370,9 @@
     "semantic_hash": "3494058ca9a11190a758a58423630a15"
   },
   "docs/assets/deployments-history.png": {
-    "mtime": 1786894829.0358334,
-    "ast_hash": "c6bcc2c7e97aba04cd743a37b3fd35f6",
-    "semantic_hash": ""
+    "mtime": 1785868930.2384608,
+    "ast_hash": "2b65707ad5bfcfaffd5e9f403ce7c6d7",
+    "semantic_hash": "2b65707ad5bfcfaffd5e9f403ce7c6d7"
   },
   "docs/assets/deployments-overview.png": {
     "mtime": 1786892730.824175,
@@ -627,31 +627,6 @@
   "docs/assets/builds-page.png": {
     "mtime": 1786892730.8170378,
     "ast_hash": "f4c5b95abc545609f89848560889303c",
-    "semantic_hash": ""
-  },
-  "docs/repositories/dependency-analysis.md": {
-    "mtime": 1786983465.2751112,
-    "ast_hash": "da5bec3039d71b4dce763cc018c4cafd",
-    "semantic_hash": ""
-  },
-  "docs/repositories/import-microfrontends.md": {
-    "mtime": 1786983436.9996648,
-    "ast_hash": "54638aaf32aded46843cb5312fd8e4b4",
-    "semantic_hash": ""
-  },
-  "pnpm-workspace.yaml": {
-    "mtime": 1786983510.8803718,
-    "ast_hash": "e9e5721a5a044bfcedf6a9a0eb63d1f9",
-    "semantic_hash": ""
-  },
-  "docs/assets/repository-import-action.png": {
-    "mtime": 1786983473.6803696,
-    "ast_hash": "3ad27451d08732550e57ce664622245e",
-    "semantic_hash": ""
-  },
-  "docs/assets/repository-import-dialog.png": {
-    "mtime": 1786983473.6817214,
-    "ast_hash": "8893b9681e9e69dc2785048ce272f82b",
     "semantic_hash": ""
   }
 }
