@@ -30,9 +30,9 @@
     "semantic_hash": "36d957e2dbb019a1eddf5398df25c5c9"
   },
   "docs/project-settings/_category_.json": {
-    "mtime": 1787814354.285281,
-    "ast_hash": "b7b6b991591a45fc8b3ec9738a04cddf",
-    "semantic_hash": ""
+    "mtime": 1785864535.3607068,
+    "ast_hash": "c4f8c4fbe07d0a6c209cb9f2970140ef",
+    "semantic_hash": "c4f8c4fbe07d0a6c209cb9f2970140ef"
   },
   "docs/repositories/_category_.json": {
     "mtime": 1785864535.3613095,
@@ -45,8 +45,8 @@
     "semantic_hash": "bb503a4dbc2246ade4679dafc7880db4"
   },
   "docs/self-hosting/_category_.json": {
-    "mtime": 1787814354.2901871,
-    "ast_hash": "cef86049bcc6882c8c74ee1ec7ddb3b8",
+    "mtime": 1786892975.0289772,
+    "ast_hash": "ddf08d9c7ed7d9b6726b8fd51cf51b6e",
     "semantic_hash": ""
   },
   "docs/self-hosting/enable-sso/_category_.json": {
@@ -160,13 +160,13 @@
     "semantic_hash": ""
   },
   "docs/core-concepts.md": {
-    "mtime": 1787814382.9757257,
-    "ast_hash": "63e40a1408aec75a70301ed4b5b599cd",
+    "mtime": 1786356668.7504365,
+    "ast_hash": "24b6c4e2f5eeafb1ac103bcada1633b7",
     "semantic_hash": ""
   },
   "docs/deployments/overview.md": {
-    "mtime": 1787814436.0370476,
-    "ast_hash": "9d4d49875ddc790322366698c6c9d252",
+    "mtime": 1786893139.006587,
+    "ast_hash": "982daa3bd36a83e6fba18fa1fbd5652f",
     "semantic_hash": ""
   },
   "docs/deployments/rollback-and-redeploy.md": {
@@ -215,18 +215,18 @@
     "semantic_hash": ""
   },
   "docs/intro.mdx": {
-    "mtime": 1787814470.5673733,
-    "ast_hash": "b21ec63c73b7954322fd1ebc58c3ffad",
+    "mtime": 1786893060.1824536,
+    "ast_hash": "81c40bfc8b154b789f8500331d8778a1",
     "semantic_hash": ""
   },
   "docs/microfrontends/canary-releases.md": {
-    "mtime": 1787814427.825952,
-    "ast_hash": "7c8c8f307a64f3f8cc7af8e46e1f4f0a",
+    "mtime": 1786892831.5830429,
+    "ast_hash": "99c035b120bf0b29c28dc72bc0e56d53",
     "semantic_hash": ""
   },
   "docs/microfrontends/create-a-microfrontend.md": {
-    "mtime": 1787814346.8656015,
-    "ast_hash": "dba2b91de27e634b42efe20301b78580",
+    "mtime": 1786474368.7955854,
+    "ast_hash": "08c4b4fcf9162bb3bed90a08b33ab7cc",
     "semantic_hash": ""
   },
   "docs/microfrontends/host-and-remotes.md": {
@@ -240,9 +240,9 @@
     "semantic_hash": ""
   },
   "docs/microfrontends/overview.md": {
-    "mtime": 1787814305.7969558,
-    "ast_hash": "122e0690f847e291223926711b6bd3b9",
-    "semantic_hash": ""
+    "mtime": 1785868930.2810838,
+    "ast_hash": "c978b8d97091d4ff3d048add3c8e2950",
+    "semantic_hash": "c978b8d97091d4ff3d048add3c8e2950"
   },
   "docs/microfrontends/versions-and-builds.md": {
     "mtime": 1786894075.3586173,
@@ -250,14 +250,14 @@
     "semantic_hash": ""
   },
   "docs/project-settings/projects.md": {
-    "mtime": 1787814439.527465,
-    "ast_hash": "c9afadea9f5393331233c41ebb378e15",
-    "semantic_hash": ""
+    "mtime": 1785868930.2817638,
+    "ast_hash": "3d30f270a5b6a264559300677721e655",
+    "semantic_hash": "3d30f270a5b6a264559300677721e655"
   },
   "docs/project-settings/users-and-roles.md": {
-    "mtime": 1787814412.2366023,
-    "ast_hash": "9d095d572f4101d1d0f162ba20539b79",
-    "semantic_hash": ""
+    "mtime": 1785868930.282031,
+    "ast_hash": "1f47709cbcbe14e8002576ef83fa95e3",
+    "semantic_hash": "1f47709cbcbe14e8002576ef83fa95e3"
   },
   "docs/repositories/connect/azure.dev-ops.md": {
     "mtime": 1785868930.282297,
@@ -345,8 +345,8 @@
     "semantic_hash": "161c36bb151a4527d99a95a65f4fdbe9"
   },
   "docs/assets/canary-users.png": {
-    "mtime": 1787818973.0328677,
-    "ast_hash": "cac626d2e1b19e5fce1f782ffd91e138",
+    "mtime": 1786892730.8203976,
+    "ast_hash": "12e4362eaf7de5b56b0a2424fe275520",
     "semantic_hash": ""
   },
   "docs/assets/choose-a-template.png": {
@@ -435,14 +435,14 @@
     "semantic_hash": "093984f4cb09e30cb2bedf6f619c9564"
   },
   "docs/assets/microfrontend-canary.png": {
-    "mtime": 1787818930.9160726,
-    "ast_hash": "6fa5af2efe3017e92b2960ae6fd541c4",
-    "semantic_hash": ""
+    "mtime": 1785868930.2537744,
+    "ast_hash": "8a4d9e464a8eaaeecf41f3b7b8abcbba",
+    "semantic_hash": "8a4d9e464a8eaaeecf41f3b7b8abcbba"
   },
   "docs/assets/microfrontend-form.png": {
-    "mtime": 1787818915.042556,
-    "ast_hash": "02caf1ea6bfbe01d92ce192a7cddf4eb",
-    "semantic_hash": ""
+    "mtime": 1785868930.2548664,
+    "ast_hash": "175a1ae61ca434b6966a71c121ffa432",
+    "semantic_hash": "175a1ae61ca434b6966a71c121ffa432"
   },
   "docs/assets/microfrontend-hosting-type.png": {
     "mtime": 1785868930.2556727,
@@ -460,14 +460,14 @@
     "semantic_hash": "f974be58b4e90918e792b7bf1bfc0436"
   },
   "docs/assets/microfrontends-grid-view.png": {
-    "mtime": 1787818627.3503122,
-    "ast_hash": "c45eb4bca6d08e39a53c3d81960ab5a4",
-    "semantic_hash": ""
+    "mtime": 1785868930.2593641,
+    "ast_hash": "0058a89b322503464d4db130b7563f0a",
+    "semantic_hash": "0058a89b322503464d4db130b7563f0a"
   },
   "docs/assets/microfrontends-table-view.png": {
-    "mtime": 1787818629.4828281,
-    "ast_hash": "5608f4c170fa9033012aaf35746e06e6",
-    "semantic_hash": ""
+    "mtime": 1785868930.2603354,
+    "ast_hash": "9d81b899630e048548a51522d86165be",
+    "semantic_hash": "9d81b899630e048548a51522d86165be"
   },
   "docs/assets/project-settings.png": {
     "mtime": 1785868930.2614152,
@@ -585,8 +585,8 @@
     "semantic_hash": ""
   },
   "docs/quick-start.mdx": {
-    "mtime": 1787814449.8242347,
-    "ast_hash": "5ffb9db9861df28fc0fe1bd8758b3fe2",
+    "mtime": 1786352812.8192587,
+    "ast_hash": "0689899669b10797077c6e821f6a0dac",
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
@@ -640,8 +640,8 @@
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
-    "mtime": 1787814188.394629,
-    "ast_hash": "0583b43224a1d35f2859b8f3b38ab459",
+    "mtime": 1786983510.8803718,
+    "ast_hash": "e9e5721a5a044bfcedf6a9a0eb63d1f9",
     "semantic_hash": ""
   },
   "docs/assets/repository-import-action.png": {
@@ -652,86 +652,6 @@
   "docs/assets/repository-import-dialog.png": {
     "mtime": 1786983473.6817214,
     "ast_hash": "8893b9681e9e69dc2785048ce272f82b",
-    "semantic_hash": ""
-  },
-  "docs/organizations/_category_.json": {
-    "mtime": 1787814186.307113,
-    "ast_hash": "8938aca515d5b7a89d32379f65c180ad",
-    "semantic_hash": ""
-  },
-  "docs/organizations/managing-an-organization.md": {
-    "mtime": 1787819005.226125,
-    "ast_hash": "d0c69addc844fe6d13c8402f567fcae2",
-    "semantic_hash": ""
-  },
-  "docs/organizations/overview.md": {
-    "mtime": 1787814208.6148536,
-    "ast_hash": "df372e5f244f7502334d42c95679c0b1",
-    "semantic_hash": ""
-  },
-  "docs/organizations/roles-and-visibility.md": {
-    "mtime": 1787818239.7624285,
-    "ast_hash": "843d0a9063e8f4a9d206ba8c2241c0d5",
-    "semantic_hash": ""
-  },
-  "docs/organizations/upgrading-to-organizations.md": {
-    "mtime": 1787814339.3302338,
-    "ast_hash": "d499ef50f482446f86cfd8e0d7bec6af",
-    "semantic_hash": ""
-  },
-  "docs/assets/deployment-canary-cards.png": {
-    "mtime": 1787818967.717788,
-    "ast_hash": "de21f0d5b09a726654e1ad42912f5eab",
-    "semantic_hash": ""
-  },
-  "docs/assets/microfrontend-canary-card.png": {
-    "mtime": 1787818627.3853228,
-    "ast_hash": "6b283c8b48abd3acb27dfccb19ed80d7",
-    "semantic_hash": ""
-  },
-  "docs/assets/microfrontend-canary-type.png": {
-    "mtime": 1787818916.1285968,
-    "ast_hash": "06115a77982045007114af1a1b0cb979",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-create.png": {
-    "mtime": 1787819039.1049063,
-    "ast_hash": "989670b14640c824a911dccfabefbb93",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-danger-zone.png": {
-    "mtime": 1787819039.114787,
-    "ast_hash": "041c495bc62ba272b9a4310139abc10a",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-details.png": {
-    "mtime": 1787819039.1073658,
-    "ast_hash": "4c5ffcbdf60ddc34ca6eec5cccb89765",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-invite.png": {
-    "mtime": 1787819039.1174858,
-    "ast_hash": "e51ea63fded1c9f025485c0f2d586168",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-members.png": {
-    "mtime": 1787819039.109854,
-    "ast_hash": "612357583ed74f6937614fe6f548d53c",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-menu.png": {
-    "mtime": 1787819039.0997694,
-    "ast_hash": "413632794fddccd474fe5e7fa29ceadd",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-pending-invitations.png": {
-    "mtime": 1787819039.1122618,
-    "ast_hash": "8b3d71771cdf0789f4582ca1e9b110af",
-    "semantic_hash": ""
-  },
-  "docs/assets/organization-switcher.png": {
-    "mtime": 1787819039.1023884,
-    "ast_hash": "4a87bf9b8aefad994241c110b7ffb474",
     "semantic_hash": ""
   }
 }

@@ -1,16 +1,16 @@
-# Graph Report - documentation  (2026-08-27)
+# Graph Report - documentation  (2026-08-17)
 
 ## Corpus Check
-- 80 files · ~445,432 words
+- 75 files · ~439,190 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1047 nodes · 1156 edges · 175 communities (104 shown, 71 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.81)
+- 1012 nodes · 1107 edges · 173 communities (102 shown, 71 thin omitted)
+- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fde34797`
+- Built from commit: `fea269cd`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -186,13 +186,11 @@
 - [[_COMMUNITY_Dependency analysis and peer dependency alignment|Dependency analysis and peer dependency alignment]]
 - [[_COMMUNITY_Self-host on Kubernetes with Helm|Self-host on Kubernetes with Helm]]
 - [[_COMMUNITY_Self-host with Docker Compose|Self-host with Docker Compose]]
-- [[_COMMUNITY_Upgrading to organizations|Upgrading to organizations]]
-- [[_COMMUNITY_Organizations overview|Organizations overview]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `scripts` - 12 edges
-2. `The object model` - 11 edges
-3. `Store builds on Google Cloud Storage` - 10 edges
+2. `Store builds on Google Cloud Storage` - 10 edges
+3. `The object model` - 10 edges
 4. `Canary releases for microfrontends` - 10 edges
 5. `Store builds on Amazon S3` - 9 edges
 6. `Storage overview` - 9 edges
@@ -251,11 +249,11 @@
 - **First Storage Creation Onboarding Flow** — docs_assets_storages_empty_storages_page, docs_assets_storages_empty_empty_state_pattern, docs_assets_storages_empty_new_storage_cta, docs_assets_storages_empty_first_storage_onboarding_rationale [INFERRED 0.85]
 - **Project Members screen: manage members via invite, role badges, and card listing** — docs_assets_team_members_project_members_management, docs_assets_team_members_invite_user_action, docs_assets_team_members_owner_role, docs_assets_team_members_member_card_layout [EXTRACTED 1.00]
 
-## Communities (175 total, 71 thin omitted)
+## Communities (173 total, 71 thin omitted)
 
 ### Community 1 - "Deployments, Storage & CI/CD Docs"
-Cohesion: 0.14
-Nodes (14): API key, Code repository, Core concepts and object model, Deployment, Environment, Environment variable, Members and roles, Microfrontend (+6 more)
+Cohesion: 0.15
+Nodes (13): API key, Code repository, Core concepts and object model, Deployment, Environment, Environment variable, Members and roles, Microfrontend (+5 more)
 
 ### Community 2 - "Docusaurus Package Config"
 Cohesion: 0.05
@@ -474,12 +472,12 @@ Cohesion: 0.13
 Nodes (15): Auth0, Available Variables, Azure Entra ID, Container environment variables, Database Configuration, Email Configuration (SMTP), General Configuration, GitHub (code repositories) (+7 more)
 
 ### Community 62 - "Store builds on Azure Blob Storage"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (11): Option A — Connection string, Option B — Shared key, Option C — Azure AD (recommended), Prerequisites, Secret rotation, Step 1: Create the storage account and container, Step 2: Choose an authentication method, Step 3: Add the storage in MFE Orchestrator (+3 more)
 
 ### Community 63 - "Store builds on Google Cloud Storage"
-Cohesion: 0.07
-Nodes (28): Cost notes, Prerequisites, Step 1: Create the bucket, Step 2: Create an IAM policy, Step 3: Create an IAM user and access key, Step 4: Add the storage in MFE Orchestrator, Step 5: Point a microfrontend at it, Store builds on Amazon S3 (+20 more)
+Cohesion: 0.20
+Nodes (10): Key rotation, Prerequisites, Step 1: Create the bucket, Step 2: Create a service account, Step 3: Grant access on the bucket, Step 4: Create a JSON key, Step 5: Add the storage in MFE Orchestrator, Step 6: Point a microfrontend at it (+2 more)
 
 ### Community 64 - "Serve API reference"
 Cohesion: 0.15
@@ -491,11 +489,11 @@ Nodes (10): 1. Clone the Repository, 2. Initialize Terraform, 3. Review the Plan
 
 ### Community 66 - "Store builds on Amazon S3"
 Cohesion: 0.22
-Nodes (9): Creating an organization, Danger zone, Details, Inviting a member, Managing an organization, Members, Switching organization, The header menu (+1 more)
+Nodes (9): Cost notes, Prerequisites, Step 1: Create the bucket, Step 2: Create an IAM policy, Step 3: Create an IAM user and access key, Step 4: Add the storage in MFE Orchestrator, Step 5: Point a microfrontend at it, Store builds on Amazon S3 (+1 more)
 
 ### Community 67 - "Storage overview"
-Cohesion: 0.25
-Nodes (8): How the two levels combine, Inviting to a project creates a membership in the organization, Organization roles and project visibility, Pending invitations are not memberships, Relation to project roles, Removing somebody from the organization, The three organization roles, What a Member actually gets
+Cohesion: 0.22
+Nodes (9): Adding a storage, Credentials and least privilege, Housekeeping, How it works, Path layout, Storage overview, Supported providers, Using a storage (+1 more)
 
 ### Community 68 - "Enable SSO with Auth0"
 Cohesion: 0.22
@@ -653,33 +651,25 @@ Nodes (9): Configuration, Health and scaling, Image version, Ingress, Install, M
 Cohesion: 0.50
 Nodes (4): Before you call it production, Prerequisites, Self-host with Docker Compose, Start the configuration container
 
-### Community 173 - "Upgrading to organizations"
-Cohesion: 0.29
-Nodes (7): After the upgrade, Endpoints that changed, How roles are converted, Projects with no members at all, Safe to run, safe to interrupt, Upgrading to organizations, What the migration does
-
-### Community 174 - "Organizations overview"
-Cohesion: 0.33
-Nodes (6): One organization at a time, Organizations overview, Where it sits in the object model, Where to go next, Why the level exists, Your first organization
-
 ## Knowledge Gaps
-- **593 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+588 more)
+- **568 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+563 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **71 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Connect an Azure DevOps repository` connect `Connect an Azure DevOps repository` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **Why does `Connect a GitLab repository` connect `Connect a GitLab repository` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `Container environment variables` connect `Available Variables` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `Import repositories as microfrontends` connect `Import repositories as microfrontends` to `Canary Releases & Product Concepts`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `Deploy with Azure Pipelines` connect `Deploy with Azure Pipelines` to `Canary Releases & Product Concepts`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **What connects `config`, `name`, `version` to the rest of the system?**
-  _617 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Canary Releases & Product Concepts` be split into smaller, more focused modules?**
-  _Cohesion score 0.1488095238095238 - nodes in this community are weakly interconnected._
-- **Should `Deployments, Storage & CI/CD Docs` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+  _592 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Docusaurus Package Config` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
+- **Should `Docs Landing Page Components` be split into smaller, more focused modules?**
+  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
+- **Should `Connect a GitLab repository` be split into smaller, more focused modules?**
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
