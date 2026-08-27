@@ -1622,6 +1622,136 @@
       "norm_label": "deployment"
     },
     {
+      "label": "email-flows.md",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_account_email_flows",
+      "community": 0,
+      "norm_label": "email-flows.md"
+    },
+    {
+      "label": "Activation, password reset and invitations",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_activation_password_reset_and_invitations",
+      "community": 177,
+      "norm_label": "activation, password reset and invitations"
+    },
+    {
+      "label": "Registration and activation",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_registration_and_activation",
+      "community": 177,
+      "norm_label": "registration and activation"
+    },
+    {
+      "label": "Recovering a password",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_recovering_a_password",
+      "community": 177,
+      "norm_label": "recovering a password"
+    },
+    {
+      "label": "Accepting an invitation",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_accepting_an_invitation",
+      "community": 177,
+      "norm_label": "accepting an invitation"
+    },
+    {
+      "label": "When the link does not work",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L128",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_when_the_link_does_not_work",
+      "community": 177,
+      "norm_label": "when the link does not work"
+    },
+    {
+      "label": "The route that needs no email",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L149",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_the_route_that_needs_no_email",
+      "community": 177,
+      "norm_label": "the route that needs no email"
+    },
+    {
+      "label": "What the platform sends, and when",
+      "file_type": "document",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L156",
+      "_origin": "ast",
+      "id": "docs_account_email_flows_what_the_platform_sends_and_when",
+      "community": 177,
+      "norm_label": "what the platform sends, and when"
+    },
+    {
+      "label": "profile.md",
+      "file_type": "document",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_account_profile",
+      "community": 0,
+      "norm_label": "profile.md"
+    },
+    {
+      "label": "Your profile",
+      "file_type": "document",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_account_profile_your_profile",
+      "community": 0,
+      "norm_label": "your profile"
+    },
+    {
+      "label": "Profile picture",
+      "file_type": "document",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "docs_account_profile_profile_picture",
+      "community": 0,
+      "norm_label": "profile picture"
+    },
+    {
+      "label": "Personal data",
+      "file_type": "document",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "docs_account_profile_personal_data",
+      "community": 0,
+      "norm_label": "personal data"
+    },
+    {
+      "label": "Marketing communications",
+      "file_type": "document",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "docs_account_profile_marketing_communications",
+      "community": 0,
+      "norm_label": "marketing communications"
+    },
+    {
       "label": "architecture.md",
       "file_type": "document",
       "source_file": "docs/architecture.md",
@@ -1698,7 +1828,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_buckets_aws_s3",
-      "community": 0,
+      "community": 175,
       "norm_label": "aws-s3.md"
     },
     {
@@ -1798,7 +1928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_buckets_azure_blob_storage",
-      "community": 0,
+      "community": 62,
       "norm_label": "azure-blob-storage.md"
     },
     {
@@ -1918,7 +2048,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_buckets_google_cloud_storage",
-      "community": 0,
+      "community": 63,
       "norm_label": "google-cloud-storage.md"
     },
     {
@@ -4555,7 +4685,7 @@
       "label": "Danger zone",
       "file_type": "document",
       "source_file": "docs/organizations/managing-an-organization.md",
-      "source_location": "L147",
+      "source_location": "L148",
       "_origin": "ast",
       "id": "docs_organizations_managing_an_organization_danger_zone",
       "community": 66,
@@ -4965,7 +5095,7 @@
       "label": "Managing invitations",
       "file_type": "document",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L114",
+      "source_location": "L116",
       "_origin": "ast",
       "id": "docs_project_settings_users_and_roles_managing_invitations",
       "community": 80,
@@ -4975,7 +5105,7 @@
       "label": "Changing a role",
       "file_type": "document",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L133",
+      "source_location": "L135",
       "_origin": "ast",
       "id": "docs_project_settings_users_and_roles_changing_a_role",
       "community": 80,
@@ -4985,7 +5115,7 @@
       "label": "Removing a member",
       "file_type": "document",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L145",
+      "source_location": "L147",
       "_origin": "ast",
       "id": "docs_project_settings_users_and_roles_removing_a_member",
       "community": 80,
@@ -4995,7 +5125,7 @@
       "label": "Authentication",
       "file_type": "document",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L171",
+      "source_location": "L173",
       "_origin": "ast",
       "id": "docs_project_settings_users_and_roles_authentication",
       "community": 80,
@@ -5005,7 +5135,7 @@
       "label": "Machine access",
       "file_type": "document",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L189",
+      "source_location": "L191",
       "_origin": "ast",
       "id": "docs_project_settings_users_and_roles_machine_access",
       "community": 80,
@@ -5848,7 +5978,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_self_host_with_docker",
-      "community": 167,
+      "community": 175,
       "norm_label": "self-host with docker"
     },
     {
@@ -5858,7 +5988,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_prerequisites",
-      "community": 167,
+      "community": 175,
       "norm_label": "prerequisites"
     },
     {
@@ -5868,7 +5998,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_which_image",
-      "community": 167,
+      "community": 175,
       "norm_label": "which image"
     },
     {
@@ -5878,7 +6008,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_start_the_all_in_one_container",
-      "community": 167,
+      "community": 175,
       "norm_label": "start the all-in-one container"
     },
     {
@@ -5888,7 +6018,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_start_the_standard_container",
-      "community": 167,
+      "community": 175,
       "norm_label": "start the standard container"
     },
     {
@@ -5898,7 +6028,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_image_tags",
-      "community": 167,
+      "community": 175,
       "norm_label": "image tags"
     },
     {
@@ -5908,7 +6038,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_container_variables",
-      "community": 167,
+      "community": 175,
       "norm_label": "container variables"
     },
     {
@@ -6202,6 +6332,66 @@
       "norm_label": "troubleshooting"
     },
     {
+      "label": "encryption-at-rest.md",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_self_hosting_encryption_at_rest",
+      "community": 0,
+      "norm_label": "encryption-at-rest.md"
+    },
+    {
+      "label": "Encryption of stored credentials",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_self_hosting_encryption_at_rest_encryption_of_stored_credentials",
+      "community": 178,
+      "norm_label": "encryption of stored credentials"
+    },
+    {
+      "label": "What this protects against, and what it does not",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "docs_self_hosting_encryption_at_rest_what_this_protects_against_and_what_it_does_not",
+      "community": 178,
+      "norm_label": "what this protects against, and what it does not"
+    },
+    {
+      "label": "What is covered",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "docs_self_hosting_encryption_at_rest_what_is_covered",
+      "community": 178,
+      "norm_label": "what is covered"
+    },
+    {
+      "label": "In the API",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L83",
+      "_origin": "ast",
+      "id": "docs_self_hosting_encryption_at_rest_in_the_api",
+      "community": 178,
+      "norm_label": "in the api"
+    },
+    {
+      "label": "Rotating or losing the key",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "docs_self_hosting_encryption_at_rest_rotating_or_losing_the_key",
+      "community": 178,
+      "norm_label": "rotating or losing the key"
+    },
+    {
       "label": "environment-variables.md",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
@@ -6295,7 +6485,7 @@
       "label": "Security & Authentication",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L80",
+      "source_location": "L90",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_security_authentication",
       "community": 61,
@@ -6305,7 +6495,7 @@
       "label": "JWT",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L82",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_jwt",
       "community": 61,
@@ -6315,7 +6505,7 @@
       "label": "Secrets encryption",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L93",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_secrets_encryption",
       "community": 61,
@@ -6325,7 +6515,7 @@
       "label": "Auth0",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L113",
+      "source_location": "L123",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_auth0",
       "community": 61,
@@ -6335,7 +6525,7 @@
       "label": "Azure Entra ID",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L121",
+      "source_location": "L131",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_azure_entra_id",
       "community": 61,
@@ -6345,7 +6535,7 @@
       "label": "Google OAuth",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L131",
+      "source_location": "L141",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_google_oauth",
       "community": 61,
@@ -6355,7 +6545,7 @@
       "label": "GitHub (code repositories)",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L141",
+      "source_location": "L151",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_github_code_repositories",
       "community": 61,
@@ -6365,7 +6555,7 @@
       "label": "Observability and telemetry",
       "file_type": "document",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L147",
+      "source_location": "L157",
       "_origin": "ast",
       "id": "docs_self_hosting_environment_variables_observability_and_telemetry",
       "community": 61,
@@ -6470,6 +6660,136 @@
       "id": "docs_self_hosting_helm_health_and_scaling",
       "community": 171,
       "norm_label": "health and scaling"
+    },
+    {
+      "label": "telemetry.md",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry",
+      "community": 0,
+      "norm_label": "telemetry.md"
+    },
+    {
+      "label": "Anonymous telemetry",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "community": 167,
+      "norm_label": "anonymous telemetry"
+    },
+    {
+      "label": "Why it exists",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_why_it_exists",
+      "community": 167,
+      "norm_label": "why it exists"
+    },
+    {
+      "label": "What is sent",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_what_is_sent",
+      "community": 167,
+      "norm_label": "what is sent"
+    },
+    {
+      "label": "What is never sent",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_what_is_never_sent",
+      "community": 167,
+      "norm_label": "what is never sent"
+    },
+    {
+      "label": "When and where",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_when_and_where",
+      "community": 167,
+      "norm_label": "when and where"
+    },
+    {
+      "label": "Pointing it at your own collector",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L103",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_pointing_it_at_your_own_collector",
+      "community": 167,
+      "norm_label": "pointing it at your own collector"
+    },
+    {
+      "label": "How to turn it off",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_how_to_turn_it_off",
+      "community": 167,
+      "norm_label": "how to turn it off"
+    },
+    {
+      "label": "Full precedence",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_full_precedence",
+      "community": 167,
+      "norm_label": "full precedence"
+    },
+    {
+      "label": "The variables",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L153",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_the_variables",
+      "community": 167,
+      "norm_label": "the variables"
+    },
+    {
+      "label": "How to check all of this yourself",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L163",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_how_to_check_all_of_this_yourself",
+      "community": 167,
+      "norm_label": "how to check all of this yourself"
+    },
+    {
+      "label": "The installation id",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L207",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_the_installation_id",
+      "community": 167,
+      "norm_label": "the installation id"
+    },
+    {
+      "label": "The commitments behind it",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L220",
+      "_origin": "ast",
+      "id": "docs_self_hosting_telemetry_the_commitments_behind_it",
+      "community": 167,
+      "norm_label": "the commitments behind it"
     },
     {
       "label": "terraform.md",
@@ -13666,6 +13986,166 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_account_email_flows",
+      "target": "docs_account_email_flows_activation_password_reset_and_invitations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L172",
+      "weight": 1.0,
+      "source": "docs_account_email_flows",
+      "target": "docs_account_profile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "docs_account_email_flows",
+      "target": "docs_organizations_managing_an_organization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "docs_account_email_flows",
+      "target": "docs_project_settings_users_and_roles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "docs_account_email_flows",
+      "target": "docs_self_hosting_environment_variables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "docs_account_email_flows_activation_password_reset_and_invitations",
+      "target": "docs_account_email_flows_accepting_an_invitation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "docs_account_email_flows_activation_password_reset_and_invitations",
+      "target": "docs_account_email_flows_recovering_a_password",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "docs_account_email_flows_activation_password_reset_and_invitations",
+      "target": "docs_account_email_flows_registration_and_activation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "docs_account_email_flows_activation_password_reset_and_invitations",
+      "target": "docs_account_email_flows_what_the_platform_sends_and_when",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "docs_account_email_flows_accepting_an_invitation",
+      "target": "docs_account_email_flows_the_route_that_needs_no_email",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "docs_account_email_flows_accepting_an_invitation",
+      "target": "docs_account_email_flows_when_the_link_does_not_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_account_profile",
+      "target": "docs_account_profile_your_profile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/environment-variables.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "docs_self_hosting_environment_variables",
+      "target": "docs_account_profile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "docs_account_profile_your_profile",
+      "target": "docs_account_profile_marketing_communications",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "docs_account_profile_your_profile",
+      "target": "docs_account_profile_personal_data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/profile.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "docs_account_profile_your_profile",
+      "target": "docs_account_profile_profile_picture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/architecture.md",
       "source_location": "L9",
       "weight": 1.0,
@@ -14274,6 +14754,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest",
+      "target": "docs_buckets_overview",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/buckets/overview.md",
@@ -14467,7 +14957,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L165",
+      "source_location": "L167",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles",
       "target": "docs_ci_cd_api_keys",
@@ -15934,6 +16424,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest",
+      "target": "docs_environments_environment_variables",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/environments/environment-variables.md",
@@ -16800,6 +17300,16 @@
       "source_location": "L113",
       "weight": 1.0,
       "source": "docs_microfrontends_versions_and_builds",
+      "target": "docs_integration_serve_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest",
       "target": "docs_integration_serve_api",
       "confidence_score": 1.0
     },
@@ -17737,7 +18247,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/organizations/managing-an-organization.md",
-      "source_location": "L157",
+      "source_location": "L158",
       "weight": 1.0,
       "source": "docs_organizations_managing_an_organization",
       "target": "docs_project_settings_projects",
@@ -17747,7 +18257,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/organizations/managing-an-organization.md",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0,
       "source": "docs_organizations_managing_an_organization",
       "target": "docs_self_hosting_environment_variables",
@@ -17787,7 +18297,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L159",
+      "source_location": "L161",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles",
       "target": "docs_organizations_managing_an_organization",
@@ -17837,7 +18347,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/organizations/managing-an-organization.md",
-      "source_location": "L147",
+      "source_location": "L148",
       "weight": 1.0,
       "source": "docs_organizations_managing_an_organization_the_organization_page",
       "target": "docs_organizations_managing_an_organization_danger_zone",
@@ -18287,7 +18797,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L184",
+      "source_location": "L186",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles",
       "target": "docs_self_hosting_enable_sso_google",
@@ -18297,7 +18807,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L111",
+      "source_location": "L113",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles",
       "target": "docs_self_hosting_environment_variables",
@@ -18307,7 +18817,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L171",
+      "source_location": "L173",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles_project_members_and_roles",
       "target": "docs_project_settings_users_and_roles_authentication",
@@ -18317,7 +18827,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L133",
+      "source_location": "L135",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles_project_members_and_roles",
       "target": "docs_project_settings_users_and_roles_changing_a_role",
@@ -18337,7 +18847,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L189",
+      "source_location": "L191",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles_project_members_and_roles",
       "target": "docs_project_settings_users_and_roles_machine_access",
@@ -18347,7 +18857,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L114",
+      "source_location": "L116",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles_project_members_and_roles",
       "target": "docs_project_settings_users_and_roles_managing_invitations",
@@ -18357,7 +18867,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/project-settings/users-and-roles.md",
-      "source_location": "L145",
+      "source_location": "L147",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles_project_members_and_roles",
       "target": "docs_project_settings_users_and_roles_removing_a_member",
@@ -19246,6 +19756,16 @@
     {
       "relation": "references",
       "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry",
+      "target": "docs_self_hosting_docker_compose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/terraform.md",
       "source_location": "L113",
       "weight": 1.0,
@@ -19407,7 +19927,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L119",
+      "source_location": "L129",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables",
       "target": "docs_self_hosting_enable_sso_auth0",
@@ -19666,6 +20186,66 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest",
+      "target": "docs_self_hosting_encryption_at_rest_encryption_of_stored_credentials",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/environment-variables.md",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "docs_self_hosting_environment_variables",
+      "target": "docs_self_hosting_encryption_at_rest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest_encryption_of_stored_credentials",
+      "target": "docs_self_hosting_encryption_at_rest_in_the_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest_encryption_of_stored_credentials",
+      "target": "docs_self_hosting_encryption_at_rest_rotating_or_losing_the_key",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest_encryption_of_stored_credentials",
+      "target": "docs_self_hosting_encryption_at_rest_what_is_covered",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/encryption-at-rest.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "docs_self_hosting_encryption_at_rest_encryption_of_stored_credentials",
+      "target": "docs_self_hosting_encryption_at_rest_what_this_protects_against_and_what_it_does_not",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
       "source_location": "L9",
       "weight": 1.0,
@@ -19681,6 +20261,16 @@
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables",
       "target": "docs_self_hosting_helm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/environment-variables.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "docs_self_hosting_environment_variables",
+      "target": "docs_self_hosting_telemetry",
       "confidence_score": 1.0
     },
     {
@@ -19757,7 +20347,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L147",
+      "source_location": "L157",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_available_variables",
       "target": "docs_self_hosting_environment_variables_observability_and_telemetry",
@@ -19767,7 +20357,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L80",
+      "source_location": "L90",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_available_variables",
       "target": "docs_self_hosting_environment_variables_security_authentication",
@@ -19797,7 +20387,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L113",
+      "source_location": "L123",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_security_authentication",
       "target": "docs_self_hosting_environment_variables_auth0",
@@ -19807,7 +20397,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L121",
+      "source_location": "L131",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_security_authentication",
       "target": "docs_self_hosting_environment_variables_azure_entra_id",
@@ -19817,7 +20407,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L141",
+      "source_location": "L151",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_security_authentication",
       "target": "docs_self_hosting_environment_variables_github_code_repositories",
@@ -19827,7 +20417,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L131",
+      "source_location": "L141",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_security_authentication",
       "target": "docs_self_hosting_environment_variables_google_oauth",
@@ -19837,7 +20427,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L82",
+      "source_location": "L92",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_security_authentication",
       "target": "docs_self_hosting_environment_variables_jwt",
@@ -19847,7 +20437,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
-      "source_location": "L93",
+      "source_location": "L103",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables_security_authentication",
       "target": "docs_self_hosting_environment_variables_secrets_encryption",
@@ -19951,6 +20541,126 @@
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_storage_of_the_uploaded_microfrontends",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry",
+      "target": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L163",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_how_to_check_all_of_this_yourself",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_how_to_turn_it_off",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L220",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_the_commitments_behind_it",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L207",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_the_installation_id",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_what_is_never_sent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_what_is_sent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_when_and_where",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_anonymous_telemetry",
+      "target": "docs_self_hosting_telemetry_why_it_exists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_when_and_where",
+      "target": "docs_self_hosting_telemetry_pointing_it_at_your_own_collector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_how_to_turn_it_off",
+      "target": "docs_self_hosting_telemetry_full_precedence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/telemetry.md",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "docs_self_hosting_telemetry_how_to_turn_it_off",
+      "target": "docs_self_hosting_telemetry_the_variables",
       "confidence_score": 1.0
     },
     {
@@ -25301,5 +26011,5 @@
       "weight": 1.0
     }
   ],
-  "built_at_commit": "c3ceb6c70fa052c4bc3b2be09ea65cd656e73c45"
+  "built_at_commit": "7faab3a1b6ec4f258bbe73d319240f428add0571"
 }
