@@ -47,8 +47,8 @@ it — the platform logs a warning and does not connect, it does not fall back t
 | `ALLOWED_ORIGINS` | *(empty)* | List of allowed URLs for cross-origin requests comma separated. |
 | `ALLOWED_SERVE_ORIGINS` | *(falls back to `ALLOWED_ORIGINS`)* | The same list, applied only to the `/serve/*` endpoints your host applications call. |
 | `RATE_LIMIT_MAX` | `100` | Requests per IP per minute. An empty value fails validation — leave it unset to keep the default. |
-| `MARKETING_OPT_IN_ENABLED` | `false` | If `true`, the registration form collects a marketing consent, which the profile page can then change. |
-| `MARKETING_OPT_IN_VERSION` | `1` | Version of the consent text, stored together with the consent. |
+| `MARKETING_OPT_IN_ENABLED` | `false` | If `true`, the registration form collects a marketing consent, which the [profile page](../account/profile.md#marketing-communications) can then change. The platform records the consent and never sends a commercial email of its own. |
+| `MARKETING_OPT_IN_VERSION` | `1` | Version of the consent text, stored together with the consent, so an old consent stays attributable to the wording it was given for. |
 | `NPM_REGISTRY_URL` | `https://registry.npmjs.org` | Registry queried by the dependency analysis for published versions. |
 
 ### Database Configuration
@@ -76,6 +76,16 @@ it — the platform logs a warning and does not connect, it does not fall back t
 | `EMAIL_SMTP_USER` | *(empty)* | Username for SMTP authentication. |
 | `EMAIL_SMTP_PASSWORD` | *(empty)* | Password for SMTP authentication. |
 | `EMAIL_SMTP_FROM` | *(no default)* | Sender email address, for example `no-reply@example.com`. |
+
+:::danger Five console screens exist only because these are set
+Account activation, password recovery, password reset and both invitation acceptance screens are all
+reached through a token delivered by email, and by no other means. With `EMAIL_SMTP_HOST` unset an
+installation cannot activate an account, cannot reset a password and cannot confirm an invitation —
+and the password reset reports success while sending nothing.
+
+[Activation, password reset and invitations](../account/email-flows.md) sets out what each flow does
+in that state.
+:::
 
 ### Security & Authentication
 
@@ -106,9 +116,9 @@ Generate one with `openssl rand -base64 32`. Two things to know before you set i
   same applies to changing a key once values have been written with it: the old key is what reads
   them back.
 
-The full treatment, including the migration of values written before the key existed, is in the
-product's own
-[`docs/SECRETS.md`](https://github.com/mfe-orchestrator/mfe-orchestrator/blob/main/docs/SECRETS.md).
+The full treatment — the threat model, the exact list of encrypted fields, why global variables stay
+in the clear on purpose, and what losing the key costs — is on
+[Encryption at rest](./encryption-at-rest.md).
 
 #### Auth0
 | Variable | Default Value | Description |
@@ -147,7 +157,9 @@ product's own
 ### Observability and telemetry
 
 Self-hosted installations send one anonymous ping per day — aggregate counters only, no names, no
-URLs, no personal data — and it can be turned off with any of the three switches below.
+URLs, no personal data — and it can be turned off with any of the three switches below. The exact
+payload, the full precedence of the switches and the endpoint that shows what your own installation
+would send are on [Telemetry](./telemetry.md).
 
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|

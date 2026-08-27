@@ -87,7 +87,9 @@ deployment.
    ![The invite dialog, asking for an email address and a role](../assets/invite-user-dialog.png)
 
 An email goes out with an invitation link. The invitee follows it, signs in or registers, and joins
-the project with the role you chose.
+the project with the role you chose — see
+[Accepting an invitation](../account/email-flows.md#accepting-an-invitation) for the screen they land
+on and how long the link lives.
 
 :::info The invitation reaches the organization too
 A project sits inside an organization, so inviting somebody to a project also adds them to that

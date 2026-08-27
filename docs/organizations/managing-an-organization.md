@@ -124,7 +124,8 @@ project of the organization** with it.
 ![The invite a user to the organization dialog, with an email field and a role selector](../assets/organization-invite.png)
 
 Enter an email address, choose a role, and **Send invitation**. If the address has no account yet,
-one is created in an invited state and the invitation email walks them through setting a password.
+one is created in an invited state and the invitation email walks them through setting a password —
+[the screen they land on](../account/email-flows.md#accepting-an-invitation) asks for it.
 
 Invitations wait for an answer in their own table:
 
