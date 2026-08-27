@@ -91,17 +91,24 @@ create an [API key](../ci-cd/api-keys.md) yourself.
 
 ## Editing a microfrontend
 
-Clicking a microfrontend opens the same form in edit mode, organised into sections:
+Clicking a microfrontend opens the same form in edit mode. **Release** sits at the top, outside the
+tabs, because the version and the canary are what decide which bytes a browser gets; everything
+else is behind a tab:
 
-| Section | Contains |
+| Where | Contains |
 | --- | --- |
-| General information | Name, slug, description, version, continuous deployment |
-| Hosting information | Hosting type, entry point, storage or URL |
-| Canary settings | Progressive rollout — see [Canary releases](./canary-releases.md) |
-| Code repository | The linked repository |
-| Danger zone | Delete this microfrontend |
+| Release (above the tabs) | Version, and **Canary Settings** — progressive rollout, see [Canary releases](./canary-releases.md) |
+| General | Name, slug, description, continuous deployment |
+| Hosting | Hosting type, entry point, storage or URL |
+| Repository | The linked repository |
+| Danger Zone | Delete this microfrontend |
 
-![The microfrontend form, with general information, hosting and canary sections](../assets/microfrontend-form.png)
+Switching tab keeps what you typed: every panel stays mounted, so a value entered under **Hosting**
+survives a detour through **General**. A tab whose fields failed validation is marked with a dot,
+and submitting an invalid form jumps to the first one — an error is never hidden behind an inactive
+tab.
+
+![The microfrontend form in edit mode: the Release card with the version and the canary settings above the General, Hosting, Repository and Danger Zone tabs](../assets/microfrontend-form.png)
 
 Remember that edits take effect for your users only after the next
 [deployment](../deployments/overview.md).

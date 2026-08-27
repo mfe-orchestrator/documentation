@@ -15,15 +15,27 @@ to.
 
 ## Enabling a canary
 
-Open the microfrontend, find **Canary Settings** and turn the switch on. The section then asks for
-four things:
+Open the microfrontend. **Release** is the first card of the form and it sits *above* the tabs, so
+it is on screen whichever of **General**, **Hosting**, **Repository** or **Danger Zone** is
+selected: the version and the canary decide which bytes a browser gets, and they are not something
+you should have to go looking for. Under the version, past a divider, is **Canary Settings** and
+its switch.
+
+![The Canary Settings section of the microfrontend form with the switch on, the percentage slider and its presets, the canary type and deployment type selects and the canary version field](../assets/microfrontend-canary.png)
+
+Turned on, the section asks for four things, in this order:
 
 | Field | Meaning |
 | --- | --- |
-| **Canary Type** | Who gets the canary — *Random*, *Session* or *User* |
 | **Canary Percentage** | Share of traffic that should receive the canary, as a slider with 5, 10, 25 and 50 presets. Not asked for by *User*, which enrols people instead of splitting traffic |
+| **Canary Type** | Who gets the canary — *Random*, *Session* or *User* |
 | **Deployment Type** | What the canary is — *Based on Version* or *Based on URL* |
 | **Canary Version** / **Canary URL** | The target, depending on the deployment type |
+
+A sentence under the two selects spells out what the selected type does, because the three names
+are not enough to tell them apart. The percentage has to be between 1 and 100 while the canary is
+enabled — 0 is refused, which is deliberate: a canary configured to reach nobody is a
+misconfiguration and not a way to switch it off. Turning the switch off is.
 
 Canary configuration is part of the microfrontend, so like everything else it is captured in a
 [deployment](../deployments/overview.md) and only becomes live once you deploy. Expanding a
@@ -31,10 +43,20 @@ deployment under **Deployments** shows a card per microfrontend with its stable 
 types, and the canary share — or *Enrolled users*, for a *User* canary, which has no share. It is
 the quickest way to confirm what a deployment will actually do.
 
+![The microfrontend cards of an expanded deployment, each with its stable version, canary share, canary type and deployment type badges and canary version](../assets/deployment-canary-cards.png)
+
+The microfrontends list carries the same information in shorter form. A grid card shows the share
+as a bar with the canary version underneath; the table view gives it a column of its own, next to
+a **Canary Version** column, and says *No canary* for the microfrontends that have none.
+
+![A microfrontend card in grid view showing the canary block: the share as a percentage, a progress bar and the canary version](../assets/microfrontend-canary-card.png)
+
 ## Who — the canary type
 
 The three types answer two different questions, and it is worth being clear about which one you are
 asking.
+
+![The Canary Type select open, showing the three options Random, Session and User](../assets/microfrontend-canary-type.png)
 
 | Canary Type | Who gets the canary | Sticky? |
 | --- | --- | --- |
@@ -189,9 +211,9 @@ deployment under **Deployments** — the active one or any in the history — an
 
 ![The canary users table with every row selected and the bulk enable, disable and remove actions](../assets/canary-users.png)
 
-- **Add** one or more user ids. Paste a list separated by commas, spaces or new lines to enrol a
-  whole group in one go; the input de-duplicates, so a list copied out of a spreadsheet or a query
-  result works as it is.
+- **Add** one or more user ids. Paste a list separated by commas, spaces or new lines — semicolons
+  work too — to enrol a whole group in one go; the input de-duplicates, so a list copied out of a
+  spreadsheet or a query result works as it is.
 - **Toggle** a row between *Canary* and *Excluded* to suspend someone without losing the entry.
 - **Remove** a row to send that person back to the stable version.
 - **Select rows** with the checkboxes to enable, disable or remove all of them at once — the same
@@ -243,8 +265,10 @@ a reload. Resolving your remotes behind your own auth guard avoids the question 
 - **Based on URL canaries cannot be inspected the same way.** The split itself works exactly as
   described — the type decides it, and *Session* is as sticky there as anywhere else — but there is
   no version of ours in play: the host is simply handed one URL or the other. Nothing serves those
-  files, so they carry no `x-mfe-version` header and `?mfeVersion=` has nothing to force. Prefer
-  *Based on Version* when you want to watch a rollout rather than just perform one.
+  files, so they carry no `x-mfe-version` header and `?mfeVersion=` has nothing to force. The
+  manifest is no help either — with no version of ours to report, its `version` field names the
+  microfrontend's stable version whichever of the two URLs it just handed out. Prefer *Based on
+  Version* when you want to watch a rollout rather than just perform one.
 - **The manifest is fetched once per page load and is not retried.** If that request fails, the
   remotes of that page load fail with it; the SDK clears its memo so the next call tries again.
 
@@ -263,9 +287,10 @@ decision you have already made. The presets on the slider exist for that reason.
 matters: every step keeps the browsers already on the canary where they are and only adds new ones,
 so you are never re-running the split on people who have been fine for an hour.
 
-**Roll back by lowering the percentage, not by rewriting the version.** Setting it to 0 and
-deploying takes everyone back to the stable version and keeps the canary configuration around for
-the next attempt. Turning the switch off does the same, more bluntly. For anything worse than a bad
+**Roll back by turning the canary off, not by rewriting the version.** The switch is the stop
+button: the fields keep what you typed, so the next attempt starts from the configuration you
+already had. Lowering the percentage is the gentler version of the same move, but it does not reach
+zero — the form refuses a canary that is enabled and set to 0%. For anything worse than a bad
 canary there is [rollback and redeploy](../deployments/rollback-and-redeploy.md).
 
 **Verify with the header, not by counting.** Before you trust a rollout, load the host twice — once

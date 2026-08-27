@@ -63,7 +63,9 @@ The page has two parts:
 **Active deployment** — the snapshot currently serving this environment, expandable to show:
 
 - **Microfrontends** — one card each, with the version frozen in this snapshot and, when a canary
-  is configured, the share of traffic it takes, its type and its target version or URL
+  is configured, the share of traffic it takes — or *Enrolled users*, for a
+  [*User* canary](../microfrontends/canary-releases.md#who--the-canary-type), which splits nothing
+  — next to its canary type, its deployment type and its target version or URL
 - **Environment variables** — the values frozen in this snapshot
 - **View canary users** — the enrolment list of this deployment
 

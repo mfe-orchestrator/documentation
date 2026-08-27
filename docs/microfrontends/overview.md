@@ -39,8 +39,9 @@ corner:
 
   ![Diagram view: a shell host with catalog, cart and account remotes](../assets/microfrontends-diagram-view.png)
 
-- **Grid view** — a card per microfrontend, showing version, repository, storage and canary
-  badges at a glance.
+- **Grid view** — a card per microfrontend, showing its version, its linked repository and, when
+  one is configured, the canary: the share of traffic it takes as a bar, or *Enrolled users* for a
+  [*User* canary](./canary-releases.md#who--the-canary-type), and the canary version underneath.
 
   ![Grid view: one card per microfrontend](../assets/microfrontends-grid-view.png)
 
@@ -48,7 +49,8 @@ corner:
 
   ![Table view: name, slug, version, hosting and canary in one row per microfrontend](../assets/microfrontends-table-view.png)
 
-You can filter the list by free-text search and by status.
+A free-text search above the views filters the list by name, and the counter next to it says how
+many of the total are showing.
 
 ## Anatomy of a microfrontend
 
