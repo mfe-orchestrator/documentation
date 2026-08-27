@@ -50,7 +50,12 @@ terraform plan
 This shows all resources that will be created, including:
 - Docker networks
 - Docker containers
-- Docker volumes
+- Docker images
+
+There are no `docker_volume` resources: each container gets a **host bind mount** under
+`${path.root}/volumes/` — `volumes/mongodb`, `volumes/redis` and `volumes/mfe-orchestrator` for the
+uploaded microfrontends. The directories are created next to the root module, so the state of the
+installation lives in your working copy and is deleted with it.
 
 Apply the Terraform configuration to deploy the infrastructure:
 
@@ -86,12 +91,26 @@ and one run in three months bring up the same stack:
 
 | Container | Image |
 | --- | --- |
-| MFE Orchestrator | `lory1990/mfe-orchestrator:3.1.0` |
+| MFE Orchestrator | `lory1990/mfe-orchestrator:4.0.0` |
 | MongoDB | `mongo:8-noble` |
 | Redis | `redis:8.0.2-alpine` |
 
 Upgrading is deliberate: change the tag in `terraform/modules/microfronted-orchestrator-hub.tf` and
 apply again.
+
+## Before you call it production
+
+The module is a local development stack, and two of its defaults are unsafe anywhere else:
+
+- **MongoDB credentials are hardcoded.** `terraform/modules/mongo.tf` sets `root` / `example`, and
+  the orchestrator's `NOSQL_DATABASE_URL` names the same pair. Change both, together.
+- **No `JWT_SECRET` is set.** The module passes none, so the backend signs its tokens with the
+  built-in default key — which means anybody who knows it can forge a token for the installation.
+  Add `JWT_SECRET=<a random value>` to the `env` list in
+  `terraform/modules/microfronted-orchestrator-hub.tf`, and a `SECRETS_ENCRYPTION_KEY` beside it if
+  the installation will hold storage credentials or repository tokens.
+
+[Docker Compose](./docker-compose.md) warns about the same two defaults; the reasoning is there.
 
 ## Container Variables
 

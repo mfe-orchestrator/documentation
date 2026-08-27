@@ -79,7 +79,9 @@ The first entries should be your files, not a directory prefix.
 - The microfrontend must already exist in the project, matched by **slug**.
 - The archive is extracted into the version's folder, wherever that microfrontend is
   [hosted](../microfrontends/hosting-options.md) — the platform's own storage or your bucket.
-- Uploading a version that already exists overwrites its files in place.
+- Uploading a version that already exists overwrites its files in place. The target folder is not
+  cleaned first, so a file that was in the previous upload and is absent from the new one survives
+  under the same version and is still served.
 - **Custom URL** microfrontends cannot be uploaded to; the request fails. Publishing is entirely
   yours in that case.
 

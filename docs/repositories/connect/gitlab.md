@@ -114,7 +114,7 @@ In the **Add Repository** dialog, enter the following information:
    - Copy and paste the full token
    - Make sure there are no extra spaces
 
-### 3.2 Test and Save the Connection
+### 3.2 Test the Connection
 
 Before saving, verify that everything is configured correctly clicking on **Test Connection** button
 
@@ -122,7 +122,20 @@ Before saving, verify that everything is configured correctly clicking on **Test
 If the test is successful, you'll see a **green checkmark** and a success message. If it fails, double-check your GitLab URL and PAT.
 :::
 
-1. Once the test is successful, click **Connect GitLab**
+### 3.3 Select the Group
+
+The test does more than validate the token: it returns the groups the token can see, and a **Select
+project** dropdown appears under the green checkmark listing them. Pick the group new microfrontend
+repositories should be created in.
+
+This step is not optional. The field is required and **Connect GitLab** stays disabled until the test
+has succeeded, so the form cannot be submitted without a selection. The group is also what MFE
+Orchestrator needs in order to create the group-level CI/CD variable holding the deploy key — see
+[Deploy with GitLab CI](../../ci-cd/gitlab-ci.md#the-cicd-variable).
+
+### 3.4 Save the Connection
+
+1. With a group selected, click **Connect GitLab**
 2. Your GitLab connection is now active!
 
 ## Troubleshooting
@@ -132,7 +145,7 @@ If the test is successful, you'll see a **green checkmark** and a success messag
 If the connection test fails, check the following:
 
 - **Invalid GitLab URL**: Verify that the GitLab URL is correct (e.g., `https://gitlab.com` for GitLab.com or your self-hosted instance URL)
-- **Insufficient Permissions**: Ensure you selected all three required scopes (api, read_repository, write_repository)
+- **Insufficient Permissions**: Ensure you selected all three required scopes (`api`, `read_user`, `read_repository`)
 - **Expired Token**: Check if your PAT has expired and create a new one if needed
 - **Network Issues**: Verify that you have internet connectivity and can access GitLab
 - **Self-Hosted GitLab**: If using a self-hosted instance, make sure MFE Orchestrator can reach your GitLab server (check firewall rules)
@@ -144,7 +157,7 @@ If you see a permissions error after connecting:
 1. Go back to GitLab - User Settings - Access Tokens
 2. Find your MFE Orchestrator token
 3. Click **Revoke** and create a new token
-4. Ensure all required scopes are selected (api, read_repository, write_repository)
+4. Ensure all required scopes are selected (`api`, `read_user`, `read_repository`)
 5. Update the token in MFE Orchestrator settings
 
 ### Cannot Access My Repositories

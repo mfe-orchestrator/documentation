@@ -48,10 +48,26 @@ Add the following environment variables to your Docker container configuration:
 | Variable Name | Description | Example Value |
 |---------------|-------------|---------------|
 | `GOOGLE_CLIENT_ID` | Client ID from Google Cloud Console | `1234567890-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com` |
+| `GOOGLE_CLIENT_SECRET` | Client secret from the same OAuth client. **Required** | `GOCSPX-…` |
 | `GOOGLE_REDIRECT_URI` | Redirect URI for authentication | `http://localhost:3000/api/auth/callback/google` |
-| `GOOGLE_AUTH_SCOPE` | Required scopes (space-separated) | `https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile` |
-| `GOOGLE_AUTH_HOSTED_DOMAIN` | (Optional) Restrict to specific domain | `yourdomain.com` |
-| `GOOGLE_API_AUDIENCE` | (Optional) API audience for additional APIs | `https://www.googleapis.com/auth/...` |
+
+:::caution `GOOGLE_CLIENT_SECRET` is not optional
+The console signs in with the authorization-code flow: the browser gets a code, the backend exchanges
+it for tokens at `https://oauth2.googleapis.com/token`, and that exchange sends the client secret.
+With the secret missing, the Google consent screen appears and succeeds, and the login then fails at
+the token step — which reads as a broken installation rather than a missing variable.
+:::
+
+### Variables that are read but have no effect
+
+These three are accepted by the configuration schema and passed to the frontend, and nothing acts on
+them. They are listed here so you do not spend time tuning them:
+
+| Variable Name | Why it does nothing |
+|---------------|---------------------|
+| `GOOGLE_AUTH_SCOPE` | The login button requests `openid profile email`, hardcoded in the frontend |
+| `GOOGLE_AUTH_HOSTED_DOMAIN` | Never read. Restrict the Workspace domain in the Google OAuth client instead |
+| `GOOGLE_API_AUDIENCE` | Never read |
 
 ## Step 4: Update Docker Configuration
 
@@ -62,10 +78,8 @@ services:
   mfe-orchestrator:
     environment:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI}
-      - GOOGLE_AUTH_SCOPE=${GOOGLE_AUTH_SCOPE}
-      - GOOGLE_AUTH_HOSTED_DOMAIN=${GOOGLE_AUTH_HOSTED_DOMAIN}
-      - GOOGLE_API_AUDIENCE=${GOOGLE_API_AUDIENCE}
 ```
 
 ## Step 5: Restart Your Application
@@ -81,5 +95,7 @@ docker-compose up -d
 
 - **400: redirect_uri_mismatch**: Ensure the redirect URI in your Google Cloud Console matches exactly with what's in your configuration
 - **403: access_denied**: Verify that the Google OAuth consent screen is properly configured and published
+- **Login succeeds at Google, then fails in the console**: almost always `GOOGLE_CLIENT_SECRET`
+  missing or wrong — the code-for-token exchange is the step that needs it
 - **Invalid client secret**: Ensure the client secret is correct and hasn't expired
 - **Check Docker logs** for any authentication-related errors

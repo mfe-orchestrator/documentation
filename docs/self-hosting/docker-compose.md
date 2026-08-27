@@ -10,7 +10,7 @@ keywords: [docker compose, self-hosting, installation, mongodb, redis]
 
 This page provides instructions to install MFE Orchestrator Hub using Docker Compose.
 
-You can find the official docker repo on [dockerhub](https://hub.docker.com/r/lory1990/mfe-orchestrator-hub)
+You can find the official docker repo on [dockerhub](https://hub.docker.com/r/lory1990/mfe-orchestrator)
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ services:
       retries: 5
 
   mfe-orchestrator:
-    image: lory1990/mfe-orchestrator:3.1.0
+    image: lory1990/mfe-orchestrator:4.0.0
     container_name: mfe-orchestrator
     restart: always
     ports:
@@ -95,11 +95,16 @@ docker compose up -d
 
 ## Before you call it production
 
-- **Pin the version.** The file above names `lory1990/mfe-orchestrator:3.1.0` on purpose: the
+- **Pin the version.** The file above names `lory1990/mfe-orchestrator:4.0.0` on purpose: the
   `latest` tag is rebuilt from the development branches on every push, so it is not a release
   channel. Bump the tag deliberately, when you decide to upgrade. The same goes for `mongo:8.0` and
   `redis:8-alpine`.
 - **Set your own `JWT_SECRET`.** Without it the tokens are signed with the built-in default.
+- **Set a `SECRETS_ENCRYPTION_KEY`.** 32 bytes, base64 or hex — `openssl rand -base64 32`. Without
+  it the credentials a project stores (bucket keys, storage connection strings, repository tokens)
+  are written to MongoDB in the clear, and the backend logs a warning at boot saying so. Keep the
+  value: it is what reads those records back. See
+  [environment variables](./environment-variables.md#secrets-encryption).
 - **Change the MongoDB credentials.** `root` / `example` is a getting-started convenience, and the
   database port is published on the host in this file.
 - **Consider a replica set.** MongoDB offers transactions only on a replica set; on the standalone

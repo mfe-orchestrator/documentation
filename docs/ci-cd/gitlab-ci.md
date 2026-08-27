@@ -128,10 +128,23 @@ deploy:
     - tags
 ```
 
-In a scaffolded repository the two variables are filled in for you — your slug, and the installation
-you created the repository from. Both are plain job variables, so a **project** CI/CD variable of the
-same name wins over them: set `MICROFRONTEND_ORCHESTRATOR_DOMAIN` in the project settings to publish
-somewhere else without touching the YAML.
+:::caution You have to fill these two in yourself
+Unlike the GitHub path, the GitLab scaffolder copies the pipeline in without substituting anything:
+placeholder replacement is present in the code but commented out for GitLab. The committed
+`.gitlab-ci.yml` therefore keeps the literal `%microfrontendSlug%` and `%domain%`, and the first
+tagged pipeline fails on them.
+
+Before your first release, edit the file and replace them:
+
+| Placeholder | Replace with |
+| --- | --- |
+| `%microfrontendSlug%` | The slug of the microfrontend, as it appears in the console |
+| `%domain%` | The API base URL of your installation, e.g. `https://console.example.com` |
+:::
+
+Both are plain job variables, so a **project** CI/CD variable of the same name wins over them: once
+the YAML is correct you can set `MICROFRONTEND_ORCHESTRATOR_DOMAIN` in the project settings to publish
+somewhere else without touching the file again.
 
 Points worth noting:
 
@@ -145,11 +158,20 @@ Points worth noting:
 
 ## The CI/CD variable
 
-The job reads `MICROFRONTEND_ORCHESTRATOR_API_KEY`. For repositories MFE Orchestrator created, this
-already exists as a **group-level** CI/CD variable — created as a `MANAGER` key valid for one year.
+The job reads `MICROFRONTEND_ORCHESTRATOR_API_KEY`. It is created as a **group-level** CI/CD variable
+when you connect the GitLab repository to a project — or edit that connection — not when a
+microfrontend is scaffolded, and it is skipped if a variable of that name already exists in the group.
 
 Group scope means every microfrontend repository in that GitLab group can publish without further
-setup.
+setup. It also means the connection must have a group selected: without a group id the injector
+returns without creating anything.
+
+:::note The key is dated 15 days out, and keeps working anyway
+The generated key's expiry is computed as 365 *hours*, not a year, so **Settings → API Keys** badges
+it **Expired** about two weeks after you connect the repository. The key keeps authenticating —
+the expiry date is recorded and never enforced, see
+[expiry is recorded, not enforced](./api-keys.md#expiry-is-recorded-not-enforced).
+:::
 
 :::caution Protected variables and tags
 If you mark the variable as **Protected**, it is only exposed to pipelines on protected branches and
@@ -168,7 +190,7 @@ Or use the **Build** action on the microfrontend card in the console, which crea
 
 ## Adding this to an existing repository
 
-1. Create an [API key](./api-keys.md) with the `MANAGER` role.
+1. Create an [API key](./api-keys.md).
 2. Add it as a CI/CD variable named `MICROFRONTEND_ORCHESTRATOR_API_KEY`, at group or project level
    (**Settings → CI/CD → Variables**). Mark it **Masked**.
 3. Add the `deploy` job above to your `.gitlab-ci.yml`, with your slug and API base URL.
@@ -184,10 +206,16 @@ Base pipelines for other compilers and host types are in
 
 `only: tags` means branch pushes skip it. Confirm you pushed a tag.
 
+**The upload URL contains `%domain%`, or the slug is `%microfrontendSlug%`**
+
+The scaffolded pipeline was committed with the placeholders unsubstituted. Replace them as described
+[above](#the-publish-job).
+
 **`api-key` empty / authentication failure**
 
 Either the variable is not defined at a scope the project can see, or it is **Protected** and the tag
-is not. Check both, and confirm the key has not expired in **Settings → API Keys**.
+is not. Check both, and confirm the key still exists in **Settings → API Keys** — an **Expired**
+badge is not the cause, since expired keys still authenticate. Only a deleted key stops working.
 
 **`dist/` missing in the deploy job**
 

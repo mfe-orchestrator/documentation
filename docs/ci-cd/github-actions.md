@@ -88,7 +88,7 @@ if you add others.
 
 | Input | Meaning |
 | --- | --- |
-| `apikey` | An MFE Orchestrator [API key](./api-keys.md) with the `MANAGER` role |
+| `apikey` | An MFE Orchestrator [API key](./api-keys.md) |
 | `microfrontend-slug` | The slug of the microfrontend to publish to |
 | `domain` | Base URL of your MFE Orchestrator installation |
 | `file-path` | The build output directory, e.g. `./dist` |
@@ -99,20 +99,35 @@ directory, not at a zip you made yourself.
 
 ## The secret
 
-The workflow reads `secrets.MICROFRONTEND_ORCHESTRATOR_API_KEY`. For repositories MFE Orchestrator
-created, this already exists — created as a `MANAGER` key valid for one year and written to your
-GitHub organization or repository.
+The workflow reads `secrets.MICROFRONTEND_ORCHESTRATOR_API_KEY`. It is created when you **connect**
+the GitHub repository to a project — or edit that connection — not when a microfrontend is
+scaffolded, and it is written as an **organization** secret visible to all repositories. Creating a
+second microfrontend does not create a second key: the injector skips the work when a secret of that
+name already exists.
 
-:::caution The key expires after a year
-When it does, builds succeed and the publish step fails. Create a new
-[API key](./api-keys.md) and update the secret. Worth a calendar reminder at scaffold time.
+:::caution A personal GitHub account gets no organization secret
+The injector needs an organization id and returns without doing anything when the connection is to a
+personal account. For repositories the console creates itself it falls back to a repository secret,
+so those still work — but a pipeline you added to a repository you connected by hand has no secret at
+all, and its publish step fails with an authentication error on the first run.
+
+Fix it by hand: create an [API key](./api-keys.md), then add it under
+**Settings → Secrets and variables → Actions** as `MICROFRONTEND_ORCHESTRATOR_API_KEY`.
+:::
+
+:::note The key is dated 15 days out, and keeps working anyway
+The generated key's expiry is computed as 365 *hours*, not a year, so **Settings → API Keys** badges
+it **Expired** about two weeks after you connect the repository. The key keeps authenticating: the
+expiry date is recorded and never enforced — see
+[expiry is recorded, not enforced](./api-keys.md#expiry-is-recorded-not-enforced). Nothing to do, but
+do not read that badge as the cause of a failing publish.
 :::
 
 ## Adding this to an existing repository
 
 For a repository MFE Orchestrator did not create:
 
-1. Create an [API key](./api-keys.md) with the `MANAGER` role.
+1. Create an [API key](./api-keys.md).
 2. Add it as a repository secret named `MICROFRONTEND_ORCHESTRATOR_API_KEY`
    (**Settings → Secrets and variables → Actions**).
 3. Copy the workflow above into `.github/workflows/build-and-deploy.yml`, replacing
@@ -145,8 +160,10 @@ between *published* and *live* is the platform's main safety property.
 
 **Publish step fails with an authentication error**
 
-The secret is missing, misnamed or the key has expired. Check the exact name
-`MICROFRONTEND_ORCHESTRATOR_API_KEY`, and the key's status in **Settings → API Keys**.
+The secret is missing, misnamed, or names a key that has been deleted. Check the exact spelling of
+`MICROFRONTEND_ORCHESTRATOR_API_KEY`, and that the key still exists in **Settings → API Keys**. An
+**Expired** badge is not the cause — expired keys still authenticate. On a personal GitHub account,
+suspect the missing organization secret described above.
 
 **"Entity not found" for the slug**
 

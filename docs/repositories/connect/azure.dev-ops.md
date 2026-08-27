@@ -119,7 +119,7 @@ In the **Add Repository** dialog, enter the following information:
    - Copy and paste the full token
    - Make sure there are no extra spaces
 
-### 3.2 Test and Save the Connection
+### 3.2 Test the Connection
 
 Before saving, verify that everything is configured correctly clicking on **Test Connection** button
 
@@ -127,7 +127,21 @@ Before saving, verify that everything is configured correctly clicking on **Test
 If the test is successful, you'll see a **green checkmark** and a success message. If it fails, double-check your organization name and PAT.
 :::
 
-1. Once the test is successful, click **Connect Azure Dev Ops**
+### 3.3 Select the Project
+
+The test does more than validate the token: it returns the projects in the organization, and a
+**Select project** dropdown appears under the green checkmark listing them. Pick the Azure DevOps
+project new microfrontend repositories should be created in.
+
+This step is not optional. The field is required and **Connect Azure Dev Ops** stays disabled until
+the test has succeeded, so the form cannot be submitted without a selection. The project is also what
+MFE Orchestrator needs in order to create the `MFE_ORCHESTRATOR_SECRETS` variable group holding the
+deploy key — see
+[Deploy with Azure Pipelines](../../ci-cd/azure-pipelines.md#the-variable-group).
+
+### 3.4 Save the Connection
+
+1. With a project selected, click **Connect Azure Dev Ops**
 2. Your Azure DevOps connection is now active!
 
 ## Troubleshooting
@@ -137,7 +151,8 @@ If the test is successful, you'll see a **green checkmark** and a success messag
 If the connection test fails, check the following:
 
 - **Invalid Organization Name**: Verify that the organization name matches exactly what appears in your Azure DevOps URL
-- **Insufficient Permissions**: Ensure you selected all three required scopes (Code, Build, Release) with "read, write & manage" permissions
+- **Insufficient Permissions**: Ensure you selected all four required scopes — Code, Build and
+  Release with "Read, write & manage", and Variable Groups with "Read, create, & manage"
 - **Expired Token**: Check if your PAT has expired and create a new one if needed
 - **Network Issues**: Verify that you have internet connectivity and can access Azure DevOps
 

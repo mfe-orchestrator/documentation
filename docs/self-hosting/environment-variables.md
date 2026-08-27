@@ -26,6 +26,14 @@ For security-sensitive values like passwords and secrets, consider using Docker 
 
 ## Available Variables
 
+:::note "Default Value" means what the schema declares
+The container validates its environment against a fixed schema, and most variables have no default
+in it. Where the column below reads *(no default)* the variable is genuinely unset unless you set
+it — the platform logs a warning and does not connect, it does not fall back to `localhost`. The
+`root` / `example` credentials you see elsewhere in these pages are the
+[Docker Compose](./docker-compose.md) fixture, not a fallback the application applies.
+:::
+
 ### General Configuration
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
@@ -48,33 +56,59 @@ For security-sensitive values like passwords and secrets, consider using Docker 
 #### MongoDB
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `NOSQL_DATABASE_URL` | `mongodb://localhost:27017/microfrontend-orchestrator` | MongoDB database connection URL. |
-| `NOSQL_DATABASE_NAME` | `microfrontend-orchestrator` | MongoDB database name. |
-| `NOSQL_DATABASE_USERNAME` | `root` | MongoDB username. |
-| `NOSQL_DATABASE_PASSWORD` | `example` | MongoDB password. |
+| `NOSQL_DATABASE_URL` | *(no default)* | MongoDB connection URL, for example `mongodb://root:example@mongodb:27017`. Unset, the backend logs *"Cannot see MongoDB database URL, will not connect"* and starts with no database at all. |
+| `NOSQL_DATABASE_NAME` | *(no default)* | MongoDB database name, for example `microfrontend-orchestrator`. |
+| `NOSQL_DATABASE_USERNAME` | *(no default)* | MongoDB username. `root` is the Compose fixture, not a default. |
+| `NOSQL_DATABASE_PASSWORD` | *(no default)* | MongoDB password. `example` is the Compose fixture, not a default. |
 
 #### Redis
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `REDIS_URL` | `redis://localhost:6379` | Redis server connection URL. |
-| `REDIS_PASSWORD` | *(empty)* | Password for Redis access (if set). |
+| `REDIS_URL` | *(no default)* | Redis connection URL, scheme included — `redis://host:6379` or `rediss://host:6379` for TLS. Unset, the backend logs *"Cannot see redis URL, will not connect"* and runs without Redis. |
+| `REDIS_PASSWORD` | *(empty)* | Password for Redis access. The username is always `default`; a Redis fronted by another ACL user cannot be configured. |
 
 ### Email Configuration (SMTP)
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `EMAIL_SMTP_HOST` | `smtp.example.com` | SMTP server host for sending emails. |
+| `EMAIL_SMTP_HOST` | *(no default)* | SMTP server host. It is the switch for the whole feature: unset, the platform sends no email — no invitations, no password resets. |
 | `EMAIL_SMTP_PORT` | `587` | SMTP server port (e.g., 587 for TLS). |
 | `EMAIL_SMTP_SECURE` | `false` | If `true`, uses secure connection (SSL/TLS). |
 | `EMAIL_SMTP_USER` | *(empty)* | Username for SMTP authentication. |
 | `EMAIL_SMTP_PASSWORD` | *(empty)* | Password for SMTP authentication. |
-| `EMAIL_SMTP_FROM` | `no-reply@example.com` | Sender email address. |
+| `EMAIL_SMTP_FROM` | *(no default)* | Sender email address, for example `no-reply@example.com`. |
 
 ### Security & Authentication
 
 #### JWT
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `JWT_SECRET` | `your-secret-key-here` | Secret key for JWT generation and validation. |
+| `JWT_SECRET` | `your-secret-key` | Secret key for JWT generation and validation. |
+
+:::caution The JWT default is a published constant
+`your-secret-key` is in the source, so an installation that leaves `JWT_SECRET` unset signs its
+tokens with a key anybody can read. Set one — `openssl rand -hex 32` — everywhere except the
+all-in-one image, which generates one into its volume on the first start.
+:::
+
+#### Secrets encryption
+
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `SECRETS_ENCRYPTION_KEY` | *(empty)* | 32 bytes, base64 or hex. Encrypts the credentials the console stores for a project — bucket keys, storage connection strings, service account files, repository tokens — and stops the API from returning them. |
+
+Generate one with `openssl rand -base64 32`. Two things to know before you set it:
+
+- **Unset, those credentials are stored in the clear** and the backend says so in a warning at boot.
+  Anybody who reads the database — a dump, a backup, a hosted MongoDB you do not own — reads usable
+  credentials.
+- **A value of the wrong length stops the boot.** The key is validated at startup and a key that
+  does not decode to exactly 32 bytes fails the container rather than silently doing nothing. The
+  same applies to changing a key once values have been written with it: the old key is what reads
+  them back.
+
+The full treatment, including the migration of values written before the key existed, is in the
+product's own
+[`docs/SECRETS.md`](https://github.com/mfe-orchestrator/mfe-orchestrator/blob/main/docs/SECRETS.md).
 
 #### Auth0
 | Variable | Default Value | Description |
@@ -82,6 +116,7 @@ For security-sensitive values like passwords and secrets, consider using Docker 
 | `AUTH0_DOMAIN` | *(empty)* | Auth0 tenant domain. |
 | `AUTH0_CLIENT_ID` | *(empty)* | Client ID of the Auth0 application. |
 | `AUTH0_AUDIENCE` | *(empty)* | API Audience configured in Auth0. |
+| `AUTH0_SCOPE` | `openid profile email` | OAuth scopes requested at login. Served to the frontend but not applied by it — see [Auth0](./enable-sso/Auth0.md). |
 
 #### Azure Entra ID
 | Variable | Default Value | Description |
@@ -127,4 +162,10 @@ URLs, no personal data — and it can be turned off with any of the three switch
 The container validates its configuration against a fixed schema and drops anything it does not
 know, so a misspelled name fails silently rather than being picked up. `LOG_LEVEL` and
 `AZURE_ENTRAID_CLIENT_SECRET`, which earlier versions of this page listed, are read by nothing.
+
+Worse than a name that is dropped is a name that is accepted. `HOST`, `NOSQL_DB_URL`,
+`NOSQL_DB_DATABASE` and `NOSQL_DB_PASSWORD` are declared in the schema, so they pass validation and
+the container starts without a complaint — and nothing reads them. Setting `NOSQL_DB_URL` instead of
+`NOSQL_DATABASE_URL` gets you an installation that looks configured and has no database. Use the
+names in the tables above.
 :::

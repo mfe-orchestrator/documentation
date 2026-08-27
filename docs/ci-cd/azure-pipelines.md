@@ -79,7 +79,15 @@ stages:
               version: '$(VERSION)'
 ```
 
-`microfrontendSlug` is substituted with your slug at scaffold time.
+:::caution You have to fill `microfrontendSlug` in yourself
+The Azure DevOps scaffolder copies the pipeline in without substituting anything: placeholder
+replacement is present in the code but commented out for this path. The committed
+`azure-pipelines.yml` therefore keeps the literal `%microfrontendSlug%` — and `%domain%` if the
+template it came from names one — and the first tagged run fails on it.
+
+Before your first release, edit the file and replace `%microfrontendSlug%` with the slug of the
+microfrontend as it appears in the console. Only the GitHub workflow is substituted for you.
+:::
 
 ## Two stages, deliberately
 
@@ -95,11 +103,20 @@ is derived from the tag name by stripping `refs/tags/`.
 ## The variable group
 
 The publish task reads `$(MICROFRONTEND_ORCHESTRATOR_API_KEY)` from a variable group named
-**`MFE_ORCHESTRATOR_SECRETS`**, which MFE Orchestrator creates in your Azure DevOps project along
-with a `MANAGER` API key valid for one year.
+**`MFE_ORCHESTRATOR_SECRETS`**. MFE Orchestrator creates the group and the key when you connect the
+Azure DevOps repository to a project — or edit that connection — not when a microfrontend is
+scaffolded, and it skips the work when the variable already exists.
 
 The group is created at **project** scope, so several microfrontend repositories in the same Azure
-DevOps project share it.
+DevOps project share it. That also means the connection must have a project selected: without an
+organization and a project id the injector returns without creating anything.
+
+:::note The key is dated 15 days out, and keeps working anyway
+The generated key's expiry is computed as 365 *hours*, not a year, so **Settings → API Keys** badges
+it **Expired** about two weeks after you connect the repository. The key keeps authenticating —
+the expiry date is recorded and never enforced, see
+[expiry is recorded, not enforced](./api-keys.md#expiry-is-recorded-not-enforced).
+:::
 
 :::caution Pipeline authorization
 A newly created variable group may need to be authorized for the pipeline the first time it runs.
@@ -114,20 +131,23 @@ before a pipeline can use it.
 
 | Input | Meaning |
 | --- | --- |
-| `apiKey` | An MFE Orchestrator [API key](./api-keys.md) with the `MANAGER` role |
+| `apiKey` | An MFE Orchestrator [API key](./api-keys.md) |
 | `microfrontendSlug` | The slug of the microfrontend to publish to |
 | `filePath` | The directory containing the build output |
 | `version` | The version to publish |
-| `domain` | Base URL of the installation to publish to |
 
-The generated pipeline resolves `domain` from a `MICROFRONTEND_ORCHESTRATOR_DOMAIN` pipeline or
-variable-group variable, falling back to the installation the repository was scaffolded from. Set
-that variable to point an existing repository at a different installation.
+The generated pipeline passes exactly these four, and no domain: it publishes to the extension's
+default installation. To publish somewhere else, add a `MICROFRONTEND_ORCHESTRATOR_DOMAIN` variable
+to the `MFE_ORCHESTRATOR_SECRETS` group and pass it to the task as an additional `domain` input.
 
 :::info If the task is not available
 Install the extension from the Visual Studio Marketplace into your organization. If your
 organization does not permit third-party extensions, replace the task with a script step calling the
 [upload endpoint](./manual-upload.md) directly — it does the same thing:
+
+The `curl` needs a base URL, which the generated pipeline does not carry, so declare it in the
+`Deploy` stage's `variables` block — or add it to the `MFE_ORCHESTRATOR_SECRETS` group — before using
+the step below:
 
 ```yaml
 - script: |
@@ -136,9 +156,11 @@ organization does not permit third-party extensions, replace the task with a scr
     curl --fail --show-error --silent -X POST \
       -H "api-key: $(MICROFRONTEND_ORCHESTRATOR_API_KEY)" \
       -F "file=@$(Build.ArtifactStagingDirectory)/dist.zip" \
-      "$(MICROFRONTEND_ORCHESTRATOR_DOMAIN_RESOLVED)/api/microfrontends/by-slug/catalog/upload/$(VERSION)"
+      "$(MICROFRONTEND_ORCHESTRATOR_DOMAIN)/api/microfrontends/by-slug/catalog/upload/$(VERSION)"
   displayName: '🚀 Upload to MFE Orchestrator'
 ```
+
+`--fail` is not optional: without it `curl` exits 0 on a rejected upload and the stage passes.
 :::
 
 ## Publishing a version
@@ -154,7 +176,7 @@ Or use the **Build** action on the microfrontend card in the console, which crea
 
 ## Adding this to an existing repository
 
-1. Create an [API key](./api-keys.md) with the `MANAGER` role.
+1. Create an [API key](./api-keys.md).
 2. Create a variable group named `MFE_ORCHESTRATOR_SECRETS`
    (**Pipelines → Library → Variable group**) with a secret variable
    `MICROFRONTEND_ORCHESTRATOR_API_KEY`.
@@ -183,8 +205,10 @@ The extension is not installed in the organization. Install it, or use the `curl
 
 **Authentication failure on publish**
 
-The key is missing from the group, misnamed, or expired. Check **Settings → API Keys** in the
-console.
+The key is missing from the group, misnamed, or names a key that has been deleted. Check
+**Settings → API Keys** in the console — an **Expired** badge is not the cause, since expired keys
+still authenticate. If the connection has no Azure DevOps project selected, the group was never
+created at all.
 
 **Wrong version published**
 

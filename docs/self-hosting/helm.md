@@ -76,6 +76,7 @@ env:
 
 envSecrets:
   JWT_SECRET: a-32-bytes-random-string
+  SECRETS_ENCRYPTION_KEY: a-base64-or-hex-32-byte-key
   NOSQL_DATABASE_PASSWORD: example
 
 extraEnv:
@@ -107,11 +108,11 @@ effect.
 ## Image version
 
 `image.tag` defaults to the chart's `appVersion`, so a plain install runs the version the chart was
-released with — `3.1.0` for chart `0.1.2`. Override it to pin a different one:
+released with — `4.0.0` for chart `0.2.0`. Override it to pin a different one:
 
 ```yaml
 image:
-  tag: "3.1.0"
+  tag: "4.0.0"
 ```
 
 ## Storage of the uploaded microfrontends

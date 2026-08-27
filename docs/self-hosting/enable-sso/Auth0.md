@@ -45,10 +45,23 @@ Add the following environment variables to your Docker container configuration a
 
 | Variable Name | Description | Example Value |
 |---------------|-------------|---------------|
-| `AUTH0_DOMAIN` | *(empty)* | Auth0 tenant domain. |
-| `AUTH0_CLIENT_ID` | *(empty)* | Client ID of the Auth0 application. |
-| `AUTH0_AUDIENCE` | *(empty)* | API Audience configured in Auth0. |
-| `AUTH0_SCOPE` | `openid profile email` | OAuth scopes (space-separated) |
+| `AUTH0_DOMAIN` | Auth0 tenant domain. **Required** — it is what enables the provider | `your-tenant.auth0.com` |
+| `AUTH0_CLIENT_ID` | Client ID of the Auth0 application | `AbCdEf0123456789…` |
+| `AUTH0_AUDIENCE` | API Audience configured in Auth0 | `https://api.yourdomain.com` |
+
+:::caution `AUTH0_DOMAIN` is the switch
+The backend adds Auth0 to the configuration it serves the console only when `AUTH0_DOMAIN` is set.
+Without it the client ID and the audience are ignored and no Auth0 button appears, whatever else you
+configured.
+:::
+
+`AUTH0_SCOPE` also exists, defaulting to `openid profile email`. It is served to the frontend and the
+frontend does not apply it: the Auth0 provider is constructed without a `scope`, so changing the
+variable changes nothing. Set the scopes on the Auth0 application instead.
+
+The **callback URL** to register in Auth0 is the console's own origin — for example
+`https://console.example.com` — because that is what the frontend sends as `redirect_uri`. There is
+no variable for it.
 
 ## Step 5: Update Docker Configuration
 
@@ -58,10 +71,9 @@ If you are using docker comse add those variables to `docker-compose.yml` file u
 services:
   mfe-orchestrator:
     environment:
+      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
       - AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
-      - AUTH0_ISSUER=${AUTH0_ISSUER}
       - AUTH0_AUDIENCE=${AUTH0_AUDIENCE}
-      - AUTH0_SCOPE=openid profile email
 ```
 
 ## Step 6: Restart Your Application
