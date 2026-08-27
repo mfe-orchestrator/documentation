@@ -9,8 +9,9 @@ keywords: [microfrontends, console, host, remote, versions]
 # Microfrontends overview
 
 The **Microfrontends** page is the home screen of the console and the place where you spend
-most of your time. It lists every microfrontend registered in the current project, together
-with its version, hosting type and whether a canary release is active.
+most of your time. It lists every microfrontend registered in the current project with its
+version, and — depending on the view you choose — its repository, its hosting type and its
+canary release.
 
 ## Host and remote
 

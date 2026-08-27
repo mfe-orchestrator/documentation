@@ -82,16 +82,31 @@ select the host microfrontend, and copy the generated configuration for your bun
 - [Vite](../integration/module-federation-vite.md)
 - [Webpack](../integration/module-federation-webpack.md)
 
-For hosts whose repository is connected, the **Inject in Repository** button writes the
-configuration straight into the repository instead of asking you to copy and paste.
+For hosts whose repository is connected there is an alternative to copy and paste. Two buttons sit
+next to the microfrontend selector: **Integrate my microfrontends**, for every microfrontend of the
+project that consumes another one, and **Integrate only this one**, for the selected one. Both open
+the same dialog, which shows the config that would be written for each repository and a diff against
+what that repository holds today; you pick which ones to commit, and the write lands on the default
+branch of each.
 
 ## Shared dependencies
 
-The generated configurations mark `react`, `react-dom` and `react-router-dom` as shared
-singletons. This is what prevents two copies of React from being loaded — a failure mode that
-produces confusing hook errors rather than an obvious crash.
+The generated configuration shares the framework core, and only that — the list depends on the
+detected framework:
 
-If your microfrontends share other libraries — a state manager, a design system, a date library
-— add them to the `shared` block in every participating microfrontend, hosts and remotes alike.
-The generated config is a starting point, not a final answer; keep the shared list in sync
-across the graph.
+| Framework | Shared |
+| --- | --- |
+| React | `react`, `react-dom` |
+| Vue | `vue` |
+| Angular | `@angular/core`, `@angular/common`, `@angular/platform-browser`, `rxjs` |
+
+This is what prevents two copies of the framework from being loaded — a failure mode that produces
+confusing hook errors rather than an obvious crash. The Webpack form marks each of them
+`singleton: true`; the Vite form lists them, and no version range is pinned, so federation reads it
+from your own `package.json`.
+
+Nothing else is shared, on purpose: declaring a package the application does not depend on fails the
+build. So if your microfrontends share other libraries — a router, a state manager, a design system,
+a date library — add them to the `shared` block yourself, in every participating microfrontend, hosts
+and remotes alike. The generated config is a starting point, not a final answer; keep the shared list
+in sync across the graph.

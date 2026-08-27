@@ -93,15 +93,16 @@ infrastructure — MFE Orchestrator only records which version to point at.
 
 ## Selecting a version
 
-Once a version exists, open the microfrontend and pick it in the **Version** field. The field
-offers the versions known to the platform, plus a **Custom version** option for typing one in
-directly — useful for Custom URL microfrontends, where the platform has no upload history to
-list.
+Once a version exists, open the microfrontend and pick it in the **Version** field, at the top of the
+form in **Release settings**. The field offers the versions known to the platform, plus a
+**Custom version** option, which reveals a second box for typing one in directly — useful for Custom
+URL microfrontends, where the platform has no upload history to list.
 
 ![The Version field listing the uploaded versions and a Custom version option](../assets/microfrontend-version-select.png)
 
-Before anything has been uploaded there is nothing to list, so the field starts out as a plain text
-box and only becomes a list once the platform has seen its first version.
+That list only appears when editing a microfrontend that already has uploads. On the creation form,
+and on any microfrontend nothing has been uploaded for, there is nothing to list, so the field is a
+plain text box.
 
 Then [deploy](../deployments/overview.md) the environments you want to move.
 

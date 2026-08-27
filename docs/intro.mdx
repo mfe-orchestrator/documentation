@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Get started with MFE Orchestrator
 sidebar_label: Let's start
-description: Create an account, connect a repository and get your first microfrontend deployed with MFE Orchestrator — hosted console or self-hosted, in about five minutes.
+description: Create an account, connect a repository and create your first microfrontend with MFE Orchestrator — hosted console or self-hosted, one step at a time.
 keywords: [getting started, tutorial, quickstart, microfrontends]
 ---
 
@@ -83,9 +83,11 @@ To get started, you need to create an account. You have two options:
 **Option 1: Register with Email**
 1. Click on **"Register"** or **"Sign Up"**
 2. Enter your email address and create a password
-3. Verify your email
+3. Verify your email — on the hosted console, and on any self-hosted instance with SMTP configured;
+   without SMTP there is no verification step at all
 4. Sign in with your credentials
-5. Create your organization, then set your first project name
+5. Create your organization. The [five-step project wizard](./project-settings/projects.md#creating-a-project)
+   then opens inside it: name, environments, storage, repositories, collaborators
 
 ![Creating an account with email and password](./assets/console-register.png)
 
@@ -94,7 +96,8 @@ To get started, you need to create an account. You have two options:
 2. Select your Google account
 3. Authorize MFE Orchestrator to access your basic profile
 4. You'll be automatically signed in
-5. Create your organization, then set your first project name
+5. Create your organization. The [five-step project wizard](./project-settings/projects.md#creating-a-project)
+   then opens inside it: name, environments, storage, repositories, collaborators
 
 :::tip Recommended
 Using Google SSO is faster and you don't need to remember another password!
@@ -140,15 +143,22 @@ Now you're ready to start working with microfrontends!
 
 ![Choose A template](./assets/choose-a-template.png)
 
-4. Fill in the required information
- * **name**: A descriptive name for your microfrontend
- * **slug**: A URL-friendly identifier (e.g., "my-app")
- * **source code provider**: Select the repository provider you connected in Step 2 (GitHub, GitLab, or Azure DevOps)
- * **repository name**: The name for the new repository that will be created
+4. Fill in the required information. The form is split into tabs — **General**, **Hosting** and
+   **Repository** — and what the template needs is spread over two of them:
+ * **General → name**: A descriptive name for your microfrontend
+ * **General → slug**: A URL-friendly identifier (e.g., "my-app"). It is filled in from the name as
+   you type, and cannot be changed after creation
+ * **Repository → source code provider**: The repository connection to create the new repository in.
+   Already selected when the project has only one, or when one of them is the default
+ * **Repository → repository name**: The name of the repository to create. Also pre-filled from the
+   name, so you only touch it if you want a different one
+
+Because you came from a template, the **Repository** tab arrives with its switch already on. If the
+tab is missing entirely, the project has no repository connection yet — go back to Step 2.
 
 ![Add New Microfrontend](./assets/frontend-fill-information.png)
 
-5. Click **Create** to finalize the setup
+5. Click **Save** to finalize the setup
 
 :::info Automatic Setup
 MFE Orchestrator will automatically:

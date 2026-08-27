@@ -9,12 +9,12 @@ keywords: [hosting type, hub, bucket, custom url, remoteEntry]
 # Microfrontend hosting options
 
 Every microfrontend declares **where its files live**. This is the *hosting type*, set under
-**Hosting information** on the microfrontend form. It determines how MFE Orchestrator resolves
-a request for `remoteEntry.js` into actual bytes.
+**Hosting Information** in the **Hosting** tab of the microfrontend form. It determines how
+MFE Orchestrator resolves a request for `remoteEntry.js` into actual bytes.
 
 There are three options.
 
-![Choosing a hosting type on the microfrontend form](../assets/microfrontend-hosting-type.png)
+![The Hosting Type list open, offering MFE Orchestrator Hub and Custom URL](../assets/microfrontend-hosting-type.png)
 
 :::note
 **Custom Source** only appears in the list once the project has at least one

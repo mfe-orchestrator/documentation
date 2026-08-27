@@ -59,8 +59,11 @@ Details: [Deployments overview](./deployments/overview.md)
 ## 5. Integrate your host
 
 The console generates the Module Federation configuration (Vite or Webpack) your host
-application needs, with entry URLs pointing at whatever each environment currently serves.
-Copy it once; from then on, releases never touch the host again.
+application needs. It carries no URLs at all: each remote is declared as a slug handed to
+the [client SDK](./integration/client-sdk.md), which resolves it at import time — the
+generated file even says so, *"Never write a url here: the backend resolves the version"*.
+The two values it does embed are your **project id** and the **backend URL**, so the SDK
+knows which console to ask. Copy it once; from then on, releases never touch the host again.
 
 Details: [Integration overview](./integration/overview.md)
 

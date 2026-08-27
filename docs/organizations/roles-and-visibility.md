@@ -8,9 +8,12 @@ keywords: [organization roles, owner, admin, member, permissions, project visibi
 
 # Organization roles and project visibility
 
-Access in MFE Orchestrator is decided at two levels. The **organization role** decides which
-projects you can reach at all; the **project role** decides what you can do once you are inside one.
-The two are independent, and both are checked.
+Access in MFE Orchestrator is decided at two levels, but only one of them restricts anything today.
+The **organization role** decides which projects you can reach at all, and it is enforced. The
+**project role** is a label: it is stored, shown and carried in invitation emails, but no
+authorization check consults it, so reaching a project at all is what grants full control of it. See
+[Project members and roles](../project-settings/users-and-roles.md) for the detail and the
+consequences.
 
 ## The three organization roles
 
@@ -63,14 +66,19 @@ no endpoint where it was forgotten.
 | --- | --- | --- |
 | Owner or Admin | none | Reaches the project, with full project rights |
 | Owner or Admin | Admin / Editor / Viewer | Reaches the project; the project role does not restrict them |
-| Member | Admin / Editor / Viewer | Reaches that project only, with the rights of the project role |
+| Member | Admin / Editor / Viewer | Reaches that project only — and with full rights on it, whichever role they hold |
 | Member | none | Does not reach the project at all |
 | none | any | Does not reach the project at all |
 
-:::caution An organization admin is not limited by a project role
-Giving an organization admin the *Viewer* role on a project does not make them read-only. They reach
-every project of the organization through the organization, and that path carries no restriction. If
-you need somebody read-only, they must not administer the organization.
+:::danger Nobody is limited by a project role
+Giving somebody the *Viewer* role on a project does not make them read-only — not an organization
+admin, and not a plain member either. The single gate that authorizes every project write asks
+whether you are a member, never which role you hold, so anyone who reaches a project can rename it,
+invite to it and delete it. An organization admin reaches every project of the organization on top of
+that, without being invited.
+
+The only boundary that holds is reachability: keep somebody out of the organization, or out of the
+project, if they must not change it. Read-only access does not exist yet.
 :::
 
 ## Pending invitations are not memberships
@@ -122,11 +130,12 @@ Their account, and their membership of projects in *other* organizations, are un
 
 ## Relation to project roles
 
-The project-level roles — Admin, Editor, Viewer — are unchanged and are documented in
+The project-level roles — Admin, Editor, Viewer — are documented in
 [Project members and roles](../project-settings/users-and-roles.md). Read the two levels this way:
 
-> The organization role answers *which projects*. The project role answers *what, inside one of
-> them*.
+> The organization role answers *which projects*. Project membership answers *whether this one* — and
+> nothing yet answers *what, inside it*.
 
-For machine access, [API keys](../ci-cd/api-keys.md) remain project-scoped and carry their own role.
-They are not affected by organization membership.
+For machine access, [API keys](../ci-cd/api-keys.md) are project-scoped and unaffected by
+organization membership. They record a role, but it is not enforced either, and neither is their
+expiry — see [API keys](../ci-cd/api-keys.md).

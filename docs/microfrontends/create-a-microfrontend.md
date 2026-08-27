@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+title: Create a microfrontend
+sidebar_label: Create a microfrontend
 description: Add a microfrontend from a template, which scaffolds a repository and a build pipeline for you, or by registering code that already exists elsewhere.
 keywords: [create microfrontend, templates, scaffolding, registration]
 ---
@@ -25,28 +27,45 @@ A connected code repository. If you have not connected one yet, follow
 
 ### Steps
 
-1. From the **Microfrontends** page, click **Add New Microfrontend**.
+1. From the **Microfrontends** page, click **Add New Microfrontend**. Next to it,
+   **Import from repository** takes the other route, starting from code you already have.
 
-   ![Add New Microfrontend](../assets/add-new-microfrontend.png)
+   ![The Microfrontends page header with the search field, the view switcher and the Import from repository and Add New Microfrontend buttons](../assets/add-new-microfrontend.png)
 
-2. Choose a template from the [templates library](../templates/templates-library.md). Templates
-   are filtered by framework, compiler and host type, so you can narrow down to, for example,
-   *Vite + React + remote*.
+2. Choose a template from the [templates library](../templates/templates-library.md), which opens
+   as a page of its own. Templates are grouped by framework and filtered by framework, compiler
+   and host type, so you can narrow down to, for example, *Vite + React + remote*. **Create From
+   Scratch**, the first card, skips the template and leaves you with an empty repository.
 
-   ![Choose a template](../assets/choose-a-template.png)
+   ![The templates library page: the framework, compiler and type filters above the template cards grouped by framework](../assets/choose-a-template.png)
 
-3. Fill in the microfrontend details:
+3. Fill in the microfrontend details. The form is the same one you get when editing later, minus
+   the danger zone: a **Release** card on top, then three tabs.
+
+   **Release**
+
+   - **Version** — required, the version this microfrontend starts on
+   - **Canary Settings** — off by default, and there is no reason to turn it on while creating.
+     See [canary releases](./canary-releases.md)
+
+   **General**
 
    - **Name** — the display name
    - **Slug** — lowercase and URL-friendly; this ends up in your public URLs, so choose carefully
-   - **Source code provider** — the connected repository to create the new repo in
-   - **Repository name** — the name of the repository to create. Availability is checked as you
+   - **Description** — optional
+
+   **Hosting** — see [hosting options](./hosting-options.md)
+
+   **Repository**
+
+   - **Source Code Provider** — which connected repository the new repo is created in
+   - **Repository Name** — the name of the repository to create. Availability is checked as you
      type
-   - **Visibility** — public, private or (GitLab) internal
+   - **Private Repository** — a switch. Off creates a public repository
 
-   ![Fill in the information](../assets/frontend-fill-information.png)
+   ![The creation form: the chosen template, the Release card with the version, and the General tab with name, slug and description](../assets/frontend-fill-information.png)
 
-4. Click **Create**.
+4. Click **Save**.
 
 ### What happens behind the scenes
 
