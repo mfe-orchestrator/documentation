@@ -2,8 +2,8 @@
 sidebar_position: 3
 title: Core concepts and object model
 sidebar_label: Core concepts
-description: "Projects, environments, microfrontends, versions, deployments and storages: the objects MFE Orchestrator is built around, and how they relate to each other."
-keywords: [object model, projects, environments, deployments, microfrontends]
+description: "Organizations, projects, environments, microfrontends, versions, deployments and storages: the objects MFE Orchestrator is built around, and how they relate to each other."
+keywords: [object model, organizations, projects, environments, deployments, microfrontends]
 ---
 
 # Core concepts and object model
@@ -20,22 +20,41 @@ its database, the storage options and how a deployment reaches each environment.
 ## The object model
 
 ```
-Project
-├── Environment (dev, uat, prod, …)
-│   ├── Environment Variables (key/value, per environment)
-│   └── Deployment #1, #2, #3 …  (immutable snapshots)
-├── Microfrontend (host or remote, versioned)
-├── Storage / Bucket (S3, Azure Blob, GCS)
-├── Code Repository (GitHub, GitLab, Azure DevOps)
-├── API Key (for CI/CD and automation)
-└── Members (Admin, Editor, Viewer)
+Organization
+├── Members (Owner, Admin, Member)
+└── Project
+    ├── Environment (dev, uat, prod, …)
+    │   ├── Environment Variables (key/value, per environment)
+    │   └── Deployment #1, #2, #3 …  (immutable snapshots)
+    ├── Microfrontend (host or remote, versioned)
+    ├── Storage / Bucket (S3, Azure Blob, GCS)
+    ├── Code Repository (GitHub, GitLab, Azure DevOps)
+    ├── API Key (for CI/CD and automation)
+    └── Members (Admin, Editor, Viewer)
 ```
+
+### Organization
+
+An **organization** is the tenant that owns projects. A project belongs to exactly one organization,
+and a user can belong to any number of them with a different role in each. It is the level that
+decides *which projects a person can reach at all*: whoever administers the organization
+(`OWNER`, `ADMIN`) reaches every project inside it, while a plain `MEMBER` reaches only the projects
+they were explicitly invited to.
+
+The organization is selected in the console header, and it scopes everything below it — the project
+switcher only offers projects of the organization you are in. See
+[Organizations](./organizations/overview.md).
 
 ### Project
 
-A **project** is the top-level container and the boundary for authorization: every other object
-belongs to exactly one project, and access is granted per project. A project has a `name`, a
-`slug` and an `id` — you can find all three under **Settings → Project Information**.
+A **project** is the container every configuration object belongs to, and the boundary the project
+roles are written against: microfrontends, environments, storages, repositories and API keys belong
+to exactly one project. A project has a `name`, a `slug` and an `id` — you can find all three under
+**Settings → Project Information**.
+
+Access to a project is granted either by an explicit project membership or by administering the
+organization that owns it — see
+[Organization roles and project visibility](./organizations/roles-and-visibility.md).
 
 When you call the API directly, the project is selected with the `project-id` HTTP header.
 
@@ -127,7 +146,17 @@ date. They are shown once at creation and stored hashed. See [API Keys](./ci-cd/
 
 ### Members and roles
 
-Users are invited to a project with one of three roles:
+Membership is recorded at two levels, and both are checked.
+
+At **organization** level, the role decides which projects a person reaches:
+
+| Role | In the API | Reaches |
+| --- | --- | --- |
+| Owner | `OWNER` | Every project of the organization; can also delete it and hand over ownership |
+| Admin | `ADMIN` | Every project of the organization; can manage members and create projects |
+| Member | `MEMBER` | Only the projects they were invited to |
+
+At **project** level, the role decides what they can do inside one:
 
 | Role | In the API | Can do |
 | --- | --- | --- |
@@ -135,7 +164,8 @@ Users are invited to a project with one of three roles:
 | Editor | `MEMBER` | Manage microfrontends, variables, storages and deployments |
 | Viewer | `VIEWER` | Read-only access |
 
-See [Members and roles](./project-settings/users-and-roles.md).
+See [Roles and project visibility](./organizations/roles-and-visibility.md) and
+[Members and roles](./project-settings/users-and-roles.md).
 
 ## The lifecycle of a change
 

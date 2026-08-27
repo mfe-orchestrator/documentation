@@ -2,15 +2,18 @@
 sidebar_position: 1
 title: Projects and access control
 sidebar_label: Projects
-description: A project is the top-level container and the access-control boundary in MFE Orchestrator. What belongs in one, and how to decide where to draw the line.
-keywords: [projects, access control, boundary, settings]
+description: A project is the container every configuration object belongs to, and one of the two access-control boundaries in MFE Orchestrator. What belongs in one, and how to decide where to draw the line.
+keywords: [projects, access control, boundary, settings, organization]
 ---
 
 # Projects and access control
 
-A **project** is the top-level container in MFE Orchestrator and the boundary for access control.
-Microfrontends, environments, storages, code repositories, API keys and members all belong to
-exactly one project.
+A **project** is the container every configuration object belongs to: microfrontends, environments,
+storages, code repositories, API keys and members all belong to exactly one project.
+
+The project in turn belongs to exactly one **organization**, which is the tenant that owns it and
+the level deciding who reaches the project at all. See
+[Organizations](../organizations/overview.md).
 
 ## What belongs in one project
 
@@ -36,8 +39,9 @@ that generates your Module Federation configuration — usually not worth it.
 
 ## Creating a project
 
-Your first project is created during onboarding: after registering, you are asked for a project
-name.
+Your first project is created during onboarding: after registering you are asked to create an
+[organization](../organizations/overview.md#your-first-organization), and the project wizard opens
+inside it.
 
 Additional projects are created through the **project wizard**, which walks you through:
 
@@ -47,14 +51,25 @@ Additional projects are created through the **project wizard**, which walks you 
 
 The wizard remembers where you got to, so you can leave and resume.
 
+The project is created inside the organization you are currently working in, and it stays there:
+a project cannot be moved to another organization afterwards.
+
+:::caution Only organization owners and admins can create a project
+A plain member of an organization reaches the projects they were invited to and nothing else, so the
+wizard is not offered to them at all. See
+[Roles and project visibility](../organizations/roles-and-visibility.md).
+:::
+
 ## Switching projects
 
-The project selector sits in the console header. Everything below it — microfrontends, deployments,
-settings — follows the selection.
+The project selector sits in the console header, next to the
+[organization selector](../organizations/managing-an-organization.md#the-header-menu). Everything
+below it — microfrontends, deployments, settings — follows the selection.
 
 ![The project switcher, which also creates a new project](../assets/project-switcher.png)
 
-If a page looks empty, check the selected project before anything else. It is the most common cause
+The list only ever offers projects of the organization you are in. If a page looks empty, check the
+selected project — and the selected organization — before anything else. It is the most common cause
 of "my microfrontends disappeared".
 
 ## Project settings

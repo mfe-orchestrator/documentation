@@ -2,14 +2,28 @@
 sidebar_position: 2
 title: Project members and roles
 sidebar_label: Members and roles
-description: "Access is granted per project: a user can belong to several with a different role in each. What Admin, Editor and Viewer can do, and how to invite members."
+description: "The project role decides what a member can do inside a project: what Admin, Editor and Viewer can do, how to invite members, and how this level combines with the organization role."
 keywords: [members, roles, permissions, invitations, access control]
 ---
 
 # Project members and roles
 
-Access to MFE Orchestrator is granted per project. A user can be a member of several projects, with
-a different role in each.
+A user can be a member of several projects, with a different role in each. The role recorded here
+decides **what they can do inside this project**.
+
+It is not the whole of access control. Which projects a person can reach at all is decided one level
+up, by the organization that owns them:
+
+> The [organization role](../organizations/roles-and-visibility.md) answers *which projects*. The
+> project role, on this page, answers *what, inside one of them*.
+
+Two consequences are worth keeping in mind while reading the rest of this page:
+
+- **Whoever administers the organization reaches every project in it**, invited or not, and their
+  project role does not restrict them. Somebody who must be read-only cannot be an organization
+  owner or admin.
+- **Inviting somebody to a project also puts them into the owning organization**, as a plain member.
+  See [Inviting a member](#inviting-a-member) below.
 
 Members live under **Settings → Team Members**.
 
@@ -57,6 +71,16 @@ project, or limit Editor membership and let Admins handle production.
 An email goes out with an invitation link. The invitee follows it, signs in or registers, and joins
 the project with the role you chose.
 
+:::info The invitation reaches the organization too
+A project sits inside an organization, so inviting somebody to a project also adds them to that
+organization — as a plain **member**, created already accepted. That membership grants nothing on
+its own: a plain member reaches only the projects they were invited to, which is exactly the project
+you just invited them to. Somebody who already holds a role in the organization keeps it; a project
+invitation never demotes an admin. Declining the invitation takes the implicit membership back
+again, unless they have other projects there. See
+[Roles and project visibility](../organizations/roles-and-visibility.md#inviting-to-a-project-creates-a-membership-in-the-organization).
+:::
+
 :::info Email delivery is required
 Invitations are delivered by email, so the installation needs SMTP configured. On a self-hosted
 instance without `EMAIL_SMTP_HOST` set, invitations cannot be sent — see
@@ -77,6 +101,14 @@ For a pending invitation you can:
 
 Open the member's actions and remove them, confirming by name. They lose access to this project
 immediately; their account and their membership of other projects are unaffected.
+
+:::caution Removing them from the project does not remove them from the organization
+Somebody who accepted the invitation stays in the organization as a plain member with no project —
+harmless, since that grants nothing, but they remain on the organization's members list. Take them
+out from [the organization page](../organizations/managing-an-organization.md#members) if you want
+them gone entirely; doing so also removes them from every other project of that organization. An
+invitation that was never accepted is cleaned up on its own when you revoke it.
+:::
 
 :::tip Removing a person is not enough
 People leaving is also the moment to audit [API keys](../ci-cd/api-keys.md). A key that person

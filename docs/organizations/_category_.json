@@ -1,0 +1,9 @@
+{
+  "label": "Organizations",
+  "position": 12,
+  "link": {
+    "type": "generated-index",
+    "title": "Organizations",
+    "description": "The tenant that owns your projects: who belongs to it, who reaches which project, and how to switch between them."
+  }
+}
