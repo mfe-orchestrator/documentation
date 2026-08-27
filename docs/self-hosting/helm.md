@@ -38,6 +38,20 @@ helm install mfe-orchestrator ./helm/mfe-orchestrator \
   --set envSecrets.JWT_SECRET="$(openssl rand -hex 32)"
 ```
 
+Reach the console once the pod is ready, and it will answer with the **Initial Setup** screen —
+an installation with no users has no login form:
+
+```bash
+kubectl port-forward -n mfe-orchestrator svc/mfe-orchestrator 8080:80
+```
+
+:::caution Do the first startup before the ingress is open
+That screen is public and ungated, so whoever fills it in first owns the installation. Read
+[The first startup](./first-startup.md) before you type a project name into it — the name becomes a
+permanent slug, and it mishandles anything longer than two words. Configure the
+[ingress](#ingress) after the first account exists, not before.
+:::
+
 To distribute the chart instead of cloning it on every cluster:
 
 ```bash

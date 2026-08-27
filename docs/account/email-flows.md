@@ -58,8 +58,10 @@ new account is stored as `ACTIVE` from the moment it is created, and signing in 
 field: registering and going straight to the login form works, activation email untouched.
 
 So treat the email as a confirmation that the address exists and reaches its owner, not as a barrier.
-If you need one, the barrier has to be [registration itself](../self-hosting/environment-variables.md)
-— `REGISTRATION_ALLOWED=false` and invitations only.
+And note that `REGISTRATION_ALLOWED=false` is not one either: it hides the *Register* link without
+closing the route behind it, as [The first startup](../self-hosting/first-startup.md#the-endpoint-stays-open)
+sets out. A self-hosted installation that must not accept accounts has to be closed off in front of
+the console — a private network, an ingress rule, an authenticating proxy.
 :::
 
 Where SMTP is not configured the flow is shortened rather than broken: no activation token is

@@ -41,7 +41,7 @@ it — the platform logs a warning and does not connect, it does not fall back t
 | `BACKEND_URL` | *(empty, falls back to `FRONTEND_URL` + `/api`)* | Public URL of the API, written into the generated configuration. |
 | `PORT` | `3000` | Port the backend listens on, behind the in-container nginx. |
 | `NODE_ENV` | `prod` *(development/prod/test/local)* | Node.js environment mode. Any other value stops the boot. |
-| `REGISTRATION_ALLOWED` | `true` | If `true`, allows new user registration. |
+| `REGISTRATION_ALLOWED` | `true` | **Hides the *Register* link; it does not close the route.** The backend reads it in one place only, to build the `canRegister` flag the console uses to decide what to render. With it set to `false` both `POST /users/registration` and `POST /startup/registration` still create usable accounts. See [The first startup](./first-startup.md#the-endpoint-stays-open). |
 | `ALLOW_EMBEDDED_LOGIN` | `true` | If `true`, enables the login system within the application. |
 | `MICROFRONTEND_HOST_FOLDER`| `/upload-microfrontends` | Folder containing the host microfrontends. |
 | `ALLOWED_ORIGINS` | *(empty)* | List of allowed URLs for cross-origin requests comma separated. |

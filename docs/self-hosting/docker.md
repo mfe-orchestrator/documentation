@@ -39,7 +39,14 @@ docker run -d --name mfe-orchestrator --restart unless-stopped \
 ```
 
 Open `http://localhost:8080` and wait for the server to come up — this can take up to 2 minutes on
-the first start. Enter your `email`, `password` and first project name, and you are in.
+the first start. An installation with no users answers with the **Initial Setup** screen: enter your
+`email`, `password` and first project name, and you are in.
+
+:::caution Do the first startup before the address is reachable by anybody else
+That screen is public and ungated, so whoever fills it in first owns the installation. Read
+[The first startup](./first-startup.md) before you type a project name into it — the name becomes a
+permanent slug, and it mishandles anything longer than two words.
+:::
 
 What you should know about this image:
 

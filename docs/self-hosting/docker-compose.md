@@ -91,7 +91,14 @@ docker compose up -d
 
 3.  Open `http://localhost:8080` and wait for the server to come up. This can take up to 2 minutes. Once the server is up and running, you can access MFE Orchestrator at `http://localhost:8080`.
 
-4. Once the page loads you can enter your `email`, `password` and first project name to start using the Hub
+4. Once the page loads, an installation with no users shows the **Initial Setup** screen: enter your
+    `email`, `password` and first project name to start using the Hub.
+
+:::caution Do the first startup before the address is reachable by anybody else
+That screen is public and ungated, so whoever fills it in first owns the installation. Read
+[The first startup](./first-startup.md) before you type a project name into it — the name becomes a
+permanent slug, and it mishandles anything longer than two words.
+:::
 
 ## Before you call it production
 

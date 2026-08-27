@@ -81,7 +81,12 @@ You should see the MFE Orchestrator containers up and running.
 
 ## Accessing the Application
 
-Once deployed, you can access the applcation at http://localhost:8080
+Once deployed, you can access the application at `http://localhost:8080`.
+
+An installation with no users answers with the **Initial Setup** screen rather than a login form.
+Read [The first startup](./first-startup.md) before you fill it in: it is public and ungated, so
+whoever reaches it first owns the installation, and the project name you type becomes a permanent
+slug.
 
 
 ## Pinned images
