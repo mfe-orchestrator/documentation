@@ -1,16 +1,16 @@
 # Graph Report - documentation  (2026-08-27)
 
 ## Corpus Check
-- 80 files · ~445,432 words
+- 80 files · ~447,135 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1047 nodes · 1156 edges · 175 communities (104 shown, 71 thin omitted)
+- 1070 nodes · 1194 edges · 177 communities (106 shown, 71 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fde34797`
+- Built from commit: `c3ceb6c7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -188,18 +188,20 @@
 - [[_COMMUNITY_Self-host with Docker Compose|Self-host with Docker Compose]]
 - [[_COMMUNITY_Upgrading to organizations|Upgrading to organizations]]
 - [[_COMMUNITY_Organizations overview|Organizations overview]]
+- [[_COMMUNITY_Store builds on Amazon S3|Store builds on Amazon S3]]
+- [[_COMMUNITY_Storage overview|Storage overview]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `scripts` - 12 edges
 2. `The object model` - 11 edges
 3. `Store builds on Google Cloud Storage` - 10 edges
-4. `Canary releases for microfrontends` - 10 edges
-5. `Store builds on Amazon S3` - 9 edges
-6. `Storage overview` - 9 edges
-7. `API keys for CI/CD` - 9 edges
-8. `Build status` - 9 edges
-9. `The client SDK` - 9 edges
-10. `Serve API reference` - 9 edges
+4. `Serve API reference` - 10 edges
+5. `Canary releases for microfrontends` - 10 edges
+6. `Store builds on Amazon S3` - 9 edges
+7. `Storage overview` - 9 edges
+8. `API keys for CI/CD` - 9 edges
+9. `Build status` - 9 edges
+10. `The client SDK` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Deploy to GitHub Pages workflow` --semantically_similar_to--> `Generated GitHub Actions build-and-deploy workflow`  [INFERRED] [semantically similar]
@@ -251,7 +253,7 @@
 - **First Storage Creation Onboarding Flow** — docs_assets_storages_empty_storages_page, docs_assets_storages_empty_empty_state_pattern, docs_assets_storages_empty_new_storage_cta, docs_assets_storages_empty_first_storage_onboarding_rationale [INFERRED 0.85]
 - **Project Members screen: manage members via invite, role badges, and card listing** — docs_assets_team_members_project_members_management, docs_assets_team_members_invite_user_action, docs_assets_team_members_owner_role, docs_assets_team_members_member_card_layout [EXTRACTED 1.00]
 
-## Communities (175 total, 71 thin omitted)
+## Communities (177 total, 71 thin omitted)
 
 ### Community 1 - "Deployments, Storage & CI/CD Docs"
 Cohesion: 0.14
@@ -462,32 +464,32 @@ Cohesion: 0.67
 Nodes (3): MFE Orchestrator Logo, MFE Orchestrator Brand Identity, Announcer Figure with Megaphone
 
 ### Community 59 - "Connect a GitLab repository"
-Cohesion: 0.11
-Nodes (18): 2.1 Access Token Settings, 2.2 Configure Token Settings, 2.3 Required Token Scopes, 2.4 Generate the Token, 3.1 Fill in Connection Details, 3.2 Test and Save the Connection, Cannot Access My Repositories, Connect a GitLab repository (+10 more)
+Cohesion: 0.10
+Nodes (20): 2.1 Access Token Settings, 2.2 Configure Token Settings, 2.3 Required Token Scopes, 2.4 Generate the Token, 3.1 Fill in Connection Details, 3.2 Test the Connection, 3.3 Select the Group, 3.4 Save the Connection (+12 more)
 
 ### Community 60 - "Connect an Azure DevOps repository"
-Cohesion: 0.12
-Nodes (17): 2.1 Access Token Settings, 2.2 Configure Token Settings, 2.3 Required Token Scopes, 2.4 Generate the Token, 3.1 Fill in Connection Details, 3.2 Test and Save the Connection, Cannot See My Project, Connect an Azure DevOps repository (+9 more)
+Cohesion: 0.11
+Nodes (19): 2.1 Access Token Settings, 2.2 Configure Token Settings, 2.3 Required Token Scopes, 2.4 Generate the Token, 3.1 Fill in Connection Details, 3.2 Test the Connection, 3.3 Select the Project, 3.4 Save the Connection (+11 more)
 
 ### Community 61 - "Available Variables"
-Cohesion: 0.13
-Nodes (15): Auth0, Available Variables, Azure Entra ID, Container environment variables, Database Configuration, Email Configuration (SMTP), General Configuration, GitHub (code repositories) (+7 more)
+Cohesion: 0.12
+Nodes (16): Auth0, Available Variables, Azure Entra ID, Container environment variables, Database Configuration, Email Configuration (SMTP), General Configuration, GitHub (code repositories) (+8 more)
 
 ### Community 62 - "Store builds on Azure Blob Storage"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (11): Option A — Connection string, Option B — Shared key, Option C — Azure AD (recommended), Prerequisites, Secret rotation, Step 1: Create the storage account and container, Step 2: Choose an authentication method, Step 3: Add the storage in MFE Orchestrator (+3 more)
 
 ### Community 63 - "Store builds on Google Cloud Storage"
-Cohesion: 0.07
-Nodes (28): Cost notes, Prerequisites, Step 1: Create the bucket, Step 2: Create an IAM policy, Step 3: Create an IAM user and access key, Step 4: Add the storage in MFE Orchestrator, Step 5: Point a microfrontend at it, Store builds on Amazon S3 (+20 more)
+Cohesion: 0.20
+Nodes (10): Key rotation, Prerequisites, Step 1: Create the bucket, Step 2: Create a service account, Step 3: Grant access on the bucket, Step 4: Create a JSON key, Step 5: Add the storage in MFE Orchestrator, Step 6: Point a microfrontend at it (+2 more)
 
 ### Community 64 - "Serve API reference"
-Cohesion: 0.15
-Nodes (13): Addressing an environment, Building runtime discovery, Environment variables, Error responses, Everything about an environment, Generated bundler configuration, Headers, Identity parameters (+5 more)
+Cohesion: 0.14
+Nodes (14): Addressing an environment, Building runtime discovery, Environment variables, Error responses, Everything about an environment, Generated bundler configuration, Headers, Identity parameters (+6 more)
 
 ### Community 65 - "Installation Steps"
-Cohesion: 0.20
-Nodes (10): 1. Clone the Repository, 2. Initialize Terraform, 3. Review the Planned Changes And Apply, 4. Verify the Deployment, Accessing the Application, Container Variables, Installation Steps, Pinned images (+2 more)
+Cohesion: 0.18
+Nodes (11): 1. Clone the Repository, 2. Initialize Terraform, 3. Review the Planned Changes And Apply, 4. Verify the Deployment, Accessing the Application, Before you call it production, Container Variables, Installation Steps (+3 more)
 
 ### Community 66 - "Store builds on Amazon S3"
 Cohesion: 0.22
@@ -502,20 +504,20 @@ Cohesion: 0.22
 Nodes (8): Enable SSO with Auth0, Prerequisites, Step 1: Configure Auth0 Application, Step 2: Configure Application Settings, Step 3: Set Up API (Optional but Recommended), Step 4: Configure Environment Variables, Step 5: Update Docker Configuration, Step 6: Restart Your Application
 
 ### Community 69 - "Enable SSO with Microsoft Entra ID"
-Cohesion: 0.22
-Nodes (8): Enable SSO with Microsoft Entra ID, Prerequisites, Step 1: Register a New Application in Azure AD, Step 2: Configure Application Settings, Step 3: Configure Environment Variables, Step 5: Update Docker Configuration, Step 6: Restart Your Application, Troubleshooting
+Cohesion: 0.20
+Nodes (9): Enable SSO with Microsoft Entra ID, Prerequisites, Step 1: Register a New Application in Azure AD, Step 2: Configure Application Settings, Step 3: Configure Environment Variables, Step 5: Update Docker Configuration, Step 6: Restart Your Application, Troubleshooting (+1 more)
 
 ### Community 70 - "Enable SSO with Google"
-Cohesion: 0.22
-Nodes (8): Enable SSO with Google, Prerequisites, Step 1: Create a New OAuth 2.0 Client ID, Step 2: Configure OAuth Consent Screen, Step 3: Configure Environment Variables, Step 4: Update Docker Configuration, Step 5: Restart Your Application, Troubleshooting
+Cohesion: 0.20
+Nodes (9): Enable SSO with Google, Prerequisites, Step 1: Create a New OAuth 2.0 Client ID, Step 2: Configure OAuth Consent Screen, Step 3: Configure Environment Variables, Step 4: Update Docker Configuration, Step 5: Restart Your Application, Troubleshooting (+1 more)
 
 ### Community 71 - "Microfrontend templates library"
-Cohesion: 0.18
-Nodes (11): Anatomy of a manifest entry, Browsing, Contributing a template, Create from scratch, Host templates come wired to the SDK, Host versus remote templates, Microfrontend templates library, What a template gives you (+3 more)
+Cohesion: 0.13
+Nodes (15): Anatomy of a manifest entry, Browsing, Contributing a template, Create from scratch, Dependabot comes from the template, not from the platform, Host templates come wired to the SDK, Host versus remote templates, Microfrontend templates library (+7 more)
 
 ### Community 72 - "API keys for CI/CD"
 Cohesion: 0.22
-Nodes (9): API keys for CI/CD, Creating a key, Expiry is mandatory, Good practice, Keys created for you, Revoking and deleting, Roles, Using a key (+1 more)
+Nodes (9): API keys for CI/CD, Creating a key, Expiry is recorded, not enforced, Good practice, Keys created for you, Roles, Stopping a key, Using a key (+1 more)
 
 ### Community 73 - "Deploy with Azure Pipelines"
 Cohesion: 0.25
@@ -534,20 +536,20 @@ Cohesion: 0.25
 Nodes (8): Creating a deployment, Deployments overview, Editing is not deploying, Promoting between environments, Reading the deployments page, Serving from the active deployment, What gets captured, Where to go next
 
 ### Community 77 - "Module Federation with Vite"
-Cohesion: 0.25
-Nodes (8): Configure a remote, Configure the host, Consume a remote, Development, Install the plugin, Module Federation with Vite, Remote names, Shared dependencies
+Cohesion: 0.22
+Nodes (9): Configure a remote, Configure the host, Consume a remote, Development, Install the plugin, Module Federation with Vite, Remote names, Shared dependencies (+1 more)
 
 ### Community 78 - "Integration overview"
-Cohesion: 0.25
-Nodes (8): Generated bundler configuration, Inject in Repository, Integration overview, Runtime discovery, The Integration page, The two integration models, What the platform serves, Where to go next
+Cohesion: 0.22
+Nodes (9): Choosing the stack, Generated bundler configuration, Integration overview, Runtime discovery, The Integration page, The two integration models, What the platform serves, Where to go next (+1 more)
 
 ### Community 79 - "Projects and access control"
-Cohesion: 0.25
-Nodes (8): API access, Creating a project, Deleting a project, Project information, Project settings, Projects and access control, Switching projects, What belongs in one project
+Cohesion: 0.22
+Nodes (9): API access, Creating a project, Deleting a project, Project information, Project settings, Projects and access control, Renaming a project, Switching projects (+1 more)
 
 ### Community 80 - "Project members and roles"
-Cohesion: 0.25
-Nodes (8): Authentication, Choosing a role, Inviting a member, Machine access, Managing invitations, Project members and roles, Removing a member, Roles
+Cohesion: 0.20
+Nodes (10): Authentication, Changing a role, Inviting a member, Machine access, Managing invitations, Project members and roles, Removing a member, Restricting who can deploy to production (+2 more)
 
 ### Community 81 - "Quick start: from zero to rollback in 10 minutes"
 Cohesion: 0.25
@@ -558,12 +560,12 @@ Cohesion: 0.29
 Nodes (7): Adding this to an existing repository, Deploy with GitLab CI, Publishing a version, The CI/CD variable, The generated pipeline, The publish job, Troubleshooting
 
 ### Community 83 - "Rollback and redeploy"
-Cohesion: 0.29
-Nodes (7): A rehearsal worth doing, Deployment numbering, Redeploy does not publish your edits, Rollback and redeploy, Rolling back, What a rollback does not do, What a rollback restores
+Cohesion: 0.25
+Nodes (8): A rehearsal worth doing, Deployment numbering, Redeploy does not publish your edits, Rollback and redeploy, Rolling back, The file routes do not all follow a rollback, What a rollback does not do, What a rollback restores
 
 ### Community 84 - "Module Federation with Webpack"
-Cohesion: 0.29
-Nodes (7): About `eager: true`, Configure a remote, Configure the host, Consume a remote, Module Federation with Webpack, Remote names, Version mismatches
+Cohesion: 0.25
+Nodes (8): About `eager: true`, Configure a remote, Configure the host, Consume a remote, Module Federation with Webpack, Remote names, There is no `.env` to fill in, Version mismatches
 
 ### Community 85 - "Read runtime configuration in the browser"
 Cohesion: 0.25
@@ -582,8 +584,8 @@ Cohesion: 0.29
 Nodes (7): Choosing between them, Custom Source (your own bucket), Custom URL, Entry point, MFE Orchestrator Hub, Microfrontend hosting options, URL placeholders
 
 ### Community 89 - "Allowed domains and environment resolution"
-Cohesion: 0.33
-Nodes (6): Adding domains, Allowed domains and environment resolution, How it works, The problem it solves, Troubleshooting, Which endpoints use it
+Cohesion: 0.29
+Nodes (7): Adding domains, Allowed domains and environment resolution, How it works, Overlapping domains, The problem it solves, Troubleshooting, Which endpoints use it
 
 ### Community 90 - "Environments overview"
 Cohesion: 0.33
@@ -618,12 +620,12 @@ Cohesion: 0.40
 Nodes (5): Connect a GitHub repository, Prerequisites, Step 1: Navigate to Code Repositories, Step 2: Authorize on GitHub, Troubleshooting
 
 ### Community 98 - "Use an external MongoDB and Redis"
-Cohesion: 0.40
-Nodes (4): External Redis Configuration, Introduction, MongoDB Configuration, Use an external MongoDB and Redis
+Cohesion: 0.50
+Nodes (4): MongoDB, Redis, Use an external MongoDB and Redis, What stays local
 
 ### Community 165 - "The client SDK"
-Cohesion: 0.17
-Nodes (12): Bundler configuration, Changing the user without a reload, Configuration, Configure once, at the top of the entry point, Framework adapters, Identities, Leaving the environment out, Packages (+4 more)
+Cohesion: 0.14
+Nodes (14): Bundler configuration, Changing the user without a reload, Configuration, Configure once, at the top of the entry point, Framework adapters, Identities, Leaving the environment out, Packages (+6 more)
 
 ### Community 166 - "Architecture"
 Cohesion: 0.33
@@ -661,8 +663,16 @@ Nodes (7): After the upgrade, Endpoints that changed, How roles are converted, P
 Cohesion: 0.33
 Nodes (6): One organization at a time, Organizations overview, Where it sits in the object model, Where to go next, Why the level exists, Your first organization
 
+### Community 175 - "Store builds on Amazon S3"
+Cohesion: 0.22
+Nodes (9): Cost notes, Prerequisites, Step 1: Create the bucket, Step 2: Create an IAM policy, Step 3: Create an IAM user and access key, Step 4: Add the storage in MFE Orchestrator, Step 5: Point a microfrontend at it, Store builds on Amazon S3 (+1 more)
+
+### Community 176 - "Storage overview"
+Cohesion: 0.22
+Nodes (9): Adding a storage, Credentials and least privilege, Housekeeping, How it works, Path layout, Storage overview, Supported providers, Using a storage (+1 more)
+
 ## Knowledge Gaps
-- **593 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+588 more)
+- **609 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+604 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **71 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -670,16 +680,16 @@ Nodes (6): One organization at a time, Organizations overview, Where it sits in 
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Connect an Azure DevOps repository` connect `Connect an Azure DevOps repository` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
-- **Why does `Connect a GitLab repository` connect `Connect a GitLab repository` to `Canary Releases & Product Concepts`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `Container environment variables` connect `Available Variables` to `Canary Releases & Product Concepts`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `Serve API reference` connect `Serve API reference` to `Canary Releases & Product Concepts`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Why does `Core concepts and object model` connect `Deployments, Storage & CI/CD Docs` to `Canary Releases & Product Concepts`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **What connects `config`, `name`, `version` to the rest of the system?**
-  _617 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Canary Releases & Product Concepts` be split into smaller, more focused modules?**
-  _Cohesion score 0.1488095238095238 - nodes in this community are weakly interconnected._
+  _633 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Deployments, Storage & CI/CD Docs` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
 - **Should `Docusaurus Package Config` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
+- **Should `Docs Landing Page Components` be split into smaller, more focused modules?**
+  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._

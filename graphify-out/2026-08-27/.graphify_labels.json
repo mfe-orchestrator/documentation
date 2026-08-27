@@ -171,5 +171,7 @@
   "169": "Import repositories as microfrontends",
   "170": "Dependency analysis and peer dependency alignment",
   "171": "Self-host on Kubernetes with Helm",
-  "172": "Self-host with Docker Compose"
+  "172": "Self-host with Docker Compose",
+  "173": "Upgrading to organizations",
+  "174": "Organizations overview"
 }
