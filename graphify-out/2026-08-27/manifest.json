@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "docs/project-settings/users-and-roles.md": {
-    "mtime": 1787824608.9519262,
-    "ast_hash": "fe8a7e3d4e7ef22c5fd85a3b72c92a4b",
+    "mtime": 1787828926.2431808,
+    "ast_hash": "2bd708e789b7ccaa8e003325831dfa03",
     "semantic_hash": ""
   },
   "docs/repositories/connect/azure.dev-ops.md": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "docs/self-hosting/environment-variables.md": {
-    "mtime": 1787824987.329409,
-    "ast_hash": "12d4a12f113b3c8c9d30dc993486b0f5",
+    "mtime": 1787828916.357439,
+    "ast_hash": "f3625122cdba9b70b85adfcf5b6a44f8",
     "semantic_hash": ""
   },
   "docs/self-hosting/terraform.md": {
@@ -660,8 +660,8 @@
     "semantic_hash": ""
   },
   "docs/organizations/managing-an-organization.md": {
-    "mtime": 1787819005.226125,
-    "ast_hash": "d0c69addc844fe6d13c8402f567fcae2",
+    "mtime": 1787828926.2441561,
+    "ast_hash": "8090e3b9396b15320ad7abac519edae4",
     "semantic_hash": ""
   },
   "docs/organizations/overview.md": {
@@ -732,6 +732,71 @@
   "docs/assets/organization-switcher.png": {
     "mtime": 1787819039.1023884,
     "ast_hash": "4a87bf9b8aefad994241c110b7ffb474",
+    "semantic_hash": ""
+  },
+  "docs/account/_category_.json": {
+    "mtime": 1787828693.4602437,
+    "ast_hash": "2d3e91c535d890c62a6cbab88e004525",
+    "semantic_hash": ""
+  },
+  "docs/account/email-flows.md": {
+    "mtime": 1787828760.4194412,
+    "ast_hash": "32c18d58dd8964b178b59148eb05d429",
+    "semantic_hash": ""
+  },
+  "docs/account/profile.md": {
+    "mtime": 1787828793.6668108,
+    "ast_hash": "bfd4db106ddac3a6931886451573e476",
+    "semantic_hash": ""
+  },
+  "docs/self-hosting/encryption-at-rest.md": {
+    "mtime": 1787828818.2725909,
+    "ast_hash": "9f0f93a7485b985db2409e6b7b36d82f",
+    "semantic_hash": ""
+  },
+  "docs/self-hosting/telemetry.md": {
+    "mtime": 1787828889.968868,
+    "ast_hash": "97844181056dd58d79825acebcd163d4",
+    "semantic_hash": ""
+  },
+  "docs/assets/account-activation.png": {
+    "mtime": 1787828623.7578454,
+    "ast_hash": "6c035adebdfc00bd99952e10595419e3",
+    "semantic_hash": ""
+  },
+  "docs/assets/invitation-not-found.png": {
+    "mtime": 1787828623.7731,
+    "ast_hash": "0239fb2b26625c24160c4dc0d63e62cf",
+    "semantic_hash": ""
+  },
+  "docs/assets/organization-invitation.png": {
+    "mtime": 1787828623.770298,
+    "ast_hash": "cd5d7d0d5cb89850df3371edd6a0444b",
+    "semantic_hash": ""
+  },
+  "docs/assets/profile-avatar.png": {
+    "mtime": 1787828623.7794554,
+    "ast_hash": "16e0db17e6fce89e23aa967e1c2467e0",
+    "semantic_hash": ""
+  },
+  "docs/assets/profile-marketing-consent.png": {
+    "mtime": 1787828623.7824533,
+    "ast_hash": "c76a2c0830451e0fd346ceb92de902dd",
+    "semantic_hash": ""
+  },
+  "docs/assets/profile.png": {
+    "mtime": 1787828623.7760396,
+    "ast_hash": "3c699e66b8ce05d919ead743cb58bffe",
+    "semantic_hash": ""
+  },
+  "docs/assets/project-invitation.png": {
+    "mtime": 1787828623.7672312,
+    "ast_hash": "773e676a5f0ddc82bd67c22eae3a4281",
+    "semantic_hash": ""
+  },
+  "docs/assets/reset-password-request.png": {
+    "mtime": 1787828623.7612555,
+    "ast_hash": "3c316b44e989bafb68b14c859d4259ec",
     "semantic_hash": ""
   }
 }

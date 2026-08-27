@@ -1,16 +1,16 @@
 # Graph Report - documentation  (2026-08-27)
 
 ## Corpus Check
-- 85 files · ~468,219 words
+- 86 files · ~473,113 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1102 nodes · 1233 edges · 179 communities (109 shown, 70 thin omitted)
+- 1111 nodes · 1253 edges · 176 communities (105 shown, 71 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7faab3a1`
+- Built from commit: `0562f890`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -113,7 +113,6 @@
 - [[_COMMUNITY_Runtime environment variables|Runtime environment variables]]
 - [[_COMMUNITY_Microfrontends overview|Microfrontends overview]]
 - [[_COMMUNITY_Connect a GitHub repository|Connect a GitHub repository]]
-- [[_COMMUNITY_Use an external MongoDB and Redis|Use an external MongoDB and Redis]]
 - [[_COMMUNITY_Deploy to GitHub Pages workflow|Deploy to GitHub Pages workflow]]
 - [[_COMMUNITY_CLAUDE|CLAUDE.md]]
 - [[_COMMUNITY_Amazon S3 storage integration|Amazon S3 storage integration]]
@@ -184,8 +183,6 @@
 - [[_COMMUNITY_Build status|Build status]]
 - [[_COMMUNITY_Import repositories as microfrontends|Import repositories as microfrontends]]
 - [[_COMMUNITY_Dependency analysis and peer dependency alignment|Dependency analysis and peer dependency alignment]]
-- [[_COMMUNITY_Self-host on Kubernetes with Helm|Self-host on Kubernetes with Helm]]
-- [[_COMMUNITY_Self-host with Docker Compose|Self-host with Docker Compose]]
 - [[_COMMUNITY_Upgrading to organizations|Upgrading to organizations]]
 - [[_COMMUNITY_Organizations overview|Organizations overview]]
 - [[_COMMUNITY_Store builds on Amazon S3|Store builds on Amazon S3]]
@@ -255,11 +252,7 @@
 - **First Storage Creation Onboarding Flow** — docs_assets_storages_empty_storages_page, docs_assets_storages_empty_empty_state_pattern, docs_assets_storages_empty_new_storage_cta, docs_assets_storages_empty_first_storage_onboarding_rationale [INFERRED 0.85]
 - **Project Members screen: manage members via invite, role badges, and card listing** — docs_assets_team_members_project_members_management, docs_assets_team_members_invite_user_action, docs_assets_team_members_owner_role, docs_assets_team_members_member_card_layout [EXTRACTED 1.00]
 
-## Communities (179 total, 70 thin omitted)
-
-### Community 0 - "Canary Releases & Product Concepts"
-Cohesion: 0.13
-Nodes (6): Marketing communications, Personal data, Profile picture, Your profile, Module Federation, Documentation Social Card (1200x630 OG Image Source)
+## Communities (176 total, 71 thin omitted)
 
 ### Community 1 - "Deployments, Storage & CI/CD Docs"
 Cohesion: 0.14
@@ -482,11 +475,11 @@ Cohesion: 0.12
 Nodes (16): Auth0, Available Variables, Azure Entra ID, Container environment variables, Database Configuration, Email Configuration (SMTP), General Configuration, GitHub (code repositories) (+8 more)
 
 ### Community 62 - "Store builds on Azure Blob Storage"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (11): Option A — Connection string, Option B — Shared key, Option C — Azure AD (recommended), Prerequisites, Secret rotation, Step 1: Create the storage account and container, Step 2: Choose an authentication method, Step 3: Add the storage in MFE Orchestrator (+3 more)
 
 ### Community 63 - "Store builds on Google Cloud Storage"
-Cohesion: 0.18
+Cohesion: 0.20
 Nodes (10): Key rotation, Prerequisites, Step 1: Create the bucket, Step 2: Create a service account, Step 3: Grant access on the bucket, Step 4: Create a JSON key, Step 5: Add the storage in MFE Orchestrator, Step 6: Point a microfrontend at it (+2 more)
 
 ### Community 64 - "Serve API reference"
@@ -506,8 +499,8 @@ Cohesion: 0.25
 Nodes (8): How the two levels combine, Inviting to a project creates a membership in the organization, Organization roles and project visibility, Pending invitations are not memberships, Relation to project roles, Removing somebody from the organization, The three organization roles, What a Member actually gets
 
 ### Community 68 - "Enable SSO with Auth0"
-Cohesion: 0.22
-Nodes (8): Enable SSO with Auth0, Prerequisites, Step 1: Configure Auth0 Application, Step 2: Configure Application Settings, Step 3: Set Up API (Optional but Recommended), Step 4: Configure Environment Variables, Step 5: Update Docker Configuration, Step 6: Restart Your Application
+Cohesion: 0.04
+Nodes (44): Marketing communications, Personal data, Profile picture, Your profile, Before you call it production, Prerequisites, Self-host with Docker Compose, Start the configuration container (+36 more)
 
 ### Community 69 - "Enable SSO with Microsoft Entra ID"
 Cohesion: 0.20
@@ -625,10 +618,6 @@ Nodes (5): Anatomy of a microfrontend, Host and remote, Microfrontends overview,
 Cohesion: 0.40
 Nodes (5): Connect a GitHub repository, Prerequisites, Step 1: Navigate to Code Repositories, Step 2: Authorize on GitHub, Troubleshooting
 
-### Community 98 - "Use an external MongoDB and Redis"
-Cohesion: 0.50
-Nodes (4): MongoDB, Redis, Use an external MongoDB and Redis, What stays local
-
 ### Community 165 - "The client SDK"
 Cohesion: 0.14
 Nodes (14): Bundler configuration, Changing the user without a reload, Configuration, Configure once, at the top of the entry point, Framework adapters, Identities, Leaving the environment out, Packages (+6 more)
@@ -653,14 +642,6 @@ Nodes (10): API, Before you start, Choosing what to import, Import, Import repos
 Cohesion: 0.22
 Nodes (9): Alignment issues, API, Applying the alignment, Choosing the branch, Configuration, Dependency analysis and peer dependency alignment, Limitations, Update status (+1 more)
 
-### Community 171 - "Self-host on Kubernetes with Helm"
-Cohesion: 0.22
-Nodes (9): Configuration, Health and scaling, Image version, Ingress, Install, MongoDB and Redis, Prerequisites, Self-host on Kubernetes with Helm (+1 more)
-
-### Community 172 - "Self-host with Docker Compose"
-Cohesion: 0.50
-Nodes (4): Before you call it production, Prerequisites, Self-host with Docker Compose, Start the configuration container
-
 ### Community 173 - "Upgrading to organizations"
 Cohesion: 0.29
 Nodes (7): After the upgrade, Endpoints that changed, How roles are converted, Projects with no members at all, Safe to run, safe to interrupt, Upgrading to organizations, What the migration does
@@ -670,8 +651,8 @@ Cohesion: 0.33
 Nodes (6): One organization at a time, Organizations overview, Where it sits in the object model, Where to go next, Why the level exists, Your first organization
 
 ### Community 175 - "Store builds on Amazon S3"
-Cohesion: 0.11
-Nodes (16): Cost notes, Prerequisites, Step 1: Create the bucket, Step 2: Create an IAM policy, Step 3: Create an IAM user and access key, Step 4: Add the storage in MFE Orchestrator, Step 5: Point a microfrontend at it, Store builds on Amazon S3 (+8 more)
+Cohesion: 0.22
+Nodes (9): Cost notes, Prerequisites, Step 1: Create the bucket, Step 2: Create an IAM policy, Step 3: Create an IAM user and access key, Step 4: Add the storage in MFE Orchestrator, Step 5: Point a microfrontend at it, Store builds on Amazon S3 (+1 more)
 
 ### Community 176 - "Storage overview"
 Cohesion: 0.22
@@ -686,9 +667,9 @@ Cohesion: 0.40
 Nodes (5): Encryption of stored credentials, In the API, Rotating or losing the key, What is covered, What this protects against, and what it does not
 
 ## Knowledge Gaps
-- **630 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+625 more)
+- **637 isolated node(s):** `config`, `name`, `version`, `private`, `docusaurus` (+632 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **70 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **71 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -697,12 +678,12 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Why does `Serve API reference` connect `Serve API reference` to `Canary Releases & Product Concepts`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **Why does `Connect a GitLab repository` connect `Connect a GitLab repository` to `Canary Releases & Product Concepts`?**
+- **Why does `Project members and roles` connect `Project members and roles` to `Canary Releases & Product Concepts`?**
   _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `config`, `name`, `version` to the rest of the system?**
-  _654 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _661 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Canary Releases & Product Concepts` be split into smaller, more focused modules?**
-  _Cohesion score 0.1305194805194805 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13896103896103895 - nodes in this community are weakly interconnected._
 - **Should `Deployments, Storage & CI/CD Docs` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
 - **Should `Docusaurus Package Config` be split into smaller, more focused modules?**

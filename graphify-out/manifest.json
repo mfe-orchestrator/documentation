@@ -275,13 +275,13 @@
     "semantic_hash": ""
   },
   "docs/self-hosting/docker-compose.md": {
-    "mtime": 1787824077.815276,
-    "ast_hash": "892013f658431833e17cd8ad7a482278",
+    "mtime": 1787834463.6446934,
+    "ast_hash": "a81f784e42b0886b9f80a85ddd391831",
     "semantic_hash": ""
   },
   "docs/self-hosting/docker.md": {
-    "mtime": 1787824077.8144336,
-    "ast_hash": "7d24d91f0e5ace163212a7cf118e93c5",
+    "mtime": 1787834463.6443615,
+    "ast_hash": "2f48a8c6bbe0e18ddd37c938aa712809",
     "semantic_hash": ""
   },
   "docs/self-hosting/enable-sso/Auth0.md": {
@@ -300,13 +300,13 @@
     "semantic_hash": ""
   },
   "docs/self-hosting/environment-variables.md": {
-    "mtime": 1787828916.357439,
-    "ast_hash": "f3625122cdba9b70b85adfcf5b6a44f8",
+    "mtime": 1787834470.4545507,
+    "ast_hash": "5974a82d731997f95e3c7558f7d06619",
     "semantic_hash": ""
   },
   "docs/self-hosting/terraform.md": {
-    "mtime": 1787824077.8173206,
-    "ast_hash": "d2449d22eec5c6c9862884c0d8900171",
+    "mtime": 1787834463.6451025,
+    "ast_hash": "04b0cffd0080d7ef5376d730f101cec6",
     "semantic_hash": ""
   },
   "docs/self-hosting/use-external-resources.md": {
@@ -620,8 +620,8 @@
     "semantic_hash": ""
   },
   "docs/self-hosting/helm.md": {
-    "mtime": 1787824077.8164492,
-    "ast_hash": "3b87cb50a8761208f4fcb40b6a36a104",
+    "mtime": 1787834463.6453846,
+    "ast_hash": "533c61f5a1d189e6aa16618419c6a247",
     "semantic_hash": ""
   },
   "docs/assets/builds-page.png": {
@@ -740,8 +740,8 @@
     "semantic_hash": ""
   },
   "docs/account/email-flows.md": {
-    "mtime": 1787828760.4194412,
-    "ast_hash": "32c18d58dd8964b178b59148eb05d429",
+    "mtime": 1787834480.1155875,
+    "ast_hash": "6876dd32f140a6df0890c9efb553d3a7",
     "semantic_hash": ""
   },
   "docs/account/profile.md": {
@@ -797,6 +797,21 @@
   "docs/assets/reset-password-request.png": {
     "mtime": 1787828623.7612555,
     "ast_hash": "3c316b44e989bafb68b14c859d4259ec",
+    "semantic_hash": ""
+  },
+  "docs/self-hosting/first-startup.md": {
+    "mtime": 1787834432.9393406,
+    "ast_hash": "e32d54c9dedf97e67b3cfa6625022690",
+    "semantic_hash": ""
+  },
+  "docs/assets/first-startup-sso.png": {
+    "mtime": 1787834393.1486773,
+    "ast_hash": "9ba32df535c36fa7ddc4d496ee388c55",
+    "semantic_hash": ""
+  },
+  "docs/assets/first-startup.png": {
+    "mtime": 1787834393.087898,
+    "ast_hash": "43a194943e4e36fbb874b9b27c477c2f",
     "semantic_hash": ""
   }
 }

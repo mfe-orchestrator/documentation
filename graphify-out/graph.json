@@ -1655,7 +1655,7 @@
       "label": "Recovering a password",
       "file_type": "document",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "docs_account_email_flows_recovering_a_password",
       "community": 177,
@@ -1665,7 +1665,7 @@
       "label": "Accepting an invitation",
       "file_type": "document",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L107",
+      "source_location": "L109",
       "_origin": "ast",
       "id": "docs_account_email_flows_accepting_an_invitation",
       "community": 177,
@@ -1675,7 +1675,7 @@
       "label": "When the link does not work",
       "file_type": "document",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L128",
+      "source_location": "L130",
       "_origin": "ast",
       "id": "docs_account_email_flows_when_the_link_does_not_work",
       "community": 177,
@@ -1685,7 +1685,7 @@
       "label": "The route that needs no email",
       "file_type": "document",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L149",
+      "source_location": "L151",
       "_origin": "ast",
       "id": "docs_account_email_flows_the_route_that_needs_no_email",
       "community": 177,
@@ -1695,7 +1695,7 @@
       "label": "What the platform sends, and when",
       "file_type": "document",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L156",
+      "source_location": "L158",
       "_origin": "ast",
       "id": "docs_account_email_flows_what_the_platform_sends_and_when",
       "community": 177,
@@ -1718,7 +1718,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "docs_account_profile_your_profile",
-      "community": 0,
+      "community": 68,
       "norm_label": "your profile"
     },
     {
@@ -1728,7 +1728,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "docs_account_profile_profile_picture",
-      "community": 0,
+      "community": 68,
       "norm_label": "profile picture"
     },
     {
@@ -1738,7 +1738,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "docs_account_profile_personal_data",
-      "community": 0,
+      "community": 68,
       "norm_label": "personal data"
     },
     {
@@ -1748,7 +1748,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "docs_account_profile_marketing_communications",
-      "community": 0,
+      "community": 68,
       "norm_label": "marketing communications"
     },
     {
@@ -1828,7 +1828,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_buckets_aws_s3",
-      "community": 175,
+      "community": 0,
       "norm_label": "aws-s3.md"
     },
     {
@@ -1928,7 +1928,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_buckets_azure_blob_storage",
-      "community": 62,
+      "community": 0,
       "norm_label": "azure-blob-storage.md"
     },
     {
@@ -2048,7 +2048,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "docs_buckets_google_cloud_storage",
-      "community": 63,
+      "community": 0,
       "norm_label": "google-cloud-storage.md"
     },
     {
@@ -5928,7 +5928,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_compose_self_host_with_docker_compose",
-      "community": 172,
+      "community": 68,
       "norm_label": "self-host with docker compose"
     },
     {
@@ -5938,7 +5938,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_compose_prerequisites",
-      "community": 172,
+      "community": 68,
       "norm_label": "prerequisites"
     },
     {
@@ -5948,17 +5948,17 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_compose_start_the_configuration_container",
-      "community": 172,
+      "community": 68,
       "norm_label": "start the configuration container"
     },
     {
       "label": "Before you call it production",
       "file_type": "document",
       "source_file": "docs/self-hosting/docker-compose.md",
-      "source_location": "L96",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_compose_before_you_call_it_production",
-      "community": 172,
+      "community": 68,
       "norm_label": "before you call it production"
     },
     {
@@ -5978,7 +5978,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_self_host_with_docker",
-      "community": 175,
+      "community": 68,
       "norm_label": "self-host with docker"
     },
     {
@@ -5988,7 +5988,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_prerequisites",
-      "community": 175,
+      "community": 68,
       "norm_label": "prerequisites"
     },
     {
@@ -5998,7 +5998,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_which_image",
-      "community": 175,
+      "community": 68,
       "norm_label": "which image"
     },
     {
@@ -6008,37 +6008,37 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_start_the_all_in_one_container",
-      "community": 175,
+      "community": 68,
       "norm_label": "start the all-in-one container"
     },
     {
       "label": "Start the standard container",
       "file_type": "document",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L73",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_start_the_standard_container",
-      "community": 175,
+      "community": 68,
       "norm_label": "start the standard container"
     },
     {
       "label": "Image tags",
       "file_type": "document",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L91",
+      "source_location": "L98",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_image_tags",
-      "community": 175,
+      "community": 68,
       "norm_label": "image tags"
     },
     {
       "label": "Container variables",
       "file_type": "document",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L105",
+      "source_location": "L112",
       "_origin": "ast",
       "id": "docs_self_hosting_docker_container_variables",
-      "community": 175,
+      "community": 68,
       "norm_label": "container variables"
     },
     {
@@ -6562,6 +6562,96 @@
       "norm_label": "observability and telemetry"
     },
     {
+      "label": "first-startup.md",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup",
+      "community": 0,
+      "norm_label": "first-startup.md"
+    },
+    {
+      "label": "The first startup",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_the_first_startup",
+      "community": 68,
+      "norm_label": "the first startup"
+    },
+    {
+      "label": "When it appears, and what it replaces",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_when_it_appears_and_what_it_replaces",
+      "community": 68,
+      "norm_label": "when it appears, and what it replaces"
+    },
+    {
+      "label": "The three fields",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_the_three_fields",
+      "community": 68,
+      "norm_label": "the three fields"
+    },
+    {
+      "label": "What Create actually creates",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_what_create_actually_creates",
+      "community": 68,
+      "norm_label": "what create actually creates"
+    },
+    {
+      "label": "You are not signed in afterwards",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_you_are_not_signed_in_afterwards",
+      "community": 68,
+      "norm_label": "you are not signed in afterwards"
+    },
+    {
+      "label": "Creating the first user with SSO instead",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L96",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_creating_the_first_user_with_sso_instead",
+      "community": 68,
+      "norm_label": "creating the first user with sso instead"
+    },
+    {
+      "label": "The endpoint stays open",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_the_endpoint_stays_open",
+      "community": 68,
+      "norm_label": "the endpoint stays open"
+    },
+    {
+      "label": "After the first startup",
+      "file_type": "document",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L133",
+      "_origin": "ast",
+      "id": "docs_self_hosting_first_startup_after_the_first_startup",
+      "community": 68,
+      "norm_label": "after the first startup"
+    },
+    {
       "label": "helm.md",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
@@ -6578,7 +6668,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
-      "community": 171,
+      "community": 68,
       "norm_label": "self-host on kubernetes with helm"
     },
     {
@@ -6588,7 +6678,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_prerequisites",
-      "community": 171,
+      "community": 68,
       "norm_label": "prerequisites"
     },
     {
@@ -6598,67 +6688,67 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_install",
-      "community": 171,
+      "community": 68,
       "norm_label": "install"
     },
     {
       "label": "Configuration",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L57",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_configuration",
-      "community": 171,
+      "community": 68,
       "norm_label": "configuration"
     },
     {
       "label": "Image version",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L108",
+      "source_location": "L122",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_image_version",
-      "community": 171,
+      "community": 68,
       "norm_label": "image version"
     },
     {
       "label": "Storage of the uploaded microfrontends",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L118",
+      "source_location": "L132",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_storage_of_the_uploaded_microfrontends",
-      "community": 171,
+      "community": 68,
       "norm_label": "storage of the uploaded microfrontends"
     },
     {
       "label": "Ingress",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L136",
+      "source_location": "L150",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_ingress",
-      "community": 171,
+      "community": 68,
       "norm_label": "ingress"
     },
     {
       "label": "MongoDB and Redis",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L159",
+      "source_location": "L173",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_mongodb_and_redis",
-      "community": 171,
+      "community": 68,
       "norm_label": "mongodb and redis"
     },
     {
       "label": "Health and scaling",
       "file_type": "document",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L177",
+      "source_location": "L191",
       "_origin": "ast",
       "id": "docs_self_hosting_helm_health_and_scaling",
-      "community": 171,
+      "community": 68,
       "norm_label": "health and scaling"
     },
     {
@@ -6885,7 +6975,7 @@
       "label": "Pinned images",
       "file_type": "document",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L87",
+      "source_location": "L92",
       "_origin": "ast",
       "id": "docs_self_hosting_terraform_pinned_images",
       "community": 65,
@@ -6895,7 +6985,7 @@
       "label": "Before you call it production",
       "file_type": "document",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L101",
+      "source_location": "L106",
       "_origin": "ast",
       "id": "docs_self_hosting_terraform_before_you_call_it_production",
       "community": 65,
@@ -6905,7 +6995,7 @@
       "label": "Container Variables",
       "file_type": "document",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L115",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "docs_self_hosting_terraform_container_variables",
       "community": 65,
@@ -6928,7 +7018,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "docs_self_hosting_use_external_resources_use_an_external_mongodb_and_redis",
-      "community": 98,
+      "community": 68,
       "norm_label": "use an external mongodb and redis"
     },
     {
@@ -6938,7 +7028,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "docs_self_hosting_use_external_resources_mongodb",
-      "community": 98,
+      "community": 68,
       "norm_label": "mongodb"
     },
     {
@@ -6948,7 +7038,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "docs_self_hosting_use_external_resources_redis",
-      "community": 98,
+      "community": 68,
       "norm_label": "redis"
     },
     {
@@ -6958,7 +7048,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "docs_self_hosting_use_external_resources_what_stays_local",
-      "community": 98,
+      "community": 68,
       "norm_label": "what stays local"
     },
     {
@@ -13997,7 +14087,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L172",
+      "source_location": "L174",
       "weight": 1.0,
       "source": "docs_account_email_flows",
       "target": "docs_account_profile",
@@ -14034,10 +14124,20 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/account/email-flows.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "docs_account_email_flows",
+      "target": "docs_self_hosting_first_startup",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L107",
+      "source_location": "L109",
       "weight": 1.0,
       "source": "docs_account_email_flows_activation_password_reset_and_invitations",
       "target": "docs_account_email_flows_accepting_an_invitation",
@@ -14047,7 +14147,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "docs_account_email_flows_activation_password_reset_and_invitations",
       "target": "docs_account_email_flows_recovering_a_password",
@@ -14067,7 +14167,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L156",
+      "source_location": "L158",
       "weight": 1.0,
       "source": "docs_account_email_flows_activation_password_reset_and_invitations",
       "target": "docs_account_email_flows_what_the_platform_sends_and_when",
@@ -14077,7 +14177,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L149",
+      "source_location": "L151",
       "weight": 1.0,
       "source": "docs_account_email_flows_accepting_an_invitation",
       "target": "docs_account_email_flows_the_route_that_needs_no_email",
@@ -14087,7 +14187,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/account/email-flows.md",
-      "source_location": "L128",
+      "source_location": "L130",
       "weight": 1.0,
       "source": "docs_account_email_flows_accepting_an_invitation",
       "target": "docs_account_email_flows_when_the_link_does_not_work",
@@ -14110,6 +14210,16 @@
       "source_location": "L50",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables",
+      "target": "docs_account_profile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
       "target": "docs_account_profile",
       "confidence_score": 1.0
     },
@@ -14760,6 +14870,16 @@
       "source_location": "L70",
       "weight": 1.0,
       "source": "docs_self_hosting_encryption_at_rest",
+      "target": "docs_buckets_overview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
       "target": "docs_buckets_overview",
       "confidence_score": 1.0
     },
@@ -17854,6 +17974,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
+      "target": "docs_microfrontends_create_a_microfrontend",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/microfrontends/create-a-microfrontend.md",
@@ -18300,6 +18430,16 @@
       "source_location": "L161",
       "weight": 1.0,
       "source": "docs_project_settings_users_and_roles",
+      "target": "docs_organizations_managing_an_organization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
       "target": "docs_organizations_managing_an_organization",
       "confidence_score": 1.0
     },
@@ -19747,10 +19887,20 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker-compose.md",
-      "source_location": "L107",
+      "source_location": "L114",
       "weight": 1.0,
       "source": "docs_self_hosting_docker_compose",
       "target": "docs_self_hosting_environment_variables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/docker-compose.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "docs_self_hosting_docker_compose",
+      "target": "docs_self_hosting_first_startup",
       "confidence_score": 1.0
     },
     {
@@ -19767,7 +19917,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L113",
+      "source_location": "L118",
       "weight": 1.0,
       "source": "docs_self_hosting_terraform",
       "target": "docs_self_hosting_docker_compose",
@@ -19787,7 +19937,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker-compose.md",
-      "source_location": "L96",
+      "source_location": "L103",
       "weight": 1.0,
       "source": "docs_self_hosting_docker_compose_self_host_with_docker_compose",
       "target": "docs_self_hosting_docker_compose_before_you_call_it_production",
@@ -19827,7 +19977,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L56",
+      "source_location": "L63",
       "weight": 1.0,
       "source": "docs_self_hosting_docker",
       "target": "docs_self_hosting_environment_variables",
@@ -19837,7 +19987,17 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L70",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "docs_self_hosting_docker",
+      "target": "docs_self_hosting_first_startup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/docker.md",
+      "source_location": "L77",
       "weight": 1.0,
       "source": "docs_self_hosting_docker",
       "target": "docs_self_hosting_helm",
@@ -19847,7 +20007,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L102",
+      "source_location": "L109",
       "weight": 1.0,
       "source": "docs_self_hosting_docker",
       "target": "docs_self_hosting_terraform",
@@ -19857,7 +20017,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L105",
+      "source_location": "L112",
       "weight": 1.0,
       "source": "docs_self_hosting_docker_self_host_with_docker",
       "target": "docs_self_hosting_docker_container_variables",
@@ -19867,7 +20027,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L91",
+      "source_location": "L98",
       "weight": 1.0,
       "source": "docs_self_hosting_docker_self_host_with_docker",
       "target": "docs_self_hosting_docker_image_tags",
@@ -19897,7 +20057,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/docker.md",
-      "source_location": "L73",
+      "source_location": "L80",
       "weight": 1.0,
       "source": "docs_self_hosting_docker_self_host_with_docker",
       "target": "docs_self_hosting_docker_start_the_standard_container",
@@ -20104,6 +20264,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
+      "target": "docs_self_hosting_enable_sso_google",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/enable-sso/Google.md",
@@ -20204,6 +20374,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L141",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
+      "target": "docs_self_hosting_encryption_at_rest",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/encryption-at-rest.md",
@@ -20257,6 +20437,16 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/environment-variables.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "docs_self_hosting_environment_variables",
+      "target": "docs_self_hosting_first_startup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/environment-variables.md",
       "source_location": "L21",
       "weight": 1.0,
       "source": "docs_self_hosting_environment_variables",
@@ -20277,7 +20467,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L117",
+      "source_location": "L122",
       "weight": 1.0,
       "source": "docs_self_hosting_terraform",
       "target": "docs_self_hosting_environment_variables",
@@ -20446,6 +20636,106 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
+      "target": "docs_self_hosting_first_startup_the_first_startup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
+      "target": "docs_self_hosting_helm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup",
+      "target": "docs_self_hosting_terraform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L133",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_after_the_first_startup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_creating_the_first_user_with_sso_instead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_the_endpoint_stays_open",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_the_three_fields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_what_create_actually_creates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_when_it_appears_and_what_it_replaces",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/self-hosting/first-startup.md",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "docs_self_hosting_first_startup_the_first_startup",
+      "target": "docs_self_hosting_first_startup_you_are_not_signed_in_afterwards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
       "source_location": "L9",
       "weight": 1.0,
@@ -20467,7 +20757,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L57",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_configuration",
@@ -20477,7 +20767,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L177",
+      "source_location": "L191",
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_health_and_scaling",
@@ -20487,7 +20777,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L108",
+      "source_location": "L122",
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_image_version",
@@ -20497,7 +20787,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L136",
+      "source_location": "L150",
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_ingress",
@@ -20517,7 +20807,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L159",
+      "source_location": "L173",
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_mongodb_and_redis",
@@ -20537,7 +20827,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/helm.md",
-      "source_location": "L118",
+      "source_location": "L132",
       "weight": 1.0,
       "source": "docs_self_hosting_helm_self_host_on_kubernetes_with_helm",
       "target": "docs_self_hosting_helm_storage_of_the_uploaded_microfrontends",
@@ -20687,7 +20977,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L101",
+      "source_location": "L106",
       "weight": 1.0,
       "source": "docs_self_hosting_terraform_self_host_with_terraform",
       "target": "docs_self_hosting_terraform_before_you_call_it_production",
@@ -20697,7 +20987,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L115",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "docs_self_hosting_terraform_self_host_with_terraform",
       "target": "docs_self_hosting_terraform_container_variables",
@@ -20717,7 +21007,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/self-hosting/terraform.md",
-      "source_location": "L87",
+      "source_location": "L92",
       "weight": 1.0,
       "source": "docs_self_hosting_terraform_self_host_with_terraform",
       "target": "docs_self_hosting_terraform_pinned_images",
@@ -26011,5 +26301,5 @@
       "weight": 1.0
     }
   ],
-  "built_at_commit": "7faab3a1b6ec4f258bbe73d319240f428add0571"
+  "built_at_commit": "0562f890a9be7ecf618c1220fa86693f7b8854c1"
 }
