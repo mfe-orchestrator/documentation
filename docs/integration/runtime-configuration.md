@@ -12,7 +12,7 @@ This page shows how to read an environment's [environment variables](../environm
 from the browser, so a single build can be configured differently in each stage.
 
 The console generates both snippets with your ids already substituted, under
-**Integration → Environment variables**.
+**Integration → Environment Variables**.
 
 ![The Integration page's Environment Variables tab, with both snippets filled in](../assets/integration-environment-variables.png)
 
@@ -102,10 +102,24 @@ If you would rather control loading yourself:
 ```js
 const vars = await fetch('<API_BASE>/serve/global-variables/auto/<projectId>')
   .then(r => r.json())
-// [{ key: 'API_URL', value: 'https://api.example.com' }, …]
+// [{ _id: '68f1…', key: 'API_URL', value: 'https://api.example.com',
+//    environmentId: '68f2…', createdAt: '…', updatedAt: '…' }, …]
 ```
 
-This form returns an array of `{ key, value }` objects. Convert it if you want a lookup:
+Always an array, and `key` and `value` are always on every entry — but the entries are not the same
+shape at every address:
+
+| Address | Entry shape |
+| --- | --- |
+| `/serve/global-variables/{environmentId}` | Exactly `{ key, value }` |
+| `/serve/global-variables/{projectId}/{environmentSlug}` | The stored document: `key`, `value`, plus `_id`, `environmentId`, `createdAt`, `updatedAt` |
+| `/serve/global-variables/auto/{projectId}` | The stored document, as above |
+| `globalVariables` inside `/serve/all/…` | The stored document, as above |
+
+Only the environment-id form maps the entries down to two fields. The other addresses — including the
+`auto` form used above, and the one in the generated snippet — hand back the deployed documents as
+they are stored. Read `key` and `value` and treat the rest as an implementation detail rather than a
+contract. The conversion is the same either way:
 
 ```js
 const config = Object.fromEntries(vars.map(v => [v.key, v.value]))
@@ -117,9 +131,17 @@ default recommendation.
 
 ## How `auto` resolves
 
-The `auto` address used by both snippets above carries no environment. The platform reads the
-domain the request comes from — the browser sends the page it is loading from — and matches it
-against the [allowed domains](../environments/domains.md) of each environment.
+The `auto` address used by both snippets above carries no environment. The platform works out the
+calling domain and matches it against the [allowed domains](../environments/domains.md) of each
+environment.
+
+It does not do that by relying on the browser to send the page it is loading from. Under the default
+referrer policy a cross-origin `<script src>` sends only the *origin* in `Referer`, and a request
+with no referrer at all — a `curl`, a preload, a page under a stricter policy — sends none. So the
+backend tries several forms of the calling domain in turn and accepts a match against any of them:
+the `Referer` as received, then its origin, its host and its hostname, falling back to the request's
+`Host` header when there is no `Referer`. Registering the bare hostname, ex. `dev.example.com`,
+satisfies all of them.
 
 It only works if the domain is actually registered on the intended environment: an unregistered
 domain has nothing to resolve against and the request fails rather than falling back to a default.

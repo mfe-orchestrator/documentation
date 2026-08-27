@@ -17,10 +17,12 @@ there: the boxes below are the objects described on that page.
 
 ## The system at a glance
 
-The orchestrator ships as **one container**. It serves the console, the authenticated management
-API and the public serve API from the same process, and keeps its state in MongoDB and Redis.
-Artifacts — the actual microfrontend bundles — live outside the database, either on the
-orchestrator's own storage or in a cloud bucket you own.
+The orchestrator ships as **one container**, listening on port 80. Inside it there are two
+processes: nginx serves the console as static files and proxies `/api/` to a Node process on
+localhost:3000, which is the authenticated management API and the public serve API together. All of
+it therefore arrives on one port, from one image. State lives in MongoDB — Redis is optional and
+holds no state, see below. Artifacts — the actual microfrontend bundles — live outside the database,
+either on the orchestrator's own storage or in a cloud bucket you own.
 
 ```mermaid
 flowchart TB
@@ -39,10 +41,10 @@ flowchart TB
         storage["Storage layer<br/>resolves a version to bytes"]
     end
 
-    subgraph state["State"]
+    subgraph state["State, and one optional cache"]
         direction LR
         mongo[("MongoDB<br/>projects · environments · microfrontends<br/>deployments · storages · members · API keys")]
-        redis[("Redis<br/>cache")]
+        redis[("Redis · optional<br/>caches Auth0 / Google token lookups")]
     end
 
     subgraph artifacts["Where the bundles are stored"]
@@ -70,9 +72,8 @@ flowchart TB
     mgmt --> storage
     serve --> storage
     mgmt --> mongo
-    mgmt --> redis
+    mgmt -.->|"Auth0 and Google login only"| redis
     serve --> mongo
-    serve --> redis
 
     console -.-> idp
     mgmt -.-> idp
@@ -91,14 +92,20 @@ A few things worth reading off the diagram:
 - **The browser never talks to your bucket.** For internal storage and for
   [Custom Source](./microfrontends/hosting-options.md#custom-source-your-own-bucket) buckets, the
   serve API reads the bytes server-side with your credentials and streams them back. Your bucket
-  stays private and needs no CORS configuration. The one exception is
-  [Custom URL](./microfrontends/hosting-options.md#custom-url), where the platform returns a URL
-  and the browser fetches it itself.
+  stays private and needs no CORS configuration.
+  [Custom URL](./microfrontends/hosting-options.md#custom-url) is the exception *in the manifest*:
+  the platform returns the URL and the browser fetches it itself — though `/serve/mfe/files/...`,
+  called directly for a Custom URL microfrontend, proxies those bytes server-side like any other.
 - **The serve API is public and unauthenticated** by design — it is called from browsers. The
   management API is the authenticated surface, used by the console and by CI with an
   [API key](./ci-cd/api-keys.md).
 - **Artifacts are not in the database.** MongoDB holds configuration and deployment snapshots;
   bundles live on disk or in object storage.
+- **Redis is optional, and caches one thing.** Without `REDIS_URL` the plugin logs a warning and
+  returns, and the platform runs without it. Its only consumer in the whole backend caches the
+  responses of the Google `tokeninfo` and Auth0 `/userinfo` calls, keyed by the token, for an hour —
+  so local and Entra ID logins never touch it, the rate limiter keeps its counters in memory, and
+  nothing on the serve path reads it at all.
 - **Git providers are reached from the management API**, not shown above to keep the picture
   readable: with a [repository](./repositories/connect/github.md) connected, the platform scaffolds
   a repo from a template, injects a build pipeline and creates the deploy secret that pipeline
@@ -221,19 +228,19 @@ instant, and why you may want a lifecycle rule on old objects — see
 ## Running the orchestrator itself
 
 The same control plane runs either as the hosted console or on your own infrastructure. Only the
-API base URL differs. Self-hosted, the reference topology is the container plus MongoDB, Redis and
-a persistent volume:
+API base URL differs. Self-hosted, the reference `docker-compose.yaml` is the container plus
+MongoDB, a persistent volume and an optional Redis:
 
 ```mermaid
 flowchart LR
-    subgraph host["Your infrastructure — Docker Compose, Kubernetes or Terraform"]
+    subgraph host["Your infrastructure — the reference Docker Compose topology"]
         direction TB
         app["mfe-orchestrator<br/>container port 80"]
         mongo[("mongodb<br/>NOSQL_DATABASE_URL<br/>volume: mongodb_data")]
-        redis[("redis<br/>REDIS_URL<br/>volume: redis_data")]
+        redis[("redis · optional<br/>REDIS_URL<br/>volume: redis_data")]
         vol["Persistent volume<br/>MICROFRONTEND_HOST_FOLDER<br/>volume: upload_microfrontends"]
         app --> mongo
-        app --> redis
+        app -.->|"optional"| redis
         app --> vol
     end
 
@@ -249,8 +256,14 @@ loses the builds uploaded to the internal storage — in the reference `docker-c
 the `upload_microfrontends` volume.
 :::
 
-MongoDB and Redis can be replaced by managed services; the identity providers, SMTP and cloud
-buckets are all optional. See [Docker Compose](./self-hosting/docker-compose.md),
+That diagram is the Compose topology. The Helm chart is deliberately thinner: it ships the
+deployment, a service, an ingress, a persistent volume claim and the environment variables, and no
+database of its own — `NOSQL_DATABASE_URL` has to point at a MongoDB you run, and `REDIS_URL`
+defaults to empty, which is the supported way to run without Redis at all.
+
+MongoDB can be replaced by a managed service, and so can Redis where you run one; the identity
+providers, SMTP and cloud buckets are all optional. See
+[Docker Compose](./self-hosting/docker-compose.md),
 [Terraform](./self-hosting/terraform.md),
 [Use external resources](./self-hosting/use-external-resources.md) and the full
 [environment variable reference](./self-hosting/environment-variables.md).

@@ -21,7 +21,7 @@ Click **New Environment** and fill in:
 | Field | Notes |
 | --- | --- |
 | **Name** | Display name, e.g. *Production* |
-| **Slug** | URL-friendly identifier, e.g. `prod`. Unique within the project, and part of your public serve URLs |
+| **Slug** | URL-friendly identifier, e.g. `prod`. Unique within the project, part of your public serve URLs, and read-only once the environment exists |
 | **Description** | Free text |
 | **Production** | Marks this as a production stage |
 | **Color** | Used to tag the environment throughout the console |
@@ -39,8 +39,10 @@ to start from, and you can add your own alongside them.
 
 :::caution Slugs are public
 The environment slug appears in serve URLs such as
-`<API_BASE>/serve/all/<projectId>/<environmentSlug>`. Renaming it breaks any consumer using that
-form of the URL.
+`<API_BASE>/serve/all/<projectId>/<environmentSlug>`. The console will not let you rename it — the
+field is disabled when you edit an existing environment — precisely because renaming it breaks any
+consumer using that form of the URL. `PUT /api/environments/:id` does accept a new slug, so through
+the API the breakage is yours to manage.
 :::
 
 ## The environment selector
@@ -72,8 +74,20 @@ stages.
 
 ## Deleting an environment
 
-Deleting an environment removes it along with its deployment history and its variables. You are
-asked to confirm by name. There is no undo.
+Deleting an environment removes the environment itself and nothing else. A confirmation dialog names
+the environment you are about to delete — you do not have to type the name — and there is no undo.
+
+The delete does not cascade, and no hook on the model makes it:
+
+| Object | What happens to it |
+| --- | --- |
+| Deployments of that environment | Left in the database, still pointing at the id of the deleted environment |
+| Variables of that environment | Left in the database, still pointing at the id of the deleted environment |
+
+In practice those rows are orphaned rather than deleted. Nothing serves them any more, since every
+serve endpoint resolves an environment first, and nothing in the console lists them, since every
+page that would starts from the environments of the project. They do still occupy the database, and
+recreating an environment with the same slug does not adopt them — a new environment gets a new id.
 
 ## Where to go next
 

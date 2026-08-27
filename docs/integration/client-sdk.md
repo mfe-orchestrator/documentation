@@ -26,8 +26,16 @@ server and your host stays a single build.
 | `@mfe-orchestrator-hub/client-vue` | [`client-vue`](https://github.com/mfe-orchestrator/client-vue) | Vue plugin and composables |
 | `@mfe-orchestrator-hub/client-angular` | [`client-angular`](https://github.com/mfe-orchestrator/client-angular) | Angular provider and injectable service |
 
-All four are published at `0.1.0` with npm provenance. The core ships ESM and CJS builds and its own
-types; the three adapters depend on it and contain **no decision logic of their own**.
+All four are published at `0.2.1` with npm provenance. The core ships ESM and CJS builds and its own
+types; the three adapters depend on it and add ergonomics rather than behaviour — with one deliberate
+exception, described under [framework adapters](#the-react-adapter-syncs-the-user-for-you).
+
+:::caution `setUserId()` needs the core at 0.2.0 or later
+[`setUserId()`](#changing-the-user-without-a-reload) landed in `@mfe-orchestrator-hub/client` 0.2.0.
+Pin an earlier core and the function is not exported at all. The three adapters reach it through a
+guarded property access, so they do not crash — they `console.warn` and return, and the user silently
+never changes. Ask for `^0.2.0` or later.
+:::
 
 ```bash
 npm install @mfe-orchestrator-hub/client
@@ -37,23 +45,58 @@ Install it in the **host**. Remotes do not need it — they are loaded, they do 
 
 ## Configure once, at the top of the entry point
 
+This is the block the console emits, commented out, underneath the generated bundler configuration —
+reproduced here as it is generated, because two details in it look like clutter and are not:
+
 ```ts
-// src/main.ts
+// src/main.tsx — the console names your framework's real entry point here
 import { configure } from '@mfe-orchestrator-hub/client'
+
+// Optional: leave it unset and the environment is resolved from the domain this
+// page is served on, so the same build can run on every environment.
+const environment = import.meta.env.VITE_MFE_ENVIRONMENT
 
 configure({
   backendUrl: import.meta.env.VITE_MFE_BACKEND_URL,
   projectId: import.meta.env.VITE_MFE_PROJECT_ID,
-  environment: import.meta.env.VITE_MFE_ENVIRONMENT  // optional — see below
+  // Only a canary targeted on users reads this, and nothing else can supply it.
+  // A getter is resolved right before the request, so an auth round trip is in
+  // time; later than that, use setUserId(). Without it those microfrontends
+  // serve everyone the stable version.
+  // userId: () => auth.currentUser?.id,
+  ...(environment ? { environment } : {})
 })
 ```
 
-`configure()` is synchronous, idempotent, and must run **before anything imports a remote** — the
-remotes in your federation config call into the SDK the moment they are first imported, and a call
-that arrives before `configure()` rejects with an explicit *call configure() first*.
+For a Webpack host the same block reads `process.env.MFE_BACKEND_URL`, `process.env.MFE_PROJECT_ID`
+and `process.env.MFE_ENVIRONMENT`, and the entry point it names is `src/index.ts`.
 
-The console emits this block, commented out, underneath the generated bundler configuration, because
-it does not belong in the config file but in your entry point.
+`environment` arrives through a **conditional spread**, not as a plain field. That is not style. There
+are two ways for the variable to be unset and they do not look the same in the bundle: missing from
+`.env` it arrives as `undefined`, declared with no value it arrives as `''`. And `environment: ''` is
+a value the core accepts, logs a warning about, and then ignores in favour of the `auto` routes
+anyway. Spreading the key in only when it holds something covers both cases and keeps that warning out
+of every build that never set the variable. The host templates do the same, with a `?.trim()` in front
+of it — see
+[templates library](../templates/templates-library.md#host-templates-come-wired-to-the-sdk).
+
+The commented `userId` line is there because that field is the one no environment variable can fill
+in, and leaving it out has a silent outcome rather than a visible one: a
+[User canary](../microfrontends/canary-releases.md#who--the-canary-type) simply serves everyone the
+stable version.
+
+`configure()` is synchronous, idempotent, and must run **before anything imports a remote** — the
+remotes in your federation config call into the SDK the moment they are first imported. It does not
+fail politely:
+
+- **A missing or unusable `backendUrl` or `projectId` throws, synchronously, out of `configure()`
+  itself.** The message names each option, shows what actually arrived, and prints the call to write.
+  Expect this when you write the call by hand, because the generated config supplies both values and
+  a hand-written call has to supply them itself.
+- **A read that arrives before `configure()` ever ran rejects** with *the client is not configured:
+  `remoteUrl("catalog")` was called before configure() ever ran, so neither backendUrl nor projectId
+  is known and no manifest can be requested*, followed by the snippet for whichever package you are
+  using. Every message from the SDK is prefixed `[@mfe-orchestrator-hub/client]`.
 
 ### Configuration
 
@@ -66,8 +109,14 @@ interface OrchestratorConfig {
 }
 ```
 
-`backendUrl` and `projectId` are the two the SDK cannot do anything without. The other two are
-optional, for quite different reasons.
+`backendUrl` and `projectId` are the two the SDK cannot do anything without — and the two you
+normally do not supply. The console writes their values into the generated bundler configuration
+itself, as a `define` entry for Vite and a `DefinePlugin` entry for Webpack, so the `import.meta.env`
+and `process.env` names above are already filled in by the time the bundle runs and **there is no
+`.env` to create**. See [Vite](./module-federation-vite.md#configure-the-host) and
+[Webpack](./module-federation-webpack.md#configure-the-host) for the block that does it.
+
+The other two options are optional, for quite different reasons.
 
 `userId` is the field the SDK has no way of working out for itself. Pass it — as a value or as a
 getter, if the user is not known yet at bootstrap — when you want
@@ -98,8 +147,10 @@ and the same bundle behaving as DEV on `dev.example.com` and as production on `e
 price is that resolution now depends on configuration that lives somewhere else. The domain the host
 is genuinely served from has to be registered, on the right environment and on exactly one of them.
 If it is not — a new vanity domain, a preview URL nobody added to the list, a stage that was stood
-up without touching the console — the manifest request fails with *Environment not found* rather
-than quietly picking a default, and no remote resolves on that page.
+up without touching the console — the manifest request fails with a `404` carrying
+`code: "ENVIRONMENT_NOT_FOUND"` rather than quietly picking a default, and no remote resolves on that
+page. The message spells the situation out: *No environment of project … has "…" among its registered
+domains*. See [error responses](./serve-api.md#error-responses).
 
 So: omit it when your stages sit on stable domains you have already declared, and keep the domain
 list part of the checklist for standing up a new one. Pass it when you would rather have the answer
@@ -144,6 +195,13 @@ versionless URL can end up mixing two builds in one page. See
 `configure()` is fixed for the page load: calling it again with a different configuration is ignored
 with a warning, because the manifest may already be in flight. The user is the one thing that
 legitimately changes while the page is alive, so it has its own call.
+
+:::note A React host needs none of this
+`<OrchestratorProvider>` calls `setUserId()` itself whenever the `userId` in its config changes, so
+in React the wiring below is already done for you — see
+[the React adapter syncs the user for you](#the-react-adapter-syncs-the-user-for-you). Vue and
+Angular have no equivalent.
+:::
 
 ```ts
 import { setUserId } from '@mfe-orchestrator-hub/client'
@@ -230,9 +288,9 @@ Full walkthroughs: [Vite](./module-federation-vite.md) and [Webpack](./module-fe
 
 ## Framework adapters
 
-Ergonomics only. If you need behaviour they do not have, it belongs in the core. The object each of
-them takes is the core's `OrchestratorConfig`, so `environment` is optional there too and can be
-left out of the examples below.
+Ergonomics, with the one exception noted at the end of this section: if you need behaviour they do not
+have, it belongs in the core. The object each of them takes is the core's `OrchestratorConfig`, so
+`environment` is optional there too and can be left out of the examples below.
 
 ```tsx
 // React
@@ -259,6 +317,37 @@ bootstrapApplication(AppComponent, {
   providers: [provideOrchestrator({ backendUrl, projectId, environment })]
 })
 ```
+
+### What each adapter exports
+
+| | React | Vue | Angular |
+| --- | --- | --- | --- |
+| Configure | `<OrchestratorProvider config>` | `createOrchestrator(config)` | `provideOrchestrator(config)` |
+| Remote URL | `useRemoteUrl(slug)` | `useRemoteUrl(slug)` | `OrchestratorService.remoteUrl(slug)` |
+| Variables | `useGlobalVariables()` | `useGlobalVariables()` | `OrchestratorService.globalVariables()` |
+| Manifest | `useManifest()` | — | `OrchestratorService.manifest()` |
+| Identities | — | — | `OrchestratorService.identities()` |
+| Change the user | `setUserId(userId)` | `setUserId(userId)` | `OrchestratorService.setUserId(userId)` |
+| Result type | `AsyncState<T>` | `AsyncState<T>` | plain `Promise<T>` |
+
+All three also re-export the core's types (`OrchestratorConfig`, `Manifest`, `Microfrontend`,
+`GlobalVariable`, `Identities`), and React and Vue export `AsyncState` as well.
+
+:::caution `useRemoteUrl()` does not return a string
+It returns `AsyncState<string>` — `{ data, error, loading }` — and in Vue each of the three is a
+`Ref`. Read `data` once `loading` is false; until then it is `undefined`. Passing the hook's return
+value straight into an `import()` gets you an object, not a URL.
+:::
+
+### The React adapter syncs the user for you
+
+`<OrchestratorProvider>` keeps `config.userId` in step with the core across renders: pass the user
+from your auth state and a login, a logout or an account switch reaches the core on its own, through
+`setUserId()`. The first render is skipped, because `configure()` has just carried that value itself.
+
+So in a React host the manual wiring described under
+[changing the user without a reload](#changing-the-user-without-a-reload) is redundant — change what
+you pass to the provider instead. In Vue and Angular you call `setUserId()` yourself.
 
 ## What it deliberately does not do
 

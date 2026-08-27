@@ -52,7 +52,9 @@ between "built" and "deployed", and this page is where you see it.
 
 Expanding a row also shows the repository the microfrontend is linked to and the **last five runs**
 of that repository, newest first, each with its status, ref, workflow name, start moment, who
-started it, and a link to the run on the provider.
+started it, and a link to the run on the provider. *Who started it* never appears on GitLab: the
+pipelines list endpoint does not carry it, so the field is left unset and the run is shown without
+it.
 
 ## Status badges
 
@@ -65,12 +67,16 @@ buckets.
 | `RUNNING` | In progress |
 | `SUCCESS` | Finished and passed (Azure `partiallySucceeded` counts as passed) |
 | `FAILED` | Finished and failed, timed out, or failed to start |
-| `CANCELED` | Canceled or skipped |
+| `CANCELED` | Canceled or skipped — and a GitHub run whose conclusion is `neutral` |
 | `UNKNOWN` | The provider reported a state this platform does not know |
 
-A run still in progress is always `RUNNING`, whatever result the provider left on it from a
-previous attempt: GitHub and Azure DevOps both split the outcome over two fields, and the second
-one only means something once the first says the run is over.
+A run still in progress is `RUNNING`, whatever result the provider left on it from a previous
+attempt: GitHub and Azure DevOps both split the outcome over two fields, and the second one only
+means something once the first says the run is over.
+
+Cancellation is the exception, on both providers that report it as a state of its own. Azure DevOps
+`cancelling` and GitLab `canceling` are runs that have not finished yet, and both are shown as
+`CANCELED` rather than `RUNNING`, because the outcome is already decided.
 
 ## When a row has no runs
 
@@ -133,8 +139,9 @@ and for each microfrontend its `selectedVersion`, `latestBuiltVersion`, a
 carries `unavailableReason` and an empty `builds`.
 
 :::note `EventSource` cannot be used
-The API requires an `Authorization` and a `Project-Id` header on every call, and `EventSource`
-cannot send either. Consume the stream with `fetch`, as the console does.
+The API requires an `Authorization` and a `Project-Id` header on every call — the console sends an
+`issuer` header alongside them, naming the identity provider the token came from — and `EventSource`
+cannot send any of them. Consume the stream with `fetch`, as the console does.
 :::
 
 ## Limits worth knowing

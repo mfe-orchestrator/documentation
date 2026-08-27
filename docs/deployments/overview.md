@@ -48,8 +48,10 @@ environment ids and creates them in one transaction.)
 
 Each deployment is numbered per environment: `#1`, `#2`, `#3` … The new deployment becomes
 **active**, and any previously active deployment for that environment is deactivated. Exactly one
-deployment is active per environment at any moment, and it is the one every serve endpoint answers
-from.
+deployment is active per environment at any moment. The endpoints that answer *what should I load*
+resolve against that flag; the ones that stream the files themselves resolve the deployment
+differently, which only diverges after a rollback — see
+[Serving from the active deployment](#serving-from-the-active-deployment) below.
 
 One thing travels with the new deployment without being part of your draft configuration: the
 **canary enrolment** of the deployment being replaced is copied into the new one, inside the same
@@ -97,13 +99,29 @@ want between stages.
 
 ## Serving from the active deployment
 
-Everything on the public serve API resolves against the active deployment:
+Most of the public serve API resolves against the active deployment:
 
 | Question from your app | Answered from |
 | --- | --- |
 | Which remotes do I load, and from where? | Active deployment's microfrontends |
 | What is my runtime configuration? | Active deployment's variables |
-| Give me this microfrontend's files | Version in the active deployment |
+| Give me this microfrontend's files | The **newest** deployment of the environment, which is not always the active one |
+
+The third row is not a slip. The queries behind the manifest, the per-microfrontend configuration
+and the variables filter on the `active` flag. The three routes that stream files do not: each takes
+the newest deployment of the environment, and they do not agree on what "newest" means.
+
+| File route | Newest by | After a rollback |
+| --- | --- | --- |
+| `/serve/mfe/files/:projectId/:envSlug/:mfeSlug/*` | Deployment time | Follows the rollback |
+| `/serve/mfe/files/auto/:projectId/:mfeSlug/*` | Creation time | Does not follow the rollback |
+| `/serve/mfe/files/:mfeId/*` | Creation time | Does not follow the rollback |
+
+A **Deploy** stamps both times at once, so as long as you only ever deploy forwards the newest
+deployment is the active one on either ordering and all three routes agree. A **Redeploy** bumps the
+deployment time only, which is where they part company — described in full, with the mitigation, in
+[Rollback and redeploy](./rollback-and-redeploy.md#the-file-routes-do-not-all-follow-a-rollback).
+The routes themselves are listed in [Serve API](../integration/serve-api.md).
 
 If an environment has never been deployed, these endpoints return an *Active deployment not
 found* error, and the console's Integration page tells you to deploy first.

@@ -43,8 +43,25 @@ with one value per environment; keys are unique per environment.
 ![The Environment Variables page, one column per environment](../assets/environment-variables-list.png)
 
 The dialog asks for the key once and then for its value in each environment, which is the shape
-you almost always want — the same key with a different value per stage. Leave a value empty and
-the code reading it in that environment will find `undefined`.
+you almost always want — the same key with a different value per stage. Every environment has to get
+a value: `value` is a required field on the model, so an empty box is rejected, and the values of all
+environments are written in one batch — so a single empty box fails the whole variable rather than
+creating it without that environment. The dialog validates nothing and starts with an empty box for
+each environment, so pressing **Create** with one left blank returns a validation error and stores
+nothing.
+
+:::note Leaving a variable out of one environment
+There is no way to do this from the console. The creation endpoint, though, writes only the
+environments you send it: `POST /api/global-variables`, with the project in the `project-id` header
+and a `values` array carrying no entry for one environment, creates the variable in every other
+environment and leaves that one without it. That is where the code reading it genuinely finds
+`undefined`.
+
+Editing afterwards will not fill the gap: the update endpoint only rewrites rows that already exist,
+and the console's delete removes the key from every environment at once. If the variable has to be
+present everywhere, give it an empty-ish value your code treats as off rather than trying to omit
+it.
+:::
 
 ![The Add Variable dialog, with a value per environment](../assets/environment-variable-dialog.png)
 
@@ -93,6 +110,11 @@ change. Rolling back a deployment rolls back its variables along with its versio
 
 :::tip
 If you have changed a variable and your application still reads the old value, check that you
-have deployed. The serve endpoints always answer from the **active deployment**, never from the
-current draft configuration.
+have deployed. Both variables endpoints above answer from the **active deployment** of the resolved
+environment, never from the current draft configuration.
+
+That is a property of the variables endpoints, not of the serve API as a whole: the routes that
+stream microfrontend files resolve the deployment differently and can disagree with the active one
+after a rollback — see
+[Rollback and redeploy](../deployments/rollback-and-redeploy.md#the-file-routes-do-not-all-follow-a-rollback).
 :::

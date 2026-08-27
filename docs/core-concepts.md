@@ -26,12 +26,20 @@ Organization
     ├── Environment (dev, uat, prod, …)
     │   ├── Environment Variables (key/value, per environment)
     │   └── Deployment #1, #2, #3 …  (immutable snapshots)
-    ├── Microfrontend (host or remote, versioned)
+    ├── Microfrontend (host or remote)
+    │   └── Built version (one record per bundle uploaded)
     ├── Storage / Bucket (S3, Azure Blob, GCS)
     ├── Code Repository (GitHub, GitLab, Azure DevOps)
     ├── API Key (for CI/CD and automation)
     └── Members (Admin, Editor, Viewer)
 ```
+
+One line in that tree is worth expanding, because the console does not spell it out. A
+microfrontend carries a single `version` field: the version *currently selected*, the one the next
+deployment would freeze. The versions you can select are separate records, one per bundle that has
+reached the platform, keyed by microfrontend and version string. That is why the version of a
+microfrontend is a list you pick from rather than free text, and why a version stays selectable long
+after another has been deployed over it.
 
 ### Organization
 
@@ -49,8 +57,10 @@ switcher only offers projects of the organization you are in. See
 
 A **project** is the container every configuration object belongs to, and the boundary the project
 roles are written against: microfrontends, environments, storages, repositories and API keys belong
-to exactly one project. A project has a `name`, a `slug` and an `id` — you can find all three under
-**Settings → Project Information**.
+to exactly one project. A project has a `name`, a `slug` and an `id` — all three, plus its free-text
+`description`, live under **Settings → Project Information**. Two more fields are not editable
+there: the `organizationId` of the organization that owns it, fixed at creation, and an `isActive`
+flag.
 
 Access to a project is granted either by an explicit project membership or by administering the
 organization that owns it — see
@@ -66,6 +76,7 @@ but you can define as many as you like. Each environment has:
 | Field | Purpose |
 | --- | --- |
 | `name` | Display name, e.g. *Production* |
+| `description` | Free text |
 | `slug` | URL-friendly identifier used in the public serve API, e.g. `prod` |
 | `color` | Colour used to tag the environment throughout the console |
 | `isProduction` | Marks the environment as a production stage |
@@ -141,8 +152,12 @@ re-activating an older one. See [Deployments](./deployments/overview.md).
 ### API key
 
 An **API key** authenticates machines rather than people — CI pipelines, scripts, deploy jobs.
-Keys are project-scoped, carry a role (`VIEWER` or `MANAGER`), and have a mandatory expiry
-date. They are shown once at creation and stored hashed. See [API Keys](./ci-cd/api-keys.md).
+Keys are project-scoped, and they are shown once at creation and stored hashed. They also carry a
+role and an expiry date, neither of which is currently enforced: the create form asks for a name and
+an expiry only, the role defaults to `MANAGER` and is never read when a request is authorized, and
+the check that resolves a key to its project looks at neither the expiry nor the status. Treat a key
+as full access to its project for as long as it exists, and see
+[API Keys](./ci-cd/api-keys.md).
 
 ### Members and roles
 

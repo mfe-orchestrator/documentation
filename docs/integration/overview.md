@@ -14,21 +14,48 @@ how your application actually consumes what you deployed.
 ## The Integration page
 
 **Integration** in the sidebar generates, for the selected environment, exactly the snippets your
-project needs — with your project id, environment id and deployment already filled in. It has two
-tabs:
+project needs — with your project id and the environment already filled in. The deployment id is not
+in any of them: it is a query parameter on the request that generates a snippet, nothing more. The
+page has two tabs:
 
 | Tab | Contains |
 | --- | --- |
-| **Frontend integration** | Module Federation configuration for Vite and Webpack, plus a `curl` example |
-| **Environment variables** | The snippets for reading runtime configuration in the browser |
+| **Frontend Integration** | The generated bundler configuration, plus a `curl` example |
+| **Environment Variables** | The snippets for reading runtime configuration in the browser |
 
-The page requires the selected environment to have an active deployment. If it does not, deploy
-first — there is nothing to integrate against until then.
+The page needs the selected environment to have **at least one deployment** — not an active one. The
+gate counts deployments, and the page then reads that environment's *last* deployment, the newest by
+`deployedAt`, whether or not it happens to be the active one. If the environment has never been
+deployed, deploy first: there is nothing to integrate against until then.
 
-Pick the **host** microfrontend from the selector at the top: the generated configuration is
-always from the point of view of one host, listing its remotes.
+Pick a microfrontend from the selector at the top. It lists every microfrontend of that deployment,
+hosts and remotes alike — nothing is filtered out. What the type changes is only whether the
+generated config carries an `exposes` block; the `remotes` block comes from the microfrontend's
+children in the relation graph, so one with no children simply gets none.
 
 ![The Integration page generating a Vite Module Federation config for the shell host](../assets/integration-frontend.png)
+
+### Choosing the stack
+
+Inside the Frontend Integration tab there are two inner tabs, **Module Federation** and **Direct API
+Access via CURL** — one per integration model, described below. There are no per-bundler tabs.
+
+The Module Federation tab has two selects instead, both defaulting to **Automatic**:
+
+| Select | Options |
+| --- | --- |
+| **Framework** | Automatic, React, Vue, Angular |
+| **Bundler** | Automatic, Vite, Webpack, Web Component |
+
+**Automatic** means the stack stored on the microfrontend — taken from the template it was created
+from, detected in its repository, or set by hand — and a badge above the snippet says which of the
+three it was. The selects are overrides, for when detection got it wrong or when you want to read
+another stack's instructions. A microfrontend whose stack is unknown shows neither config nor error
+until you pick one.
+
+Picking **Web Component** as the bundler produces no configuration at all: web component
+microfrontends are plain scripts registering a custom element, so there is nothing to write into a
+bundler config, and the tab shows a runtime-integration note in place of one.
 
 ## The two integration models
 
@@ -37,9 +64,11 @@ how dynamic you need to be.
 
 ### Generated bundler configuration
 
-You copy the generated `remotes` block into your bundler configuration and build. What gets baked
-into your host is not a URL: it is a call into the [client SDK](./client-sdk.md), which asks the
-serve API for the URL of each remote at import time.
+The console generates the **whole configuration file** — not a `remotes` block to graft onto your
+own — and tells you where it belongs, ex. `vite.config.js`. With it come an install line for what
+that config needs and a commented-out bootstrap block for your entry point. What gets baked into your
+host is not a URL: it is a call into the [client SDK](./client-sdk.md), which asks the serve API for the
+URL of each remote at import time.
 
 - Standard Module Federation, plus one `configure()` call in your entry point
 - No version, no environment and no CDN path compiled in, so bumping a remote's version — or
@@ -47,7 +76,7 @@ serve API for the URL of each remote at import time.
 - Which remotes the host knows about is still fixed at build time: adding or removing one requires
   a host rebuild
 
-This is what the **Vite** and **Webpack** tabs give you. Start here.
+This is what the **Module Federation** tab gives you. Start here.
 
 ### Runtime discovery
 
@@ -59,23 +88,43 @@ dynamically.
   for you
 - Costs one HTTP request during startup
 
-This is what the `curl` tab hints at: a single call to `/serve/all/...` returns the whole
-environment — microfrontends with URLs and versions, plus the environment variables. The SDK's
-`manifest()` gives you the same thing without writing the fetch.
+This is what the **Direct API Access via CURL** tab is for: a single call to `/serve/all/...` returns
+the whole environment — microfrontends with URLs and versions, plus the environment variables. The tab
+shows the `curl` line for the selected environment and, underneath it, a live `<iframe>` preview of
+`/api/serve/all/{environmentId}`, so you can read the real response without leaving the page. The
+SDK's `manifest()` gives you the same thing without writing the fetch.
 
 Most teams start with the generated configuration and move to runtime discovery when the roster of
 remotes starts changing often.
 
-## Inject in Repository
+## Writing the integration into your repositories
 
-If the host's repository is connected to MFE Orchestrator, the Integration page shows an **Inject
-in Repository** button next to the microfrontend selector. It writes the generated configuration
-directly into the repository instead of leaving you to copy, paste and commit.
+Rather than copy, paste and commit, you can have MFE Orchestrator write the integration into the
+repositories itself. Both tabs offer it, and the two are separate integrations that are never
+committed together:
+
+| Tab | Button | Writes |
+| --- | --- | --- |
+| Frontend Integration | **Integrate my microfrontends** | The bundler config of every microfrontend of the project that consumes others, plus the packages that config needs |
+| Frontend Integration | **Integrate only this one** | The same, narrowed to the selected microfrontend |
+| Environment Variables | **Add the script to my hosts** | The `<script>` tag for `window.globalConfig`, into the document of every host |
+
+The buttons are always there: nothing is gated on the selected microfrontend's repository being
+connected. What each one opens is a dialog that first computes a plan **for the whole project** —
+because the remotes of one microfrontend are the other microfrontends of it — with narrowing deciding
+only what is shown and what can be committed.
+
+The dialog then lists one row per repository with a status (*already integrated*, *config to create*,
+*config to replace*, *no remotes to declare*, *stack unknown*, *integrates at runtime*, *no document
+to write into*, *error*) and a diff you can expand to compare what is in the repository against what
+would be written. You tick the repositories to commit to, and the write lands on the **default
+branch** of each one. Rows the plan cannot act on cannot be ticked.
 
 ## What the platform serves
 
-Whatever integration model you choose, these are the things your application can ask for — all
-from the **active deployment** of the resolved environment:
+Whatever integration model you choose, these are the things your application can ask for, from the
+resolved environment's deployment — the **active** one for everything except the file endpoints, which
+[which deployment answers](./serve-api.md#which-deployment-answers) sets out:
 
 | Ask | Endpoint family |
 | --- | --- |

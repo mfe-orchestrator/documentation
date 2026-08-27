@@ -2,14 +2,15 @@
 sidebar_position: 6
 title: Serve API reference
 sidebar_label: Serve API
-description: Reference for the public, unauthenticated serve API your applications call. Every endpoint answers from the active deployment of the resolved environment.
+description: Reference for the public, unauthenticated serve API your applications call — endpoints, response shapes, error codes, and which deployment each one answers from.
 keywords: [serve api, rest api, endpoints, active deployment, remoteEntry]
 ---
 
 # Serve API reference
 
-The serve API is the public, unauthenticated surface your applications talk to. Every endpoint
-answers from the **active deployment** of the resolved environment.
+The serve API is the public, unauthenticated surface your applications talk to. Most endpoints answer
+from the **active deployment** of the resolved environment; the three file endpoints do not, which
+[Which deployment answers](#which-deployment-answers) sets out precisely.
 
 All examples use `<API_BASE>`:
 
@@ -38,9 +39,38 @@ Prefer the slug form in configuration you write by hand, and the `auto` form whe
 build to work in every environment.
 
 The `auto` form is only as reliable as the domain list behind it: the host's real domain has to be
-registered on exactly one environment of that project, otherwise the call answers
-*Environment not found*. That is the trade the `auto` form makes — one artifact everywhere, in
-exchange for a piece of configuration that lives in the console rather than in your build.
+registered on exactly one environment of that project, otherwise the call answers `404` with
+`code: "ENVIRONMENT_NOT_FOUND"` and a message naming the domain it could not place. That is the trade
+the `auto` form makes — one artifact everywhere, in exchange for a piece of configuration that lives
+in the console rather than in your build.
+
+## Which deployment answers
+
+Most of this API answers from the **active deployment** — the one flagged active on the environment,
+which is what a [rollback or redeploy](../deployments/rollback-and-redeploy.md) moves. Three
+endpoints do not:
+
+| Endpoint | Deployment it answers from |
+| --- | --- |
+| `/serve/all/…` | Active |
+| `/serve/global-variables/…` | Active |
+| `/serve/mfe/config/…` | Active |
+| `/serve/mfe/files/{projectId}/{environmentSlug}/…` | Newest by `deployedAt`, active or not |
+| `/serve/mfe/files/auto/{projectId}/…` | Newest by `createdAt`, active or not |
+| `/serve/mfe/files/{mfeId}/…` | Newest by `createdAt`, active or not |
+
+The three file endpoints filter on no `active` flag, and the last two sort on the wrong field. A
+rollback re-activates an older deployment and stamps its `deployedAt` with the moment you rolled
+back; it does not touch `createdAt`. So after a rollback the `deployedAt` form serves the deployment
+you rolled back *to*, while the two `createdAt` forms keep serving the newest-*created* one — the
+very deployment you rolled away from.
+
+:::note An SDK-wired host is on the safe route
+Every `url` in the manifest carries the environment slug, so a host that loads its remotes through
+[`remoteUrl()`](./client-sdk.md) only ever requests the `{projectId}/{environmentSlug}` form, which
+sorts on `deployedAt` and therefore honours a rollback. The exposure is a consumer that hand-writes
+an `auto/{projectId}` or `{mfeId}` file URL. Prefer the slug form for anything you write by hand.
+:::
 
 ## Everything about an environment
 
@@ -88,21 +118,36 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
 }
 ```
 
-`nameToIntegrate` is the Module Federation remote name — the slug with `/` and `-` stripped. Use it
-as the key when registering remotes dynamically.
+`nameToIntegrate` is the Module Federation remote name — the slug with every `/` replaced by `_` and
+every `-` removed. Use it as the key when registering remotes dynamically:
 
-`version` is the version this response actually resolves to, which is not necessarily the
-deployment's version: a microfrontend running a
-[canary release](../microfrontends/canary-releases.md) reports the version *this caller* gets.
+| Slug | `nameToIntegrate` |
+| --- | --- |
+| `catalog` | `catalog` |
+| `product-catalog` | `productcatalog` |
+| `shop/catalog` | `shop_catalog` |
+
+`version` is the version this response resolves to, which is not necessarily the deployment's
+version: a microfrontend on a **Based on version**
+[canary](../microfrontends/canary-releases.md) reports the version *this caller* gets.
+
+:::caution A **Based on URL** canary reports the stable version
+That branch has no version of the platform's own to pin — the canary *is* a URL somewhere else — so
+the entry carries the canary `url` next to the **deployed** `version`. A caller drawn into a URL
+canary is therefore told it is running the stable version. `url` is the field to trust there.
+:::
 
 `url` is resolved, and **already version-pinned when it needs to be**. The second entry above is on a
 version-based canary, so the version appears as a `_v/<version>/` path segment. Use the string as it
 is: never rebuild it, never strip that segment. The
 [client SDK](./client-sdk.md) does this correctly for you.
 
-It also names the environment this response resolved to, whichever of the three forms above asked
-for it. The `auto` form therefore resolves the domain once, on this call: the file requests that
-follow already know their environment, and work from a host whose domain is registered nowhere.
+The body has exactly the two keys shown above. It does **not** name the environment it resolved to —
+`response.environment` is `undefined` in all three forms — and it does not need to: the environment
+slug is baked into every `url` it hands out. So the `auto` form resolves the domain once, on this
+call, and the file requests that follow already carry their environment in the path. They work from a
+host whose domain is registered nowhere, and they are also the form that keeps answering from the
+right deployment after a rollback — see [Which deployment answers](#which-deployment-answers).
 
 ### Identity parameters
 
@@ -151,7 +196,8 @@ GET <API_BASE>/serve/mfe/config/{mfeId}                      # Referer required
 ```
 
 Returns a single entry in the same shape as the items in `microfrontends` above — the resolved URL
-and the deployed version.
+and the version that entry resolves to, which is the canary-resolved one wherever a version canary
+applies, with the same [Based on URL caveat](#everything-about-an-environment).
 
 Useful when a host wants to look up one remote lazily rather than fetching the whole environment.
 
@@ -175,8 +221,9 @@ Each of the three forms also accepts a version pinned into the path, immediately
 GET <API_BASE>/serve/mfe/files/auto/{projectId}/{mfeSlug}/_v/{version}/{path}
 ```
 
-The platform resolves the version — from the pinned segment when present, otherwise from the active
-deployment and any canary configuration — and fetches the bytes according to the microfrontend's
+The platform resolves the version — from the pinned segment when present, otherwise from the
+deployment this URL form answers from, [which is not always the active one](#which-deployment-answers),
+and any canary configuration — and fetches the bytes according to the microfrontend's
 [hosting type](../microfrontends/hosting-options.md) — local disk, your bucket, or an external URL —
 then streams them back. A pinned version is honoured only if that deployment can serve it: the
 deployed version, or the configured canary version.
@@ -193,6 +240,15 @@ redirects. It is not sufficient for a **classic script**: `document.currentScrip
 *before* redirects, so a webpack build with `publicPath: 'auto'` would derive its chunk base from the
 versionless URL and could mix two versions in one page. Take the manifest URL as it is and the
 question does not arise.
+
+:::caution The `Location` is root-relative and carries no `/api` prefix
+The redirect points at `/serve/mfe/files/…`, not at `<API_BASE>/serve/mfe/files/…`. Behind the
+shipped nginx, which proxies the backend under `location /api/` and serves the console SPA from `/`,
+the browser is therefore sent to the SPA instead of to the file. The fallback only works when the
+backend is reachable at the origin root — running standalone, or behind a proxy that mounts it
+there. One more reason to use the manifest URL as it is: it already carries the version and never
+redirects.
+:::
 
 ### Version override
 
@@ -225,11 +281,36 @@ needed.
 ## Generated bundler configuration
 
 ```http
-GET <API_BASE>/serve/code?framework={vite|webpack}&microfrontendId={id}&deploymentId={id}
+GET <API_BASE>/serve/code?microfrontendId={id}&deploymentId={id}
+    &framework={react|vue|angular}&compiler={vite|webpack|webcomponent}
 ```
 
-Returns `{ "code": "..." }` containing the generated bundler configuration for that host — the same
-text the Integration page displays.
+`framework` and `compiler` are the two axes of the stack, and both are **optional**: left out, each
+falls back to the stack stored on the microfrontend, which is the normal case. They exist so the
+console can ask for another stack — or for one at all, when detection found none.
+
+:::caution They are two different parameters
+`vite` and `webpack` are `compiler` values, not `framework` values. `framework=vite` parses to
+`undefined`, the request then has no framework to generate for, and the response comes back with an
+empty `code` and no config — a silent empty answer rather than an error.
+:::
+
+The response is the whole set of instructions, not a single string:
+
+| Field | Contents |
+| --- | --- |
+| `stack` | `{ framework, compiler, source }` — the stack the instructions were generated for, and where it came from (`TEMPLATE`, `DETECTED`, `MANUAL`) |
+| `configPath` | Where the config belongs in the repository, ex. `vite.config.js` |
+| `config` | Full content of the bundler config |
+| `bootstrap` | The commented-out `configure()` snippet for the entry point |
+| `code` | `config` and `bootstrap` concatenated — the text the Integration page displays |
+| `dependencies` | Packages the config needs beyond what the app already has |
+| `installCommand` | `npm install …`, absent when `dependencies` is empty |
+| `runtimeIntegration` | `true` for a Web Component microfrontend: there is no federation config, the host resolves the URL at runtime |
+
+`stack` is always present. A Web Component stack answers with `runtimeIntegration: true`, an empty
+`code` and nothing else; a microfrontend whose stack could not be determined answers with an empty
+`code` and no `config`.
 
 The console's **CURL** tab shows the runtime-discovery call for the selected environment, with your
 ids already substituted:
@@ -241,15 +322,28 @@ tooling, not something your application calls at runtime.
 
 ## Error responses
 
-| Message | Cause |
-| --- | --- |
-| `Active deployment not found` | The environment has never been deployed, or has no active deployment |
-| `Referer not found` | A domain-resolving endpoint was called without a `Referer` header |
-| `Environment not found` | The `Referer` matched no environment's allowed domains |
-| Entity not found for a slug/id | No such microfrontend or environment, or the microfrontend is absent from the active deployment |
+Branch on the **`code`** field, not on the message. The messages are written for a human reading a
+log and get reworded as they get more helpful; `code` is the discriminator.
+
+| `code` | Status | Message | Cause |
+| --- | --- | --- | --- |
+| `ENTITY_NOT_FOUND` | 404 | `Entity not found with id Active deployment` | The environment has never been deployed, or has no active deployment |
+| `ENTITY_NOT_FOUND` | 404 | `Entity not found with id <slug or id>` | No such microfrontend, or the microfrontend is absent from the deployment that answered |
+| `ENVIRONMENT_NOT_FOUND` | 404 | `No environment of project <id> has "<domain>" among its registered domains, …` | An `auto` form was called from a domain registered on no environment of that project |
+| `ENVIRONMENT_NOT_FOUND` | 404 | `Environment not found: <slug or id>` | An explicit slug or id form named an environment that does not exist |
+| `PROJECT_NOT_FOUND` | 404 | `Project not found: <id>` | The project id in the path is not a project of this console |
+| *none* | 500 | `Referer not found` | A `Referer`-required endpoint was called with neither a `Referer` nor a `Host` header |
+
+Note the shape of the first message: `Active deployment` is the *entity id* slotted into a generic
+template, which is why it reads the way it does. There is no `Active deployment not found` message.
+
+`Referer not found` is the odd one out. It is thrown as a plain error with no status attached, so it
+surfaces as a **500** rather than as the 4xx its neighbours return, and it carries no `code`. Only
+the two `/serve/mfe/…/{mfeId}/…` forms demand a `Referer` outright; the `auto` forms fall back to the
+`Host` header first, so in practice only a request carrying neither reaches this.
 
 A microfrontend that exists in the project but was added *after* the last deployment falls into the
-last row: deploy the environment to include it.
+second row: deploy the environment to include it.
 
 ## Building runtime discovery
 
