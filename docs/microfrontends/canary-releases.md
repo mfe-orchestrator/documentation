@@ -152,7 +152,7 @@ manifest returns the usual serve URL with the resolved version already pinned in
 segment**:
 
 ```
-https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1…/checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js
+https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1a2b3c4d5e6f7a8b9c0d1/checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js
 ```
 
 Use that URL verbatim. Never rebuild it, and never strip the `_v/<version>/` segment.

@@ -99,7 +99,7 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
   ],
   "microfrontends": [
     {
-      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1.../prod/catalog/assets/remoteEntry.js",
+      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1a2b3c4d5e6f7a8b9c0d1/prod/catalog/assets/remoteEntry.js",
       "slug": "catalog",
       "name": "Catalog",
       "nameToIntegrate": "catalog",
@@ -107,7 +107,7 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
       "continuousDeployment": false
     },
     {
-      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1.../prod/checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js",
+      "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1a2b3c4d5e6f7a8b9c0d1/prod/checkout-new/_v/1.5.0-rc1/assets/remoteEntry.js",
       "slug": "checkout-new",
       "name": "Checkout",
       "nameToIntegrate": "checkoutnew",
