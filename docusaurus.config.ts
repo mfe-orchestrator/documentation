@@ -59,7 +59,13 @@ const config: Config = {
     [
       '@docusaurus/plugin-google-gtag',
       {
-        trackingID: 'G-JS73D8WDB9',
+        // Two IDs on purpose. The docs keep their own history in G-JS73D8WDB9,
+        // and also report into the main site's property, G-SX41W7EVTN. They are
+        // one site on one domain, but were split across two properties, so a
+        // visit that starts on the marketing pages and continues into the docs
+        // was two unjoinable halves and neither property could show the whole
+        // journey. The plugin accepts an array and loads both tags.
+        trackingID: ['G-JS73D8WDB9', 'G-SX41W7EVTN'],
       },
     ],
     // Emits /llms.txt, /llms-full.txt and a .md next to every doc page.
