@@ -1,7 +1,7 @@
 ---
 title: Connect a GitLab repository
 sidebar_label: GitLab
-description: Connect GitLab, cloud or self-hosted, to MFE Orchestrator with a Personal Access Token, so it can read your repositories and scaffold new microfrontends into them.
+description: "Connect GitLab, cloud or self-hosted, with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new microfrontends into them."
 keywords: [gitlab, personal access token, repository, connection]
 ---
 

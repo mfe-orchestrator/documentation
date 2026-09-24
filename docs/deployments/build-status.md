@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Build status of your microfrontends
 sidebar_label: Build status
-description: The Builds page collects the CI runs of every microfrontend of a project in one table, next to the version each environment is serving, and streams their status live.
+description: "The Builds page collects the CI runs of every microfrontend of a project in one table, next to the version each environment serves, and streams status live."
 keywords: [builds, ci status, pipeline, github actions, gitlab pipelines, azure devops, server-sent events]
 ---
 

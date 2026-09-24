@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Self-host with Docker
 sidebar_label: Docker
-description: Run MFE Orchestrator Hub from the official Docker image — the all-in-one image for a single container installation, or the standard image against your own MongoDB and Redis.
+description: "Run MFE Orchestrator Hub from the official Docker image: the all-in-one image for a single container, or the standard image against your own MongoDB and Redis."
 keywords: [docker, self-hosting, installation, container, all-in-one]
 ---
 

@@ -2,7 +2,7 @@
 sidebar_position: 8
 title: Anonymous telemetry
 sidebar_label: Telemetry
-description: "The one anonymous ping a day a self-hosted installation sends: the exact payload, when and where it goes, the full precedence of the switches that turn it off, and the endpoint that shows you what your own installation would send."
+description: "The one anonymous ping a day a self-hosted installation sends: the exact payload, where it goes, the switches that turn it off, and how to preview your own."
 keywords: [telemetry, privacy, TELEMETRY_DISABLED, DO_NOT_TRACK, anonymous, self-hosting]
 ---
 

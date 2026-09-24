@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Import repositories as microfrontends
 sidebar_label: Import repositories
-description: Read the repositories reachable through a code repository connection and create one microfrontend per repository in a single pass, instead of declaring them one by one.
+description: "Read the repositories reachable through a code repository connection and create one microfrontend per repository in one pass, instead of one by one."
 keywords: [import, repositories, bulk, adopt, microfrontends, slug]
 ---
 

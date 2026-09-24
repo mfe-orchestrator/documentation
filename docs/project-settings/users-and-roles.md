@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Project members and roles
 sidebar_label: Members and roles
-description: "What the project role is and is not: why membership, not the role, is the boundary inside a project, how to invite and remove members, and how this level combines with the organization role."
+description: "What the project role is and is not: why membership is the boundary inside a project, how to invite and remove members, and how it meets the organization role."
 keywords: [members, roles, permissions, invitations, access control]
 ---
 

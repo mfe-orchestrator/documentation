@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Core concepts and object model
 sidebar_label: Core concepts
-description: "Organizations, projects, environments, microfrontends, versions, deployments and storages: the objects MFE Orchestrator is built around, and how they relate to each other."
+description: "Organizations, projects, environments, microfrontends, versions, deployments and storages: the objects MFE Orchestrator is built around, and how they relate."
 keywords: [object model, organizations, projects, environments, deployments, microfrontends]
 ---
 

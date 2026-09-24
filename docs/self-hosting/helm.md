@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: Self-host on Kubernetes with Helm
 sidebar_label: Helm (Kubernetes)
-description: Install MFE Orchestrator Hub on Kubernetes with the official Helm chart — configuration, secrets, persistence of the uploaded microfrontends, ingress and probes.
+description: "Install MFE Orchestrator Hub on Kubernetes with the official Helm chart: configuration, secrets, persistence of uploaded microfrontends, ingress and probes."
 keywords: [helm, kubernetes, self-hosting, installation, chart, ingress, persistent volume]
 ---
 

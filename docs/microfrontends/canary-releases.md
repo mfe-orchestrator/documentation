@@ -2,7 +2,7 @@
 sidebar_position: 6
 title: Canary releases for microfrontends
 sidebar_label: Canary releases
-description: Serve a new version of a microfrontend to a fraction of your traffic while everyone else keeps the stable one, with a sticky decision taken entirely server-side.
+description: "Serve a new version of a microfrontend to a fraction of your traffic while everyone else keeps the stable one, with a sticky decision taken server-side."
 keywords: [canary release, progressive rollout, traffic split, versions, sticky assignment]
 ---
 

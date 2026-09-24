@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Store builds on Amazon S3
 sidebar_label: Amazon S3
-description: "Connect an Amazon S3 bucket to MFE Orchestrator: create the bucket, add an IAM user and policy, and point a storage at it so builds land in your own AWS account."
+description: "Connect an Amazon S3 bucket: create the bucket, add an IAM user and policy, and point a storage at it so builds land in your own AWS account."
 keywords: [amazon s3, aws, object storage, iam policy, microfrontend builds]
 ---
 

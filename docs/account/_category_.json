@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "title": "Your account",
-    "description": "The screens that belong to a person rather than to a project: the emailed links that activate an account, reset a password or accept an invitation, and the profile page."
+    "description": "The screens belonging to a person rather than a project: the emailed links that activate an account, reset a password or accept an invitation, and the profile."
   }
 }

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-description: Point a self-hosted MFE Orchestrator at a MongoDB and a Redis you already run — the variables involved, the replica set requirement, and the encryption key that matters once the database is not yours.
+description: "Point a self-hosted MFE Orchestrator at a MongoDB and Redis you already run: the variables, the replica set requirement, and the encryption key that matters."
 title: Use an external MongoDB and Redis
 sidebar_label: External resources
 keywords: [mongodb, redis, external database, production, managed service]

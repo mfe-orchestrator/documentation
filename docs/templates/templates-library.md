@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Microfrontend templates library
 sidebar_label: Templates library
-description: "The catalogue of working Module Federation projects you pick from when creating a microfrontend: build config, a sample exposed component and a matching CI pipeline."
+description: "The catalogue of working Module Federation projects you pick from when creating a microfrontend: build config, a sample component and a matching CI pipeline."
 keywords: [templates, module federation, scaffolding, vite, webpack]
 ---
 

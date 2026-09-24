@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Activation, password reset and invitations
 sidebar_label: Emailed links
-description: "The five console screens reached without signing in: account activation, password recovery, password reset, project invitation and organization invitation — what each link carries, how long it lives, and why none of them exists on an installation without SMTP."
+description: "The five console screens reached without signing in: activation, password recovery and reset, and the two invitations. What each carries, and how long it lives."
 keywords: [activation, password reset, forgot password, invitation, SMTP, email]
 ---
 

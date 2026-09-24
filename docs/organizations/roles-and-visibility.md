@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Organization roles and project visibility
 sidebar_label: Roles and visibility
-description: "Owner, Admin and Member at organization level: who reaches every project of the tenant, who reaches only the ones they were invited to, and how that combines with the project role."
+description: "Owner, Admin and Member at organization level: who reaches every project of the tenant, who reaches only their own, and how that meets the project role."
 keywords: [organization roles, owner, admin, member, permissions, project visibility, access control]
 ---
 

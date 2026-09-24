@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: API keys for CI/CD
 sidebar_label: API keys
-description: An API key authenticates a machine — a CI pipeline, a deploy script, an automation job — against a single project. How to create one, what it can call, and how to actually stop it.
+description: "An API key authenticates a machine, a CI pipeline or a deploy script against a single project. How to create one, what it can call, and how to stop it."
 keywords: [api key, ci authentication, automation, project scope]
 ---
 

@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: Upgrading to organizations
 sidebar_label: Upgrading from 3.x
-description: What happens to projects created before 4.0.0 — the startup migration that gives each of them an organization, how owners and roles are chosen, and what to check afterwards.
+description: "What happens to projects created before 4.0.0: the startup migration that gives each an organization, how owners are chosen, and what to check afterwards."
 keywords: [migration, upgrade, 4.0.0, organizations, self-hosting, boot migration]
 ---
 

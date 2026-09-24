@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: Dependency analysis and peer dependency alignment
 sidebar_label: Dependency analysis
-description: Scan the repositories of a project through the provider API, compare the declared ranges against the npm registry, and rewrite the misaligned peerDependencies on a dedicated branch.
+description: "Scan the repositories of a project through the provider API, compare declared ranges against the npm registry, and rewrite misaligned peerDependencies."
 keywords: [dependencies, peer dependencies, npm registry, alignment, semver, monorepo]
 ---
 

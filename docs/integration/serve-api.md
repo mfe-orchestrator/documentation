@@ -2,7 +2,7 @@
 sidebar_position: 6
 title: Serve API reference
 sidebar_label: Serve API
-description: Reference for the public, unauthenticated serve API your applications call — endpoints, response shapes, error codes, and which deployment each one answers from.
+description: "Reference for the public, unauthenticated serve API your applications call: endpoints, response shapes, error codes, and which deployment each answers from."
 keywords: [serve api, rest api, endpoints, active deployment, remoteEntry]
 ---
 

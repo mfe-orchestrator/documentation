@@ -2,7 +2,7 @@
 sidebar_position: 3.5
 title: Architecture
 sidebar_label: Architecture
-description: "How MFE Orchestrator is put together: the orchestrator itself, the database and cache behind it, the artifact storage options — internal or your own cloud bucket — and how a deployment reaches each environment."
+description: "How MFE Orchestrator is put together: the orchestrator, the database and cache behind it, the storage options, and how a deployment reaches each environment."
 keywords: [architecture, diagram, deployment, mongodb, redis, object storage, self-hosting]
 ---
 

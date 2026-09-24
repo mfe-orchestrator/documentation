@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Projects and access control
 sidebar_label: Projects
-description: A project is the container every configuration object belongs to, and one of the two access-control boundaries in MFE Orchestrator. What belongs in one, and how to decide where to draw the line.
+description: "A project is the container every configuration object belongs to, and one of the two access-control boundaries. What belongs in one, and where to draw the line."
 keywords: [projects, access control, boundary, settings, organization]
 ---
 

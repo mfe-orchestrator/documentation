@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: The client SDK
 sidebar_label: Client SDK
-description: Resolve remote URLs at runtime with @mfe-orchestrator-hub/client, the framework-agnostic package the generated bundler configuration delegates to, plus its React, Vue and Angular adapters.
+description: "Resolve remote URLs at runtime with @mfe-orchestrator-hub/client, the package the generated bundler config delegates to, with React, Vue and Angular adapters."
 keywords: [client sdk, remoteUrl, configure, module federation, react, vue, angular]
 ---
 

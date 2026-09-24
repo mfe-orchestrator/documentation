@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Your profile
 sidebar_label: Profile
-description: "The profile page: the profile picture and the formats and size it accepts, the name and surname shown across the platform, the email that cannot be changed, and the marketing consent where an installation collects one."
+description: "The profile page: the picture and the formats it accepts, the name shown across the platform, the email that cannot be changed, and the marketing consent."
 keywords: [profile, avatar, profile picture, marketing consent, personal data]
 ---
 

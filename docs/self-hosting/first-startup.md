@@ -2,7 +2,7 @@
 sidebar_position: 0.5
 title: The first startup
 sidebar_label: First startup
-description: "The Initial Setup screen every self-hoster meets in the first minute: when it appears, what the one form creates, why the project name you type becomes permanent, and why a fresh installation must not sit exposed before you fill it in."
+description: "The Initial Setup screen every self-hoster meets in the first minute: when it appears, what the form creates, and why the project name you type is permanent."
 keywords: [first startup, initial setup, first user, installation, self-hosting, REGISTRATION_ALLOWED]
 ---
 

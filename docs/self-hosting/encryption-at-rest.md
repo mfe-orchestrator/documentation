@@ -2,7 +2,7 @@
 sidebar_position: 7
 title: Encryption of stored credentials
 sidebar_label: Encryption at rest
-description: "What SECRETS_ENCRYPTION_KEY encrypts and what it deliberately does not: the threat model, the covered fields, why global variables stay in the clear, and what losing the key costs."
+description: "What SECRETS_ENCRYPTION_KEY encrypts and what it deliberately does not: the threat model, the covered fields, and what losing the key costs you."
 keywords: [encryption, secrets, SECRETS_ENCRYPTION_KEY, credentials, security, threat model]
 ---
 

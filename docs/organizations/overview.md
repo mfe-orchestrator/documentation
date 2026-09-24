@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Organizations overview
 sidebar_label: Overview
-description: "An organization is the tenant that owns your projects: a project belongs to exactly one, a user can belong to many. What that changes, and where the organization lives in the console."
+description: "An organization is the tenant that owns your projects: a project belongs to exactly one, a user to many. What that changes, and where it lives in the console."
 keywords: [organization, tenant, multi-tenancy, workspace, projects]
 ---
 

@@ -613,7 +613,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="The control plane for your microfrontends"
-      description="Documentation for MFE Orchestrator: the control plane for microfrontend architectures — versions, environments, deployments, rollback and generated Module Federation configuration, hosted or self-hosted.">
+      description="Documentation for MFE Orchestrator: versions, environments, deployments, rollback and generated Module Federation configuration, hosted or self-hosted.">
       <Head>
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
