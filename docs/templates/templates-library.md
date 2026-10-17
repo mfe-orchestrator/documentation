@@ -2,8 +2,8 @@
 sidebar_position: 1
 title: Microfrontend templates library
 sidebar_label: Templates library
-description: "The catalogue of working Module Federation projects you pick from when creating a microfrontend: build config, a sample component and a matching CI pipeline."
-keywords: [templates, module federation, scaffolding, vite, webpack]
+description: "The catalogue of working microfrontend projects you pick from when creating a microfrontend: Module Federation, Web Component, single-spa and micro-lc, each with a matching CI pipeline."
+keywords: [templates, module federation, scaffolding, vite, webpack, single-spa, micro-lc]
 ---
 
 # Microfrontend templates library
@@ -15,7 +15,7 @@ afternoon of bundler archaeology.
 
 ## What the catalogue covers
 
-Fourteen templates, and every one of them is selectable — nothing in the catalogue is marked *Coming
+Eighteen templates, and every one of them is selectable — nothing in the catalogue is marked *Coming
 Soon* any more.
 
 The bulk of it is a full grid: **React, Vue and Angular**, each in a **Vite** and a **Webpack**
@@ -25,12 +25,23 @@ exists.
 Beyond the grid there is a **Web Component** host and remote for React, for the case where you would
 rather expose a custom element than a federated module and let any framework — or none — mount it.
 
+Two more pairs for React use an integration model instead of Module Federation. Both are built with
+Vite, and both still resolve every remote URL through the [client SDK](../integration/client-sdk.md):
+
+| Templates | Host | Remote | Remote entry point | React shared through |
+| --- | --- | --- | --- | --- |
+| **single-spa** (`single-spa-host-react`, `single-spa-remote-react`) | a root config registering applications with `registerApplication()` | a native ES module exporting the lifecycles | `index.js` | an import map the root config generates |
+| **micro-lc** (`microlc-host-react`, `microlc-remote-react`) | a micro-lc 2 shell whose config is built at runtime | a UMD parcel | `parcel.js` | `window.React`, `window.ReactDOM`, `window.ReactJSXRuntime` |
+
+A microfrontend created from one of these remotes is served by the template's entry point
+(`index.js`, `parcel.js`) rather than by the generic `assets/remoteEntry.js`.
+
 ## Browsing
 
 The library opens automatically when you click **Add New Microfrontend**. You can filter by:
 
 - **Framework** — React, Vue, Angular
-- **Compiler** — Vite, Webpack, Web Component
+- **Compiler** — Vite, Webpack, Web Component, single-spa, micro-lc
 - **Host type** — host or remote
 - **Free text** search by name
 
@@ -110,6 +121,8 @@ How much of that a host template ships varies, so read its config before copying
 | Vite + React | The `remoteUrl()` entry, commented out — uncomment and rename it |
 | Webpack + React | A stale `name@url` example, commented out, and an empty `exposes` |
 | Web Component + React | **No federation plugin at all** |
+| single-spa + React | No federation: `src/applications.ts` registers `example-remote`, loaded with `import()` of its `remoteUrl()` |
+| micro-lc + React | No federation: `src/microlc-config.ts` builds the micro-lc config with `entry: { scripts: [remoteUrl] }` |
 
 The Webpack + React host is the one to check: its commented example is the static
 `remote1@http://localhost:3001/remoteEntry.js` form, which is exactly what the SDK exists to avoid.
@@ -118,6 +131,17 @@ Replace it with the promise form rather than filling in a URL.
 The Web Component host is not a Module Federation project and says so in its `vite.config.ts` — "No
 federation plugin here on purpose". It wires the SDK through `src/MicrofrontendLoader.tsx`, which asks
 for the resolved URL and mounts the custom element. There is no `remotes` block to write.
+
+The single-spa and micro-lc hosts are not Module Federation projects either.
+
+- **single-spa:** the root config resolves each application's URL first, then imports it on its own
+  line: `const url = await remoteUrl('example-remote'); return import(/* @vite-ignore */ url)`. Vite
+  wraps dynamic imports in a preload callback that `import(await …)` breaks.
+- **micro-lc:** the shell hands micro-lc a config whose parcel entries are
+  `[await remoteUrl('example-remote')]`.
+
+Both share their React with the remotes, and that is a contract: rename one of the shared names and
+every remote breaks. Read the template's README before upgrading React on one side only.
 
 ### The shape of the `configure()` call is deliberate
 
@@ -150,7 +174,7 @@ The entry point is not `src/main.js` in any of them:
 
 | Host template | Entry point |
 | --- | --- |
-| Vite + React, Web Component + React | `src/main.tsx` |
+| Vite + React, Web Component + React, single-spa + React, micro-lc + React | `src/main.tsx` |
 | Vite + Vue, Vite + Angular | `src/main.ts` |
 | Webpack + React, Vue, Angular | `src/index.ts` |
 
@@ -167,7 +191,7 @@ the SDK lets the server resolve the environment from the domain the page is serv
 when the same build goes to every stage, provided each stage's domain is registered under
 [allowed domains](../environments/domains.md).
 
-The templates do not agree on what to hand you on day one. Of the seven host templates, three ship
+The templates do not agree on what to hand you on day one. Of the nine host templates, five ship
 the variable empty in `.env.example`, two ship it set to `DEV`, and two ship the line commented out.
 None of them defaults the *code* to a slug, and the Webpack + React config says why: defaulting to
 `DEV` "silently pinned every build that forgot the variable to the DEV environment". Read
@@ -183,6 +207,10 @@ When you create a microfrontend from a template, MFE Orchestrator does more than
    `<type>/<compiler>/<provider>` in
    [`template-pipelines`](https://github.com/mfe-orchestrator/template-pipelines)
 3. Registers the microfrontend in your project, linked to the new repository
+
+The single-spa and micro-lc templates have their own pipeline folders, `single-spa` and `micro-lc`.
+Their remotes publish `dist/` like the Vite ones. Their hosts build with `VITE_MFE_BACKEND_URL`,
+`VITE_MFE_PROJECT_ID` and `VITE_MFE_ENVIRONMENT`, which you set as CI variables.
 
 The result is a repository where pushing a tag builds and publishes a version. See
 [Create a microfrontend](../microfrontends/create-a-microfrontend.md). Three details around it are
@@ -285,7 +313,7 @@ files pushed — but no CI file is added, and you will need to supply your own.
 
 Templates are ordinary Git repositories. To propose one:
 
-1. Publish a repository containing a working Module Federation project, with the entry point and
+1. Publish a repository containing a working microfrontend project, with the entry point and
    build settings correct for its compiler.
 2. Open a pull request against
    [`mfe-orchestrator/documentation`](https://github.com/mfe-orchestrator/documentation) adding an
