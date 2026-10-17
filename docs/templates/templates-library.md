@@ -88,7 +88,7 @@ A host template carries one thing a remote does not: the [client SDK](../integra
 already integrated. Every host template calls `configure()` in its entry point. Most, but not all,
 also ship an example remote declared in the promise form, so the URL is asked for at import time
 rather than compiled in — shown here in its Vite flavour, with Webpack using
-`promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))` instead:
+`promise globalThis.__MFE_ORCHESTRATOR__.loadWebpackRemote('catalog', 'catalog')` instead:
 
 ```js
 remotes: {

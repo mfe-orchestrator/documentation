@@ -80,8 +80,8 @@ module.exports = {
       name: 'shell',
       filename: 'remoteEntry.js',
       remotes: {
-        'catalog': `promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))`,
-        'cart': `promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('cart'))`
+        catalog: "promise globalThis.__MFE_ORCHESTRATOR__.loadWebpackRemote('catalog', 'catalog')",
+        cart: "promise globalThis.__MFE_ORCHESTRATOR__.loadWebpackRemote('cart', 'cart')"
       },
       shared: {
         react: {
@@ -133,9 +133,21 @@ configure({
 ```
 
 `promise <expression>` is how `ModuleFederationPlugin` declares a remote whose URL is only known at
-runtime: the expression is inlined into your host bundle and awaited before the remote is used. The
-URL comes from the [client SDK](./client-sdk.md), which is referenced by bare specifier and resolved
-by your own bundler.
+runtime: the expression is pasted into your host bundle verbatim and awaited before the remote is
+used, and it has to resolve to the remote's container, not to its URL. Being pasted outside of any
+module, it cannot import the [client SDK](./client-sdk.md): a bare
+`import('@mfe-orchestrator-hub/client')` there reaches the browser unresolved and fails with "Failed
+to resolve module specifier". So it calls the loader the SDK publishes on
+`globalThis.__MFE_ORCHESTRATOR__`, which resolves the URL, injects the remote entry once and returns
+the container defined under the second argument (`loadWebpackRemote` ships with
+`@mfe-orchestrator-hub/client` 0.3.0). That argument is the `name` the remote gives its own
+`ModuleFederationPlugin`; the console generates it from the slug, without dashes, so it matches the
+key.
+
+Keep the usual webpack bootstrap: `configure()` at the top of `src/index.ts`, the rest of the app
+behind `import('./bootstrap')`. A remote requested before `configure()` waits for it, but one imported
+by the very chunk that calls `configure()` is loaded before that chunk runs, and fails after ten
+seconds with the "not configured" error.
 
 So the generated configuration contains **no URL** — no version, no environment, no CDN path. That is
 what keeps the resolution server-side and lets a

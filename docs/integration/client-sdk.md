@@ -261,8 +261,10 @@ cookie of the MFE Orchestrator domain would ever reach the server —
 
 ## Bundler configuration
 
-The generated `remotes` block references the SDK by **bare specifier**, so it is your own bundler
-that resolves it against your `node_modules` and inlines it into your host bundle:
+The generated `remotes` block reaches the SDK differently per bundler, because the two do different
+things with the string. The Vite plugin compiles the `external` expression into your host bundle, so
+the SDK is referenced by **bare specifier** and your own bundler resolves it against your
+`node_modules`; the expression only has to resolve to the URL:
 
 ```js
 // Vite — @originjs/vite-plugin-federation
@@ -274,15 +276,25 @@ remotes: {
 }
 ```
 
+Webpack pastes a `promise` remote into the bundle verbatim, outside of any module, and expects it to
+resolve to the remote's *container* (`{ get, init }`) rather than to a URL. A bare `import()` there
+would reach the browser unresolved and fail with "Failed to resolve module specifier", so the
+expression reads the SDK off the global it publishes as soon as it loads:
+
 ```js
 // Webpack — ModuleFederationPlugin
 remotes: {
-  'catalog': `promise import('@mfe-orchestrator-hub/client').then(m => m.remoteUrl('catalog'))`
+  catalog: "promise globalThis.__MFE_ORCHESTRATOR__.loadWebpackRemote('catalog', 'catalog')"
 }
 ```
 
-The core is a module-level singleton, so the copy your federation config reaches and the copy your
-application code reaches are the same instance, sharing one configuration and one manifest fetch.
+`loadWebpackRemote(slug, scope)` resolves the URL with `remoteUrl(slug)`, injects that
+`remoteEntry.js` once, and returns the container the script defines on `globalThis[scope]` — the
+`name` the remote gives its own `ModuleFederationPlugin`, which the console generates from the slug
+without dashes, the same name as the key. A remote requested before `configure()` waits for it.
+
+The core keeps its state on a global, so the copy your federation config reaches and the copy your
+application code reaches share one configuration and one manifest fetch.
 
 Full walkthroughs: [Vite](./module-federation-vite.md) and [Webpack](./module-federation-webpack.md).
 
