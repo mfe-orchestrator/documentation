@@ -109,6 +109,11 @@ to `index.js`, but Module Federation builds usually produce something else:
 | --- | --- |
 | Vite + `@originjs/vite-plugin-federation` | `assets/remoteEntry.js` |
 | Webpack Module Federation | `remoteEntry.js` |
+| single-spa application (Vite library build) | `index.js` |
+| micro-lc parcel (Vite UMD build) | `parcel.js` |
+
+A microfrontend created from a template starts with the entry point the template declares in the
+marketplace.
 
 The entry point gets special cache treatment: it is always served with
 `Cache-Control: no-cache, no-store, must-revalidate`, while the hashed assets around it are

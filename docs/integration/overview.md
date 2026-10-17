@@ -45,7 +45,7 @@ The Module Federation tab has two selects instead, both defaulting to **Automati
 | Select | Options |
 | --- | --- |
 | **Framework** | Automatic, React, Vue, Angular |
-| **Bundler** | Automatic, Vite, Webpack, Web Component |
+| **Bundler** | Automatic, Vite, Webpack, Web Component, single-spa, micro-lc |
 
 **Automatic** means the stack stored on the microfrontend — taken from the template it was created
 from, detected in its repository, or set by hand — and a badge above the snippet says which of the
@@ -56,6 +56,20 @@ until you pick one.
 Picking **Web Component** as the bundler produces no configuration at all: web component
 microfrontends are plain scripts registering a custom element, so there is nothing to write into a
 bundler config, and the tab shows a runtime-integration note in place of one.
+
+**single-spa** and **micro-lc** are integration models rather than bundlers, so they produce no
+Module Federation config either. Instead, the tab shows the file that wires the remotes into the
+host, the `configure()` bootstrap for `src/main.tsx`, and how React is shared:
+
+| Stack | Host file | Each remote becomes | React shared through |
+| --- | --- | --- | --- |
+| single-spa | `src/applications.ts` | `registerApplication()` whose `app` imports `await remoteUrl(slug)` | the root config's import map |
+| micro-lc | `src/microlc-config.ts` | a parcel with `entry: { scripts: [await remoteUrl(slug)] }` | `window.React`, `ReactDOM`, `ReactJSXRuntime` |
+
+A remote of these stacks gets the Vite library build it needs instead: an ES module emitting
+`dist/index.js` for single-spa, a UMD script emitting `dist/parcel.js` for micro-lc. In both cases
+React stays external. **Integrate my microfrontends** writes the host file and adds the runtime
+packages (`single-spa`, or `@micro-lc/orchestrator`) to `package.json`.
 
 ## The two integration models
 

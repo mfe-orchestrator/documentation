@@ -282,7 +282,7 @@ needed.
 
 ```http
 GET <API_BASE>/serve/code?microfrontendId={id}&deploymentId={id}
-    &framework={react|vue|angular}&compiler={vite|webpack|webcomponent}
+    &framework={react|vue|angular}&compiler={vite|webpack|webcomponent|single-spa|micro-lc}
 ```
 
 `framework` and `compiler` are the two axes of the stack, and both are **optional**: left out, each
@@ -304,13 +304,19 @@ The response is the whole set of instructions, not a single string:
 | `config` | Full content of the bundler config |
 | `bootstrap` | The commented-out `configure()` snippet for the entry point |
 | `code` | `config` and `bootstrap` concatenated — the text the Integration page displays |
-| `dependencies` | Packages the config needs beyond what the app already has |
+| `dependencies` | Build-time packages the config needs beyond what the app already has |
+| `runtimeDependencies` | single-spa and micro-lc only: packages the app imports at runtime, ex. `single-spa` |
 | `installCommand` | `npm install …`, absent when `dependencies` is empty |
 | `runtimeIntegration` | `true` for a Web Component microfrontend: there is no federation config, the host resolves the URL at runtime |
 
 `stack` is always present. A Web Component stack answers with `runtimeIntegration: true`, an empty
 `code` and nothing else; a microfrontend whose stack could not be determined answers with an empty
 `code` and no `config`.
+
+A single-spa or micro-lc stack has no federation config. For a host, `configPath` and `config`
+describe the file that wires the remotes in: `src/applications.ts` or `src/microlc-config.ts`. For a
+remote, they describe its Vite library build. `compiler` is read case- and dash-insensitively, so
+`single-spa`, `SINGLE_SPA` and `singlespa` all mean the same stack.
 
 The console's **CURL** tab shows the runtime-discovery call for the selected environment, with your
 ids already substituted:

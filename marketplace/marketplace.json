@@ -216,5 +216,71 @@
         "compiler": "webcomponent",
         "framework": "React",
         "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/webcomponents.png"
+    },
+    {
+        "name": "single-spa & React - host Template",
+        "slug": "single-spa-host-react",
+        "description": "Template for single-spa root configs: registers single-spa applications and shares React with them through an import map",
+        "version": "1.0.0",
+        "license": "MIT",
+        "repo": "https://github.com/mfe-orchestrator/template-single-spa-react-host",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-single-spa-react-host/archive/refs/heads/main.zip",
+        "tags": [
+            "template"
+        ],
+        "type": "host",
+        "compiler": "single-spa",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/single-spa.png"
+    },
+    {
+        "name": "single-spa & React - remote Template",
+        "slug": "single-spa-remote-react",
+        "description": "Template for single-spa applications: a native ES module exporting the single-spa lifecycles, React kept external",
+        "version": "1.0.0",
+        "license": "MIT",
+        "repo": "https://github.com/mfe-orchestrator/template-single-spa-react-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-single-spa-react-remote/archive/refs/heads/main.zip",
+        "tags": [
+            "template"
+        ],
+        "type": "remote",
+        "entryPoint": "index.js",
+        "compiler": "single-spa",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/single-spa.png"
+    },
+    {
+        "name": "micro-lc & React - host Template",
+        "slug": "microlc-host-react",
+        "description": "Template for micro-lc shells: builds the micro-lc configuration at runtime and shares React on window",
+        "version": "1.0.0",
+        "license": "MIT",
+        "repo": "https://github.com/mfe-orchestrator/template-microlc-react-host",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-microlc-react-host/archive/refs/heads/main.zip",
+        "tags": [
+            "template"
+        ],
+        "type": "host",
+        "compiler": "micro-lc",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/micro-lc.png"
+    },
+    {
+        "name": "micro-lc & React - remote Template",
+        "slug": "microlc-remote-react",
+        "description": "Template for micro-lc parcels: one UMD script exporting the parcel lifecycles, React read from the shell",
+        "version": "1.0.0",
+        "license": "MIT",
+        "repo": "https://github.com/mfe-orchestrator/template-microlc-react-remote",
+        "zipUrl": "https://github.com/mfe-orchestrator/template-microlc-react-remote/archive/refs/heads/main.zip",
+        "tags": [
+            "template"
+        ],
+        "type": "remote",
+        "entryPoint": "parcel.js",
+        "compiler": "micro-lc",
+        "framework": "React",
+        "icon": "https://raw.githubusercontent.com/mfe-orchestrator/documentation/refs/heads/main/marketplace/micro-lc.png"
     }
 ]
