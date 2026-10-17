@@ -61,6 +61,8 @@ stages:
       - group: MFE_ORCHESTRATOR_SECRETS
       - name: VERSION
         value: $[replace(variables['Build.SourceBranch'], 'refs/tags/', '')]
+      - name: MICROFRONTEND_ORCHESTRATOR_DOMAIN_RESOLVED
+        value: $[coalesce(variables['MICROFRONTEND_ORCHESTRATOR_DOMAIN'], 'https://console.mfe-orchestrator.dev')]
     jobs:
       - job: Deploy
         steps:
@@ -77,17 +79,17 @@ stages:
               microfrontendSlug: 'catalog'
               filePath: '$(System.ArtifactsDirectory)/app'
               version: '$(VERSION)'
+              domain: '$(MICROFRONTEND_ORCHESTRATOR_DOMAIN_RESOLVED)'
 ```
 
-:::caution You have to fill `microfrontendSlug` in yourself
-The Azure DevOps scaffolder copies the pipeline in without substituting anything: placeholder
-replacement is present in the code but commented out for this path. The committed
-`azure-pipelines.yml` therefore keeps the literal `%microfrontendSlug%` — and `%domain%` if the
-template it came from names one — and the first tagged run fails on it.
-
-Before your first release, edit the file and replace `%microfrontendSlug%` with the slug of the
-microfrontend as it appears in the console. Only the GitHub workflow is substituted for you.
-:::
+The template in
+[`template-pipelines`](https://github.com/mfe-orchestrator/template-pipelines) carries
+`%microfrontendSlug%` and `%domain%` where this example has `catalog` and the console URL. The
+scaffolder replaces both before the initial commit, as it does on GitHub: the slug of the
+microfrontend, and the base URL of the console without `/api` — `BACKEND_URL` if the installation
+sets it, `https://console.mfe-orchestrator.dev` otherwise. A pipeline variable named
+`MICROFRONTEND_ORCHESTRATOR_DOMAIN` wins over that default, so you can publish to another
+installation without editing the file.
 
 ## Two stages, deliberately
 
