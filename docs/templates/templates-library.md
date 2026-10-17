@@ -216,16 +216,17 @@ The result is a repository where pushing a tag builds and publishes a version. S
 [Create a microfrontend](../microfrontends/create-a-microfrontend.md). Three details around it are
 worth knowing before you rely on them.
 
-### Placeholder substitution runs for GitHub only
+### Placeholders are replaced in the pipeline only
 
-The pipelines carry `%microfrontendSlug%` and `%domain%` placeholders. On GitHub the whole
-`<type>/<compiler>/GITHUB` directory is copied into `.github/` and both placeholders are replaced —
-with your microfrontend's slug and this installation's API URL.
+The pipelines carry `%microfrontendSlug%` and `%domain%` placeholders. Both are replaced before the
+initial commit, on every provider, with the same values: your microfrontend's slug, and the base URL
+of the console the pipeline publishes to — `BACKEND_URL` when the installation sets it,
+`https://console.mfe-orchestrator.dev` otherwise. The pipelines add `/api` to it themselves.
 
-On **GitLab** and **Azure DevOps** a single file is copied (`.gitlab-ci.yml`, `azure-pipelines.yml`)
-and the substitution call is commented out, so those pipelines are committed with the literal
-`%microfrontendSlug%` and `%domain%` still in them. Fill them in yourself after the first commit, or
-the pipeline will not run.
+What is copied differs by provider. On GitHub the whole `<type>/<compiler>/github` directory goes
+into `.github/`; on **GitLab** and **Azure DevOps** a single file is copied to the repository root
+(`.gitlab-ci.yml`, `azure-pipelines.yml`). Only those copied files are touched: a placeholder in the
+template's own files is committed as it is.
 
 ### Where the API key lives
 

@@ -128,19 +128,16 @@ deploy:
     - tags
 ```
 
-:::caution You have to fill these two in yourself
-Unlike the GitHub path, the GitLab scaffolder copies the pipeline in without substituting anything:
-placeholder replacement is present in the code but commented out for GitLab. The committed
-`.gitlab-ci.yml` therefore keeps the literal `%microfrontendSlug%` and `%domain%`, and the first
-tagged pipeline fails on them.
+The template in
+[`template-pipelines`](https://github.com/mfe-orchestrator/template-pipelines) carries two
+placeholders, which the scaffolder replaces before the initial commit, as it does on GitHub:
 
-Before your first release, edit the file and replace them:
-
-| Placeholder | Replace with |
+| Placeholder | Replaced with |
 | --- | --- |
 | `%microfrontendSlug%` | The slug of the microfrontend, as it appears in the console |
-| `%domain%` | The API base URL of your installation, e.g. `https://console.example.com` |
-:::
+| `%domain%` | The base URL of the console, without `/api`: `BACKEND_URL` if the installation sets it, `https://console.mfe-orchestrator.dev` otherwise |
+
+If you add this job to a repository by hand, write those two values in yourself.
 
 Both are plain job variables, so a **project** CI/CD variable of the same name wins over them: once
 the YAML is correct you can set `MICROFRONTEND_ORCHESTRATOR_DOMAIN` in the project settings to publish
@@ -208,7 +205,8 @@ Base pipelines for other compilers and host types are in
 
 **The upload URL contains `%domain%`, or the slug is `%microfrontendSlug%`**
 
-The scaffolded pipeline was committed with the placeholders unsubstituted. Replace them as described
+The repository was scaffolded by a console older than the one that replaces the placeholders on
+GitLab, or the job was copied by hand from `template-pipelines`. Replace them as described
 [above](#the-publish-job).
 
 **`api-key` empty / authentication failure**
