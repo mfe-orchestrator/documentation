@@ -54,7 +54,7 @@ This shows all resources that will be created, including:
 
 There are no `docker_volume` resources: each container gets a **host bind mount** under
 `${path.root}/volumes/` — `volumes/mongodb`, `volumes/redis` and `volumes/mfe-orchestrator` for the
-uploaded microfrontends. The directories are created next to the root module, so the state of the
+uploaded frontends. The directories are created next to the root module, so the state of the
 installation lives in your working copy and is deleted with it.
 
 Apply the Terraform configuration to deploy the infrastructure:

@@ -23,7 +23,7 @@ https://api.example.com/serve/mfe/files/<projectId>/prod/catalog/remoteEntry.js
 ```
 
 That works, but it means the deployed artifact of your host differs per environment — the very
-thing microfrontend architectures are supposed to avoid. You end up with an environment-specific
+thing frontend architectures are supposed to avoid. You end up with an environment-specific
 build, or with runtime string surgery in the host.
 
 ## How it works
@@ -43,7 +43,7 @@ stage. [Overlapping domains](#overlapping-domains) explains what that costs.
 Then use the environment-less form of the URL:
 
 ```
-<API_BASE>/serve/mfe/files/auto/<projectId>/<microfrontendSlug>/<entryPoint>
+<API_BASE>/serve/mfe/files/auto/<projectId>/<frontendSlug>/<entryPoint>
 ```
 
 When that request arrives, MFE Orchestrator reads the browser's `Referer` header and matches it

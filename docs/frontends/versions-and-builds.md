@@ -1,14 +1,14 @@
 ---
 sidebar_position: 4
-title: Microfrontend versions and builds
+title: Frontend versions and builds
 sidebar_label: Versions and builds
-description: How a microfrontend version comes into existence, what a version string means to the platform, and the two ways to produce and upload build artifacts.
+description: How a frontend version comes into existence, what a version string means to the platform, and the two ways to produce and upload build artifacts.
 keywords: [versions, builds, artifacts, tags, upload]
 ---
 
-# Microfrontend versions and builds
+# Frontend versions and builds
 
-A microfrontend is only useful once there are artifacts to serve. This page describes how a
+A frontend is only useful once there are artifacts to serve. This page describes how a
 version comes into existence, and the two ways to trigger one.
 
 ## What a version is
@@ -17,14 +17,14 @@ A version is a string you choose — `1.0.0`, `2026.02.14`, `1.4.0-rc1` — unde
 built files is stored. MFE Orchestrator does not parse or order versions; it uses them as
 folder names and as the value it hands to your host application.
 
-Each microfrontend has one **selected version** in the project configuration, plus the history
+Each frontend has one **selected version** in the project configuration, plus the history
 of every version that has ever been uploaded. What your users actually load is the version
 captured in the [active deployment](../deployments/overview.md), not the one selected in the
 form.
 
 ## Triggering a build from the console
 
-If the microfrontend is linked to a code repository, its card shows a **Build** action. It opens
+If the frontend is linked to a code repository, its card shows a **Build** action. It opens
 a dialog asking for:
 
 - **Branch** — the branch to build. The list is read live from your provider, with the default
@@ -58,12 +58,12 @@ brought your own pipeline, make sure it triggers on tags — otherwise the **Bui
 create tags that nothing acts on.
 
 :::info
-The **Build** action requires a linked code repository. It has no effect on microfrontends
+The **Build** action requires a linked code repository. It has no effect on frontends
 without one.
 :::
 
 You do not have to leave the console to know how that run went: the
-[Build status](../deployments/build-status.md) page lists the latest run of every microfrontend of
+[Build status](../deployments/build-status.md) page lists the latest run of every frontend of
 the project, reading it from GitHub Actions, GitLab pipelines or Azure DevOps, and updates while
 you watch.
 
@@ -85,31 +85,31 @@ repository.
 See [CI/CD](../ci-cd/github-actions.md) for the full pipeline examples, and
 [Manual upload](../ci-cd/manual-upload.md) for the raw HTTP call.
 
-:::caution Custom URL microfrontends cannot be uploaded to
-Upload only works for microfrontends hosted on the **MFE Orchestrator Hub** or on a
+:::caution Custom URL frontends cannot be uploaded to
+Upload only works for frontends hosted on the **MFE Orchestrator Hub** or on a
 **Custom Source** bucket. For **Custom URL**, publishing is handled entirely by your own
 infrastructure — MFE Orchestrator only records which version to point at.
 :::
 
 ## Selecting a version
 
-Once a version exists, open the microfrontend and pick it in the **Version** field, at the top of the
+Once a version exists, open the frontend and pick it in the **Version** field, at the top of the
 form in **Release settings**. The field offers the versions known to the platform, plus a
 **Custom version** option, which reveals a second box for typing one in directly — useful for Custom
-URL microfrontends, where the platform has no upload history to list.
+URL frontends, where the platform has no upload history to list.
 
-![The Version field listing the uploaded versions and a Custom version option](../assets/microfrontend-version-select.png)
+![The Version field listing the uploaded versions and a Custom version option](../assets/frontend-version-select.png)
 
-That list only appears when editing a microfrontend that already has uploads. On the creation form,
-and on any microfrontend nothing has been uploaded for, there is nothing to list, so the field is a
+That list only appears when editing a frontend that already has uploads. On the creation form,
+and on any frontend nothing has been uploaded for, there is nothing to list, so the field is a
 plain text box.
 
 Then [deploy](../deployments/overview.md) the environments you want to move.
 
 ## Continuous deployment
 
-The **Continuous Deployment** switch marks a microfrontend as continuously deployed. The flag is
-stored on the microfrontend and published to consumers as `continuousDeployment` on the
+The **Continuous Deployment** switch marks a frontend as continuously deployed. The flag is
+stored on the frontend and published to consumers as `continuousDeployment` on the
 [serve API](../integration/serve-api.md) payload.
 
 :::info It is a marker, not an automation

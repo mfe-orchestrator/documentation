@@ -3,7 +3,7 @@ sidebar_position: 2
 title: Store builds on Amazon S3
 sidebar_label: Amazon S3
 description: "Connect an Amazon S3 bucket: create the bucket, add an IAM user and policy, and point a storage at it so builds land in your own AWS account."
-keywords: [amazon s3, aws, object storage, iam policy, microfrontend builds]
+keywords: [amazon s3, aws, object storage, iam policy, frontend builds]
 ---
 
 # Store builds on Amazon S3
@@ -19,7 +19,7 @@ This page walks through connecting an S3 bucket to MFE Orchestrator.
 
 In the AWS console, open **S3 → Create bucket**:
 
-- **Bucket name** — globally unique, e.g. `acme-microfrontends`
+- **Bucket name** — globally unique, e.g. `acme-frontends`
 - **Region** — pick one close to your users; note it, you will need it
 - **Block Public Access** — leave **enabled**
 
@@ -33,7 +33,7 @@ so S3 versioning adds protection against accidental overwrites rather than relea
 
 ## Step 2: Create an IAM policy
 
-Create a policy granting only what the platform needs. Replace `acme-microfrontends` with your
+Create a policy granting only what the platform needs. Replace `acme-frontends` with your
 bucket name, and `mfe/` with your intended path prefix (or drop the prefix to allow the whole
 bucket):
 
@@ -48,13 +48,13 @@ bucket):
         "s3:GetObject",
         "s3:PutObject"
       ],
-      "Resource": "arn:aws:s3:::acme-microfrontends/mfe/*"
+      "Resource": "arn:aws:s3:::acme-frontends/mfe/*"
     },
     {
       "Sid": "ListBucket",
       "Effect": "Allow",
       "Action": "s3:ListBucket",
-      "Resource": "arn:aws:s3:::acme-microfrontends",
+      "Resource": "arn:aws:s3:::acme-frontends",
       "Condition": {
         "StringLike": {
           "s3:prefix": "mfe/*"
@@ -87,7 +87,7 @@ Go to **Settings → Storages → New Storage** and select **Amazon S3**:
 | Field | Value |
 | --- | --- |
 | **Name** | A label, e.g. *Production S3* |
-| **Bucket Name** | `acme-microfrontends` |
+| **Bucket Name** | `acme-frontends` |
 | **Path** | Optional prefix inside the bucket, e.g. `mfe`. Leave blank for the bucket root |
 | **Access Key ID** | From step 3 |
 | **Secret Access Key** | From step 3 |
@@ -97,13 +97,13 @@ Go to **Settings → Storages → New Storage** and select **Amazon S3**:
 
 Save.
 
-## Step 5: Point a microfrontend at it
+## Step 5: Point a frontend at it
 
-Open a microfrontend, set **Hosting type** to **Custom Source**, select this storage, and save.
+Open a frontend, set **Hosting type** to **Custom Source**, select this storage, and save.
 Publish a new version — the artifact now lands in your bucket, at:
 
 ```
-mfe/<projectSlug>-<projectId>/<microfrontendSlug>/<version>/…
+mfe/<projectSlug>-<projectId>/<frontendSlug>/<version>/…
 ```
 
 Then [deploy](../deployments/overview.md) the environment.
@@ -135,6 +135,6 @@ S3 console.
 ## Cost notes
 
 The traffic pattern is `GET` requests from MFE Orchestrator to S3, one per file served, plus egress
-from S3 to the platform. Both are small for typical bundles, but if your microfrontends are heavily
+from S3 to the platform. Both are small for typical bundles, but if your frontends are heavily
 trafficked and large, consider a bucket in the same region as your MFE Orchestrator installation to
 reduce inter-region egress.

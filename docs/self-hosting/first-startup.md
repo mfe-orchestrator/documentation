@@ -134,7 +134,7 @@ installation must not accept new accounts.
 
 You have an account, an organization and an empty project. From here:
 
-1. [Create your first microfrontend](../microfrontends/create-a-microfrontend.md).
+1. [Create your first frontend](../frontends/create-a-frontend.md).
 2. Connect a [bucket](../buckets/overview.md) if you want the platform to host the bundles.
 3. Configure [SMTP](./environment-variables.md) before inviting anybody — without it invitations,
    password resets and account activation [cannot work](../account/email-flows.md).

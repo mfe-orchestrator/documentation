@@ -2,8 +2,8 @@
 sidebar_position: 2
 title: Get started with MFE Orchestrator
 sidebar_label: Let's start
-description: Create an account, connect a repository and create your first microfrontend with MFE Orchestrator — hosted console or self-hosted, one step at a time.
-keywords: [getting started, tutorial, quickstart, microfrontends]
+description: Create an account, connect a repository and create your first frontend with MFE Orchestrator — hosted console or self-hosted, one step at a time.
+keywords: [getting started, tutorial, quickstart, frontends]
 ---
 
 import Link from '@docusaurus/Link';
@@ -14,7 +14,7 @@ Welcome to MFE Orchestrator! This tutorial will guide you through your first ste
 
 :::tip In a hurry?
 The **[quick start](./quick-start.mdx)** is the condensed version of this page: from zero to a
-deployed microfrontend — and a one-click rollback — in about ten minutes.
+deployed frontend — and a one-click rollback — in about ten minutes.
 :::
 
 **MFE Orchestrator can be used in two ways:**
@@ -107,7 +107,7 @@ If you already have an account, simply sign in with your email or Google account
 
 ## Step 2: Connect Your Code Repository
 
-To deploy microfrontends, you need to connect MFE Orchestrator to your source code repository.
+To deploy frontends, you need to connect MFE Orchestrator to your source code repository.
 
 1. Navigate to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** or click on **Settings** → **Code Repositories** in the main navigation menu
 
@@ -130,14 +130,14 @@ MFE Orchestrator supports multiple repository providers:
 For most users, we recommend starting with GitHub as it has the simplest setup process.
 :::
 
-## Step 3: Create Your First Microfrontend
+## Step 3: Create Your First Frontend
 
-Now you're ready to start working with microfrontends!
+Now you're ready to start working with frontends!
 
 1. Return to the **[Home page](https://console.mfe-orchestrator.dev)** by clicking on the home icon or logo in the navigation menu
-2. Click the **Add New Microfrontend** box at the center of the screen
+2. Click the **Add New Frontend** box at the center of the screen
 
-![Add New Microfrontend](./assets/add-new-microfrontend.png)
+![Add New Frontend](./assets/add-new-frontend.png)
 
 3. Choose a template from the list
 
@@ -145,7 +145,7 @@ Now you're ready to start working with microfrontends!
 
 4. Fill in the required information. The form is split into tabs — **General**, **Hosting** and
    **Repository** — and what the template needs is spread over two of them:
- * **General → name**: A descriptive name for your microfrontend
+ * **General → name**: A descriptive name for your frontend
  * **General → slug**: A URL-friendly identifier (e.g., "my-app"). It is filled in from the name as
    you type, and cannot be changed after creation
  * **Repository → source code provider**: The repository connection to create the new repository in.
@@ -156,31 +156,31 @@ Now you're ready to start working with microfrontends!
 Because you came from a template, the **Repository** tab arrives with its switch already on. If the
 tab is missing entirely, the project has no repository connection yet — go back to Step 2.
 
-![Add New Microfrontend](./assets/frontend-fill-information.png)
+![Add New Frontend](./assets/frontend-fill-information.png)
 
 5. Click **Save** to finalize the setup
 
 :::info Automatic Setup
 MFE Orchestrator will automatically:
 - ✅ **Create the repository** in your selected source code provider with the chosen template
-- ✅ **Initialize the microfrontend** with all necessary configurations
+- ✅ **Initialize the frontend** with all necessary configurations
 - ✅ **Set up the deployment pipeline** ready for your first deployment
 
 This process usually takes a few seconds. You'll see a success message once everything is ready!
 :::
 
-**Congratulations!** 🎉 You've successfully created your first microfrontend. You can now start developing, deploying, and managing your application through MFE Orchestrator.
+**Congratulations!** 🎉 You've successfully created your first frontend. You can now start developing, deploying, and managing your application through MFE Orchestrator.
 
 ## Next steps
 
-Your microfrontend exists, but there are a few more pieces before it is serving traffic. The
+Your frontend exists, but there are a few more pieces before it is serving traffic. The
 shortest path from here:
 
 1. **[Understand the model](./core-concepts.md)** — projects, environments, deployments and how they
    relate. Ten minutes that will save you an hour later.
-2. **[Publish a version](./microfrontends/versions-and-builds.md)** — push a tag and let the
+2. **[Publish a version](./frontends/versions-and-builds.md)** — push a tag and let the
    generated pipeline build and upload your first artifact.
-3. **[Set up your environments](./environments/overview.md)** — the stages your microfrontend moves
+3. **[Set up your environments](./environments/overview.md)** — the stages your frontend moves
    through, plus the [allowed domains](./environments/domains.md) that let one build serve them all.
 4. **[Deploy](./deployments/overview.md)** — snapshot the configuration and make it live. Remember:
    editing is not deploying.
@@ -189,9 +189,9 @@ shortest path from here:
 
 ### Going further
 
-- **[Hosting options](./microfrontends/hosting-options.md)** — keep artifacts on the hub, in
+- **[Hosting options](./frontends/hosting-options.md)** — keep artifacts on the hub, in
   [your own bucket](./buckets/overview.md), or on your existing CDN
-- **[Build status](./deployments/build-status.md)** — every microfrontend, its latest CI run and the
+- **[Build status](./deployments/build-status.md)** — every frontend, its latest CI run and the
   version each environment serves, on one page
 - **[Runtime configuration](./integration/runtime-configuration.md)** — configure the same build
   differently per environment, without a rebuild

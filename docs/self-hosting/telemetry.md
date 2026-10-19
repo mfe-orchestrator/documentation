@@ -54,7 +54,7 @@ object and no free text:
 | `version` | Version of the orchestrator, so we know which releases are still alive. |
 | `nodeVersion` | Major and minor of the Node.js runtime, so we know when a Node version is safe to drop. |
 | `projects` | How many projects exist. A count, never a name. |
-| `microfrontends` | How many microfrontends exist. A count, never a name, a URL or a version. |
+| `microfrontends` | How many frontends exist. A count, never a name, a URL or a version. |
 | `environments` | How many environments exist. A count, never a name or a domain. |
 | `users` | How many accounts exist. A count, never an email or a name. |
 | `deploymentsLastWeek` | Deployments performed in the last 7 days. This is what distinguishes a live installation from one that was merely installed. |
@@ -71,12 +71,12 @@ payload that currently says less than it looks like it says.
 
 Not "is not currently sent", but "there is no code that could send it":
 
-- No names — no project, microfrontend, environment, user, company or host name
+- No names — no project, frontend, environment, user, company or host name
 - No emails, no user ids, no database ids
 - No URLs, domains, git remotes or repository names
 - No hostname, no IP address in the payload, no environment variables, no secrets, no configuration
   values
-- No microfrontend content, no bundles, no deployment contents, no global variables
+- No frontend content, no bundles, no deployment contents, no global variables
 - No logs, no stack traces, no error messages
 - No page views, no clicks, no session tracking — there is no client-side tracker, no cookie and no
   third-party analytics anywhere in the product
@@ -167,7 +167,7 @@ is on. Rule 4 protects a local `pnpm dev` and a CI job, not a deployment.
 ```text
 Anonymous telemetry is ENABLED (every 24h to https://telemetry.mfe-orchestrator.dev/api/telemetry/self-hosted)
 What we send, and nothing else: installationId, version, nodeVersion, projects, microfrontends, environments, users, deploymentsLastWeek
-No names, no emails, no URLs, no hostnames, no IPs, no project or microfrontend content
+No names, no emails, no URLs, no hostnames, no IPs, no project or frontend content
 Inspect the exact payload of this installation: GET /api/telemetry/status
 Turn it off: TELEMETRY_DISABLED=true
 ```

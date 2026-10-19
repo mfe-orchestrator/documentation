@@ -114,7 +114,7 @@ have deployed. Both variables endpoints above answer from the **active deploymen
 environment, never from the current draft configuration.
 
 That is a property of the variables endpoints, not of the serve API as a whole: the routes that
-stream microfrontend files resolve the deployment differently and can disagree with the active one
+stream frontend files resolve the deployment differently and can disagree with the active one
 after a rollback — see
 [Rollback and redeploy](../deployments/rollback-and-redeploy.md#the-file-routes-do-not-all-follow-a-rollback).
 :::

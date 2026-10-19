@@ -1,0 +1,9 @@
+{
+  "label": "Frontends",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "title": "Manage frontends",
+    "description": "Register, version, host and wire together the frontends of your project."
+  }
+}

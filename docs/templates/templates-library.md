@@ -1,16 +1,16 @@
 ---
 sidebar_position: 1
-title: Microfrontend templates library
+title: Frontend templates library
 sidebar_label: Templates library
-description: "The catalogue of working microfrontend projects you pick from when creating a microfrontend: Module Federation, Web Component, single-spa and micro-lc, each with a matching CI pipeline."
+description: "The catalogue of working frontend projects you pick from when creating a frontend: Module Federation, Web Component, single-spa and micro-lc, each with a matching CI pipeline."
 keywords: [templates, module federation, scaffolding, vite, webpack, single-spa, micro-lc]
 ---
 
-# Microfrontend templates library
+# Frontend templates library
 
-The templates library is the catalogue you pick from when creating a microfrontend. A template is a
+The templates library is the catalogue you pick from when creating a frontend. A template is a
 working Module Federation project — correct build configuration, a sample exposed component, and a
-matching CI pipeline — so a new microfrontend is deployable within minutes rather than after an
+matching CI pipeline — so a new frontend is deployable within minutes rather than after an
 afternoon of bundler archaeology.
 
 ## What the catalogue covers
@@ -33,12 +33,12 @@ Vite, and both still resolve every remote URL through the [client SDK](../integr
 | **single-spa** (`single-spa-host-react`, `single-spa-remote-react`) | a root config registering applications with `registerApplication()` | a native ES module exporting the lifecycles | `index.js` | an import map the root config generates |
 | **micro-lc** (`microlc-host-react`, `microlc-remote-react`) | a micro-lc 2 shell whose config is built at runtime | a UMD parcel | `parcel.js` | `window.React`, `window.ReactDOM`, `window.ReactJSXRuntime` |
 
-A microfrontend created from one of these remotes is served by the template's entry point
+A frontend created from one of these remotes is served by the template's entry point
 (`index.js`, `parcel.js`) rather than by the generic `assets/remoteEntry.js`.
 
 ## Browsing
 
-The library opens automatically when you click **Add New Microfrontend**. You can filter by:
+The library opens automatically when you click **Add New Frontend**. You can filter by:
 
 - **Framework** — React, Vue, Angular
 - **Compiler** — Vite, Webpack, Web Component, single-spa, micro-lc
@@ -55,7 +55,7 @@ Templates come in pairs, and picking the wrong one is the most common early mist
 | Template type | Use for |
 | --- | --- |
 | **host** | The shell application — boots the page, owns routing, loads remotes |
-| **remote** | A microfrontend consumed by a host |
+| **remote** | A frontend consumed by a host |
 
 A typical project starts with one host template and then adds remote templates as features are
 carved out.
@@ -129,7 +129,7 @@ The Webpack + React host is the one to check: its commented example is the stati
 Replace it with the promise form rather than filling in a URL.
 
 The Web Component host is not a Module Federation project and says so in its `vite.config.ts` — "No
-federation plugin here on purpose". It wires the SDK through `src/MicrofrontendLoader.tsx`, which asks
+federation plugin here on purpose". It wires the SDK through `src/FrontendLoader.tsx`, which asks
 for the resolved URL and mounts the custom element. There is no `remotes` block to write.
 
 The single-spa and micro-lc hosts are not Module Federation projects either.
@@ -183,7 +183,7 @@ The Webpack hosts read `process.env.MFE_*` instead of `import.meta.env.VITE_MFE_
 the whole configuration object there, passing it as `configure(MFE_ENV)`.
 
 So a host scaffolded from a template already resolves its remotes through MFE Orchestrator and already
-honours [canary releases](../microfrontends/canary-releases.md). Starting a host from scratch means
+honours [canary releases](../frontends/canary-releases.md). Starting a host from scratch means
 doing both by hand — see [Client SDK](../integration/client-sdk.md).
 
 Only `backendUrl` and `projectId` are required. The environment slug can be left unset, in which case
@@ -200,26 +200,26 @@ project rather than following whichever template you happened to pick.
 
 ## What gets added on top
 
-When you create a microfrontend from a template, MFE Orchestrator does more than copy files. It also:
+When you create a frontend from a template, MFE Orchestrator does more than copy files. It also:
 
 1. Creates the repository in your connected provider
 2. Injects a **build-and-deploy pipeline** for that provider and compiler, looked up as
    `<type>/<compiler>/<provider>` in
    [`template-pipelines`](https://github.com/mfe-orchestrator/template-pipelines)
-3. Registers the microfrontend in your project, linked to the new repository
+3. Registers the frontend in your project, linked to the new repository
 
 The single-spa and micro-lc templates have their own pipeline folders, `single-spa` and `micro-lc`.
 Their remotes publish `dist/` like the Vite ones. Their hosts build with `VITE_MFE_BACKEND_URL`,
 `VITE_MFE_PROJECT_ID` and `VITE_MFE_ENVIRONMENT`, which you set as CI variables.
 
 The result is a repository where pushing a tag builds and publishes a version. See
-[Create a microfrontend](../microfrontends/create-a-microfrontend.md). Three details around it are
+[Create a frontend](../frontends/create-a-frontend.md). Three details around it are
 worth knowing before you rely on them.
 
 ### Placeholders are replaced in the pipeline only
 
 The pipelines carry `%microfrontendSlug%` and `%domain%` placeholders. Both are replaced before the
-initial commit, on every provider, with the same values: your microfrontend's slug, and the base URL
+initial commit, on every provider, with the same values: your frontend's slug, and the base URL
 of the console the pipeline publishes to — `BACKEND_URL` when the installation sets it,
 `https://console.mfe-orchestrator.dev` otherwise. The pipelines add `/api` to it themselves.
 
@@ -237,7 +237,7 @@ overwritten.
 
 | Connection | Secret created as | When |
 | --- | --- | --- |
-| GitHub, personal account | A repository secret on the new repository | Creating the microfrontend |
+| GitHub, personal account | A repository secret on the new repository | Creating the frontend |
 | GitHub, organization | An organization secret, visible to all repositories | Creating or editing the code-repository connection |
 | GitLab, with a group | A group secret | Creating or editing the connection |
 | Azure DevOps | A variable in the `MFE_ORCHESTRATOR_SECRETS` variable group | Creating or editing the connection |
@@ -253,7 +253,7 @@ authenticate. Create the [API key](../ci-cd/api-keys.md) yourself and add it und
 
 No product code writes a Dependabot configuration. Most host templates carry a
 `.github/dependabot.yml` of their own, which is copied along with the rest of the template — but the
-Vite + React and Webpack + React hosts do not, so a microfrontend scaffolded from either of those has
+Vite + React and Webpack + React hosts do not, so a frontend scaffolded from either of those has
 none.
 
 The one thing that could add one anyway is the GitHub branch of the pipeline injection, which copies
@@ -264,9 +264,9 @@ repository after creation rather than assuming either way.
 
 ## Create from scratch
 
-**Create From Scratch** in the library skips the template and registers a microfrontend against
+**Create From Scratch** in the library skips the template and registers a frontend against
 code you already have. You then choose the hosting type yourself and arrange builds and uploads —
-see [Versions and builds](../microfrontends/versions-and-builds.md).
+see [Versions and builds](../frontends/versions-and-builds.md).
 
 Note that no pipeline is injected into a repository MFE Orchestrator did not create. To get the same
 automation, copy the appropriate file from
@@ -289,7 +289,7 @@ hosted and self-hosted alike — without an upgrade.
 {
   "name": "Vite & React - remote Template",
   "slug": "vite-remote-react",
-  "description": "Template for remote microfrontends using Vite",
+  "description": "Template for remote frontends using Vite",
   "version": "1.0.0",
   "author": "Lorenzo De Francesco",
   "license": "MIT",
@@ -314,7 +314,7 @@ files pushed — but no CI file is added, and you will need to supply your own.
 
 Templates are ordinary Git repositories. To propose one:
 
-1. Publish a repository containing a working microfrontend project, with the entry point and
+1. Publish a repository containing a working frontend project, with the entry point and
    build settings correct for its compiler.
 2. Open a pull request against
    [`mfe-orchestrator/documentation`](https://github.com/mfe-orchestrator/documentation) adding an

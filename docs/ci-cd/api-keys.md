@@ -57,13 +57,13 @@ one.
 
 ## What a key can call
 
-One endpoint: the [upload](#using-a-key) of a microfrontend version.
+One endpoint: the [upload](#using-a-key) of a frontend version.
 
 ```
-POST <API_BASE>/microfrontends/by-slug/:slug/upload/:version
+POST <API_BASE>/frontends/by-slug/:slug/upload/:version
 ```
 
-Everything else on the API — creating a deployment, editing a microfrontend, reading the build
+Everything else on the API — creating a deployment, editing a frontend, reading the build
 status — is authenticated with the token of a signed-in user and answers an API key with an
 authentication error. So a pipeline can *publish* a version, and it cannot *deploy* it; see
 [publishing does not deploy](./manual-upload.md#publishing-does-not-deploy).
@@ -87,7 +87,7 @@ CI pages ask for a key, any key the console gives you is the right one.
 You often do not need to create a key at all. Connecting a code repository — or editing an existing
 connection — creates a key and writes it into your Git provider under the name the generated
 pipelines read, `MICROFRONTEND_ORCHESTRATOR_API_KEY`. It happens once per connection, not once per
-microfrontend, and is skipped when a secret of that name already exists.
+frontend, and is skipped when a secret of that name already exists.
 
 | Provider | Where the key is written | Scope |
 | --- | --- | --- |
@@ -126,13 +126,13 @@ Send it in the `api-key` header:
 curl -X POST \
   -H "api-key: $MFE_ORCHESTRATOR_API_KEY" \
   -F "file=@dist.zip" \
-  "<API_BASE>/microfrontends/by-slug/catalog/upload/1.4.0"
+  "<API_BASE>/frontends/by-slug/catalog/upload/1.4.0"
 ```
 
 A query parameter is also accepted, for clients that cannot set headers:
 
 ```
-<API_BASE>/microfrontends/by-slug/catalog/upload/1.4.0?apiKey=…
+<API_BASE>/frontends/by-slug/catalog/upload/1.4.0?apiKey=…
 ```
 
 :::caution Prefer the header
@@ -169,6 +169,6 @@ so secret scanners will not catch one you paste into a repository.
 key per project — which is the correct blast radius, not an inconvenience to work around.
 
 **Treat a leaked key as a live incident.** Any key can publish arbitrary JavaScript to your
-production microfrontends. **Delete it first, investigate second** — deleting is the only thing that
+production frontends. **Delete it first, investigate second** — deleting is the only thing that
 stops it, and nothing else you can do in the console reduces its access at all. Then create a
 replacement and update the consumer.

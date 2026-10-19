@@ -167,7 +167,7 @@ exists to avoid. Prefer it for anything you ship.
 
 Always from the **active deployment** of that environment — never from the draft configuration in
 the console. A variable you have added but not deployed is not served. This is the same rule that
-governs microfrontend versions, and it means a configuration rollback is just a
+governs frontend versions, and it means a configuration rollback is just a
 [redeploy](../deployments/rollback-and-redeploy.md).
 
 ## Security

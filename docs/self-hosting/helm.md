@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: Self-host on Kubernetes with Helm
 sidebar_label: Helm (Kubernetes)
-description: "Install MFE Orchestrator Hub on Kubernetes with the official Helm chart: configuration, secrets, persistence of uploaded microfrontends, ingress and probes."
+description: "Install MFE Orchestrator Hub on Kubernetes with the official Helm chart: configuration, secrets, persistence of uploaded frontends, ingress and probes."
 keywords: [helm, kubernetes, self-hosting, installation, chart, ingress, persistent volume]
 ---
 
@@ -129,7 +129,7 @@ image:
   tag: "4.0.0"
 ```
 
-## Storage of the uploaded microfrontends
+## Storage of the uploaded frontends
 
 Uploaded bundles are stored on a PersistentVolumeClaim mounted at `MICROFRONTEND_HOST_FOLDER`
 (default `/upload-microfrontends`); setting `persistence.mountPath` overrides the mount point and
@@ -143,7 +143,7 @@ persistence:
   # existingClaim: my-claim
 ```
 
-With `persistence.enabled: false` the microfrontends live in the container filesystem and are lost
+With `persistence.enabled: false` the frontends live in the container filesystem and are lost
 at every restart. If you scale beyond one replica, use a `ReadWriteMany` volume — otherwise keep
 `replicaCount: 1`.
 

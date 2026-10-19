@@ -73,7 +73,7 @@ is usable on its own.
 :::caution Global variables are not encrypted, and are not secrets
 [Environment variables](../environments/environment-variables.md) marked as global are served to
 **every browser that loads your application**, as `window.globalConfig`. That is the whole point of
-them: they are how a microfrontend learns which API base URL to call.
+them: they are how a frontend learns which API base URL to call.
 
 They are not covered here, and encrypting them would change nothing — anybody who can open your site
 can read them from the page. Anything genuinely secret does not belong in a global variable in the

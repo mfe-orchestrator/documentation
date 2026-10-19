@@ -1,7 +1,7 @@
 ---
 title: Connect a GitLab repository
 sidebar_label: GitLab
-description: "Connect GitLab, cloud or self-hosted, with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new microfrontends into them."
+description: "Connect GitLab, cloud or self-hosted, with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new frontends into them."
 keywords: [gitlab, personal access token, repository, connection]
 ---
 
@@ -125,7 +125,7 @@ If the test is successful, you'll see a **green checkmark** and a success messag
 ### 3.3 Select the Group
 
 The test does more than validate the token: it returns the groups the token can see, and a **Select
-project** dropdown appears under the green checkmark listing them. Pick the group new microfrontend
+project** dropdown appears under the green checkmark listing them. Pick the group new frontend
 repositories should be created in.
 
 This step is not optional. The field is required and **Connect GitLab** stays disabled until the test

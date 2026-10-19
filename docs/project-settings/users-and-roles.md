@@ -58,7 +58,7 @@ The console is not consistent about which of the two names it shows. The **invit
 
 The last Admin is protected from removal: the API refuses to remove the final `OWNER` of a project,
 and the console disables the button. That is the only outcome a project role changes. Renaming,
-deleting, inviting, deploying, editing microfrontends, environments or variables: none of them
+deleting, inviting, deploying, editing frontends, environments or variables: none of them
 consult it.
 
 Choose the role, then, as documentation of intent rather than as a control — it tells the next person

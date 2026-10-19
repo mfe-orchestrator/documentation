@@ -59,7 +59,7 @@ For a given project, the question *can this user open it?* has exactly two ways 
 
 If neither holds, the project is not returned in any listing and every endpoint touching it is
 refused. The rule lives in a single gate shared by every backend service, so it applies uniformly to
-microfrontends, environments, variables, storages, repositories, builds and deployments — there is
+frontends, environments, variables, storages, repositories, builds and deployments — there is
 no endpoint where it was forgotten.
 
 | Organization role | Project membership | Result |

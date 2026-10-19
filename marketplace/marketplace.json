@@ -2,7 +2,7 @@
     {
         "name": "Vite & React - remote Template",
         "slug": "vite-remote-react",
-        "description": "Template for remote microfrontends using Vite",
+        "description": "Template for remote frontends using Vite",
         "version": "1.0.0",
         "author": "Lorenzo De Francesco",
         "license": "MIT",
@@ -21,7 +21,7 @@
         "name": "Vite & React - host Template",
         "slug": "vite-host-react",
         "version": "1.0.0",
-        "description": "Template for host microfrontends using Vite",
+        "description": "Template for host frontends using Vite",
         "repo": "https://github.com/mfe-orchestrator/template-vite-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-vite-host/archive/refs/heads/main.zip",
         "tags": [
@@ -38,7 +38,7 @@
         "slug": "vite-host-angular",
         "repo": "https://github.com/mfe-orchestrator/template-vite-angular-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-vite-angular-host/archive/refs/heads/main.zip",
-        "description": "Template for host microfrontends using Vite",
+        "description": "Template for host frontends using Vite",
         "tags": [
             "template"
         ],
@@ -53,7 +53,7 @@
         "slug": "vite-remote-angular",
         "repo": "https://github.com/mfe-orchestrator/template-vite-angular-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-vite-angular-remote/archive/refs/heads/main.zip",
-        "description": "Template for remote microfrontends using Vite",
+        "description": "Template for remote frontends using Vite",
         "version": "1.0.0",
         "author": "Lorenzo De Francesco",
         "license": "MIT",
@@ -71,7 +71,7 @@
         "slug": "vite-host-vue",
         "repo": "https://github.com/mfe-orchestrator/template-vite-vue-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-vite-vue-host/archive/refs/heads/main.zip",
-        "description": "Template for host microfrontends using Vite",
+        "description": "Template for host frontends using Vite",
         "tags": [
             "template"
         ],
@@ -86,7 +86,7 @@
         "slug": "vite-remote-vue",
         "repo": "https://github.com/mfe-orchestrator/template-vite-vue-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-vite-vue-remote/archive/refs/heads/main.zip",
-        "description": "Template for remote microfrontends using Vite",
+        "description": "Template for remote frontends using Vite",
         "author": "Lorenzo De Francesco",
         "license": "MIT",
         "tags": [
@@ -102,7 +102,7 @@
         "name": "Webpack & React - remote Template",
         "slug": "webpack-remote-react",
         "version": "1.0.0",
-        "description": "Template for remote microfrontends using Webpack",
+        "description": "Template for remote frontends using Webpack",
         "repo": "https://github.com/mfe-orchestrator/template-webpack-react-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-react-remote/archive/refs/heads/main.zip",
         "tags": [
@@ -118,7 +118,7 @@
         "name": "Webpack & React - host Template",
         "slug": "webpack-host-react",
         "version": "1.0.0",
-        "description": "Template for host microfrontends using Webpack",
+        "description": "Template for host frontends using Webpack",
         "repo": "https://github.com/mfe-orchestrator/template-webpack-react-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-react-host/archive/refs/heads/main.zip",
         "tags": [
@@ -134,7 +134,7 @@
         "slug": "webpack-remote-angular",
         "repo": "https://github.com/mfe-orchestrator/template-webpack-angular-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-angular-remote/archive/refs/heads/main.zip",
-        "description": "Template for remote microfrontends using Webpack",
+        "description": "Template for remote frontends using Webpack",
         "tags": [
             "template"
         ],
@@ -150,7 +150,7 @@
         "entryPoint": "remoteEntry.js",
         "repo": "https://github.com/mfe-orchestrator/template-webpack-angular-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-angular-host/archive/refs/heads/main.zip",
-        "description": "Template for host microfrontends using Webpack",
+        "description": "Template for host frontends using Webpack",
         "tags": [
             "template"
         ],
@@ -164,7 +164,7 @@
         "slug": "webpack-remote-vue",
         "repo": "https://github.com/mfe-orchestrator/template-webpack-vue-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-vue-remote/archive/refs/heads/main.zip",
-        "description": "Template for remote microfrontends using Webpack",
+        "description": "Template for remote frontends using Webpack",
         "tags": [
             "template"
         ],
@@ -180,7 +180,7 @@
         "entryPoint": "remoteEntry.js",
         "repo": "https://github.com/mfe-orchestrator/template-webpack-vue-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webpack-vue-host/archive/refs/heads/main.zip",
-        "description": "Template for host microfrontends using Webpack",
+        "description": "Template for host frontends using Webpack",
         "tags": [
             "template"
         ],
@@ -194,7 +194,7 @@
         "slug": "webcomponent-remote-react",
         "repo": "https://github.com/mfe-orchestrator/template-webcomponent-remote",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webcomponent-remote/archive/refs/heads/main.zip",
-        "description": "Template for remote microfrontends using Web Component",
+        "description": "Template for remote frontends using Web Component",
         "tags": [
             "template"
         ],
@@ -208,7 +208,7 @@
         "slug": "webcomponent-host-react",
         "repo": "https://github.com/mfe-orchestrator/template-webcomponent-react-host",
         "zipUrl": "https://github.com/mfe-orchestrator/template-webcomponent-react-host/archive/refs/heads/main.zip",
-        "description": "Template for host microfrontends using Web Component",
+        "description": "Template for host frontends using Web Component",
         "tags": [
             "template"
         ],

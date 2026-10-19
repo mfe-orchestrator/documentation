@@ -43,7 +43,7 @@ it — the platform logs a warning and does not connect, it does not fall back t
 | `NODE_ENV` | `prod` *(development/prod/test/local)* | Node.js environment mode. Any other value stops the boot. |
 | `REGISTRATION_ALLOWED` | `true` | **Hides the *Register* link; it does not close the route.** The backend reads it in one place only, to build the `canRegister` flag the console uses to decide what to render. With it set to `false` both `POST /users/registration` and `POST /startup/registration` still create usable accounts. See [The first startup](./first-startup.md#the-endpoint-stays-open). |
 | `ALLOW_EMBEDDED_LOGIN` | `true` | If `true`, enables the login system within the application. |
-| `MICROFRONTEND_HOST_FOLDER`| `/upload-microfrontends` | Folder containing the host microfrontends. |
+| `MICROFRONTEND_HOST_FOLDER`| `/upload-microfrontends` | Folder containing the host frontends. |
 | `ALLOWED_ORIGINS` | *(empty)* | List of allowed URLs for cross-origin requests comma separated. |
 | `ALLOWED_SERVE_ORIGINS` | *(falls back to `ALLOWED_ORIGINS`)* | The same list, applied only to the `/serve/*` endpoints your host applications call. |
 | `RATE_LIMIT_MAX` | `100` | Requests per IP per minute. An empty value fails validation — leave it unset to keep the default. |

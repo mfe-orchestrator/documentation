@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Upload a build from any CI system
 sidebar_label: Uploading a build
-description: The single HTTP endpoint every pipeline reduces to, so you can publish a microfrontend build from any CI system, or from your laptop when debugging.
+description: The single HTTP endpoint every pipeline reduces to, so you can publish a frontend build from any CI system, or from your laptop when debugging.
 keywords: [upload build, rest api, api key, publish version, ci cd]
 ---
 
@@ -14,7 +14,7 @@ you can publish from any CI system — or from your laptop when debugging.
 ## The endpoint
 
 ```http
-POST <API_BASE>/microfrontends/by-slug/{microfrontendSlug}/upload/{version}
+POST <API_BASE>/frontends/by-slug/{frontendSlug}/upload/{version}
 ```
 
 | | |
@@ -33,7 +33,7 @@ cd ..
 curl -X POST \
   -H "api-key: $MFE_ORCHESTRATOR_API_KEY" \
   -F "file=@dist.zip" \
-  "https://console.mfe-orchestrator.dev/api/microfrontends/by-slug/catalog/upload/1.4.0"
+  "https://console.mfe-orchestrator.dev/api/frontends/by-slug/catalog/upload/1.4.0"
 ```
 
 ## Zipping correctly
@@ -76,13 +76,13 @@ The first entries should be your files, not a directory prefix.
 ## Requirements and behaviour
 
 - The file must be a **ZIP** — the request is rejected on both MIME type and `.zip` extension.
-- The microfrontend must already exist in the project, matched by **slug**.
-- The archive is extracted into the version's folder, wherever that microfrontend is
-  [hosted](../microfrontends/hosting-options.md) — the platform's own storage or your bucket.
+- The frontend must already exist in the project, matched by **slug**.
+- The archive is extracted into the version's folder, wherever that frontend is
+  [hosted](../frontends/hosting-options.md) — the platform's own storage or your bucket.
 - Uploading a version that already exists overwrites its files in place. The target folder is not
   cleaned first, so a file that was in the previous upload and is absent from the new one survives
   under the same version and is still served.
-- **Custom URL** microfrontends cannot be uploaded to; the request fails. Publishing is entirely
+- **Custom URL** frontends cannot be uploaded to; the request fails. Publishing is entirely
   yours in that case.
 
 :::caution Overwriting a deployed version
@@ -94,7 +94,7 @@ meaningful.
 ## Publishing does not deploy
 
 After a successful upload the version exists and is selectable, but nothing changes for your users.
-Select the version on the microfrontend and [deploy](../deployments/overview.md) the environment.
+Select the version on the frontend and [deploy](../deployments/overview.md) the environment.
 
 :::caution An API key cannot deploy
 `POST /api/deployment` — the endpoint behind the **Deploy** button, which takes
@@ -130,7 +130,7 @@ curl --fail --show-error --silent \
   -X POST \
   -H "api-key: ${MFE_ORCHESTRATOR_API_KEY}" \
   -F "file=@dist.zip" \
-  "${API_BASE}/microfrontends/by-slug/${SLUG}/upload/${VERSION}"
+  "${API_BASE}/frontends/by-slug/${SLUG}/upload/${VERSION}"
 
 echo "published ${SLUG} ${VERSION}"
 ```
@@ -152,11 +152,11 @@ VERSION="${BUILD_SOURCEBRANCHNAME}"  # Azure DevOps
 | --- | --- |
 | `401` / authentication error | Missing, wrong, revoked or **expired** `api-key` |
 | `File must be a ZIP archive` | Wrong MIME type or extension — send a real `.zip` |
-| Entity not found for the slug | No microfrontend with that slug in the key's project |
-| `Microfrontend host type is not supported` | The microfrontend is **Custom URL** |
+| Entity not found for the slug | No frontend with that slug in the key's project |
+| `Frontend host type is not supported` | The frontend is **Custom URL** |
 | Upload succeeds, app 404s | Entry point mismatch, or the ZIP has a directory prefix |
 | Upload succeeds, users see the old version | You have not deployed |
 
 For the entry point: Vite Module Federation emits `assets/remoteEntry.js`, Webpack emits
-`remoteEntry.js`. The **Entry Point** field on the microfrontend must match what your build actually
+`remoteEntry.js`. The **Entry Point** field on the frontend must match what your build actually
 produces.

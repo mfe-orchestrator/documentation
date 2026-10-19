@@ -1,27 +1,27 @@
 ---
 sidebar_position: 6
-title: Canary releases for microfrontends
+title: Canary releases for frontends
 sidebar_label: Canary releases
-description: "Serve a new version of a microfrontend to a fraction of your traffic while everyone else keeps the stable one, with a sticky decision taken server-side."
+description: "Serve a new version of a frontend to a fraction of your traffic while everyone else keeps the stable one, with a sticky decision taken server-side."
 keywords: [canary release, progressive rollout, traffic split, versions, sticky assignment]
 ---
 
-# Canary releases for microfrontends
+# Canary releases for frontends
 
-A canary release serves a new version of a microfrontend to a fraction of your traffic while
-everyone else keeps the stable one. MFE Orchestrator takes that decision per microfrontend and
+A canary release serves a new version of a frontend to a fraction of your traffic while
+everyone else keeps the stable one. MFE Orchestrator takes that decision per frontend and
 entirely server-side: the host page never learns which side of the split it got, and does not need
 to.
 
 ## Enabling a canary
 
-Open the microfrontend. **Release** is the first card of the form and it sits *above* the tabs, so
+Open the frontend. **Release** is the first card of the form and it sits *above* the tabs, so
 it is on screen whichever of **General**, **Hosting**, **Repository** or **Danger Zone** is
 selected: the version and the canary decide which bytes a browser gets, and they are not something
 you should have to go looking for. Under the version, past a divider, is **Canary Settings** and
 its switch.
 
-![The Canary Settings section of the microfrontend form with the switch on, the percentage slider and its presets, the canary type and deployment type selects and the canary version field](../assets/microfrontend-canary.png)
+![The Canary Settings section of the frontend form with the switch on, the percentage slider and its presets, the canary type and deployment type selects and the canary version field](../assets/frontend-canary.png)
 
 Turned on, the section asks for four things, in this order:
 
@@ -37,26 +37,26 @@ are not enough to tell them apart. The percentage has to be between 1 and 100 wh
 enabled — 0 is refused, which is deliberate: a canary configured to reach nobody is a
 misconfiguration and not a way to switch it off. Turning the switch off is.
 
-Canary configuration is part of the microfrontend, so like everything else it is captured in a
+Canary configuration is part of the frontend, so like everything else it is captured in a
 [deployment](../deployments/overview.md) and only becomes live once you deploy. Expanding a
-deployment under **Deployments** shows a card per microfrontend with its stable version, the two
+deployment under **Deployments** shows a card per frontend with its stable version, the two
 types, and the canary share — or *Enrolled users*, for a *User* canary, which has no share. It is
 the quickest way to confirm what a deployment will actually do.
 
-![The microfrontend cards of an expanded deployment, each with its stable version, canary share, canary type and deployment type badges and canary version](../assets/deployment-canary-cards.png)
+![The frontend cards of an expanded deployment, each with its stable version, canary share, canary type and deployment type badges and canary version](../assets/deployment-canary-cards.png)
 
-The microfrontends list carries the same information in shorter form. A grid card shows the share
+The frontends list carries the same information in shorter form. A grid card shows the share
 as a bar with the canary version underneath; the table view gives it a column of its own, next to
-a **Canary Version** column, and says *No canary* for the microfrontends that have none.
+a **Canary Version** column, and says *No canary* for the frontends that have none.
 
-![A microfrontend card in grid view showing the canary block: the share as a percentage, a progress bar and the canary version](../assets/microfrontend-canary-card.png)
+![A frontend card in grid view showing the canary block: the share as a percentage, a progress bar and the canary version](../assets/frontend-canary-card.png)
 
 ## Who — the canary type
 
 The three types answer two different questions, and it is worth being clear about which one you are
 asking.
 
-![The Canary Type select open, showing the three options Random, Session and User](../assets/microfrontend-canary-type.png)
+![The Canary Type select open, showing the three options Random, Session and User](../assets/frontend-canary-type.png)
 
 | Canary Type | Who gets the canary | Sticky? |
 | --- | --- | --- |
@@ -78,12 +78,12 @@ for you:
 | `mfeSessionId` | The browsing session | `sessionStorage` | No canary strategy — the SDK still sends it, and exposes it, for your own telemetry |
 
 The host sends **every identity it holds** and is never told which one was used, nor the
-percentage, nor whether a canary exists at all. Switching a microfrontend from one type to another
+percentage, nor whether a canary exists at all. Switching a frontend from one type to another
 is therefore a console change only — nothing to redeploy on the host side.
 
 :::info No cookie is involved, and none can be
 An earlier version of this feature had a *Cookie Based* type, and the name was misleading:
-**no cookie is involved anywhere here, and none can be.** Microfrontends are loaded with a
+**no cookie is involved anywhere here, and none can be.** Frontends are loaded with a
 cross-site `import()`, and module scripts are fetched with a fixed `same-origin` credentials mode,
 so a cookie belonging to the MFE Orchestrator domain is never attached to those requests and a
 `Set-Cookie` on their responses is never stored. This is how module scripts are specified in every
@@ -95,8 +95,8 @@ That is why *Session* means "an identity that outlives the browser session", kep
 by the SDK. If you would rather keep it in a first-party cookie of your own domain, read it
 yourself and pass it as `mfeDeviceId`.
 
-The old *On Sessions* and *Cookie Based* types no longer exist. Microfrontends still configured with
-either of them — and the microfrontend snapshots inside deployments already shipped — are converted
+The old *On Sessions* and *Cookie Based* types no longer exist. Frontends still configured with
+either of them — and the frontend snapshots inside deployments already shipped — are converted
 to *Session* automatically, by a migration the backend runs when it connects to the database.
 Nothing to do on your side.
 :::
@@ -105,7 +105,7 @@ Nothing to do on your side.
 
 | Type | Behaviour |
 | --- | --- |
-| **Based on Version** | The canary is a different **version** of the same microfrontend, served through its normal hosting configuration |
+| **Based on Version** | The canary is a different **version** of the same frontend, served through its normal hosting configuration |
 | **Based on URL** | The canary is a completely separate **URL**, which can point anywhere |
 
 *Based on Version* is the natural choice when the canary is simply the next build. *Based on URL*
@@ -118,7 +118,7 @@ CDN — and you want to send a slice of traffic there without registering it as 
 is fetched, with nothing stored anywhere.
 
 *Session* is **sticky**, and gets there without server-side state and without a draw per request.
-The identity and the microfrontend id are concatenated (`identity:microfrontendId`), hashed with
+The identity and the frontend id are concatenated (`identity:frontendId`), hashed with
 FNV-1a into one of 100 buckets, and the request gets the canary when `bucket < percentage`.
 
 Three properties follow from that, and they are the reason it is done this way:
@@ -127,8 +127,8 @@ Three properties follow from that, and they are the reason it is done this way:
   the side it was on, without anything being stored.
 - **Monotonic.** Raising the percentage only ever *adds* browsers to the canary; it never moves one
   back to stable. Measured going from 20% to 40%: zero browsers moved out.
-- **Independent per microfrontend.** The microfrontend id is part of the hashed string, so a
-  browser can be on the canary of one microfrontend and on the stable version of another. A single
+- **Independent per frontend.** The frontend id is part of the hashed string, so a
+  browser can be on the canary of one frontend and on the stable version of another. A single
   unlucky user does not get every canary at once.
 
 The distribution is accurate enough to trust the number you type: 25% configured measured 25.1%
@@ -147,7 +147,7 @@ actual over 4000 identities.
 
 This is the subtle part, and worth understanding before you debug a rollout.
 
-A canary that rolls out one of *your* versions does **not** change the URL of the microfrontend. The
+A canary that rolls out one of *your* versions does **not** change the URL of the frontend. The
 manifest returns the usual serve URL with the resolved version already pinned into it as a **path
 segment**:
 
@@ -157,7 +157,7 @@ https://console.mfe-orchestrator.dev/api/serve/mfe/files/auto/68f1a2b3c4d5e6f7a8
 
 Use that URL verbatim. Never rebuild it, and never strip the `_v/<version>/` segment.
 
-**A microfrontend is many files, and they all come from one build.** The draw happens exactly once,
+**A frontend is many files, and they all come from one build.** The draw happens exactly once,
 on the entry point, and its result is pinned into that URL; every chunk imported from it inherits
 the `_v/<version>/` segment, because relative specifiers resolve against the entry point's URL. The
 server never draws again for the individual files — a file arriving without a version in its path
@@ -171,7 +171,7 @@ resolution drops the query string. A version carried in the query would be lost 
 request.
 
 **Why the URL is pinned up front rather than redirected to.** The entry point of a canary
-microfrontend also answers the *versionless* URL with a `302` (uncacheable) to the pinned one, as a
+frontend also answers the *versionless* URL with a `302` (uncacheable) to the pinned one, as a
 fallback for anyone holding a raw URL. That redirect is enough for an ES module, whose relative
 imports resolve against the **post-redirect** URL. It is *not* enough for a classic script:
 `document.currentScript.src` is the URL *before* redirects, so a webpack build with
@@ -188,7 +188,7 @@ so the host is simply handed either the canary URL or the stable one.
 
 | Tool | What it does |
 | --- | --- |
-| `x-mfe-version` response header | Present on every file served for a microfrontend, naming the version those exact bytes came from |
+| `x-mfe-version` response header | Present on every file served for a frontend, naming the version those exact bytes came from |
 | `?mfeVersion=<version>` query parameter | Forces a specific version, for testing |
 
 `mfeVersion` is accepted only when the value is one of the versions that deployment can serve —
@@ -205,7 +205,7 @@ carries a row enabling them, and everyone else — including every anonymous vis
 version. Because the decision is taken on `mfeUserId`, it follows that person onto any browser and
 any device.
 
-The list lives on the deployment and covers every microfrontend of it configured as *User*. Open a
+The list lives on the deployment and covers every frontend of it configured as *User*. Open a
 deployment under **Deployments** — the active one or any in the history — and press
 **View canary users**.
 
@@ -256,7 +256,7 @@ auth.onLogout(() => setUserId(undefined))
 
 [`setUserId()`](../integration/client-sdk.md#changing-the-user-without-a-reload) drops the memoised
 manifest, so the next remote resolved is decided on the new identity. What it cannot do is move a
-microfrontend that is **already on the page**: the federation runtime keeps the container it loaded,
+frontend that is **already on the page**: the federation runtime keeps the container it loaded,
 so an enrolment that arrives after the remote was imported takes effect on the next resolution or on
 a reload. Resolving your remotes behind your own auth guard avoids the question entirely.
 
@@ -267,7 +267,7 @@ a reload. Resolving your remotes behind your own auth guard avoids the question 
   no version of ours in play: the host is simply handed one URL or the other. Nothing serves those
   files, so they carry no `x-mfe-version` header and `?mfeVersion=` has nothing to force. The
   manifest is no help either — with no version of ours to report, its `version` field names the
-  microfrontend's stable version whichever of the two URLs it just handed out. Prefer *Based on
+  frontend's stable version whichever of the two URLs it just handed out. Prefer *Based on
   Version* when you want to watch a rollout rather than just perform one.
 - **The manifest is fetched once per page load and is not retried.** If that request fails, the
   remotes of that page load fail with it; the SDK clears its memo so the next call tries again.
@@ -298,6 +298,6 @@ in a normal window and once in a fresh private window — and read `x-mfe-versio
 of each. Two different values is the split working. With a *Random* canary a plain refresh is
 enough. Use `?mfeVersion=` when you need to see the canary on demand rather than by luck.
 
-**Promote by making the canary the version.** Once you are convinced, set the microfrontend's
+**Promote by making the canary the version.** Once you are convinced, set the frontend's
 version to what the canary was pointing at and turn the canary off. Nothing about the URLs your
 host holds changes.

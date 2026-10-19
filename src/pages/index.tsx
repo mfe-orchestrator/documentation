@@ -31,7 +31,7 @@ const STRUCTURED_DATA = {
       name: 'MFE Orchestrator documentation',
       url: DOCS_URL,
       description:
-        'Documentation for MFE Orchestrator: the control plane for microfrontend architectures.',
+        'Documentation for MFE Orchestrator: the control plane for frontend architectures.',
       inLanguage: 'en',
       publisher: ORGANIZATION,
     },
@@ -42,7 +42,7 @@ const STRUCTURED_DATA = {
       operatingSystem: 'Any',
       url: SITE_URL,
       description:
-        'Control plane for microfrontend architectures: versions, environments, deployments and ' +
+        'Control plane for frontend architectures: versions, environments, deployments and ' +
         'rollbacks, with generated Module Federation configuration. Hosted or self-hosted.',
       author: ORGANIZATION,
       publisher: ORGANIZATION,
@@ -98,7 +98,7 @@ const START_HERE: Card[] = [
     icon: '🚀',
     title: 'Quick start',
     description:
-      'From zero to a deployed microfrontend — and a one-click rollback — on the free hosted console. About ten minutes, nothing to install.',
+      'From zero to a deployed frontend — and a one-click rollback — on the free hosted console. About ten minutes, nothing to install.',
     to: '/docs/quick-start',
     cta: 'Start the quick start',
   },
@@ -106,7 +106,7 @@ const START_HERE: Card[] = [
     icon: '🧠',
     title: 'Core concepts',
     description:
-      'Projects, environments, microfrontends, deployments and how they relate. The ten minutes that save you an hour later.',
+      'Projects, environments, frontends, deployments and how they relate. The ten minutes that save you an hour later.',
     to: '/docs/core-concepts',
     cta: 'Read the model',
   },
@@ -132,7 +132,7 @@ const CAPABILITIES: Card[] = [
     icon: '📦',
     title: 'Immutable deployments',
     description:
-      'A deployment is a snapshot of every microfrontend, variable and storage setting. Editing is not deploying: drafts stay drafts until you deploy.',
+      'A deployment is a snapshot of every frontend, variable and storage setting. Editing is not deploying: drafts stay drafts until you deploy.',
     to: '/docs/deployments/overview',
   },
   {
@@ -179,16 +179,16 @@ const STEPS: Step[] = [
     to: '/docs/repositories/connect/github',
   },
   {
-    title: 'Create a microfrontend',
+    title: 'Create a frontend',
     description:
       'Pick a template and the platform creates the repository, the configuration and the pipeline.',
-    to: '/docs/microfrontends/create-a-microfrontend',
+    to: '/docs/frontends/create-a-frontend',
   },
   {
     title: 'Publish a version',
     description:
       'Push a tag. The pipeline builds and uploads the artifact where you configured it.',
-    to: '/docs/microfrontends/versions-and-builds',
+    to: '/docs/frontends/versions-and-builds',
   },
   {
     title: 'Deploy and integrate',
@@ -214,20 +214,20 @@ const DOC_SECTIONS: DocSection[] = [
     ],
   },
   {
-    title: 'Microfrontends',
+    title: 'Frontends',
     links: [
-      {label: 'Overview', to: '/docs/microfrontends/overview'},
+      {label: 'Overview', to: '/docs/frontends/overview'},
       {
-        label: 'Create a microfrontend',
-        to: '/docs/microfrontends/create-a-microfrontend',
+        label: 'Create a frontend',
+        to: '/docs/frontends/create-a-frontend',
       },
-      {label: 'Hosts and remotes', to: '/docs/microfrontends/host-and-remotes'},
+      {label: 'Hosts and remotes', to: '/docs/frontends/host-and-remotes'},
       {
         label: 'Versions and builds',
-        to: '/docs/microfrontends/versions-and-builds',
+        to: '/docs/frontends/versions-and-builds',
       },
-      {label: 'Hosting options', to: '/docs/microfrontends/hosting-options'},
-      {label: 'Canary releases', to: '/docs/microfrontends/canary-releases'},
+      {label: 'Hosting options', to: '/docs/frontends/hosting-options'},
+      {label: 'Canary releases', to: '/docs/frontends/canary-releases'},
     ],
   },
   {
@@ -330,11 +330,11 @@ function Hero() {
           <span className={styles.eyebrow}>Documentation</span>
           <Heading as="h1" className={styles.heroTitle}>
             The <span className={styles.gradientText}>control plane</span> for
-            your microfrontends
+            your frontends
           </Heading>
           <p className={styles.heroSubtitle}>
             MFE Orchestrator keeps versions, environments, deployments and
-            rollbacks of a microfrontend architecture in one place — and
+            rollbacks of a frontend architecture in one place — and
             generates the Module Federation configuration your host application
             needs. These pages cover both the hosted console and the
             self-hosted platform.
@@ -427,7 +427,7 @@ function Capabilities() {
         <div className={styles.sectionHead}>
           <span className={styles.kicker}>What the platform does</span>
           <Heading as="h2" className={styles.sectionTitle}>
-            Everything a microfrontend needs after <code>npm run build</code>
+            Everything a frontend needs after <code>npm run build</code>
           </Heading>
           <p className={styles.sectionLead}>
             Not a bundler and not a framework — the layer that decides what is
@@ -450,7 +450,7 @@ function HowItWorks() {
       <div className={styles.sectionHead}>
         <span className={styles.kicker}>The short path</span>
         <Heading as="h2" className={styles.sectionTitle}>
-          From empty project to live microfrontend
+          From empty project to live frontend
         </Heading>
         <p className={styles.sectionLead}>
           Four steps, each with a guide. The console handles the plumbing in
@@ -591,7 +591,7 @@ function Help() {
           <h2 className={styles.helpTitle}>Not sure where to start?</h2>
           <p className={styles.helpText}>
             The quick start takes you from an empty account to a deployed
-            microfrontend — and back with a rollback. If something is missing or
+            frontend — and back with a rollback. If something is missing or
             wrong in these pages, open an issue — every page has an “Edit this
             page” link at the bottom.
           </p>
@@ -612,7 +612,7 @@ function Help() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="The control plane for your microfrontends"
+      title="The control plane for your frontends"
       description="Documentation for MFE Orchestrator: versions, environments, deployments, rollback and generated Module Federation configuration, hosted or self-hosted.">
       <Head>
         <meta property="og:type" content="website" />

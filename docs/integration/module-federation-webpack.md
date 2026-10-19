@@ -39,15 +39,15 @@ module.exports = {
 };
 ```
 
-Webpack writes `remoteEntry.js` to the root of your output directory, so the microfrontend's
+Webpack writes `remoteEntry.js` to the root of your output directory, so the frontend's
 **Entry Point** in MFE Orchestrator should read `remoteEntry.js` — unless you have customised
 `output.publicPath` or the filename.
 
 :::caution `remoteEntry.js` is not a default you can rely on
-Nothing in the platform defaults that field to `remoteEntry.js`. The microfrontend model stores no
+Nothing in the platform defaults that field to `remoteEntry.js`. The frontend model stores no
 default, and when the field is empty the serving path falls back to **`index.js`**. Where
 `remoteEntry.js` appears without you typing it, it came from the marketplace entry of the Webpack
-template the microfrontend was created from. Create the microfrontend with **Create From Scratch**
+template the frontend was created from. Create the frontend with **Create From Scratch**
 and the form pre-fills `assets/remoteEntry.js` instead — the *Vite* output layout, wrong for a
 Webpack build. Check the field rather than assuming it.
 :::
@@ -55,7 +55,7 @@ Webpack build. Check the field rather than assuming it.
 ## Configure the host
 
 Open **Integration → Frontend Integration**, select your host, set **Bundler** to Webpack (or leave
-it on Automatic if that is the microfrontend's stored stack) and copy the **Module Federation** tab:
+it on Automatic if that is the frontend's stored stack) and copy the **Module Federation** tab:
 
 ![The Module Federation tab of the Integration page, with the remotes of the selected host filled in](../assets/integration-webpack.png)
 
@@ -124,7 +124,7 @@ configure({
   projectId: process.env.MFE_PROJECT_ID,
   // Only a canary targeted on users reads this, and nothing else can supply it.
   // A getter is resolved right before the request, so an auth round trip is in
-  // time; later than that, use setUserId(). Without it those microfrontends
+  // time; later than that, use setUserId(). Without it those frontends
   // serve everyone the stable version.
   // userId: () => auth.currentUser?.id,
   ...(environment ? { environment } : {})
@@ -151,7 +151,7 @@ seconds with the "not configured" error.
 
 So the generated configuration contains **no URL** — no version, no environment, no CDN path. That is
 what keeps the resolution server-side and lets a
-[canary release](../microfrontends/canary-releases.md) decide which version this browser receives.
+[canary release](../frontends/canary-releases.md) decide which version this browser receives.
 See [Allowed domains](../environments/domains.md) for how the environment is resolved.
 
 Two things you have to do yourself:
@@ -261,6 +261,6 @@ a meaningful bundle-size budget.
 
 `requiredVersion` with `singleton: true` makes Webpack warn at runtime when a remote wants a
 different major version of a shared library than the host provides. Those warnings are worth
-taking seriously — a satisfied-but-mismatched React is the source of most confusing microfrontend
+taking seriously — a satisfied-but-mismatched React is the source of most confusing frontend
 bugs. Keep shared library versions aligned across the graph, and upgrade hosts and remotes
 together.

@@ -2,8 +2,8 @@
 sidebar_position: 3
 title: Core concepts and object model
 sidebar_label: Core concepts
-description: "Organizations, projects, environments, microfrontends, versions, deployments and storages: the objects MFE Orchestrator is built around, and how they relate."
-keywords: [object model, organizations, projects, environments, deployments, microfrontends]
+description: "Organizations, projects, environments, frontends, versions, deployments and storages: the objects MFE Orchestrator is built around, and how they relate."
+keywords: [object model, organizations, projects, environments, deployments, frontends]
 ---
 
 # Core concepts and object model
@@ -26,7 +26,7 @@ Organization
     ├── Environment (dev, uat, prod, …)
     │   ├── Environment Variables (key/value, per environment)
     │   └── Deployment #1, #2, #3 …  (immutable snapshots)
-    ├── Microfrontend (host or remote)
+    ├── Frontend (host or remote)
     │   └── Built version (one record per bundle uploaded)
     ├── Storage / Bucket (S3, Azure Blob, GCS)
     ├── Code Repository (GitHub, GitLab, Azure DevOps)
@@ -35,10 +35,10 @@ Organization
 ```
 
 One line in that tree is worth expanding, because the console does not spell it out. A
-microfrontend carries a single `version` field: the version *currently selected*, the one the next
+frontend carries a single `version` field: the version *currently selected*, the one the next
 deployment would freeze. The versions you can select are separate records, one per bundle that has
-reached the platform, keyed by microfrontend and version string. That is why the version of a
-microfrontend is a list you pick from rather than free text, and why a version stays selectable long
+reached the platform, keyed by frontend and version string. That is why the version of a
+frontend is a list you pick from rather than free text, and why a version stays selectable long
 after another has been deployed over it.
 
 ### Organization
@@ -56,7 +56,7 @@ switcher only offers projects of the organization you are in. See
 ### Project
 
 A **project** is the container every configuration object belongs to, and the boundary the project
-roles are written against: microfrontends, environments, storages, repositories and API keys belong
+roles are written against: frontends, environments, storages, repositories and API keys belong
 to exactly one project. A project has a `name`, a `slug` and an `id` — all three, plus its free-text
 `description`, live under **Settings → Project Information**. Two more fields are not editable
 there: the `organizationId` of the organization that owns it, fixed at creation, and an `isActive`
@@ -88,26 +88,26 @@ The `slug` is unique within a project.
 :::info Why domains matter
 Some public endpoints resolve the environment automatically from the browser's `Referer`
 header, by matching it against the environment's **Allowed Domains**. This is what lets a
-single microfrontend URL serve the right version to `app.example.com` and to
+single frontend URL serve the right version to `app.example.com` and to
 `staging.example.com`. See [Environments → Allowed domains](./environments/domains.md).
 :::
 
-### Microfrontend
+### Frontend
 
-A **microfrontend** is a versioned frontend bundle registered in a project. It is either:
+A **frontend** is a versioned frontend bundle registered in a project. It is either:
 
-- a **host** — the shell application that loads other microfrontends, or
-- a **remote** — a microfrontend consumed by a host.
+- a **host** — the shell application that loads other frontends, or
+- a **remote** — a frontend consumed by a host.
 
 Hosts and remotes are wired together by declaring parent/child relations in the console, and
 MFE Orchestrator turns those relations into the `remotes` block of your Module Federation
 configuration.
 
-![The microfrontends of a project, drawn as a host with its remotes](./assets/microfrontends-diagram-view.png)
+![The frontends of a project, drawn as a host with its remotes](./assets/frontends-diagram-view.png)
 
-Each microfrontend has a `slug` (unique per project), a `version`, and a **hosting type** that
+Each frontend has a `slug` (unique per project), a `version`, and a **hosting type** that
 tells the platform where its files actually live. See
-[Microfrontends → Hosting options](./microfrontends/hosting-options.md).
+[Frontends → Hosting options](./frontends/hosting-options.md).
 
 ### Environment variable
 
@@ -119,7 +119,7 @@ without a rebuild. See [Runtime configuration](./integration/runtime-configurati
 ### Storage (bucket)
 
 A **storage** is a connection to an object storage bucket you own — Amazon S3, Azure Blob
-Storage or Google Cloud Storage. Microfrontend builds can be uploaded to your own bucket
+Storage or Google Cloud Storage. Frontend builds can be uploaded to your own bucket
 instead of to the hub, which keeps your artifacts inside your own cloud account. See
 [Buckets](./buckets/overview.md).
 
@@ -132,13 +132,13 @@ create the deploy secret the pipeline needs. See [Code Repositories](./repositor
 ### Deployment
 
 A **deployment** is an immutable snapshot of everything an environment needs at a point in
-time: the full list of microfrontends with their versions and hosting configuration, the
+time: the full list of frontends with their versions and hosting configuration, the
 environment's variables, and the storage configuration.
 
 This is the single most important idea in MFE Orchestrator:
 
 :::tip Editing is not deploying
-Changing a microfrontend's version, adding a variable, or connecting a bucket does **not**
+Changing a frontend's version, adding a variable, or connecting a bucket does **not**
 affect what your users see. Those changes sit in the project configuration until you press
 **Deploy**, which freezes them into a new snapshot and activates it.
 :::
@@ -176,7 +176,7 @@ At **project** level, the role decides what they can do inside one:
 | Role | In the API | Can do |
 | --- | --- | --- |
 | Admin | `OWNER` | Everything, including managing members and deleting the project |
-| Editor | `MEMBER` | Manage microfrontends, variables, storages and deployments |
+| Editor | `MEMBER` | Manage frontends, variables, storages and deployments |
 | Viewer | `VIEWER` | Read-only access |
 
 See [Roles and project visibility](./organizations/roles-and-visibility.md) and
@@ -187,14 +187,14 @@ See [Roles and project visibility](./organizations/roles-and-visibility.md) and
 Putting it together, this is the path a code change takes from commit to browser:
 
 ```
-1. Commit                Your microfrontend repository
+1. Commit                Your frontend repository
       │
 2. Build & upload        CI builds the bundle and uploads it to
       │                  MFE Orchestrator (hub or your own bucket),
       │                  tagged with a version
       │
 3. Register version      The version becomes selectable on the
-      │                  microfrontend in the console
+      │                  frontend in the console
       │
 4. Deploy                You create a deployment for an environment,
       │                  snapshotting versions + variables

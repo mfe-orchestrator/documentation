@@ -1,7 +1,7 @@
 ---
 title: Connect an Azure DevOps repository
 sidebar_label: Azure DevOps
-description: "Connect an Azure DevOps organization with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new microfrontends into them."
+description: "Connect an Azure DevOps organization with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new frontends into them."
 keywords: [azure devops, personal access token, repository, connection]
 ---
 
@@ -131,7 +131,7 @@ If the test is successful, you'll see a **green checkmark** and a success messag
 
 The test does more than validate the token: it returns the projects in the organization, and a
 **Select project** dropdown appears under the green checkmark listing them. Pick the Azure DevOps
-project new microfrontend repositories should be created in.
+project new frontend repositories should be created in.
 
 This step is not optional. The field is required and **Connect Azure Dev Ops** stays disabled until
 the test has succeeded, so the form cannot be submitted without a selection. The project is also what

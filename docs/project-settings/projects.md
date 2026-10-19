@@ -8,7 +8,7 @@ keywords: [projects, access control, boundary, settings, organization]
 
 # Projects and access control
 
-A **project** is the container every configuration object belongs to: microfrontends, environments,
+A **project** is the container every configuration object belongs to: frontends, environments,
 storages, code repositories, API keys and members all belong to exactly one project.
 
 The project in turn belongs to exactly one **organization**, which is the tenant that owns it and
@@ -18,11 +18,11 @@ the level deciding who reaches the project at all. See
 ## What belongs in one project
 
 A good rule of thumb: **one project per application**, where an application is a set of
-microfrontends deployed together and sharing a host.
+frontends deployed together and sharing a host.
 
 Signs you want a second project rather than a bigger one:
 
-- The microfrontends are never deployed together
+- The frontends are never deployed together
 - Different teams should not see each other's configuration
 - The release cadences are unrelated
 - The environments genuinely differ (not just in values, but in which environments exist)
@@ -33,7 +33,7 @@ Signs you want one project:
 - They are promoted through the same stages
 - The same people manage all of them
 
-Bear in mind that microfrontends can only be wired into a host graph *within* a project, and API
+Bear in mind that frontends can only be wired into a host graph *within* a project, and API
 keys are project-scoped. Splitting an application across projects means losing the relation graph
 that generates your Module Federation configuration — usually not worth it.
 
@@ -79,13 +79,13 @@ wizard is not offered to them at all. See
 
 The project selector sits in the console header, next to the
 [organization selector](../organizations/managing-an-organization.md#the-header-menu). Everything
-below it — microfrontends, deployments, settings — follows the selection.
+below it — frontends, deployments, settings — follows the selection.
 
 ![The project switcher, which also creates a new project](../assets/project-switcher.png)
 
 The list only ever offers projects of the organization you are in. If a page looks empty, check the
 selected project — and the selected organization — before anything else. It is the most common cause
-of "my microfrontends disappeared".
+of "my frontends disappeared".
 
 ## Project settings
 
@@ -135,10 +135,10 @@ be aware the slug appears in bucket paths when auditing storage.
 ## Deleting a project
 
 **Settings → Danger Zone → Delete Project** removes the project and everything scoped to it, in one
-transaction: microfrontends, environments, variables, deployments and their history, API keys, member
+transaction: frontends, environments, variables, deployments and their history, API keys, member
 and invitation rows, **storage connections**, **code repository connections**, the record of every
-built frontend uploaded for those microfrontends, and any
-[canary user enrolment](../microfrontends/canary-releases.md) on those deployments.
+built frontend uploaded for those frontends, and any
+[canary user enrolment](../frontends/canary-releases.md) on those deployments.
 
 You must type the project name to confirm. There is no undo and no soft delete.
 
@@ -151,7 +151,7 @@ What is *not* deleted:
 
 :::caution Deleting a project breaks live applications
 Every public serve endpoint for that project stops answering immediately. Any application currently
-loading microfrontends through it will fail to load them. Make sure nothing is serving from the
+loading frontends through it will fail to load them. Make sure nothing is serving from the
 project before you delete it.
 :::
 

@@ -60,13 +60,13 @@ export default defineConfig({
 with these already set; if you configure a remote by hand, keep them.
 :::
 
-The built `remoteEntry.js` lands in `dist/assets/`, so set the microfrontend's **Entry Point** in
+The built `remoteEntry.js` lands in `dist/assets/`, so set the frontend's **Entry Point** in
 MFE Orchestrator to `assets/remoteEntry.js`.
 
 ## Configure the host
 
 This is the part MFE Orchestrator generates. Open **Integration → Frontend Integration**, select
-your host, set **Bundler** to Vite (or leave it on Automatic if that is the microfrontend's stored
+your host, set **Bundler** to Vite (or leave it on Automatic if that is the frontend's stored
 stack) and copy the **Module Federation** tab:
 
 ![The Module Federation tab of the Integration page, with the remotes of the selected host filled in](../assets/integration-vite.png)
@@ -126,7 +126,7 @@ configure({
   projectId: import.meta.env.VITE_MFE_PROJECT_ID,
   // Only a canary targeted on users reads this, and nothing else can supply it.
   // A getter is resolved right before the request, so an auth round trip is in
-  // time; later than that, use setUserId(). Without it those microfrontends
+  // time; later than that, use setUserId(). Without it those frontends
   // serve everyone the stable version.
   // userId: () => auth.currentUser?.id,
   ...(environment ? { environment } : {})
@@ -141,7 +141,7 @@ import time and the URL comes from the [client SDK](./client-sdk.md).
 
 That is what keeps the resolution server-side: neither a version, nor an environment, nor a fixed
 CDN path is compiled into your host, so the configuration survives version bumps, works unchanged
-across environments, and lets a [canary release](../microfrontends/canary-releases.md) decide which
+across environments, and lets a [canary release](../frontends/canary-releases.md) decide which
 version *this* browser receives. See [Allowed domains](../environments/domains.md) for how the
 environment is resolved.
 
@@ -186,7 +186,7 @@ it holds something covers both.
 
 ## Remote names
 
-The keys in `remotes` come from the microfrontend slug with every `/` replaced by `_` and every `-`
+The keys in `remotes` come from the frontend slug with every `/` replaced by `_` and every `-`
 removed:
 
 | Slug | Key to import from |
@@ -226,7 +226,7 @@ declare module 'catalog/App' {
 The generated host config shares the framework core only — `react` and `react-dom` for a React host,
 `vue` for Vue, `@angular/core`, `@angular/common`, `@angular/platform-browser` and `rxjs` for Angular
 — and pins no `requiredVersion`, so federation reads the range out of your own `package.json`. Keep
-the shared list consistent across every microfrontend in the graph: a library shared by the host but
+the shared list consistent across every frontend in the graph: a library shared by the host but
 not by a remote gets loaded twice, and for React that means broken hooks rather than a clear error.
 
 If you share other libraries — a state manager, a design system — add them to the `shared` array

@@ -79,11 +79,11 @@ A Redis whose ACL puts your credentials on another user cannot be reached: creat
 
 ## What stays local
 
-The uploaded microfrontend bundles are not in either store. They live on the filesystem at
+The uploaded frontend bundles are not in either store. They live on the filesystem at
 `MICROFRONTEND_HOST_FOLDER`, so that path still needs a volume that survives a restart — a
 PersistentVolumeClaim under Helm, a named volume under Docker. Moving them off the node is a
 different decision: give the project a
-[storage bucket](../microfrontends/hosting-options.md) and the platform stops holding the files at
+[storage bucket](../frontends/hosting-options.md) and the platform stops holding the files at
 all.
 
 Every variable named here is listed with its exact semantics on the

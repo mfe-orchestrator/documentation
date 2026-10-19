@@ -15,7 +15,7 @@ re-upload. It is re-activating a snapshot that already exists.
 
 1. Open **Deployments** and select the affected environment.
 2. Find the last known-good deployment in **History**.
-3. Expand it and check its microfrontend versions and variables are what you expect.
+3. Expand it and check its frontend versions and variables are what you expect.
 4. Choose **Redeploy** on that deployment.
 
 **Redeploy** lives on the deployments in **History**, next to **View canary users**. The active
@@ -26,24 +26,24 @@ deployment has no Redeploy button — re-activating what is already active would
 Reading the two snapshots against each other is the whole point. Above, `#2` and `#1` carry the same
 versions, because nothing was edited between the two deployments — which is itself the answer to
 "did anything actually change?". When they differ, the line you are looking for is the version badge
-on a microfrontend card: `#2` serving `catalog` at `2.2.0` while `#1`, one click away, still holds
+on a frontend card: `#2` serving `catalog` at `2.2.0` while `#1`, one click away, still holds
 `2.1.0`.
 
 That deployment becomes active again and the broken one is deactivated. The manifest, the
-per-microfrontend configuration and the variables endpoints answer from the restored snapshot
+per-frontend configuration and the variables endpoints answer from the restored snapshot
 immediately. The routes that stream the files themselves do not all follow — read the next section
 before you rely on a rollback in production.
 
-Because the microfrontend entry point is always served with
+Because the frontend entry point is always served with
 `Cache-Control: no-cache, no-store, must-revalidate`, browsers pick up the change on their next
 request rather than after a cache expiry.
 
 ## The file routes do not all follow a rollback
 
 :::caution A rollback is not honoured by two of the three file routes
-The manifest, the per-microfrontend configuration and the global-variables endpoints filter
+The manifest, the per-frontend configuration and the global-variables endpoints filter
 deployments on the `active` flag, so **Redeploy** moves them at once. The three routes that stream
-the bytes of a microfrontend do not filter on it: each takes the newest deployment of the
+the bytes of a frontend do not filter on it: each takes the newest deployment of the
 environment, and they order "newest" differently.
 
 | File route | Newest by | After a rollback |
@@ -62,14 +62,14 @@ landed yet: the manifest reports the restored version while those two routes str
 version you rolled back from. The version your host believes it is running and the code it actually
 runs disagree, which is not a state any error message will point you at.
 
-**Whether this reaches you depends on which URL your host asks for.** Every microfrontend URL the
+**Whether this reaches you depends on which URL your host asks for.** Every frontend URL the
 manifest hands out carries the environment slug, and that is the route ordered by deployment time —
 so a host wired through the [client SDK](../integration/client-sdk.md), or through any code that
 loads the URLs the manifest returned, lands on the behaviour that is correct. Only a consumer that
 calls the `auto` or `:mfeId` file URLs directly — hardcoded in an `index.html` or in a Module
 Federation `remotes` block — is exposed.
 
-If you are in that position, do not stop at the rollback. Set the microfrontend's selected version
+If you are in that position, do not stop at the rollback. Set the frontend's selected version
 back to the good one and press **Deploy**: a new snapshot is the newest by both orderings, so every
 route follows it. See [Serve API](../integration/serve-api.md) for the routes themselves.
 
@@ -77,7 +77,7 @@ route follows it. See [Serve API](../integration/serve-api.md) for the routes th
 
 Everything in the snapshot, together:
 
-- Microfrontend versions
+- Frontend versions
 - Hosting configuration and entry points
 - Canary settings
 - Environment variables
@@ -87,7 +87,7 @@ The **canary enrolment** comes back with it too, but for a different reason: enr
 stored per deployment, and the one you re-activate still holds its own. That is the list as it was
 on that deployment, which is not necessarily the list you had a minute ago — if you enrolled
 someone after the deployment you are rolling back to was replaced, check
-[canary users](../microfrontends/canary-releases.md#canary-users) afterwards.
+[canary users](../frontends/canary-releases.md#canary-users) afterwards.
 
 This matters when an incident has more than one cause. If a bad release changed both a version
 and a feature-flag variable, rolling back the deployment undoes both — you do not have to
@@ -98,7 +98,7 @@ remember which variables moved.
 | Not restored | Why |
 | --- | --- |
 | Your project's draft configuration | The console keeps showing the versions and variables you last selected. Only the *active snapshot* changes |
-| Deleted microfrontends | A microfrontend deleted from the project is gone from the project, even if older snapshots mention it |
+| Deleted frontends | A frontend deleted from the project is gone from the project, even if older snapshots mention it |
 | Data outside MFE Orchestrator | Database migrations, backend deployments and CDN state are yours to manage |
 
 Point one is a common surprise: after a rollback, the console still shows the version you were
@@ -106,7 +106,7 @@ trying to ship, because that is still what you have selected. Reconcile the draf
 your next deployment will re-ship the bad version.
 
 :::tip After rolling back
-Set the microfrontend's selected version back to the good one straight away. It costs ten seconds
+Set the frontend's selected version back to the good one straight away. It costs ten seconds
 and prevents the next deployment from re-introducing the incident.
 :::
 

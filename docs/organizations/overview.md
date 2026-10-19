@@ -27,12 +27,12 @@ Organization
 ├── Members (Owner, Admin, Member)
 └── Project
     ├── Environment (dev, uat, prod, …)
-    ├── Microfrontend (host or remote, versioned)
+    ├── Frontend (host or remote, versioned)
     ├── Storage / Bucket, Code Repository, API Key
     └── Members (Admin, Editor, Viewer)
 ```
 
-The project is still the boundary every other object belongs to — microfrontends, environments,
+The project is still the boundary every other object belongs to — frontends, environments,
 deployments, API keys are all project-scoped, and nothing about that changed. What the organization
 adds is a boundary *above* the project: an authorization level that decides reachability rather than
 ownership. See [Core concepts](../core-concepts.md#the-object-model).

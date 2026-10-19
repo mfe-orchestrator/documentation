@@ -1,7 +1,7 @@
 ---
 title: Connect a GitHub repository
 sidebar_label: GitHub
-description: "Connect GitHub, cloud or self-hosted, with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new microfrontends into them."
+description: "Connect GitHub, cloud or self-hosted, with a Personal Access Token, so MFE Orchestrator can read your repositories and scaffold new frontends into them."
 keywords: [github, personal access token, repository, connection]
 ---
 
@@ -46,7 +46,7 @@ repositories will not be listed in the meantime.
 :::
 
 Once you confirm, GitHub returns you to the console and the connection appears in the repository
-list. From there you can [create a microfrontend from a template](../../microfrontends/create-a-microfrontend.md),
+list. From there you can [create a frontend from a template](../../frontends/create-a-frontend.md),
 which scaffolds the repository and its pipeline for you.
 
 ## Troubleshooting

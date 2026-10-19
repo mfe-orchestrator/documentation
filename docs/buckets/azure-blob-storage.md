@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Store builds on Azure Blob Storage
 sidebar_label: Azure Blob Storage
-description: Authenticate MFE Orchestrator against Azure Blob Storage with a connection string, a shared key or a service principal, and store microfrontend builds there.
+description: Authenticate MFE Orchestrator against Azure Blob Storage with a connection string, a shared key or a service principal, and store frontend builds there.
 keywords: [azure blob storage, connection string, shared key, service principal]
 ---
 
@@ -27,7 +27,7 @@ follow the matching section.
 1. In the Azure portal, create a **Storage account** (or reuse one).
    - **Performance**: Standard is fine
    - **Redundancy**: your call; LRS is sufficient for rebuildable artifacts
-2. Inside it, open **Data storage → Containers** and create a container, e.g. `microfrontends`.
+2. Inside it, open **Data storage → Containers** and create a container, e.g. `frontends`.
 3. Set the container's **Public access level** to **Private**.
 
 :::tip Keep the container private
@@ -113,13 +113,13 @@ the **Authentication Type** you pick:
 
 Save.
 
-## Step 4: Point a microfrontend at it
+## Step 4: Point a frontend at it
 
-Open a microfrontend, set **Hosting type** to **Custom Source**, select this storage, and save. New
+Open a frontend, set **Hosting type** to **Custom Source**, select this storage, and save. New
 versions land at:
 
 ```
-<path>/<projectSlug>-<projectId>/<microfrontendSlug>/<version>/…
+<path>/<projectSlug>-<projectId>/<frontendSlug>/<version>/…
 ```
 
 Then [deploy](../deployments/overview.md) the environment.
@@ -149,7 +149,7 @@ storage that worked for months and then failed. Create a new secret and update t
 
 **Files upload but the app 404s**
 
-Check the **Entry Point** on the microfrontend. Vite Module Federation builds emit
+Check the **Entry Point** on the frontend. Vite Module Federation builds emit
 `assets/remoteEntry.js`; you can verify the layout by browsing the version prefix in Storage
 Explorer.
 

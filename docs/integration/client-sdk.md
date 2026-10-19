@@ -13,7 +13,7 @@ The generated bundler configuration no longer contains a URL. It contains a call
 back a ready-to-use URL for each remote.
 
 That indirection is the whole point: a URL baked into your host bundle would freeze one version into
-it, and a [canary release](../microfrontends/canary-releases.md) could no longer decide which
+it, and a [canary release](../frontends/canary-releases.md) could no longer decide which
 version this particular browser should get. With the SDK in the middle, the decision stays on the
 server and your host stays a single build.
 
@@ -61,7 +61,7 @@ configure({
   projectId: import.meta.env.VITE_MFE_PROJECT_ID,
   // Only a canary targeted on users reads this, and nothing else can supply it.
   // A getter is resolved right before the request, so an auth round trip is in
-  // time; later than that, use setUserId(). Without it those microfrontends
+  // time; later than that, use setUserId(). Without it those frontends
   // serve everyone the stable version.
   // userId: () => auth.currentUser?.id,
   ...(environment ? { environment } : {})
@@ -82,7 +82,7 @@ of it — see
 
 The commented `userId` line is there because that field is the one no environment variable can fill
 in, and leaving it out has a silent outcome rather than a visible one: a
-[User canary](../microfrontends/canary-releases.md#who--the-canary-type) simply serves everyone the
+[User canary](../frontends/canary-releases.md#who--the-canary-type) simply serves everyone the
 stable version.
 
 `configure()` is synchronous, idempotent, and must run **before anything imports a remote** — the
@@ -120,8 +120,8 @@ The other two options are optional, for quite different reasons.
 
 `userId` is the field the SDK has no way of working out for itself. Pass it — as a value or as a
 getter, if the user is not known yet at bootstrap — when you want
-[User](../microfrontends/canary-releases.md#who--the-canary-type) canary targeting to work: without
-it there is nobody to look up in the enrolment list, so that microfrontend serves everyone the
+[User](../frontends/canary-releases.md#who--the-canary-type) canary targeting to work: without
+it there is nobody to look up in the enrolment list, so that frontend serves everyone the
 stable version. A getter is resolved as late as possible, right before the manifest request is
 issued, so an auth round trip that finishes after bootstrap is still in time. When the user appears
 or changes later than that — a login, a logout, an account switch — use
@@ -178,7 +178,7 @@ function globalVariables(): Promise<Record<string, string>>
 function identities(): { sessionId: string; deviceId: string }
 ```
 
-`remoteUrl()` takes the microfrontend **slug**, not the federation remote name. Asking for a slug
+`remoteUrl()` takes the frontend **slug**, not the federation remote name. Asking for a slug
 that is not in the manifest rejects with a message listing the ones that are, which is usually
 enough to spot the typo or the missing deployment.
 
@@ -187,7 +187,7 @@ enough to spot the typo or the missing deployment.
 version this browser is meant to receive. Never rebuild that URL by hand and never strip the
 segment: the entry point resolves its chunks relative to the URL it was loaded from, and a
 versionless URL can end up mixing two builds in one page. See
-[how the version reaches the browser](../microfrontends/canary-releases.md#how-the-version-reaches-the-browser).
+[how the version reaches the browser](../frontends/canary-releases.md#how-the-version-reaches-the-browser).
 :::
 
 ### Changing the user without a reload
@@ -218,7 +218,7 @@ SDK cannot know. A request already in flight is not cancelled — whoever is awa
 the manifest of the previous identity — and calling it before `configure()` throws.
 
 :::caution It does not reload the remotes already imported
-The federation runtime keeps the container it loaded, so a microfrontend already on the page stays on
+The federation runtime keeps the container it loaded, so a frontend already on the page stays on
 the version drawn for the previous user. Only the remotes resolved *after* the call see the new one.
 Either mount your remotes behind your own auth guard and set the user before the guard opens — nothing
 has resolved yet, so the whole page is decided on the right identity — or reload the page after the
@@ -257,7 +257,7 @@ nothing escapes the SDK as an exception.
 Identities are the reason a canary decision is sticky. They travel in the query string rather than
 in a cookie because module scripts are fetched with a fixed `same-origin` credentials mode, so no
 cookie of the MFE Orchestrator domain would ever reach the server —
-[the details are on the canary page](../microfrontends/canary-releases.md#who--the-canary-type).
+[the details are on the canary page](../frontends/canary-releases.md#who--the-canary-type).
 
 ## Bundler configuration
 
@@ -342,7 +342,7 @@ bootstrapApplication(AppComponent, {
 | Change the user | `setUserId(userId)` | `setUserId(userId)` | `OrchestratorService.setUserId(userId)` |
 | Result type | `AsyncState<T>` | `AsyncState<T>` | plain `Promise<T>` |
 
-All three also re-export the core's types (`OrchestratorConfig`, `Manifest`, `Microfrontend`,
+All three also re-export the core's types (`OrchestratorConfig`, `Manifest`, `Frontend`,
 `GlobalVariable`, `Identities`), and React and Vue export `AsyncState` as well.
 
 :::caution `useRemoteUrl()` does not return a string

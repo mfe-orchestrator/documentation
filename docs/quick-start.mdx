@@ -2,8 +2,8 @@
 sidebar_position: 1
 title: "Quick start: from zero to rollback in 10 minutes"
 sidebar_label: Quick start
-description: "The shortest path through MFE Orchestrator on the free hosted console: create a microfrontend, publish, deploy, integrate the host, roll back. No installation."
-keywords: [quick start, quickstart, getting started, tutorial, rollback, microfrontends]
+description: "The shortest path through MFE Orchestrator on the free hosted console: create a frontend, publish, deploy, integrate the host, roll back. No installation."
+keywords: [quick start, quickstart, getting started, tutorial, rollback, frontends]
 ---
 
 import Link from '@docusaurus/Link';
@@ -11,7 +11,7 @@ import Link from '@docusaurus/Link';
 # Quick start: from zero to rollback in 10 minutes
 
 This is the golden path: the fewest steps that take you from nothing to a deployed
-microfrontend — and back, because a deploy you cannot undo is not one you should trust.
+frontend — and back, because a deploy you cannot undo is not one you should trust.
 It uses the **free hosted console**, so there is nothing to install.
 
 :::info Prefer your own infrastructure?
@@ -28,28 +28,28 @@ projects — and the project wizard opens inside it. That is the whole setup.
 
 Details: [Get started with MFE Orchestrator](./intro.mdx)
 
-## 2. Connect a repository and create a microfrontend
+## 2. Connect a repository and create a frontend
 
 1. In **Settings → Code Repositories**, connect GitHub, GitLab or Azure DevOps.
-2. Back on the home page, choose **Add New Microfrontend**, pick a template, and give it a
+2. Back on the home page, choose **Add New Frontend**, pick a template, and give it a
    name and a slug.
 
 The console creates the repository from the template, with the build pipeline already in it.
 
 Details: [Connect GitHub](./repositories/connect/github.md) ·
-[Create a microfrontend](./microfrontends/create-a-microfrontend.md)
+[Create a frontend](./frontends/create-a-frontend.md)
 
 ## 3. Publish a version
 
-On the microfrontend's card, choose **Build**, pick the branch and type a version — say
+On the frontend's card, choose **Build**, pick the branch and type a version — say
 `1.0.0`. The console creates a Git tag with that name; your pipeline triggers on the tag,
 builds, and uploads the artifact. When it finishes, `1.0.0` appears in the version list.
 
-Details: [Versions and builds](./microfrontends/versions-and-builds.md)
+Details: [Versions and builds](./frontends/versions-and-builds.md)
 
 ## 4. Deploy
 
-Select version `1.0.0` on the microfrontend, then press **Deploy** on your environment.
+Select version `1.0.0` on the frontend, then press **Deploy** on your environment.
 This captures an immutable snapshot — versions, variables, storage configuration — and
 activates it. Remember the platform's one rule: **editing is not deploying**. Nothing your
 users see changes until you press Deploy.

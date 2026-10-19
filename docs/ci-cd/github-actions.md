@@ -56,13 +56,13 @@ jobs:
       uses: mfe-orchestrator-hub/github-action@0.0.29
       with:
         apikey: ${{ secrets.MICROFRONTEND_ORCHESTRATOR_API_KEY }}
-        microfrontend-slug: catalog
+        frontend-slug: catalog
         domain: ${{ vars.MICROFRONTEND_ORCHESTRATOR_DOMAIN || 'https://console.mfe-orchestrator.dev' }}
         file-path: './dist'
         version: ${{ inputs.version || github.ref_name }}
 ```
 
-The `microfrontend-slug` and `domain` values are substituted for you at scaffold time — the slug you
+The `frontend-slug` and `domain` values are substituted for you at scaffold time — the slug you
 chose, and the API base URL of the installation you created it from. The domain stays overridable
 afterwards: set a `MICROFRONTEND_ORCHESTRATOR_DOMAIN` repository variable
 (**Settings ▸ Secrets and variables ▸ Actions ▸ Variables**) and the workflow publishes there
@@ -78,8 +78,8 @@ git push origin 1.4.0
 ```
 
 **Run it manually.** From the Actions tab, or from the console's **Build** action on the
-microfrontend card, which creates the tag for you — see
-[Versions and builds](../microfrontends/versions-and-builds.md).
+frontend card, which creates the tag for you — see
+[Versions and builds](../frontends/versions-and-builds.md).
 
 Tag-driven versioning is what makes the console's **Build** button work, so keep the tag trigger even
 if you add others.
@@ -89,7 +89,7 @@ if you add others.
 | Input | Meaning |
 | --- | --- |
 | `apikey` | An MFE Orchestrator [API key](./api-keys.md) |
-| `microfrontend-slug` | The slug of the microfrontend to publish to |
+| `frontend-slug` | The slug of the frontend to publish to |
 | `domain` | Base URL of your MFE Orchestrator installation |
 | `file-path` | The build output directory, e.g. `./dist` |
 | `version` | The version to publish |
@@ -100,9 +100,9 @@ directory, not at a zip you made yourself.
 ## The secret
 
 The workflow reads `secrets.MICROFRONTEND_ORCHESTRATOR_API_KEY`. It is created when you **connect**
-the GitHub repository to a project — or edit that connection — not when a microfrontend is
+the GitHub repository to a project — or edit that connection — not when a frontend is
 scaffolded, and it is written as an **organization** secret visible to all repositories. Creating a
-second microfrontend does not create a second key: the injector skips the work when a secret of that
+second frontend does not create a second key: the injector skips the work when a secret of that
 name already exists.
 
 :::caution A personal GitHub account gets no organization secret
@@ -131,7 +131,7 @@ For a repository MFE Orchestrator did not create:
 2. Add it as a repository secret named `MICROFRONTEND_ORCHESTRATOR_API_KEY`
    (**Settings → Secrets and variables → Actions**).
 3. Copy the workflow above into `.github/workflows/build-and-deploy.yml`, replacing
-   `microfrontend-slug` and `domain` with your values.
+   `frontend-slug` and `domain` with your values.
 4. Adjust the package manager and build command if you do not use pnpm.
 
 Ready-made variants for other compilers and host types are in
@@ -144,8 +144,8 @@ Ready-made variants for other compilers and host types are in
 `npm ci` / `npm run build`, and set `cache: 'npm'`.
 
 **A monorepo** — build only the package that changed and point `file-path` at that package's output,
-e.g. `./packages/catalog/dist`. Publishing several microfrontends from one repository means one
-publish step per microfrontend, each with its own slug.
+e.g. `./packages/catalog/dist`. Publishing several frontends from one repository means one
+publish step per frontend, each with its own slug.
 
 **Tests before publishing** — add the step between build and publish. A failing test then stops the
 release, which is the behaviour you want.
@@ -167,7 +167,7 @@ suspect the missing organization secret described above.
 
 **"Entity not found" for the slug**
 
-`microfrontend-slug` does not match a microfrontend in the key's project. Slugs are lowercase; check
+`frontend-slug` does not match a frontend in the key's project. Slugs are lowercase; check
 for a typo or a stale value after a rename.
 
 **Publishes, but the app still serves the old version**
@@ -177,7 +177,7 @@ Publishing is not deploying. Select the version and
 
 **Publishes, but requests 404**
 
-Almost always the **Entry Point** on the microfrontend not matching the build output. Vite Module
+Almost always the **Entry Point** on the frontend not matching the build output. Vite Module
 Federation emits `assets/remoteEntry.js`; Webpack emits `remoteEntry.js`.
 
 **Workflow does not run**

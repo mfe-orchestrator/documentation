@@ -68,12 +68,12 @@ services:
       REDIS_URL: redis://redis:6379
       MICROFRONTEND_HOST_FOLDER: /upload-microfrontends
       # Once a day this installation sends an anonymous ping with aggregate
-      # counters only (version, number of projects/microfrontends/environments/
+      # counters only (version, number of projects/frontends/environments/
       # users, deployments of the last week). No names, no URLs, no personal
       # data. Uncomment the line below to turn it off.
       # TELEMETRY_DISABLED: "true"
     volumes:
-      - upload_microfrontends:/upload-microfrontends
+      - upload_frontends:/upload-microfrontends
     depends_on:
       - mongodb
       - redis
@@ -81,7 +81,7 @@ services:
 volumes:
   mongodb_data:
   redis_data:
-  upload_microfrontends:
+  upload_frontends:
 ```
 
 2. Run the following command to start the container:
@@ -117,7 +117,7 @@ permanent slug, and it mishandles anything longer than two words.
 - **Consider a replica set.** MongoDB offers transactions only on a replica set; on the standalone
   `mongod` above the backend detects it and runs the multi-document operations — creating a
   deployment among them — without one.
-- **Keep the volumes.** `upload_microfrontends` holds the uploaded bundles: losing it means the
+- **Keep the volumes.** `upload_frontends` holds the uploaded bundles: losing it means the
   builds served from the internal storage are gone.
 
 Every variable you can set is listed on the

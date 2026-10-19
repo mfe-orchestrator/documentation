@@ -2,14 +2,14 @@
 sidebar_position: 1
 title: Storage overview
 sidebar_label: Overview
-description: "Connect object storage you own, on Amazon S3, Azure Blob Storage or Google Cloud Storage, so microfrontend builds land in your cloud account, not the platform."
+description: "Connect object storage you own, on Amazon S3, Azure Blob Storage or Google Cloud Storage, so frontend builds land in your cloud account, not the platform."
 keywords: [object storage, buckets, amazon s3, azure blob storage, google cloud storage]
 ---
 
 # Storage overview
 
 A **bucket** — a *storage* in the console — is a connection to object storage you own. With one
-configured, microfrontend builds are stored in your own cloud account instead of on the platform,
+configured, frontend builds are stored in your own cloud account instead of on the platform,
 while MFE Orchestrator continues to handle versioning, deployments and serving.
 
 Buckets live under **Settings → Storages**.
@@ -40,7 +40,7 @@ already own the disk.
 
 ## How it works
 
-Once a storage is configured and selected on a microfrontend whose hosting type is
+Once a storage is configured and selected on a frontend whose hosting type is
 **Custom Source**:
 
 ```
@@ -69,7 +69,7 @@ Two things follow from this:
 Files are stored under a deterministic path:
 
 ```
-<storage path>/<projectSlug>-<projectId>/<microfrontendSlug>/<version>/…
+<storage path>/<projectSlug>-<projectId>/<frontendSlug>/<version>/…
 ```
 
 For example, with a storage `path` of `mfe`:
@@ -99,19 +99,19 @@ makes rollback instant: nothing is overwritten or deleted on a new release.
 
 :::caution The provider cannot be changed later
 A storage's provider type is fixed at creation. To move from S3 to GCS, create a new storage and
-re-point your microfrontends at it.
+re-point your frontends at it.
 :::
 
 You can mark one storage as the **default** for the project, which is then preselected for new
-microfrontends.
+frontends.
 
 ## Using a storage
 
-On the microfrontend, set **Hosting type** to **Custom Source** and pick the storage. Then upload
+On the frontend, set **Hosting type** to **Custom Source** and pick the storage. Then upload
 as usual — the platform routes the artifact to your bucket. See
-[Hosting options](../microfrontends/hosting-options.md).
+[Hosting options](../frontends/hosting-options.md).
 
-Existing versions are not migrated when you change a microfrontend's storage. Change it, then
+Existing versions are not migrated when you change a frontend's storage. Change it, then
 publish a new version.
 
 ## Credentials and least privilege

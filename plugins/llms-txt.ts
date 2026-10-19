@@ -194,7 +194,7 @@ export default function llmsTxtPlugin(context: LoadContext): Plugin<void> {
         `> ${siteConfig.tagline}`,
         '',
         'MFE Orchestrator manages the versions, environments, deployments and',
-        'rollbacks of a microfrontend architecture, and generates the Module',
+        'rollbacks of a frontend architecture, and generates the Module',
         'Federation configuration a host application needs. It runs as a hosted',
         'console or self-hosted. This file indexes the documentation; every page',
         'is also available as markdown at the same URL with a `.md` suffix.',

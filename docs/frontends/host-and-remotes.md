@@ -8,13 +8,13 @@ keywords: [host, remotes, module federation, relation graph, diagram view]
 
 # Hosts and remotes in Module Federation
 
-A microfrontend architecture is only an architecture once the pieces know about each other.
+A frontend architecture is only an architecture once the pieces know about each other.
 This page covers how MFE Orchestrator models those relationships, and what it does with them.
 
 ## The relation graph
 
-Every microfrontend can have **parents** — the hosts that load it. In the **Diagram view** on
-the Microfrontends page, relations are the arrows between nodes; you create and remove them
+Every frontend can have **parents** — the hosts that load it. In the **Diagram view** on
+the Frontends page, relations are the arrows between nodes; you create and remove them
 there directly.
 
 A typical setup looks like this:
@@ -30,7 +30,7 @@ A typical setup looks like this:
 In the console the same graph looks like this — `payments` is a remote of `cart`, which is
 itself a remote of `shell`:
 
-![Diagram view showing the relation graph between host and remotes](../assets/microfrontends-diagram-view.png)
+![Diagram view showing the relation graph between host and remotes](../assets/frontends-diagram-view.png)
 
 Nothing stops a remote from being a host of other remotes, and nothing stops a remote from
 having several parents — a shared design-system remote consumed by three hosts is a perfectly
@@ -41,9 +41,9 @@ normal shape.
 The graph is what lets MFE Orchestrator generate your Module Federation configuration. When a
 host asks the platform for its remotes, the answer is computed as:
 
-> all microfrontends in the **active deployment** whose parents include this host
+> all frontends in the **active deployment** whose parents include this host
 
-and each of them is resolved to a concrete URL, based on that microfrontend's hosting type and
+and each of them is resolved to a concrete URL, based on that frontend's hosting type and
 the version frozen in the deployment.
 
 The consequence worth internalising: **your host's build configuration does not contain version
@@ -77,13 +77,13 @@ imports, and there is no ambiguity about what the remote name will be.
 ## Getting the configuration
 
 Once the graph is set up and the environment is deployed, open **Integration** in the sidebar,
-select the host microfrontend, and copy the generated configuration for your bundler. See:
+select the host frontend, and copy the generated configuration for your bundler. See:
 
 - [Vite](../integration/module-federation-vite.md)
 - [Webpack](../integration/module-federation-webpack.md)
 
 For hosts whose repository is connected there is an alternative to copy and paste. Two buttons sit
-next to the microfrontend selector: **Integrate my microfrontends**, for every microfrontend of the
+next to the frontend selector: **Integrate my frontends**, for every frontend of the
 project that consumes another one, and **Integrate only this one**, for the selected one. Both open
 the same dialog, which shows the config that would be written for each repository and a diff against
 what that repository holds today; you pick which ones to commit, and the write lands on the default
@@ -106,7 +106,7 @@ confusing hook errors rather than an obvious crash. The Webpack form marks each 
 from your own `package.json`.
 
 Nothing else is shared, on purpose: declaring a package the application does not depend on fails the
-build. So if your microfrontends share other libraries — a router, a state manager, a design system,
-a date library — add them to the `shared` block yourself, in every participating microfrontend, hosts
+build. So if your frontends share other libraries — a router, a state manager, a design system,
+a date library — add them to the `shared` block yourself, in every participating frontend, hosts
 and remotes alike. The generated config is a starting point, not a final answer; keep the shared list
 in sync across the graph.

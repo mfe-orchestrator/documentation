@@ -81,7 +81,7 @@ GET <API_BASE>/serve/all/auto/{projectId}                # Referer or Host
     ?mfeSessionId=<uuid>&mfeDeviceId=<uuid>&mfeUserId=<optional>
 ```
 
-Returns the whole environment in one call: microfrontends with resolved URLs, and variables.
+Returns the whole environment in one call: frontends with resolved URLs, and variables.
 
 The third form names no environment at all: the caller says only which project it belongs to, and
 the platform picks the environment whose allowed domains match the request. It is what the
@@ -97,7 +97,7 @@ curl "<API_BASE>/serve/all/68f1a2.../prod"
   "globalVariables": [
     { "key": "API_URL", "value": "https://api.example.com" }
   ],
-  "microfrontends": [
+  "frontends": [
     {
       "url": "https://console.mfe-orchestrator.dev/api/serve/mfe/files/68f1a2b3c4d5e6f7a8b9c0d1/prod/catalog/assets/remoteEntry.js",
       "slug": "catalog",
@@ -128,8 +128,8 @@ every `-` removed. Use it as the key when registering remotes dynamically:
 | `shop/catalog` | `shop_catalog` |
 
 `version` is the version this response resolves to, which is not necessarily the deployment's
-version: a microfrontend on a **Based on version**
-[canary](../microfrontends/canary-releases.md) reports the version *this caller* gets.
+version: a frontend on a **Based on version**
+[canary](../frontends/canary-releases.md) reports the version *this caller* gets.
 
 :::caution A **Based on URL** canary reports the stable version
 That branch has no version of the platform's own to pin — the canary *is* a URL somewhere else — so
@@ -161,7 +161,7 @@ The three optional query parameters carry the identities a canary decision can b
 
 Send every one you have. They are not cookies and cannot be: module scripts are fetched with a fixed
 `same-origin` credentials mode, so the URL is the only channel — see
-[canary releases](../microfrontends/canary-releases.md#who--the-canary-type). Omitting them is
+[canary releases](../frontends/canary-releases.md#who--the-canary-type). Omitting them is
 supported: a *Session* canary then falls back to a draw per page load instead of a sticky one, and
 a *User* canary serves the stable version to everyone.
 
@@ -186,7 +186,7 @@ works in every one of them.
 
 See [Runtime configuration](./runtime-configuration.md) for usage.
 
-## One microfrontend's configuration
+## One frontend's configuration
 
 ```http
 GET <API_BASE>/serve/mfe/config/{projectId}/{environmentSlug}/{mfeSlug}
@@ -195,13 +195,13 @@ GET <API_BASE>/serve/mfe/config/auto/{projectId}/{mfeSlug}   # Referer or Host
 GET <API_BASE>/serve/mfe/config/{mfeId}                      # Referer required
 ```
 
-Returns a single entry in the same shape as the items in `microfrontends` above — the resolved URL
+Returns a single entry in the same shape as the items in `frontends` above — the resolved URL
 and the version that entry resolves to, which is the canary-resolved one wherever a version canary
 applies, with the same [Based on URL caveat](#everything-about-an-environment).
 
 Useful when a host wants to look up one remote lazily rather than fetching the whole environment.
 
-## Microfrontend files
+## Frontend files
 
 These endpoints stream the actual bundle files, and are what the URLs in your Module Federation
 configuration point at.
@@ -223,14 +223,14 @@ GET <API_BASE>/serve/mfe/files/auto/{projectId}/{mfeSlug}/_v/{version}/{path}
 
 The platform resolves the version — from the pinned segment when present, otherwise from the
 deployment this URL form answers from, [which is not always the active one](#which-deployment-answers),
-and any canary configuration — and fetches the bytes according to the microfrontend's
-[hosting type](../microfrontends/hosting-options.md) — local disk, your bucket, or an external URL —
+and any canary configuration — and fetches the bytes according to the frontend's
+[hosting type](../frontends/hosting-options.md) — local disk, your bucket, or an external URL —
 then streams them back. A pinned version is honoured only if that deployment can serve it: the
 deployed version, or the configured canary version.
 
 ### The entry point redirect
 
-When a microfrontend is running a version-based canary and its **entry point** is requested at a
+When a frontend is running a version-based canary and its **entry point** is requested at a
 *versionless* URL, the response is a `302` (uncacheable) to the same file under
 `/_v/<resolved-version>/`. This exists as a fallback for callers holding a raw URL; the URLs handed
 out by the manifest already carry the segment, so they never take the redirect.
@@ -265,7 +265,7 @@ so it cannot reach an arbitrary build.
 
 | Situation | Headers |
 | --- | --- |
-| The file is the microfrontend's **entry point** | `Cache-Control: no-cache, no-store, must-revalidate`, `Pragma: no-cache`, `Expires: 0` |
+| The file is the frontend's **entry point** | `Cache-Control: no-cache, no-store, must-revalidate`, `Pragma: no-cache`, `Expires: 0` |
 | Any other file | Cacheable |
 | All files | `Cross-Origin-Resource-Policy: cross-origin`, `x-mfe-version: <version>` |
 
@@ -281,12 +281,12 @@ needed.
 ## Generated bundler configuration
 
 ```http
-GET <API_BASE>/serve/code?microfrontendId={id}&deploymentId={id}
+GET <API_BASE>/serve/code?frontendId={id}&deploymentId={id}
     &framework={react|vue|angular}&compiler={vite|webpack|webcomponent|single-spa|micro-lc}
 ```
 
 `framework` and `compiler` are the two axes of the stack, and both are **optional**: left out, each
-falls back to the stack stored on the microfrontend, which is the normal case. They exist so the
+falls back to the stack stored on the frontend, which is the normal case. They exist so the
 console can ask for another stack — or for one at all, when detection found none.
 
 :::caution They are two different parameters
@@ -307,10 +307,10 @@ The response is the whole set of instructions, not a single string:
 | `dependencies` | Build-time packages the config needs beyond what the app already has |
 | `runtimeDependencies` | single-spa and micro-lc only: packages the app imports at runtime, ex. `single-spa` |
 | `installCommand` | `npm install …`, absent when `dependencies` is empty |
-| `runtimeIntegration` | `true` for a Web Component microfrontend: there is no federation config, the host resolves the URL at runtime |
+| `runtimeIntegration` | `true` for a Web Component frontend: there is no federation config, the host resolves the URL at runtime |
 
 `stack` is always present. A Web Component stack answers with `runtimeIntegration: true`, an empty
-`code` and nothing else; a microfrontend whose stack could not be determined answers with an empty
+`code` and nothing else; a frontend whose stack could not be determined answers with an empty
 `code` and no `config`.
 
 A single-spa or micro-lc stack has no federation config. For a host, `configPath` and `config`
@@ -334,7 +334,7 @@ log and get reworded as they get more helpful; `code` is the discriminator.
 | `code` | Status | Message | Cause |
 | --- | --- | --- | --- |
 | `ENTITY_NOT_FOUND` | 404 | `Entity not found with id Active deployment` | The environment has never been deployed, or has no active deployment |
-| `ENTITY_NOT_FOUND` | 404 | `Entity not found with id <slug or id>` | No such microfrontend, or the microfrontend is absent from the deployment that answered |
+| `ENTITY_NOT_FOUND` | 404 | `Entity not found with id <slug or id>` | No such frontend, or the frontend is absent from the deployment that answered |
 | `ENVIRONMENT_NOT_FOUND` | 404 | `No environment of project <id> has "<domain>" among its registered domains, …` | An `auto` form was called from a domain registered on no environment of that project |
 | `ENVIRONMENT_NOT_FOUND` | 404 | `Environment not found: <slug or id>` | An explicit slug or id form named an environment that does not exist |
 | `PROJECT_NOT_FOUND` | 404 | `Project not found: <id>` | The project id in the path is not a project of this console |
@@ -348,7 +348,7 @@ surfaces as a **500** rather than as the 4xx its neighbours return, and it carri
 the two `/serve/mfe/…/{mfeId}/…` forms demand a `Referer` outright; the `auto` forms fall back to the
 `Host` header first, so in practice only a request carrying neither reaches this.
 
-A microfrontend that exists in the project but was added *after* the last deployment falls into the
+A frontend that exists in the project but was added *after* the last deployment falls into the
 second row: deploy the environment to include it.
 
 ## Building runtime discovery

@@ -10,7 +10,7 @@ keywords: [environments, dev uat prod, deployment stages, runtime configuration]
 
 An **environment** is a deployment stage of your project: `dev`, `uat`, `prod`, or whatever your
 release process calls them. Environments are where versions and configuration diverge — the same
-microfrontend can be at `1.2.0` in production and `1.4.0-rc1` in UAT at the same time.
+frontend can be at `1.2.0` in production and `1.4.0-rc1` in UAT at the same time.
 
 Environments live under **Settings → Environments**.
 
@@ -60,7 +60,7 @@ This distinction matters, and it is not obvious at first:
 
 | Object | Scope |
 | --- | --- |
-| Microfrontends | **Project** — one definition, shared by all environments |
+| Frontends | **Project** — one definition, shared by all environments |
 | Environment variables | **Environment** |
 | Deployments | **Environment** — each has its own numbering and history |
 | Storages / buckets | **Project** |
@@ -68,7 +68,7 @@ This distinction matters, and it is not obvious at first:
 | API keys | **Project** |
 | Members | **Project** |
 
-So a microfrontend exists once, but the **version that is live** is a property of each
+So a frontend exists once, but the **version that is live** is a property of each
 environment's active deployment. That is the mechanism by which one definition serves many
 stages.
 

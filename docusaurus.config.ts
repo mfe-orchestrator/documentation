@@ -7,7 +7,7 @@ import llmsTxt from './plugins/llms-txt';
 
 const config: Config = {
   title: 'MFE Orchestrator',
-  tagline: 'The control plane for your microfrontends',
+  tagline: 'The control plane for your frontends',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -172,8 +172,8 @@ const config: Config = {
           title: 'Platform',
           items: [
             {
-              label: 'Microfrontends',
-              to: '/docs/microfrontends/overview',
+              label: 'Frontends',
+              to: '/docs/frontends/overview',
             },
             {
               label: 'Environments',

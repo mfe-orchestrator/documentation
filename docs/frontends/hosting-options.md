@@ -1,20 +1,20 @@
 ---
 sidebar_position: 3
-title: Microfrontend hosting options
+title: Frontend hosting options
 sidebar_label: Hosting options
-description: "Every microfrontend declares where its files live: the MFE Orchestrator hub, a storage bucket you own, or a URL you already serve. What each option changes."
+description: "Every frontend declares where its files live: the MFE Orchestrator hub, a storage bucket you own, or a URL you already serve. What each option changes."
 keywords: [hosting type, hub, bucket, custom url, remoteEntry]
 ---
 
-# Microfrontend hosting options
+# Frontend hosting options
 
-Every microfrontend declares **where its files live**. This is the *hosting type*, set under
-**Hosting Information** in the **Hosting** tab of the microfrontend form. It determines how
+Every frontend declares **where its files live**. This is the *hosting type*, set under
+**Hosting Information** in the **Hosting** tab of the frontend form. It determines how
 MFE Orchestrator resolves a request for `remoteEntry.js` into actual bytes.
 
 There are three options.
 
-![The Hosting Type list open, offering MFE Orchestrator Hub and Custom URL](../assets/microfrontend-hosting-type.png)
+![The Hosting Type list open, offering MFE Orchestrator Hub and Custom URL](../assets/frontend-hosting-type.png)
 
 :::note
 **Custom Source** only appears in the list once the project has at least one
@@ -29,7 +29,7 @@ Orchestrator extracts and serves it.
 - **Best for**: getting started, internal tools, self-hosted installations where you already
   own the disk.
 - **Where files land**: on the server filesystem, under
-  `<MICROFRONTEND_HOST_FOLDER>/<projectSlug>-<projectId>/<microfrontendSlug>/<version>/`.
+  `<MICROFRONTEND_HOST_FOLDER>/<projectSlug>-<projectId>/<frontendSlug>/<version>/`.
   `MICROFRONTEND_HOST_FOLDER` defaults to `/upload-microfrontends` — see
   [Environment Variables](../self-hosting/environment-variables.md).
 - **Upload with**: the [upload endpoint](../ci-cd/manual-upload.md), used by the generated
@@ -37,7 +37,7 @@ Orchestrator extracts and serves it.
 
 :::caution Self-hosting and persistence
 When self-hosting, mount `MICROFRONTEND_HOST_FOLDER` on a persistent volume. In the reference
-`docker-compose.yaml` this is the `upload_microfrontends` volume. Without it, every container
+`docker-compose.yaml` this is the `upload_frontends` volume. Without it, every container
 restart loses your uploaded builds.
 :::
 
@@ -48,9 +48,9 @@ Storage or Google Cloud Storage — and streams files from there on request.
 
 - **Best for**: production, compliance requirements, keeping artifacts inside your own cloud
   account.
-- **Requires**: a configured [storage](../buckets/overview.md), selected on the microfrontend.
+- **Requires**: a configured [storage](../buckets/overview.md), selected on the frontend.
 - **Where files land**: inside the bucket, under
-  `<storage path>/<projectSlug>-<projectId>/<microfrontendSlug>/<version>/`. The optional
+  `<storage path>/<projectSlug>-<projectId>/<frontendSlug>/<version>/`. The optional
   storage-level `path` lets several projects share one bucket without colliding.
 - **Upload with**: the same [upload endpoint](../ci-cd/manual-upload.md) — the platform routes
   the artifact to your bucket for you.
@@ -64,10 +64,10 @@ The files are already published somewhere — a CDN, an existing static host, an
 infrastructure — and you just want MFE Orchestrator to keep track of versions and hand the
 right URL to your host application.
 
-- **Best for**: microfrontends you do not build, or an existing CDN setup you do not want to
+- **Best for**: frontends you do not build, or an existing CDN setup you do not want to
   change.
 - **Requires**: a base URL.
-- **Upload**: not supported. Uploading to a Custom URL microfrontend is rejected; publishing is
+- **Upload**: not supported. Uploading to a Custom URL frontend is rejected; publishing is
   entirely your responsibility.
 
 ### URL placeholders
@@ -77,14 +77,14 @@ The URL may contain placeholders, substituted at request time:
 | Placeholder | Replaced with |
 | --- | --- |
 | `$version` | The version from the active deployment |
-| `$microfrontendSlug` | The microfrontend's slug |
+| `$frontendSlug` | The frontend's slug |
 | `$projectId` | The project id |
 | `$projectSlug` | The project slug |
 
 For example:
 
 ```
-https://cdn.example.com/mfe/$microfrontendSlug/$version/remoteEntry.js
+https://cdn.example.com/mfe/$frontendSlug/$version/remoteEntry.js
 ```
 
 `$version` is what makes this option useful: switching a version in the console and deploying
@@ -112,7 +112,7 @@ to `index.js`, but Module Federation builds usually produce something else:
 | single-spa application (Vite library build) | `index.js` |
 | micro-lc parcel (Vite UMD build) | `parcel.js` |
 
-A microfrontend created from a template starts with the entry point the template declares in the
+A frontend created from a template starts with the entry point the template declares in the
 marketplace.
 
 The entry point gets special cache treatment: it is always served with
