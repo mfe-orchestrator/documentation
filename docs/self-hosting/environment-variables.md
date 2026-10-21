@@ -154,6 +154,21 @@ in the clear on purpose, and what losing the key costs — is on
 | `CODE_REPOSITORY_GITHUB_CLIENT_ID` | *(empty)* | Client ID for the GitHub OAuth application used to connect repositories. |
 | `CODE_REPOSITORY_GITHUB_CLIENT_SECRET` | *(empty)* | Client secret of the same application. |
 
+### AI and MCP
+
+AI is off until an AI is available: either the organizations add their own in the console, or the
+installation describes a **system AI** offered to all of them. The provider variables, their defaults and
+`AI_MAX_EFFORT` are on [AIs of an organization](../ai/ai-models.md#the-system-ai).
+
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `AI_PROVIDER` | *(empty)* | Provider of the system AI: `anthropic`, `azure-foundry`, `aws-bedrock`, `azure-openai` or `gemini`. Empty with `ANTHROPIC_API_KEY` set means `anthropic`. |
+| `AI_MAX_EFFORT` | *(empty)* | Highest [reasoning effort](../ai/reasoning-effort.md) users can pick with the system AI. |
+| `AZURE_OPENAI_ENDPOINT_SUFFIXES` | *(empty)* | Extra Azure OpenAI host suffixes for the sovereign clouds, comma separated. |
+| `ASSISTANT_RATE_LIMIT_MAX` | `20` | Questions to the assistant per minute. |
+| `REPOSITORIES_FOLDER` | `/repositories` | Where [Edit with AI](../microfrontends/edit-with-ai.md#configuration) clones the repositories. |
+| `MCP_ENABLED` | `false` | Turns on the [MCP server](../ai/mcp-server.md#turning-it-on) for AI clients. |
+
 ### Observability and telemetry
 
 Self-hosted installations send one anonymous ping per day — aggregate counters only, no names, no

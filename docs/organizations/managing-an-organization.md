@@ -145,6 +145,14 @@ added to the organization straight away instead — a confirmation link that can
 leave them stuck. See [Environment Variables](../self-hosting/environment-variables.md).
 :::
 
+### Artificial intelligences
+
+The AIs the projects of the organization use for [Maestro](../ai/assistant.md),
+[Edit with AI](../microfrontends/edit-with-ai.md) and the project draft: Claude, GPT on Azure OpenAI or
+Gemini, each with its credentials. Every member sees the list; owners and admins add, edit and delete
+AIs, mark the default one, and choose under **Project access** which AIs each project may use. See
+[AIs of an organization](../ai/ai-models.md).
+
 ### Danger zone
 
 ![The danger zone refusing to delete an organization that still holds a project](../assets/organization-danger-zone.png)

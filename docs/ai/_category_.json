@@ -1,0 +1,9 @@
+{
+  "label": "AI",
+  "position": 10.5,
+  "link": {
+    "type": "generated-index",
+    "title": "AI in MFE Orchestrator",
+    "description": "The AIs an organization brings, the Maestro assistant, the reasoning effort, the notes the team writes for agents and the MCP server that opens the console to AI clients."
+  }
+}

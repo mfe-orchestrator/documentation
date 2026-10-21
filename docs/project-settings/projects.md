@@ -99,6 +99,10 @@ counts, linking through to each area:
 | API Keys | [API keys](../ci-cd/api-keys.md) |
 | Storages | [Buckets](../buckets/overview.md) |
 | Code Repositories | [Code repositories](../repositories/connect/github.md) |
+| AI assistants | [MCP server](../ai/mcp-server.md): the AI clients connected to the project |
+
+The **General** tab also holds the **Project AI context**, the notes for AI agents that apply to the
+whole project: see [AI context](../ai/ai-context.md).
 
 ### Project information
 
