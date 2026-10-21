@@ -39,8 +39,8 @@ page, its [AI context](../ai/ai-context.md) and [Edit with AI](./edit-with-ai.md
 
 ## The image repository
 
-Under **Container**, **Image repository** is where its pipeline pushes the image, without tag, for
-example `ghcr.io/acme/shell`.
+In the **General** tab, the optional **Image repository** is where its pipeline pushes the image,
+without tag, for example `ghcr.io/acme/shell`.
 
 ## Register a version
 
