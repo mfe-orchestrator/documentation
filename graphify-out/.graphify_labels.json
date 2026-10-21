@@ -97,6 +97,7 @@
   "95": "Runtime environment variables",
   "96": "Microfrontends overview",
   "97": "Connect a GitHub repository",
+  "98": "Organizations overview",
   "99": "Deploy to GitHub Pages workflow",
   "100": "CLAUDE.md",
   "101": "Amazon S3 storage integration",
@@ -169,10 +170,13 @@
   "168": "Build status",
   "169": "Import repositories as microfrontends",
   "170": "Dependency analysis and peer dependency alignment",
+  "171": "github.md",
+  "172": "Microfrontend versions and builds",
   "173": "Upgrading to organizations",
   "174": "Organizations overview",
   "175": "Store builds on Amazon S3",
   "176": "Storage overview",
   "177": "Activation, password reset and invitations",
-  "178": "Encryption of stored credentials"
+  "178": "Encryption of stored credentials",
+  "179": "graphify"
 }
