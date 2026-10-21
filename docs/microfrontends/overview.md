@@ -22,6 +22,10 @@ A microfrontend is registered as one of two types:
 | **Host** | The shell application. It boots the page, owns routing and layout, and loads remotes at runtime. |
 | **Remote** | A microfrontend exposed to be consumed by a host. |
 
+A host can also be the **main frontend** of the application, built into a Docker image and served
+by its own container: register it with the *Frontend* kind, see
+[The main frontend](./main-frontend.md).
+
 A project normally has one host per application and any number of remotes. A remote can itself
 be a host of other remotes — the relations form a graph, not just a two-level tree.
 
@@ -60,12 +64,17 @@ many of the total are showing.
 | **Name** | Display name |
 | **Slug** | Lowercase, URL-friendly, **unique within the project**. It appears in serve URLs and becomes the Module Federation remote name, so treat it as permanent. |
 | **Description** | Free text |
+| **Kind** | *Microfrontend*, served by MFE Orchestrator, or *Frontend*, served by its own Docker container — see [The main frontend](./main-frontend.md) |
 | **Version** | The version currently selected for this microfrontend. Only becomes live when you deploy. |
 | **Continuous Deployment** | A flag published to consumers on the serve API, marking this microfrontend as continuously deployed |
 | **Hosting type** | Where the files live — see [Hosting options](./hosting-options.md) |
 | **Entry Point** | The file a consumer loads. Defaults to `index.js`; Vite Module Federation builds typically use `assets/remoteEntry.js` |
 | **Code repository** | Optional link to a GitHub / GitLab / Azure DevOps repository, which enables the **Build** action |
 | **Canary** | Optional progressive rollout configuration — see [Canary releases](./canary-releases.md) |
+| **AI context** | Notes for AI agents about this microfrontend — see [AI context](../ai/ai-context.md) |
+
+Clicking a microfrontend opens [Edit with AI](./edit-with-ai.md) when the project has an AI available;
+**Details & settings** holds the form below.
 
 :::caution The slug is fixed at creation
 The slug appears in your serve URLs and becomes the remote name in generated Module Federation
@@ -81,3 +90,5 @@ its consumers. Pick one you can live with.
 - [Versions and builds](./versions-and-builds.md) — how a version gets created and uploaded
 - [Hosts and remotes](./host-and-remotes.md) — wiring the graph
 - [Canary releases](./canary-releases.md) — progressive rollout
+- [The main frontend](./main-frontend.md) — a host served by its own Docker container
+- [Edit with AI](./edit-with-ai.md) — change the code with an AI agent

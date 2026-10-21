@@ -53,6 +53,8 @@ A connected code repository. If you have not connected one yet, follow
    - **Name** — the display name
    - **Slug** — lowercase and URL-friendly; this ends up in your public URLs, so choose carefully
    - **Description** — optional
+   - **Kind** — *Microfrontend* unless this is the main frontend, built into a Docker image: see
+     [The main frontend](./main-frontend.md)
 
    **Hosting** — see [hosting options](./hosting-options.md)
 
@@ -110,16 +112,18 @@ create an [API key](../ci-cd/api-keys.md) yourself.
 
 ## Editing a microfrontend
 
-Clicking a microfrontend opens the same form in edit mode. **Release** sits at the top, outside the
+Open a microfrontend and pick **Details & settings** to get the same form in edit mode (with an AI
+available, a microfrontend opens on [Edit with AI](./edit-with-ai.md)). **Release** sits at the top, outside the
 tabs, because the version and the canary are what decide which bytes a browser gets; everything
 else is behind a tab:
 
 | Where | Contains |
 | --- | --- |
 | Release (above the tabs) | Version, and **Canary Settings** — progressive rollout, see [Canary releases](./canary-releases.md) |
-| General | Name, slug, description, continuous deployment |
+| General | Name, slug, description, kind, continuous deployment |
 | Hosting | Hosting type, entry point, storage or URL |
 | Repository | The linked repository |
+| AI context | Notes for AI agents about this microfrontend, see [AI context](../ai/ai-context.md) |
 | Danger Zone | Delete this microfrontend |
 
 Switching tab keeps what you typed: every panel stays mounted, so a value entered under **Hosting**

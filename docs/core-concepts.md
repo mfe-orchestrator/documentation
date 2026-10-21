@@ -109,6 +109,10 @@ Each microfrontend has a `slug` (unique per project), a `version`, and a **hosti
 tells the platform where its files actually live. See
 [Microfrontends → Hosting options](./microfrontends/hosting-options.md).
 
+The main frontend of an application can also be built into a Docker image and run by your own
+infrastructure: registered with the **Frontend** kind, it is a host whose versions are the images its
+pipeline registers. See [The main frontend](./microfrontends/main-frontend.md).
+
 ### Environment variable
 
 An **environment variable** (also called a *global variable*) is a `key`/`value` pair scoped to
