@@ -75,7 +75,7 @@ The file looks like this:
 
 ## Step 5: Add the storage in MFE Orchestrator
 
-Go to **Settings → Storages → New Storage** and select **Google Cloud Storage**:
+Open **Project Settings → General → Storages → New Storage** and select **Google Cloud Storage**:
 
 | Field | Value |
 | --- | --- |
@@ -90,7 +90,7 @@ Go to **Settings → Storages → New Storage** and select **Google Cloud Storag
 Paste the whole JSON document, not just the private key — the platform reads `client_email` and
 `private_key` out of it.
 
-Save.
+Click **Test connection** to check the credentials against the bucket, then save. See [Testing the connection](./overview.md#testing-the-connection).
 
 ## Step 6: Point a microfrontend at it
 

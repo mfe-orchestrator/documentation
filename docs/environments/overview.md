@@ -12,7 +12,7 @@ An **environment** is a deployment stage of your project: `dev`, `uat`, `prod`, 
 release process calls them. Environments are where versions and configuration diverge — the same
 microfrontend can be at `1.2.0` in production and `1.4.0-rc1` in UAT at the same time.
 
-Environments live under **Settings → Environments**.
+Environments are reached from **Project Settings → General**: click **Environments** in the **Project resources** section.
 
 ## Creating an environment
 
@@ -74,20 +74,21 @@ stages.
 
 ## Deleting an environment
 
-Deleting an environment removes the environment itself and nothing else. A confirmation dialog names
-the environment you are about to delete — you do not have to type the name — and there is no undo.
+A confirmation dialog names the environment you are about to delete — you do not have to type the
+name — and there is no undo.
 
-The delete does not cascade, and no hook on the model makes it:
+Deleting an environment removes its contents in the same transaction, for a single delete and a
+bulk delete alike:
 
 | Object | What happens to it |
 | --- | --- |
-| Deployments of that environment | Left in the database, still pointing at the id of the deleted environment |
-| Variables of that environment | Left in the database, still pointing at the id of the deleted environment |
+| Deployments of that environment | Deleted |
+| Global variables of that environment | Deleted |
+| Canary enrolments of those deployments | Deleted |
 
-In practice those rows are orphaned rather than deleted. Nothing serves them any more, since every
-serve endpoint resolves an environment first, and nothing in the console lists them, since every
-page that would starts from the environments of the project. They do still occupy the database, and
-recreating an environment with the same slug does not adopt them — a new environment gets a new id.
+Microfrontends, storages, code repositories and the other environments are project-wide and are not
+touched. Recreating an environment with the same slug starts from an empty one: nothing from the
+deleted environment comes back.
 
 ## Where to go next
 

@@ -9,7 +9,7 @@ keywords: [encryption, secrets, SECRETS_ENCRYPTION_KEY, credentials, security, t
 # Encryption of stored credentials
 
 The console keeps credentials on behalf of a project: the keys of a bucket, an Azure connection
-string, a Google service account file, the token of a code repository. It has to — a pipeline
+string, a Google service account file, the token of a code repository, the API key of an organization's AI. It has to — a pipeline
 uploading a bundle at three in the morning needs them and nobody is there to type them.
 
 Set `SECRETS_ENCRYPTION_KEY` and they are encrypted in the database with AES-256-GCM, and no longer
@@ -58,6 +58,7 @@ upload a bundle.
 | --- | --- |
 | `storages` | `secretAccessKey`, `accountKey`, `connectionString`, `clientSecret`, `jsonKey` |
 | `coderepositories` | `accessToken`, `refreshToken` |
+| `aimodels` | `config.apiKey`, `config.secretAccessKey`: the credentials of the [AIs an organization defines](../ai/ai-models.md) |
 | `deployments` | the same storage fields, inside the snapshot a deployment freezes |
 
 Deployments are on the list because a deployment copies the storages of its project, credentials

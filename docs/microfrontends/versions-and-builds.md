@@ -65,7 +65,7 @@ without one.
 You do not have to leave the console to know how that run went: the
 [Build status](../deployments/build-status.md) page lists the latest run of every microfrontend of
 the project, reading it from GitHub Actions, GitLab pipelines or Azure DevOps, and updates while
-you watch.
+you watch. Each run links to the same run on the provider.
 
 ## Uploading from CI
 
@@ -94,7 +94,7 @@ infrastructure — MFE Orchestrator only records which version to point at.
 ## Selecting a version
 
 Once a version exists, open the microfrontend and pick it in the **Version** field, at the top of the
-form in **Release settings**. The field offers the versions known to the platform, plus a
+form in the **Release** card. The field offers the versions known to the platform, plus a
 **Custom version** option, which reveals a second box for typing one in directly — useful for Custom
 URL microfrontends, where the platform has no upload history to list.
 

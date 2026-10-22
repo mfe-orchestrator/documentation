@@ -99,7 +99,7 @@ remember which variables moved.
 | --- | --- |
 | Your project's draft configuration | The console keeps showing the versions and variables you last selected. Only the *active snapshot* changes |
 | Deleted microfrontends | A microfrontend deleted from the project is gone from the project, even if older snapshots mention it |
-| Data outside MFE Orchestrator | Database migrations, backend deployments and CDN state are yours to manage |
+| Data outside MFE Orchestrator | CDN state and anything your microfrontends call are yours to manage |
 
 Point one is a common surprise: after a rollback, the console still shows the version you were
 trying to ship, because that is still what you have selected. Reconcile the draft afterwards, or

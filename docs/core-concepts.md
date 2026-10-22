@@ -26,13 +26,17 @@ Organization
     ├── Environment (dev, uat, prod, …)
     │   ├── Environment Variables (key/value, per environment)
     │   └── Deployment #1, #2, #3 …  (immutable snapshots)
-    ├── Microfrontend (host or remote)
-    │   └── Built version (one record per bundle uploaded)
+    ├── Microfrontend (host, remote or frontend)
+    │   ├── Built version (one record per bundle uploaded)
+    │   └── AI context (notes for agents)
     ├── Storage / Bucket (S3, Azure Blob, GCS)
     ├── Code Repository (GitHub, GitLab, Azure DevOps)
     ├── API Key (for CI/CD and automation)
+    ├── AI context (notes for agents) and assigned AI models
     └── Members (Admin, Editor, Viewer)
 ```
+
+The organization also owns the **AI models** its projects work with: see [AI](#ai).
 
 One line in that tree is worth expanding, because the console does not spell it out. A
 microfrontend carries a single `version` field: the version *currently selected*, the one the next
@@ -50,7 +54,8 @@ decides *which projects a person can reach at all*: whoever administers the orga
 they were explicitly invited to.
 
 The organization is selected in the console header, and it scopes everything below it — the project
-switcher only offers projects of the organization you are in. See
+switcher only offers projects of the organization you are in. Its settings page, with the **General**,
+**Members** and **AI models** tabs, is reached from the organization link in the header. See
 [Organizations](./organizations/overview.md).
 
 ### Project
@@ -58,7 +63,8 @@ switcher only offers projects of the organization you are in. See
 A **project** is the container every configuration object belongs to, and the boundary the project
 roles are written against: microfrontends, environments, storages, repositories and API keys belong
 to exactly one project. A project has a `name`, a `slug` and an `id` — all three, plus its free-text
-`description`, live under **Settings → Project Information**. Two more fields are not editable
+`description`, live under **Settings → General → Project Information**; the settings are reached from
+the project menu at the top of the console. Two more fields are not editable
 there: the `organizationId` of the organization that owns it, fixed at creation, and an `isActive`
 flag.
 
@@ -94,14 +100,17 @@ single microfrontend URL serve the right version to `app.example.com` and to
 
 ### Microfrontend
 
-A **microfrontend** is a versioned frontend bundle registered in a project. It is either:
+A **microfrontend** is a versioned frontend bundle registered in a project. It is one of:
 
-- a **host** — the shell application that loads other microfrontends, or
-- a **remote** — a microfrontend consumed by a host.
+- a **host** — the shell application that loads other microfrontends,
+- a **remote** — a microfrontend consumed by a host, or
+- a **frontend** — the main frontend of the project, served by its own container.
 
 Hosts and remotes are wired together by declaring parent/child relations in the console, and
-MFE Orchestrator turns those relations into the `remotes` block of your Module Federation
-configuration.
+MFE Orchestrator turns those relations into the configuration of your integration model: the `remotes`
+block of a Module Federation configuration (Vite or webpack), the applications registered by a
+single-spa root config, or the configuration of a micro-lc shell. The microfrontends live on the
+**Design** page of the console.
 
 ![The microfrontends of a project, drawn as a host with its remotes](./assets/microfrontends-diagram-view.png)
 
@@ -109,9 +118,9 @@ Each microfrontend has a `slug` (unique per project), a `version`, and a **hosti
 tells the platform where its files actually live. See
 [Microfrontends → Hosting options](./microfrontends/hosting-options.md).
 
-The main frontend of an application can also be built into a Docker image and run by your own
-infrastructure: registered with the **Frontend** kind, it is a host whose versions are the images its
-pipeline registers. See [The main frontend](./microfrontends/main-frontend.md).
+A **frontend** keeps only its kind, its image repository and the image versions its pipeline
+registers: there is no bundle upload and it has no parents. See
+[The main frontend](./microfrontends/main-frontend.md).
 
 ### Environment variable
 
@@ -132,6 +141,23 @@ instead of to the hub, which keeps your artifacts inside your own cloud account.
 A **code repository** is a connection to GitHub, GitLab or Azure DevOps. With one connected,
 MFE Orchestrator can scaffold a new repository from a template, inject a build pipeline, and
 create the deploy secret the pipeline needs. See [Code Repositories](./repositories/connect/github.md).
+
+### AI
+
+AI is built into the console and works on the objects above. An organization defines its own **AI
+models** — provider, model and credentials — and assigns them to its projects. A project and each of
+its microfrontends carry **AI context**: notes written for agents, handed to every task.
+
+- **AI agent**, first in the sidebar, runs jobs that span several microfrontends and hosts
+  [Maestro](./ai/assistant.md), the assistant that answers about the project and asks you to confirm
+  every change it wants to make.
+- **[Edit with AI](./microfrontends/edit-with-ai.md)** proposes a change to the repository of a
+  microfrontend, refined by chat, then pushes it on a feature branch and applies it or opens a pull
+  request.
+- The **[MCP server](./ai/mcp-server.md)** lets the AI clients you already use read the project and
+  submit code changes as a pull request.
+
+See [AI in MFE Orchestrator](./ai/overview.md).
 
 ### Deployment
 
@@ -156,12 +182,9 @@ re-activating an older one. See [Deployments](./deployments/overview.md).
 ### API key
 
 An **API key** authenticates machines rather than people — CI pipelines, scripts, deploy jobs.
-Keys are project-scoped, and they are shown once at creation and stored hashed. They also carry a
-role and an expiry date, neither of which is currently enforced: the create form asks for a name and
-an expiry only, the role defaults to `MANAGER` and is never read when a request is authorized, and
-the check that resolves a key to its project looks at neither the expiry nor the status. Treat a key
-as full access to its project for as long as it exists, and see
-[API Keys](./ci-cd/api-keys.md).
+Keys are project-scoped, and they are shown once at creation and stored hashed. They carry a role and
+an expiry date, and a revoked or expired key is refused. The create form asks for a name and an
+expiry only, and every key it produces is a `MANAGER`. See [API Keys](./ci-cd/api-keys.md).
 
 ### Members and roles
 
@@ -208,7 +231,8 @@ Putting it together, this is the path a code change takes from commit to browser
 ```
 
 Steps 2 and 3 are automated by the pipelines MFE Orchestrator injects into your repository —
-see [CI/CD](./ci-cd/api-keys.md). Step 5 is described in
+see [CI/CD](./ci-cd/api-keys.md). The pipeline of a project can come from a repository of its own,
+set in the **Delivery** tab of the project settings. Step 5 is described in
 [Integration](./integration/overview.md).
 
 ## Two ways to run the platform

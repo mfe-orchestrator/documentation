@@ -2,7 +2,7 @@
 sidebar_position: 0.5
 title: The first startup
 sidebar_label: First startup
-description: "The Initial Setup screen every self-hoster meets in the first minute: when it appears, what the form creates, and why the project name you type is permanent."
+description: "The Initial Setup screen every self-hoster meets in the first minute: when it appears, what the form creates, and why the project name you type becomes a permanent slug."
 keywords: [first startup, initial setup, first user, installation, self-hosting, REGISTRATION_ALLOWED]
 ---
 
@@ -65,23 +65,24 @@ In this order, and all of it from that one project name:
 The organization is created first because a project cannot exist outside one, and the user is made
 its **owner** — no other row would grant the right to administer it.
 
-:::caution The project name becomes a permanent slug, and it mishandles spaces
-The project's slug is derived from the name you type here, and the derivation replaces only the
-**first** space. A name of two words is fine; a longer one is not:
+:::caution The project name becomes a permanent slug
+The project's slug is derived from the name you type here: it is lowercased, every run of characters
+outside `a-z` and `0-9` — spaces, dots, underscores, accents, punctuation — becomes a single hyphen,
+and hyphens at either end are dropped. The organization's slug goes through the same rule.
 
 | Project Name you type | Slug you get |
 | --- | --- |
 | `Storefront` | `storefront` |
 | `Acme Storefront` | `acme-storefront` |
-| `My Cool Storefront App` | `my-cool storefront app` ← literal spaces |
+| `My Cool Storefront App` | `my-cool-storefront-app` |
+| `Shop_v2.0 (EU)` | `shop-v2-0-eu` |
 
 That slug is **not editable afterwards** — not from the console, where it is a read-only value, and
 not through the API, which refuses to write it on purpose: the slug is part of the storage path
 uploaded bundles live under (`<slug>-<id>/…`), so moving it would orphan every deployed file.
 
-Renaming the project later changes its name and leaves the slug as it is. So on this one screen,
-prefer a **one or two word project name**. The organization's slug is generated properly from the
-same string, which is why the two can end up disagreeing.
+Renaming the project later changes its name and leaves the slug as it is, so pick a name you are
+happy to see in that path.
 :::
 
 ## You are not signed in afterwards

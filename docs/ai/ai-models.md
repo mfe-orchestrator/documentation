@@ -15,8 +15,8 @@ of one department, and the user picks one per request.
 
 ## Add an AI
 
-On the organization page, under **Artificial intelligences**, every member sees the list; owners and
-admins add, edit and delete AIs with **Add AI**.
+In the organization settings (`/organization`), the **AI** tab lists under **Artificial intelligences**
+the AIs of the organization: every member sees the list; owners and admins add, edit and delete AIs with **Add AI**.
 
 | Provider in the form | Model | Configuration | Model field |
 | --- | --- | --- | --- |
@@ -96,7 +96,7 @@ hits its rate limit.
 ## Which AIs a project may use
 
 By default a project may use every AI of its organization, including those added later. Under
-**Project access** on the organization page, owners and admins choose, project by project:
+**Project access** in the same tab, owners and admins choose, project by project:
 
 - **All the AIs of the organization** (the default), including those added later;
 - **Only the selected AIs**: an AI added later is not included;

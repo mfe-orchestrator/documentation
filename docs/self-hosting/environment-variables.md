@@ -37,7 +37,7 @@ it — the platform logs a warning and does not connect, it does not fall back t
 ### General Configuration
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `FRONTEND_URL` | `http://localhost:3000` | URL of the frontend application. |
+| `FRONTEND_URL` | `http://localhost:3000` | Public URL of the console. Required with `MCP_ENABLED`. |
 | `BACKEND_URL` | *(empty, falls back to `FRONTEND_URL` + `/api`)* | Public URL of the API, written into the generated configuration. |
 | `PORT` | `3000` | Port the backend listens on, behind the in-container nginx. |
 | `NODE_ENV` | `prod` *(development/prod/test/local)* | Node.js environment mode. Any other value stops the boot. |
@@ -49,6 +49,7 @@ it — the platform logs a warning and does not connect, it does not fall back t
 | `RATE_LIMIT_MAX` | `100` | Requests per IP per minute. An empty value fails validation — leave it unset to keep the default. |
 | `MARKETING_OPT_IN_ENABLED` | `false` | If `true`, the registration form collects a marketing consent, which the [profile page](../account/profile.md#marketing-communications) can then change. The platform records the consent and never sends a commercial email of its own. |
 | `MARKETING_OPT_IN_VERSION` | `1` | Version of the consent text, stored together with the consent, so an old consent stays attributable to the wording it was given for. |
+| `TRUST_PROXY` | *(unset; `127.0.0.1` in the Docker images)* | Proxies trusted for `X-Forwarded-For`: `true` or a comma separated list of addresses or CIDRs (`loopback` and `uniquelocal` work too); a hop count is refused. Behind a Kubernetes ingress or a load balancer add its address, for example `loopback,10.0.0.0/8`, or every client shares one rate limit bucket. |
 | `NPM_REGISTRY_URL` | `https://registry.npmjs.org` | Registry queried by the dependency analysis for published versions. |
 
 ### Database Configuration
@@ -92,7 +93,7 @@ in that state.
 #### JWT
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `JWT_SECRET` | `your-secret-key` | Secret key for JWT generation and validation. |
+| `JWT_SECRET` | `your-secret-key` | Secret key for JWT generation and validation. With [`MCP_ENABLED`](#mcp-server) it must be your own, at least 32 bytes. |
 
 :::caution The JWT default is a published constant
 `your-secret-key` is in the source, so an installation that leaves `JWT_SECRET` unset signs its
@@ -104,7 +105,7 @@ all-in-one image, which generates one into its volume on the first start.
 
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
-| `SECRETS_ENCRYPTION_KEY` | *(empty)* | 32 bytes, base64 or hex. Encrypts the credentials the console stores for a project — bucket keys, storage connection strings, service account files, repository tokens — and stops the API from returning them. |
+| `SECRETS_ENCRYPTION_KEY` | *(empty)* | 32 bytes, base64 or hex. Encrypts the credentials the console stores for a project — bucket keys, storage connection strings, service account files, repository tokens, the API keys of the organizations' AIs — and stops the API from returning them. |
 
 Generate one with `openssl rand -base64 32`. Two things to know before you set it:
 
@@ -154,20 +155,78 @@ in the clear on purpose, and what losing the key costs — is on
 | `CODE_REPOSITORY_GITHUB_CLIENT_ID` | *(empty)* | Client ID for the GitHub OAuth application used to connect repositories. |
 | `CODE_REPOSITORY_GITHUB_CLIENT_SECRET` | *(empty)* | Client secret of the same application. |
 
-### AI and MCP
+### AI
 
 AI is off until an AI is available: either the organizations add their own in the console, or the
-installation describes a **system AI** offered to all of them. The provider variables, their defaults and
-`AI_MAX_EFFORT` are on [AIs of an organization](../ai/ai-models.md#the-system-ai).
+installation describes a **system AI** offered to all of them. With no provider and no
+`ANTHROPIC_API_KEY` there is no system AI, and a project whose organization defines none has AI off.
+How the system AI and the organizations' own AIs fit together is on
+[AIs of an organization](../ai/ai-models.md#the-system-ai).
+
+A provider named without its credentials stops the boot, so a typo shows up at start and not at the
+first question.
 
 | Variable | Default Value | Description |
 |-----------|---------------|-------------|
 | `AI_PROVIDER` | *(empty)* | Provider of the system AI: `anthropic`, `azure-foundry`, `aws-bedrock`, `azure-openai` or `gemini`. Empty with `ANTHROPIC_API_KEY` set means `anthropic`. |
-| `AI_MAX_EFFORT` | *(empty)* | Highest [reasoning effort](../ai/reasoning-effort.md) users can pick with the system AI. |
-| `AZURE_OPENAI_ENDPOINT_SUFFIXES` | *(empty)* | Extra Azure OpenAI host suffixes for the sovereign clouds, comma separated. |
-| `ASSISTANT_RATE_LIMIT_MAX` | `20` | Questions to the assistant per minute. |
-| `REPOSITORIES_FOLDER` | `/repositories` | Where [Edit with AI](../microfrontends/edit-with-ai.md#configuration) clones the repositories. |
-| `MCP_ENABLED` | `false` | Turns on the [MCP server](../ai/mcp-server.md#turning-it-on) for AI clients. |
+| `AI_MAX_EFFORT` | *(empty: every level the model takes)* | Highest [reasoning effort](../ai/reasoning-effort.md) users can pick with the system AI: `low`, `medium`, `high`, `xhigh` or `max`. Higher efforts take more tokens per answer. |
+| `ASSISTANT_RATE_LIMIT_MAX` | `20` | Questions to the assistant per IP per minute. Each one is a paid model call, so the ceiling is separate from `RATE_LIMIT_MAX`. |
+| `REPOSITORIES_FOLDER` | `/repositories` (`/data/repositories` in the all-in-one image) | Where [Edit with AI](../microfrontends/edit-with-ai.md#configuration) clones the repositories, as `<org>/<project>/<microfrontend>`. A cache: deleting it only costs a new clone. |
+| `REPOSITORIES_MAX_SIZE_MB` | `500` | A repository bigger than this on disk is refused, and removed, after the clone. |
+| `REPOSITORIES_EVICT_AFTER_DAYS` | `14` | Working copies not used for this many days are deleted. |
+
+#### Anthropic
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `ANTHROPIC_API_KEY` | *(empty)* | API key for `anthropic`. |
+| `ANTHROPIC_MODEL` | `claude-opus-5-5` | Claude model for `anthropic`. |
+
+#### Azure AI Foundry
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `AZURE_FOUNDRY_RESOURCE` | *(empty)* | Resource name for `azure-foundry`, as in `https://<resource>.services.ai.azure.com`. |
+| `AZURE_FOUNDRY_API_KEY` | *(empty)* | API key for `azure-foundry`. |
+| `AZURE_FOUNDRY_MODEL` | `claude-opus-5-5` | Name of the Claude deployment on Foundry. |
+
+#### AWS Bedrock
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `AWS_BEDROCK_REGION` | *(empty)* | AWS region for `aws-bedrock`. |
+| `AWS_BEDROCK_ACCESS_KEY_ID` | *(empty)* | Access key allowed to invoke the model. |
+| `AWS_BEDROCK_SECRET_ACCESS_KEY` | *(empty)* | Secret of that access key. |
+| `AWS_BEDROCK_MODEL` | *(empty)* | Model id or inference profile, for example `anthropic.claude-opus-5-5`. Required with `aws-bedrock`. |
+
+#### Azure OpenAI
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `AZURE_OPENAI_ENDPOINT` | *(empty)* | `https://<resource>.openai.azure.com/` for `azure-openai`. |
+| `AZURE_OPENAI_API_KEY` | *(empty)* | API key for `azure-openai`. |
+| `AZURE_OPENAI_DEPLOYMENT` | *(empty)* | Deployment of the GPT model, which is also the model name. |
+| `AZURE_OPENAI_REASONING` | `false` | `true` for reasoning deployments (o-series, GPT-5 and later): the effort is sent as `reasoning.effort`. |
+| `AZURE_OPENAI_ENDPOINT_SUFFIXES` | *(empty)* | Host suffixes an organization's Azure OpenAI endpoint may name besides the public cloud's (`.openai.azure.com`, `.cognitiveservices.azure.com`, `.services.ai.azure.com`), comma separated. Meant for the sovereign clouds, for example `.openai.azure.us,.openai.azure.cn`. |
+
+#### Gemini
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `GEMINI_API_KEY` | *(empty)* | API key for `gemini`. |
+| `GEMINI_MODEL` | *(empty)* | Gemini model. Required with `gemini`: none is assumed, as Gemini models are retired often. |
+
+### MCP server
+
+The remote [MCP server](../ai/mcp-server.md) is off until you turn it on. `MCP_ENABLED` needs a
+`FRONTEND_URL` and a `JWT_SECRET` of your own, at least 32 bytes (`openssl rand -hex 32`): with a
+placeholder, a short secret or no `FRONTEND_URL` the backend refuses to start.
+
+| Variable | Default Value | Description |
+|-----------|---------------|-------------|
+| `MCP_ENABLED` | `false` | Turns on the [MCP server](../ai/mcp-server.md#turning-it-on) for AI clients and the OAuth 2.1 endpoints in front of it. |
+| `MCP_API_KEY_ENABLED` | `true` | Lets MCP clients that cannot do OAuth use a project API key on `/mcp` instead. |
+| `MCP_RATE_LIMIT_MAX` | `120` | MCP requests per minute for each OAuth grant or API key, on top of `RATE_LIMIT_MAX` per IP. |
+| `MCP_DCR_ENABLED` | `true` | Lets MCP clients register themselves (dynamic client registration, RFC 7591). |
+| `MCP_CIMD_ENABLED` | `true` | Accepts MCP clients identified by a client metadata document URL. |
+| `CIMD_ALLOWED_HOSTS` | *(any host)* | Comma separated hosts allowed to publish a client metadata document. |
+| `OAUTH_ISSUER_URL` | *(falls back to `BACKEND_URL`)* | Issuer of the MCP access tokens, for when the public URLs cannot be derived from `BACKEND_URL` and `FRONTEND_URL`. |
+| `MCP_RESOURCE_URL` | *(falls back to the issuer + `/mcp`)* | Public URL of the MCP endpoint. |
 
 ### Observability and telemetry
 

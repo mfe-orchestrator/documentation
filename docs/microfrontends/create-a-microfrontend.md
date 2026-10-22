@@ -27,10 +27,10 @@ A connected code repository. If you have not connected one yet, follow
 
 ### Steps
 
-1. From the **Microfrontends** page, click **Add New Microfrontend**. Next to it,
+1. From the **Design** page, click **Add New Microfrontend**. Next to it,
    **Import from repository** takes the other route, starting from code you already have.
 
-   ![The Microfrontends page header with the search field, the view switcher and the Import from repository and Add New Microfrontend buttons](../assets/add-new-microfrontend.png)
+   ![The Design page header with the search field, the view switcher and the Import from repository and Add New Microfrontend buttons](../assets/add-new-microfrontend.png)
 
 2. Choose a template from the [templates library](../templates/templates-library.md), which opens
    as a page of its own. Templates are grouped by framework and filtered by framework, compiler
@@ -55,6 +55,9 @@ A connected code repository. If you have not connected one yet, follow
    - **Description** — optional
    - **Kind** — *Microfrontend* unless this is the main frontend, built into a Docker image: see
      [The main frontend](./main-frontend.md)
+
+   **AI context** — optional notes for AI agents about this microfrontend, see
+   [AI context](../ai/ai-context.md)
 
    **Hosting** — see [hosting options](./hosting-options.md)
 
@@ -101,6 +104,10 @@ the hosting configuration:
 - **Custom Source** — you will upload builds to your own bucket
 - **Custom URL** — the files are already served from a URL you control
 
+A microfrontend created without a hosting, by [Import from repository](#import-from-a-repository), the
+assistant or an MCP client, is hosted on the project's default storage, or on the MFE Orchestrator Hub
+when the project has none.
+
 See [Hosting options](./hosting-options.md) for the details of each, and
 [Versions and builds](./versions-and-builds.md) for how to get artifacts in.
 
@@ -109,6 +116,11 @@ You can optionally link an existing repository under **Code repository** — thi
 repository it did not create. To use the same automation, copy the relevant pipeline from the
 [template-pipelines repository](https://github.com/mfe-orchestrator/template-pipelines) and
 create an [API key](../ci-cd/api-keys.md) yourself.
+
+## Import from a repository
+
+**Import from repository**, next to **Add New Microfrontend**, creates one microfrontend for each
+repository of a connection you pick. Repositories already linked to a microfrontend are skipped.
 
 ## Editing a microfrontend
 
@@ -120,10 +132,10 @@ else is behind a tab:
 | Where | Contains |
 | --- | --- |
 | Release (above the tabs) | Version, and **Canary Settings** — progressive rollout, see [Canary releases](./canary-releases.md) |
-| General | Name, slug, description, kind, continuous deployment |
-| Hosting | Hosting type, entry point, storage or URL |
-| Repository | The linked repository |
+| General | Name, slug, description, kind, image repository for a Frontend |
 | AI context | Notes for AI agents about this microfrontend, see [AI context](../ai/ai-context.md) |
+| Hosting | Hosting type, entry point, storage or URL. Not shown for a Frontend |
+| Repository | The linked repository, and **Rename repository** |
 | Danger Zone | Delete this microfrontend |
 
 Switching tab keeps what you typed: every panel stays mounted, so a value entered under **Hosting**
@@ -131,7 +143,24 @@ survives a detour through **General**. A tab whose fields failed validation is m
 and submitting an invalid form jumps to the first one — an error is never hidden behind an inactive
 tab.
 
-![The microfrontend form in edit mode: the Release card with the version and the canary settings above the General, Hosting, Repository and Danger Zone tabs](../assets/microfrontend-form.png)
+![The microfrontend form in edit mode: the Release card with the version and the canary settings above the General, AI context, Hosting, Repository and Danger Zone tabs](../assets/microfrontend-form.png)
+
+### Rename the repository
+
+In the **Repository** tab of a microfrontend with a linked repository, **Rename repository** asks for
+the new name and renames the repository on the provider. The name takes letters, numbers, dots,
+hyphens and underscores (100 characters at most) and cannot end with `.git` or `.atom`. Save any
+pending change to the tab first: the button waits for it.
+
+Local clones must point their remote to the new address:
+
+```bash
+git remote set-url origin <new url>
+```
+
+GitHub and GitLab redirect the old address to the new one; Azure DevOps does not, so there the old
+address stops working. The same rename is available through the API and the `microfrontend_repository_rename`
+MCP tool.
 
 Remember that edits take effect for your users only after the next
 [deployment](../deployments/overview.md).

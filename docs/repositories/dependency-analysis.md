@@ -13,6 +13,31 @@ from pinning a different version of React, of the design system, or of any other
 library. This feature walks those repositories, reports what each one declares, flags what is
 behind the npm registry, and can rewrite the misaligned `peerDependencies` for you.
 
+## The Dependencies page
+
+**Dependencies** is an entry of the sidebar, below **Design**. It runs the scan when you open it and
+shows:
+
+![The Dependencies page with the summary, the peer dependencies to align and the dependencies by microfrontend](../assets/dependencies-page.png)
+
+- A summary: **Scanned microfrontends**, **Distinct packages**, **Outdated packages** and
+  **Misaligned peer dependencies**, with the time of the **Last scan** and a **Rescan** button.
+- **Peer dependencies to align**: each package, the range every microfrontend declares and the range
+  it will be aligned to.
+- **Shared dependencies with different versions**: reported for visibility only, the alignment never
+  rewrites them.
+- **Dependencies by microfrontend**: every dependency with its type, **Declared range**,
+  **Latest version** and status, with a **Show outdated only** option.
+- **Branches to compare**: the branch of each microfrontend, the default branch unless you pick
+  another and click **Apply the selected branches**.
+
+**Align peer dependencies** opens a dialog asking for the **Target branch** and, on **Create the
+commits**, commits the updated `package.json` on that branch of every repository. The result tells how
+many repositories were aligned and how many failed.
+
+If the npm registry cannot be reached, the page says so and shows only the comparison across
+microfrontends.
+
 ## What the scan does
 
 1. Lists the microfrontends of the current project that have a

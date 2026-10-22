@@ -58,7 +58,7 @@ services:
       retries: 5
 
   mfe-orchestrator:
-    image: lory1990/mfe-orchestrator:4.0.0
+    image: lory1990/mfe-orchestrator:5.0.0
     container_name: mfe-orchestrator
     restart: always
     ports:
@@ -72,6 +72,13 @@ services:
       # users, deployments of the last week). No names, no URLs, no personal
       # data. Uncomment the line below to turn it off.
       # TELEMETRY_DISABLED: "true"
+      # Remote MCP server for AI clients (Claude, Cursor, VS Code). Needs
+      # FRONTEND_URL (the public URL of the console) and a JWT_SECRET of your
+      # own: at least 32 bytes, generate it with `openssl rand -hex 32` (the
+      # backend refuses to start on a placeholder or a short one).
+      # MCP_ENABLED: "true"
+      # FRONTEND_URL: https://console.example.com
+      # JWT_SECRET: <output of openssl rand -hex 32>
     volumes:
       - upload_microfrontends:/upload-microfrontends
     depends_on:
@@ -97,12 +104,12 @@ docker compose up -d
 :::caution Do the first startup before the address is reachable by anybody else
 That screen is public and ungated, so whoever fills it in first owns the installation. Read
 [The first startup](./first-startup.md) before you type a project name into it — the name becomes a
-permanent slug, and it mishandles anything longer than two words.
+permanent slug.
 :::
 
 ## Before you call it production
 
-- **Pin the version.** The file above names `lory1990/mfe-orchestrator:4.0.0` on purpose: the
+- **Pin the version.** The file above names `lory1990/mfe-orchestrator:5.0.0` on purpose: the
   `latest` tag is rebuilt from the development branches on every push, so it is not a release
   channel. Bump the tag deliberately, when you decide to upgrade. The same goes for `mongo:8.0` and
   `redis:8-alpine`.
@@ -117,6 +124,9 @@ permanent slug, and it mishandles anything longer than two words.
 - **Consider a replica set.** MongoDB offers transactions only on a replica set; on the standalone
   `mongod` above the backend detects it and runs the multi-document operations — creating a
   deployment among them — without one.
+- **Turn on what you need.** The commented lines in the file enable the
+  [remote MCP server](../ai/mcp-server.md#turning-it-on); the AI providers are configured with the
+  [AI variables](./environment-variables.md#ai).
 - **Keep the volumes.** `upload_microfrontends` holds the uploaded bundles: losing it means the
   builds served from the internal storage are gone.
 

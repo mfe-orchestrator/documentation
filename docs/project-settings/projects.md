@@ -9,7 +9,7 @@ keywords: [projects, access control, boundary, settings, organization]
 # Projects and access control
 
 A **project** is the container every configuration object belongs to: microfrontends, environments,
-storages, code repositories, API keys and members all belong to exactly one project.
+storages, code repositories, API keys, AI context and members all belong to exactly one project.
 
 The project in turn belongs to exactly one **organization**, which is the tenant that owns it and
 the level deciding who reaches the project at all. See
@@ -46,7 +46,11 @@ inside it.
 Additional projects are created through the **project wizard**, which has five steps:
 
 1. **Name** — the project name, and a description. The name is required, at least three characters,
-   and the slug is derived from it.
+   and the slug is derived from it: the name goes through `slugify`, so it is lower-cased, every run
+   of characters outside `a-z` and `0-9` becomes a single hyphen, and hyphens at either end are
+   dropped. *My Cool Storefront App* becomes `my-cool-storefront-app`. Above the form, the assistant
+   can draft the name, description and environments from a few sentences of yours; you review
+   everything before confirming each step.
 2. **Environments** — pick from a set of default stages, or define your own
 3. **Storage** — connect a bucket for the artifacts, or skip
 4. **Repositories** — connect a code repository, or skip
@@ -54,7 +58,9 @@ Additional projects are created through the **project wizard**, which has five s
    email invitation, exactly as from
    [Members and roles](./users-and-roles.md#inviting-a-member).
 
-The last three steps are skippable, and every one of them can be done later from **Settings**.
+![The first step of the project wizard: the assistant draft above the project name and description](../assets/new-project-wizard.png)
+
+The last three steps are skippable, and every one of them can be done later from the project **Settings**.
 
 :::caution Leaving the wizard halfway creates a half-configured project
 The project row is created the moment you complete step 1, before any environment exists. Nothing
@@ -79,7 +85,7 @@ wizard is not offered to them at all. See
 
 The project selector sits in the console header, next to the
 [organization selector](../organizations/managing-an-organization.md#the-header-menu). Everything
-below it — microfrontends, deployments, settings — follows the selection.
+below it — the sidebar pages, the project settings — follows the selection.
 
 ![The project switcher, which also creates a new project](../assets/project-switcher.png)
 
@@ -89,20 +95,30 @@ of "my microfrontends disappeared".
 
 ## Project settings
 
-**Settings** in the sidebar is the project's control panel. It shows a configuration summary with
-counts, linking through to each area:
+**Settings**, in the top project menu of the console header, is the project's control panel. It has
+three tabs, and the tab is kept in the URL (`/settings?tab=ai`, `/settings?tab=delivery`), so a link
+opens the right one:
 
-| Card | Leads to |
+| Tab | What it holds |
 | --- | --- |
-| Team Members | [Members and roles](./users-and-roles.md) |
-| Environments | [Environments](../environments/overview.md) |
-| API Keys | [API keys](../ci-cd/api-keys.md) |
-| Storages | [Buckets](../buckets/overview.md) |
-| Code Repositories | [Code repositories](../repositories/connect/github.md) |
-| AI assistants | [MCP server](../ai/mcp-server.md): the AI clients connected to the project |
+| **General** | **Project Information**, **People and access**, **Project resources** and the **Danger Zone** |
+| **AI context** | The **Project AI context**: notes for AI agents that apply to the whole project. See [AI context](../ai/ai-context.md) |
+| **Delivery** | The **Pipeline templates** a new microfrontend's repository gets. See [Pipeline templates](../ci-cd/pipeline-templates.md) |
 
-The **General** tab also holds the **Project AI context**, the notes for AI agents that apply to the
-whole project: see [AI context](../ai/ai-context.md).
+The **General** tab shows two groups of cards, each with a count and a link to the area:
+
+| Group | Card | Leads to |
+| --- | --- | --- |
+| People and access | Team Members | [Members and roles](./users-and-roles.md) |
+| People and access | API Keys | [API keys](../ci-cd/api-keys.md) |
+| People and access | AI assistants | [MCP server](../ai/mcp-server.md): the AI clients connected to the project |
+| Project resources | Environments | [Environments](../environments/overview.md) |
+| Project resources | Code Repositories | [Code repositories](../repositories/connect/github.md) |
+| Project resources | Storages | [Buckets](../buckets/overview.md) |
+
+The storages are not in the sidebar: this card is the way to them.
+
+![The General tab of the project settings: project information, people and access, resources and danger zone](../assets/project-settings.png)
 
 ### Project information
 
@@ -118,14 +134,24 @@ Under **Project Information** you will find:
 The **ID** is what you need for the serve API and for `project-id` headers — this is where to copy
 it from.
 
-![The Settings page: project information, configuration counts and danger zone](../assets/project-settings.png)
+### AI context and pipeline templates
+
+The other two tabs are covered where their subject is: the notes agents read in
+[AI context](../ai/ai-context.md), and the repository the pipelines come from in
+[Pipeline templates](../ci-cd/pipeline-templates.md). Only an owner of the project, or an administrator
+of its organization, can change where the pipeline templates come from.
+
+![The AI context tab of the project settings](../assets/project-settings-ai-context.png)
+
+![The Delivery tab of the project settings, with the pipeline templates form](../assets/project-settings-delivery.png)
 
 ### Renaming a project
 
 Edit the **Name**, then **Save**. The name and the description are one form and are saved together,
-so an edit to either writes both.
+so an edit to either writes both. Clearing the description removes it.
 
-The **Slug** does not follow the name, and cannot be edited at all. It is baked into the storage path
+The **Slug**, produced by `slugify` when the project was created, does not follow the name, and
+cannot be edited at all. It is baked into the storage path
 of every bundle already uploaded — see the caution below — so re-deriving it from a new name would
 leave those files where nothing looks for them. A renamed project keeps the slug it was created
 with, which is worth knowing when you audit a bucket and find a path naming a project that no longer
@@ -138,7 +164,7 @@ be aware the slug appears in bucket paths when auditing storage.
 
 ## Deleting a project
 
-**Settings → Danger Zone → Delete Project** removes the project and everything scoped to it, in one
+**Settings → General → Danger Zone → Delete Project** removes the project and everything scoped to it, in one
 transaction: microfrontends, environments, variables, deployments and their history, API keys, member
 and invitation rows, **storage connections**, **code repository connections**, the record of every
 built frontend uploaded for those microfrontends, and any

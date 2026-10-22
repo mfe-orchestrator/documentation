@@ -25,7 +25,7 @@ Two images are published, and the difference is what runs inside the container:
 | Image | Contains | Use it for |
 | --- | --- | --- |
 | `lory1990/mfe-orchestrator:all-in-one` | Orchestrator, MongoDB, Redis and Nginx | A working installation from a single `docker run` |
-| `lory1990/mfe-orchestrator:4.0.0` | Orchestrator and Nginx only | Installations that point at a MongoDB and a Redis you already run |
+| `lory1990/mfe-orchestrator:5.0.0` | Orchestrator and Nginx only | Installations that point at a MongoDB and a Redis you already run |
 
 The standard image does **not** bring a database with it: started on its own it has nothing to
 connect to. Give it `NOSQL_DATABASE_URL` and `REDIS_URL`, or use
@@ -45,7 +45,7 @@ the first start. An installation with no users answers with the **Initial Setup*
 :::caution Do the first startup before the address is reachable by anybody else
 That screen is public and ungated, so whoever fills it in first owns the installation. Read
 [The first startup](./first-startup.md) before you type a project name into it — the name becomes a
-permanent slug, and it mishandles anything longer than two words.
+permanent slug.
 :::
 
 What you should know about this image:
@@ -87,7 +87,7 @@ docker run -d --name mfe-orchestrator --restart unless-stopped \
   -e JWT_SECRET="$(openssl rand -hex 32)" \
   -e SECRETS_ENCRYPTION_KEY="$(openssl rand -base64 32)" \
   -v upload_microfrontends:/upload-microfrontends \
-  lory1990/mfe-orchestrator:4.0.0
+  lory1990/mfe-orchestrator:5.0.0
 ```
 
 A standalone MongoDB works, but MongoDB only offers **transactions** on a replica set: pointed at a
@@ -99,9 +99,9 @@ that matters to you. It is what the all-in-one image does.
 
 | Tag | What it points at |
 | --- | --- |
-| `4.0.0` | A released version. This is what you want in production |
+| `5.0.0` | A released version. This is what you want in production |
 | `latest` | The head of the development branches, rebuilt on every push |
-| `4.0.0-all-in-one` | The all-in-one image of a released version |
+| `5.0.0-all-in-one` | The all-in-one image of a released version |
 | `all-in-one` | The head of the development branches, all-in-one flavour |
 
 `latest` is not a release channel here: it is rebuilt from the branches, so pin a version tag

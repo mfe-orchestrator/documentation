@@ -1,4 +1,6 @@
-# Website
+# MFE Orchestrator documentation
+
+Documentation of MFE Orchestrator, the open-source orchestrator for micro frontends, with AI built in.
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 

@@ -10,7 +10,8 @@ keywords: [architecture, diagram, deployment, mongodb, redis, object storage, se
 
 MFE Orchestrator is a **control plane**: it stores what your microfrontends are, which versions
 belong to which environment, and where their files live — then answers, at runtime, the single
-question your host application asks: *what should I load?*
+question your host application asks: *what should I load?* It also carries the AI built into the
+console, described at the end of this page.
 
 This page draws that out. If you have not read [Core concepts](./core-concepts.md) yet, start
 there: the boxes below are the objects described on that page.
@@ -59,10 +60,13 @@ flowchart TB
         direction LR
         idp["Identity providers<br/>Auth0 · Entra ID · Google<br/>or local login"]
         smtp["SMTP<br/>invitations, password reset"]
+        ai["AI providers<br/>Anthropic · Azure AI Foundry · AWS Bedrock<br/>Azure OpenAI · Gemini"]
     end
 
     ext["Your CDN or static host<br/>hosting type: Custom URL"]
 
+    mcpc["MCP clients<br/>Claude · Cursor · your own agent<br/>OAuth 2.1 login"]
+    mcpc -.->|"/api/mcp · MCP_ENABLED"| mgmt
     people --> console
     console --> mgmt
     ci -->|"upload dist.zip + version"| mgmt
@@ -78,6 +82,7 @@ flowchart TB
     console -.-> idp
     mgmt -.-> idp
     mgmt -.-> smtp
+    mgmt -.->|"AI agent · Maestro · Edit with AI"| ai
 
     storage <-->|"write on upload<br/>read on request"| internal
     storage <-->|"your credentials<br/>bucket stays private"| s3
@@ -267,3 +272,16 @@ providers, SMTP and cloud buckets are all optional. See
 [Terraform](./self-hosting/terraform.md),
 [Use external resources](./self-hosting/use-external-resources.md) and the full
 [environment variable reference](./self-hosting/environment-variables.md).
+
+## The AI inside the orchestrator
+
+The AI features run in the same container, from the management API. The AI agent page, Maestro and
+Edit with AI call the AI an [organization](./ai/ai-models.md) assigned to the project — Claude through
+the Anthropic API, Azure AI Foundry or AWS Bedrock, Azure OpenAI, or Gemini — and the code they
+propose reaches your repository through your Git provider connection, on a feature branch or as a pull
+request. The reasoning effort of a request is capped by `AI_MAX_EFFORT`.
+
+The [MCP server](./ai/mcp-server.md) is the other direction: with `MCP_ENABLED` the orchestrator
+answers as a remote MCP server behind an OAuth 2.1 login, so a client such as Claude or Cursor signs in
+as the user, works on the projects they shared with it and runs on its own model. See
+[AI in MFE Orchestrator](./ai/overview.md).

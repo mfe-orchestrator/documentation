@@ -56,16 +56,18 @@ key created through Maestro is shown in the panel only, never sent to the model.
 
 ## Conversations
 
-Every conversation is saved, per user and per project. **Recent conversations** lists them to reopen one
+Every conversation is saved on the server, per user and per project, with secrets masked, so it survives a reload. **Recent conversations** lists them to reopen one
 and go on; **New conversation** starts over. Deleting a conversation removes it from the list.
 
 ## AI agent page
 
-The **AI agent** page opens Maestro full screen. Next to the **Project** conversation it keeps a tab for
+The **AI agent** page, the first entry of the sidebar, opens Maestro full screen. Next to the **Project** conversation it keeps a tab for
 each AI job: **New AI job** starts one agent on several microfrontends together, at most 10
 repositories, so a single change can span the host and the remotes that use it. Each repository gets its
 own proposal on its own feature branch, which you review, refine in the conversation and apply together
-with **Apply all**. The rules are those of [Edit with AI](../microfrontends/edit-with-ai.md).
+with **Apply all**. The rules are those of [Edit with AI](../microfrontends/edit-with-ai.md), whose queue keeps the **Applied** and **Failed** requests in groups of their own. While an agent works on a microfrontend, the **Design** page shows it on its card with a pulsing *agent at work* badge, so you see at a glance which microfrontends are being changed. A job that is still running cannot be applied, and a project runs a limited number of jobs at a time: wait for one to finish.
+
+![The AI agent page: Maestro answering about the project, with the tools it called, the tokens it used and the saved conversations beside it](../assets/ai-agent.png)
 
 ## Tokens
 

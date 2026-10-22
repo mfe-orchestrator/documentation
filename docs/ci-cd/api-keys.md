@@ -9,17 +9,18 @@ keywords: [api key, ci authentication, automation, project scope]
 # API keys for CI/CD
 
 An API key authenticates a machine — a CI pipeline, a deploy script, an automation job — against a
-single project. Keys live under **Settings → API Keys**.
+single project. Keys live under the project **Settings**: on the **General** tab, **API Keys** in the *People and
+access* card.
 
 ## Creating a key
 
-1. Go to **Settings → API Keys** and click **Create API Key**.
+1. Open **API Keys** from the project **Settings** and click **Create API Key**.
 
    ![The API Keys page of a project with no keys yet](../assets/api-keys.png)
 
 2. Give it a **Name** describing where it will be used, e.g. *catalog GitHub Actions*.
-3. Pick an **Expiration Date**. The date is sent as the *start* of the selected day (midnight UTC),
-   so pick the day after the last one you want the key dated for.
+3. Pick an **Expiration Date**. It defaults to six months from today. The date is sent as the
+   *start* of the selected day, so pick the day after the last one you want the key to work.
 4. Click **Create Key**.
 
    ![The Create API Key dialog, with a name and an expiry date](../assets/api-key-dialog.png)
@@ -31,37 +32,47 @@ The key is stored hashed and can never be retrieved again — the list view has 
 If you lose it, delete the key and create a new one.
 :::
 
-## Expiry is recorded, not enforced
+## Expiry and revocation are enforced
 
-Every key carries an expiry date and the list marks it **Active**, **Expiring soon** or **Expired**
-from that date.
+Every key carries an expiry date, and the list marks it **Active**, **Expiring soon** or
+**Expired** from that date. A key that is expired, or revoked, is **refused**: the request fails
+with an authentication error that names the reason.
 
-:::caution An expired key still works
-Read this before you rely on the expiry date for anything. The authentication check loads the keys,
-compares the presented value against their hashes and returns the project the match belongs to. It
-reads neither the `status` field nor `expiresAt`. So a key the console shows as **Expired**
-authenticates exactly like a live one, indefinitely, and the badge is a reminder to a human rather
-than a control.
+| The key is | The refusal says |
+| --- | --- |
+| Revoked | `API key revoked` |
+| Past its expiry date | `API key expired on <date>` |
+| Not known at all | `API key not found` |
 
-**Deleting the key is the only action that stops it.**
+The reason is only given for a key that exists, so a pipeline that suddenly fails tells you whether
+to rotate the key or to look for a typo.
+
+:::caution Behaviour before 5.0.0
+Before release 5.0.0 the authentication check read neither the status nor the expiry of a key, so a
+key marked **Expired** kept working and only deleting it stopped it. Both are checked now. A pipeline
+that relied on an expired key stops working on upgrade: create a new key and update the consumer.
 :::
 
-There is still no way to create a non-expiring key, and the date is still worth setting honestly: it
-is what tells you, and the next person, when a key was meant to be retired.
+There is no way to create a non-expiring key. Pick a date you can live with, and rotate by creating
+the new key first, updating the consumer, then deleting or revoking the old one.
 
 :::tip
-Put the expiry date in whatever calendar your team actually reads, and treat it as the date you
-*delete* the key. Rotate by creating the new key first, updating the consumer, then deleting the old
-one.
+Put the expiry date in whatever calendar your team actually reads: it is the day the pipeline stops
+publishing.
 :::
 
 ## What a key can call
 
-One endpoint: the [upload](#using-a-key) of a microfrontend version.
+A key authenticates the endpoints meant for pipelines:
 
 ```
 POST <API_BASE>/microfrontends/by-slug/:slug/upload/:version
+POST <API_BASE>/microfrontends/by-slug/:slug/versions/:version
 ```
+
+The first [uploads a bundle](./manual-upload.md) of a microfrontend, the second registers the Docker
+image of a [FRONTEND](./frontend-pipeline.md). A key is also accepted by the
+[MCP endpoint](../ai/mcp-server.md), with the access its role gives it.
 
 Everything else on the API — creating a deployment, editing a microfrontend, reading the build
 status — is authenticated with the token of a signed-in user and answers an API key with an
@@ -70,17 +81,16 @@ authentication error. So a pipeline can *publish* a version, and it cannot *depl
 
 ## Roles
 
-A key carries a role in the database — `MANAGER` or `VIEWER` — and neither the console nor the API
-gives you anything to do with it.
+A key carries a role, `MANAGER` or `VIEWER`.
 
-- **You cannot choose it.** The create dialog asks for a name and an expiry date, nothing else, and
-  every key it produces is a `MANAGER`. Keys created automatically for a scaffolded repository are
-  `MANAGER` too.
-- **It is never checked.** No authorization path reads the role, so a `VIEWER` key — if you could
-  create one — would upload exactly like a `MANAGER` one.
+- **You cannot choose it in the console.** The create dialog asks for a name and an expiry date,
+  and every key it produces is a `MANAGER`. Keys created automatically for a repository connection
+  are `MANAGER` too.
+- **Registering an image version needs `MANAGER`.** The endpoint for a FRONTEND answers a key with
+  another role with `MICROFRONTEND_VERSION_FORBIDDEN` (403).
 
-Treat the role as an unused field, and the *key itself* as the credential to protect. Anywhere the
-CI pages ask for a key, any key the console gives you is the right one.
+Treat the *key itself* as the credential to protect. Anywhere the CI pages ask for a key, any key
+the console gives you is the right one.
 
 ## Keys created for you
 
@@ -111,11 +121,11 @@ You will find these keys in the API Keys list named
 `MFE_ORCHESTRATOR_DEPLOY_SECRET - <provider> - <repository>`. Do not delete them unless you intend
 to break the corresponding pipeline.
 
-:::note They are dated 15 days out
-The expiry on an automatically created key is computed as `3600 * 1000 * 365` milliseconds — 365
-*hours*, not a year — so it is about 15.2 days. The console badges it **Expired** two weeks after
-the connection was made, while the key keeps working, because expiry is not enforced. Nothing breaks;
-the badge is simply wrong about it.
+:::note Deploy keys last a year
+A key created for a connection expires one year after the connection was made. Recreate the deploy
+key of the affected pipelines before that date. Keys created by a console older than 5.0.0 were
+given fifteen days instead of a year, so any of them older than that is now refused: create a new
+key and replace the secret in your pipelines.
 :::
 
 ## Using a key
@@ -145,17 +155,13 @@ header.
 
 ## Stopping a key
 
-There is one action: **Delete**, the trash button on the key's row in the list.
+- **Delete** is the trash button on the key's row in the list. The record is gone with the key.
+- **Revoke** keeps the record and stops the credential. The console list has no Revoke button: call
+  `PUT <API_BASE>/api-keys/:apiKeyId/revoke` with a user token, or ask the
+  [Maestro assistant](../ai/assistant.md) to revoke the key, which runs the `api_key_revoke` tool after
+  you confirm.
 
-:::caution Revoking does not exist, and would not work
-The API has a `PUT /api-keys/:id/revoke` endpoint that sets a key's `status` to inactive, and nothing
-calls it — the console offers no Revoke control. It would not help if it did: the authentication
-check never reads `status`, so a revoked key authenticates like a live one.
-
-Deleting the key is what stops it. There is no way to keep the record for the audit trail and stop
-the credential at the same time; if you need the history, note the key's name and expiry before you
-delete it.
-:::
+Either way the key is refused from that moment on.
 
 ## Good practice
 
@@ -169,6 +175,5 @@ so secret scanners will not catch one you paste into a repository.
 key per project — which is the correct blast radius, not an inconvenience to work around.
 
 **Treat a leaked key as a live incident.** Any key can publish arbitrary JavaScript to your
-production microfrontends. **Delete it first, investigate second** — deleting is the only thing that
-stops it, and nothing else you can do in the console reduces its access at all. Then create a
+production microfrontends. **Revoke or delete it first, investigate second.** Then create a
 replacement and update the consumer.

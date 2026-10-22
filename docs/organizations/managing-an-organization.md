@@ -2,8 +2,8 @@
 sidebar_position: 3
 title: Managing an organization
 sidebar_label: Managing an organization
-description: Switch between organizations, create one, and use the organization page — name, description, id, members, pending invitations and the danger zone.
-keywords: [organization, switch organization, create organization, members, invitations, danger zone]
+description: Switch between organizations, create one, and use the organization settings — General, Members and AI tabs, with details, members, pending invitations, AIs and the danger zone.
+keywords: [organization, organization settings, switch organization, create organization, members, invitations, AI, danger zone]
 ---
 
 # Managing an organization
@@ -19,8 +19,8 @@ The header reads *organization › project*, and both parts are useful:
 
 | Element | What it does |
 | --- | --- |
-| The organization name in the breadcrumb | Links straight to the organization page |
-| **Organization settings** | The same page: details, members and danger zone |
+| The organization name in the breadcrumb | Links straight to the organization settings |
+| **Organization settings** | The same page, at `/organization`: General, Members and AI tabs |
 | **Switch organization** | Opens the picker |
 | **Create new organization** | Opens the creation form directly, skipping the list |
 
@@ -52,12 +52,6 @@ switches you to that organization — the console works inside one at a time, so
 hand you a project list that does not contain the project you just accepted.
 :::
 
-:::tip A project shown under the wrong organization is a bug, not a mode
-The header always names the organization the current project belongs to. If you ever see a project
-listed under an organization that does not own it, you are on a build older than 4.0.0 — the race
-that caused it was fixed there.
-:::
-
 ## Creating an organization
 
 **Create new organization**, from the header menu or from the button at the bottom of the picker,
@@ -74,20 +68,22 @@ Whoever creates an organization becomes its **owner** — an organization with n
 administered. The console switches into the new organization as soon as it is created, which means
 no project is selected yet and the project wizard opens.
 
-## The organization page
+## Organization settings
 
-`/organization` is the organization's own page. It is headed **Organization members**, but it
-carries three things: the **Organization details** card, the membership tables, and the one
-irreversible action on the organization.
+`/organization` holds the settings of the organization, in three tabs:
 
-:::info The old address still works
-Until 4.0.0 this page lived in the sidebar at `/organization-users`. That path now redirects to
-`/organization`, so existing links and bookmarks keep working.
-:::
+| Tab | What it holds |
+| --- | --- |
+| **General** | The **Organization details** card and, for an owner, the danger zone |
+| **Members** | The members, with their roles, and the pending invitations. The tab shows the member count |
+| **AI** | The AIs the projects of the organization use, and which project may use which |
 
-### Details
+The tab is kept in the URL, as `?tab=members` or `?tab=ai`, so a link opens the right one. The
+address `/organization-users` opens the page straight on **Members**.
 
-![The organization details card with name, description, identifier and save button](../assets/organization-details.png)
+### General
+
+![The General tab of the organization settings, with the details card and the danger zone](../assets/organization-settings.png)
 
 | Field | Notes |
 | --- | --- |
@@ -97,9 +93,28 @@ Until 4.0.0 this page lived in the sidebar at `/organization-users`. That path n
 
 A plain member sees the name and the description as text, with no form and no save button.
 
+### Danger zone
+
+![The danger zone refusing to delete an organization that still holds a project](../assets/organization-danger-zone.png)
+
+Only an **owner** sees this section, at the bottom of the **General** tab. Deleting an organization is
+deliberately not a cascade: an organization holds every project of a tenant, and wiping all of them behind one click is not
+something a confirmation dialog can make safe.
+
+So the action is refused while the organization still holds projects, and says so before you try it.
+Delete the projects first, one at a time, where
+[each project's own danger zone](../project-settings/projects.md#deleting-a-project) spells out what
+is being lost. Once the organization is empty, deleting it asks you to type its name to confirm and
+removes the organization and its memberships.
+
+:::caution What deletion does not touch
+Deleting an organization removes the organization and its membership rows. The user accounts
+themselves, and their membership of other organizations, are unaffected.
+:::
+
 ### Members
 
-![The organization members table, with the owner shown as a badge because they are the last one, and the projects column reading All projects](../assets/organization-members.png)
+![The Members tab: the organization members table, with the owner shown as a badge because they are the last one, and the projects column reading All projects](../assets/organization-members.png)
 
 The table has one row per accepted member:
 
@@ -145,29 +160,12 @@ added to the organization straight away instead — a confirmation link that can
 leave them stuck. See [Environment Variables](../self-hosting/environment-variables.md).
 :::
 
-### Artificial intelligences
+### AI
 
-The AIs the projects of the organization use for [Maestro](../ai/assistant.md),
+The **AI** tab lists the **Artificial intelligences**: the AIs the projects of the organization use for [Maestro](../ai/assistant.md),
 [Edit with AI](../microfrontends/edit-with-ai.md) and the project draft: Claude, GPT on Azure OpenAI or
 Gemini, each with its credentials. Every member sees the list; owners and admins add, edit and delete
 AIs, mark the default one, and choose under **Project access** which AIs each project may use. See
 [AIs of an organization](../ai/ai-models.md).
 
-### Danger zone
-
-![The danger zone refusing to delete an organization that still holds a project](../assets/organization-danger-zone.png)
-
-Only an **owner** sees this section, and deleting an organization is deliberately not a cascade: an
-organization holds every project of a tenant, and wiping all of them behind one click is not
-something a confirmation dialog can make safe.
-
-So the action is refused while the organization still holds projects, and says so before you try it.
-Delete the projects first, one at a time, where
-[each project's own danger zone](../project-settings/projects.md#deleting-a-project) spells out what
-is being lost. Once the organization is empty, deleting it asks you to type its name to confirm and
-removes the organization and its memberships.
-
-:::caution What deletion does not touch
-Deleting an organization removes the organization and its membership rows. The user accounts
-themselves, and their membership of other organizations, are unaffected.
-:::
+![The AI tab of the organization settings, listing the AIs and the project access](../assets/organization-ai-models.png)

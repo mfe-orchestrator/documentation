@@ -115,12 +115,9 @@ Fix it by hand: create an [API key](./api-keys.md), then add it under
 **Settings → Secrets and variables → Actions** as `MICROFRONTEND_ORCHESTRATOR_API_KEY`.
 :::
 
-:::note The key is dated 15 days out, and keeps working anyway
-The generated key's expiry is computed as 365 *hours*, not a year, so **Settings → API Keys** badges
-it **Expired** about two weeks after you connect the repository. The key keeps authenticating: the
-expiry date is recorded and never enforced — see
-[expiry is recorded, not enforced](./api-keys.md#expiry-is-recorded-not-enforced). Nothing to do, but
-do not read that badge as the cause of a failing publish.
+:::note Deploy keys last a year
+The key is created with a one-year expiry, and an expired or revoked key is refused: recreate it
+before then. See [API keys](./api-keys.md#expiry-and-revocation-are-enforced).
 :::
 
 ## Adding this to an existing repository
@@ -137,6 +134,9 @@ For a repository MFE Orchestrator did not create:
 Ready-made variants for other compilers and host types are in
 [`template-pipelines`](https://github.com/mfe-orchestrator/template-pipelines), under
 `<type>/<compiler>/github/`.
+
+To make every new repository of the project start from your own pipeline instead of the official one,
+see [Pipeline templates](./pipeline-templates.md).
 
 ## Adapting it
 
@@ -160,10 +160,11 @@ between *published* and *live* is the platform's main safety property.
 
 **Publish step fails with an authentication error**
 
-The secret is missing, misnamed, or names a key that has been deleted. Check the exact spelling of
-`MICROFRONTEND_ORCHESTRATOR_API_KEY`, and that the key still exists in **Settings → API Keys**. An
-**Expired** badge is not the cause — expired keys still authenticate. On a personal GitHub account,
-suspect the missing organization secret described above.
+The error names the reason: `API key revoked`, `API key expired on <date>`, or `API key not found`.
+For the first two, create a new key and replace the secret. For the last, the secret is missing,
+misnamed, or names a key that was deleted: check the exact spelling of
+`MICROFRONTEND_ORCHESTRATOR_API_KEY` and that the key still exists in the **API Keys** of the project
+settings. On a personal GitHub account, suspect the missing organization secret described above.
 
 **"Entity not found" for the slug**
 

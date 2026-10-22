@@ -2,14 +2,14 @@
 sidebar_position: 1
 title: Microfrontends overview
 sidebar_label: Overview
-description: How the Microfrontends page of the MFE Orchestrator console lists, groups and gives you access to every microfrontend registered in a project.
+description: How the Design page of the MFE Orchestrator console lists, groups and gives you access to every microfrontend registered in a project.
 keywords: [microfrontends, console, host, remote, versions]
 ---
 
 # Microfrontends overview
 
-The **Microfrontends** page is the home screen of the console and the place where you spend
-most of your time. It lists every microfrontend registered in the current project with its
+The **Design** page, the *Design* entry of the sidebar, is where you spend most of your time in the
+console. It lists every microfrontend registered in the current project with its
 version, and — depending on the view you choose — its repository, its hosting type and its
 canary release.
 
@@ -22,9 +22,8 @@ A microfrontend is registered as one of two types:
 | **Host** | The shell application. It boots the page, owns routing and layout, and loads remotes at runtime. |
 | **Remote** | A microfrontend exposed to be consumed by a host. |
 
-A host can also be the **main frontend** of the application, built into a Docker image and served
-by its own container: register it with the *Frontend* kind, see
-[The main frontend](./main-frontend.md).
+The main frontend of the application, built into a Docker image and served by its own container,
+is registered with the *Frontend* kind: see [The main frontend](./main-frontend.md).
 
 A project normally has one host per application and any number of remotes. A remote can itself
 be a host of other remotes — the relations form a graph, not just a two-level tree.
@@ -40,7 +39,8 @@ The dashboard offers three ways of looking at the same data, switchable from the
 corner:
 
 - **Diagram view** — the microfrontend graph, showing which host loads which remotes. Nodes can
-  be dragged; their position and size are saved per microfrontend.
+  be dragged and resized; their position and size are saved per microfrontend. Deleting an arrow
+  removes the relation between the two microfrontends.
 
   ![Diagram view: a shell host with catalog, cart and account remotes](../assets/microfrontends-diagram-view.png)
 
@@ -54,6 +54,9 @@ corner:
 
   ![Table view: name, slug, version, hosting and canary in one row per microfrontend](../assets/microfrontends-table-view.png)
 
+While an AI agent is working on a microfrontend, a pulsing badge with the number of agents at work
+shows on its node, card and row: see the [AI agent page](../ai/assistant.md#ai-agent-page).
+
 A free-text search above the views filters the list by name, and the counter next to it says how
 many of the total are showing.
 
@@ -64,12 +67,12 @@ many of the total are showing.
 | **Name** | Display name |
 | **Slug** | Lowercase, URL-friendly, **unique within the project**. It appears in serve URLs and becomes the Module Federation remote name, so treat it as permanent. |
 | **Description** | Free text |
-| **Kind** | *Microfrontend*, served by MFE Orchestrator, or *Frontend*, served by its own Docker container — see [The main frontend](./main-frontend.md) |
+| **Kind** | *Microfrontend*, served by MFE Orchestrator, or *Frontend*, the main frontend, served by its own Docker container — see [The main frontend](./main-frontend.md) |
 | **Version** | The version currently selected for this microfrontend. Only becomes live when you deploy. |
 | **Continuous Deployment** | A flag published to consumers on the serve API, marking this microfrontend as continuously deployed |
 | **Hosting type** | Where the files live — see [Hosting options](./hosting-options.md) |
 | **Entry Point** | The file a consumer loads. Defaults to `index.js`; Vite Module Federation builds typically use `assets/remoteEntry.js` |
-| **Code repository** | Optional link to a GitHub / GitLab / Azure DevOps repository, which enables the **Build** action |
+| **Code repository** | Optional link to a GitHub / GitLab / Azure DevOps repository, which enables the **Build** action. A linked repository can be renamed from the console: see [Rename the repository](./create-a-microfrontend.md#rename-the-repository) |
 | **Canary** | Optional progressive rollout configuration — see [Canary releases](./canary-releases.md) |
 | **AI context** | Notes for AI agents about this microfrontend — see [AI context](../ai/ai-context.md) |
 
@@ -90,5 +93,5 @@ its consumers. Pick one you can live with.
 - [Versions and builds](./versions-and-builds.md) — how a version gets created and uploaded
 - [Hosts and remotes](./host-and-remotes.md) — wiring the graph
 - [Canary releases](./canary-releases.md) — progressive rollout
-- [The main frontend](./main-frontend.md) — a host served by its own Docker container
+- [The main frontend](./main-frontend.md) — the project's frontend, served by its own Docker container
 - [Edit with AI](./edit-with-ai.md) — change the code with an AI agent

@@ -82,7 +82,7 @@ which needs no credentials at all.
 
 ## Step 4: Add the storage in MFE Orchestrator
 
-Go to **Settings → Storages → New Storage** and select **Amazon S3**:
+Open **Project Settings → General → Storages → New Storage** and select **Amazon S3**:
 
 | Field | Value |
 | --- | --- |
@@ -95,7 +95,7 @@ Go to **Settings → Storages → New Storage** and select **Amazon S3**:
 
 ![The New Storage form with the Amazon S3 credential fields](../assets/storage-form-aws-s3.png)
 
-Save.
+Click **Test connection** to check the credentials against the bucket, then save. See [Testing the connection](./overview.md#testing-the-connection).
 
 ## Step 5: Point a microfrontend at it
 

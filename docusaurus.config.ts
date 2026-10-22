@@ -7,7 +7,7 @@ import llmsTxt from './plugins/llms-txt';
 
 const config: Config = {
   title: 'MFE Orchestrator',
-  tagline: 'The control plane for your microfrontends',
+  tagline: 'The open-source orchestrator for micro frontends, with AI built in',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

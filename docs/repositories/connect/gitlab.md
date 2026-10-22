@@ -17,7 +17,7 @@ This guide will walk you through connecting your GitLab repositories to MFE Orch
 
 ## Step 1: Navigate to Code Repositories
 
-1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator
+1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator (also reachable from the project **Settings**, **General** tab, under *Project resources*)
 ![The Code Repositories page](../../assets/code-repositories.png)
 2. Click the **Add Repository** button
 ![The Add Repository dialog, listing the available providers](../../assets/add-repository-provider.png)
@@ -131,7 +131,8 @@ repositories should be created in.
 This step is not optional. The field is required and **Connect GitLab** stays disabled until the test
 has succeeded, so the form cannot be submitted without a selection. The group is also what MFE
 Orchestrator needs in order to create the group-level CI/CD variable holding the deploy key — see
-[Deploy with GitLab CI](../../ci-cd/gitlab-ci.md#the-cicd-variable).
+[Deploy with GitLab CI](../../ci-cd/gitlab-ci.md#the-cicd-variable). The key is a
+[deploy API key](../../ci-cd/api-keys.md#keys-created-for-you) valid for one year.
 
 ### 3.4 Save the Connection
 

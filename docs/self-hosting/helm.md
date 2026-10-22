@@ -48,7 +48,7 @@ kubectl port-forward -n mfe-orchestrator svc/mfe-orchestrator 8080:80
 :::caution Do the first startup before the ingress is open
 That screen is public and ungated, so whoever fills it in first owns the installation. Read
 [The first startup](./first-startup.md) before you type a project name into it — the name becomes a
-permanent slug, and it mishandles anything longer than two words. Configure the
+permanent slug. Configure the
 [ingress](#ingress) after the first account exists, not before.
 :::
 
@@ -122,11 +122,11 @@ effect.
 ## Image version
 
 `image.tag` defaults to the chart's `appVersion`, so a plain install runs the version the chart was
-released with — `4.0.0` for chart `0.2.0`. Override it to pin a different one:
+released with — `5.0.0` for chart `0.3.0`. Override it to pin a different one:
 
 ```yaml
 image:
-  tag: "4.0.0"
+  tag: "5.0.0"
 ```
 
 ## Storage of the uploaded microfrontends

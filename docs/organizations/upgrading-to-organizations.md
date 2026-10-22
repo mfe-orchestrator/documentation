@@ -55,7 +55,7 @@ Whoever already holds a role in the target organization keeps it. The migration 
 An Editor or a Viewer of one project becomes a plain `MEMBER` of the organization, which reaches
 only the projects they were invited to. That is the same set of projects they could see before the
 upgrade, so nothing is lost — but it also means they cannot create projects any more. Promote them
-to `ADMIN` on the [organization page](./managing-an-organization.md#members) if they need to.
+to `ADMIN` in the **Members** tab of the [organization settings](./managing-an-organization.md#members) if they need to.
 :::
 
 ### Projects with no members at all
@@ -82,7 +82,7 @@ the API answers `502` while the static files are served normally.
 
 ## After the upgrade
 
-Worth checking once, on the [organization page](./managing-an-organization.md):
+Worth checking once, in the [organization settings](./managing-an-organization.md):
 
 1. **The organization name.** It was generated from an account name; rename it to whatever your
    team actually calls itself.

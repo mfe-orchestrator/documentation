@@ -52,7 +52,8 @@ between "built" and "deployed", and this page is where you see it.
 
 Expanding a row also shows the repository the microfrontend is linked to and the **last five runs**
 of that repository, newest first, each with its status, ref, workflow name, start moment, who
-started it, and a link to the run on the provider. *Who started it* never appears on GitLab: the
+started it, and an **Open on provider** link that opens the same run on GitHub Actions, GitLab or
+Azure DevOps, depending on where the repository lives. *Who started it* never appears on GitLab: the
 pipelines list endpoint does not carry it, so the field is left unset and the run is shown without
 it.
 

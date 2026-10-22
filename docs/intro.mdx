@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Get started with MFE Orchestrator
 sidebar_label: Let's start
-description: Create an account, connect a repository and create your first microfrontend with MFE Orchestrator — hosted console or self-hosted, one step at a time.
+description: Create an account, connect a repository and create your first microfrontend with MFE Orchestrator, the open-source orchestrator for micro frontends with AI built in — hosted console or self-hosted.
 keywords: [getting started, tutorial, quickstart, microfrontends]
 ---
 
@@ -10,7 +10,7 @@ import Link from '@docusaurus/Link';
 
 # Get started with MFE Orchestrator
 
-Welcome to MFE Orchestrator! This tutorial will guide you through your first steps with the platform.
+Welcome to MFE Orchestrator, the open-source orchestrator for micro frontends, with AI built in. This tutorial will guide you through your first steps with the platform.
 
 :::tip In a hurry?
 The **[quick start](./quick-start.mdx)** is the condensed version of this page: from zero to a
@@ -109,7 +109,7 @@ If you already have an account, simply sign in with your email or Google account
 
 To deploy microfrontends, you need to connect MFE Orchestrator to your source code repository.
 
-1. Navigate to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** or click on **Settings** → **Code Repositories** in the main navigation menu
+1. Navigate to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** or open **Settings** in the project menu at the top and choose **Code Repositories** under the project resources of the **General** tab
 
    ![The Code Repositories page before any provider is connected](./assets/code-repositories.png)
 
@@ -134,8 +134,8 @@ For most users, we recommend starting with GitHub as it has the simplest setup p
 
 Now you're ready to start working with microfrontends!
 
-1. Return to the **[Home page](https://console.mfe-orchestrator.dev)** by clicking on the home icon or logo in the navigation menu
-2. Click the **Add New Microfrontend** box at the center of the screen
+1. Open **Design** in the sidebar: the page where the microfrontends of the project live
+2. Click **Add New Microfrontend**
 
 ![Add New Microfrontend](./assets/add-new-microfrontend.png)
 
@@ -171,6 +171,8 @@ This process usually takes a few seconds. You'll see a success message once ever
 
 **Congratulations!** 🎉 You've successfully created your first microfrontend. You can now start developing, deploying, and managing your application through MFE Orchestrator.
 
+The sidebar of the console is one flat list: **AI agent**, **Design**, **Dependencies**, **Integration**, **Environment Variables**, **Builds** and **Deployments**. The project settings sit in the project menu at the top.
+
 ## Next steps
 
 Your microfrontend exists, but there are a few more pieces before it is serving traffic. The
@@ -184,14 +186,19 @@ shortest path from here:
    through, plus the [allowed domains](./environments/domains.md) that let one build serve them all.
 4. **[Deploy](./deployments/overview.md)** — snapshot the configuration and make it live. Remember:
    editing is not deploying.
-5. **[Integrate](./integration/overview.md)** — copy the generated Module Federation configuration
-   into your host application.
+5. **[Integrate](./integration/overview.md)** — copy the generated configuration into your host
+   application: Module Federation (Vite, webpack), single-spa or micro-lc.
 
 ### Going further
 
+- **[AI in MFE Orchestrator](./ai/overview.md)** — the **AI agent** page, [Maestro](./ai/assistant.md),
+  the [AIs of your organization](./ai/ai-models.md) and the
+  [AI context](./ai/ai-context.md) agents read
 - **[Edit with AI](./microfrontends/edit-with-ai.md)** — describe a change, refine it with an AI agent
-  and push it or open a pull request; ask [Maestro](./ai/assistant.md) anything about the project
+  and push it or open a pull request
 - **[MCP server](./ai/mcp-server.md)** — let Claude, Cursor or your own agent work on the project
+- **[The main frontend](./microfrontends/main-frontend.md)** — register the frontend of your app, served
+  by its own container, as a **Frontend**
 
 - **[Hosting options](./microfrontends/hosting-options.md)** — keep artifacts on the hub, in
   [your own bucket](./buckets/overview.md), or on your existing CDN

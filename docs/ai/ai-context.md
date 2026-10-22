@@ -13,7 +13,7 @@ you write them down: free Markdown for AI agents, one for the project and one fo
 
 | Context | Where to edit it | What belongs there |
 | --- | --- | --- |
-| **Project AI context** | Settings → General | What applies to every microfrontend: the domain of the product, shared conventions, rules |
+| **Project AI context** | Project settings → **AI context** tab | What applies to every microfrontend: the domain of the product, shared conventions, rules |
 | **Microfrontend AI context** | The **AI context** tab of the microfrontend | Its responsibility, its quirks, what not to touch |
 
 Each is Markdown, at most 20,000 characters.

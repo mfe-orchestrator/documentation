@@ -9,7 +9,7 @@ keywords: [profile, avatar, profile picture, marketing consent, personal data]
 # Your profile
 
 The profile page is about the person signed in rather than about a project. Open it from the
-**account button at the bottom of the sidebar** — the one carrying your name — and then **Profile**.
+**account button at the bottom of the sidebar** — the one carrying your name — and then **Profile**. The same menu holds **Logout**.
 
 ![The profile page, with the profile picture, personal data and marketing consent cards](../assets/profile.png)
 
@@ -108,3 +108,18 @@ nothing will ever act on.
 The registration form carries the same checkbox, under the same condition, and it starts unticked —
 a box that arrives already ticked is not a consent. Whichever of the two you use, the record is the
 same.
+
+## Signing out
+
+**Logout**, in the same account menu, ends the session in the console and clears what the browser
+keeps for it: the assistant conversations and job tabs of the person who was signed in, and the cached
+history of their questions, so the next person to sign in on that browser does not see them.
+
+Signing in with an identity provider adds one step on the way out:
+
+| Signed in with | Logout also |
+| --- | --- |
+| Google | Revokes the Google access token |
+| Microsoft | Ends the Microsoft session with `logoutRedirect`: the browser leaves for Microsoft and comes back to the console |
+| Auth0 | Signs out of Auth0 |
+| Email and password | Nothing beyond the console session |

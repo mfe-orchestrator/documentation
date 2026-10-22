@@ -15,7 +15,7 @@ and whether the client may change things, and the client acts only inside the pr
 
 ## Connect a client
 
-Open **Settings → AI assistants** (the card under *People and access*) and copy the MCP server URL. With
+Open **Settings → General** and, under *People and access*, **Manage** on the **AI assistants** card. The page shows the MCP server URL to copy. With
 the default layout it is:
 
 ```
@@ -25,6 +25,8 @@ https://<your console>/api/mcp
 Add it as a remote MCP server in your client. Claude.ai, ChatGPT and Gemini need nothing else: they open
 the console, you sign in and approve access on the consent page.
 
+![The AI assistants page: the MCP server URL to copy and the list of connected assistants](../assets/mcp-clients.png)
+
 ```bash
 # Claude Code
 claude mcp add --transport http mfe-orchestrator https://<your console>/api/mcp
@@ -32,9 +34,10 @@ claude mcp add --transport http mfe-orchestrator https://<your console>/api/mcp
 
 On the consent page you choose:
 
-- the **projects**, grouped by organization;
+- the **projects**, grouped by organization, with a search box and *Select all* per organization: one
+  connection can share several projects;
 - **Allow changes** or read only. With changes allowed the client can also create projects, and the page
-  says so.
+  says so. A selected project where you are a viewer stays read-only, and the page tells you how many.
 
 The consent page warns you when the client's name cannot be verified, when the code would be sent to a
 host other than the client's, or when it goes to a local application. Approve only clients you
@@ -44,8 +47,8 @@ recognize.
 
 | Access | Tools |
 | --- | --- |
-| **Read only** (`mfe:read`) | Read the project: microfrontends, environments, deployments, canary users, global variables, build status, storages and repository connections (credentials masked), dependency and integration plans, the [AI context](./ai-context.md) |
-| **Read and write** (`mfe:write`) | Everything the console does inside a project, **deploy and rollback included**: create and edit microfrontends and environments, trigger builds, import repositories, change global variables, apply dependency alignments and integrations, scaffold a microfrontend with a new repository from a template, change code through a pull request, create projects |
+| **Read only** (`mfe:read`) | Read the project: microfrontends, environments, deployments, canary users, global variables, build status, storages and repository connections (credentials masked), dependency and integration plans, and the [AI context](./ai-context.md) with `context_get` |
+| **Read and write** (`mfe:write`) | Everything the console does inside a project, **deploy and rollback included**: create and edit microfrontends and environments, trigger builds, import repositories, rename a microfrontend's repository (`microfrontend_repository_rename`), change global variables, apply dependency alignments and integrations, scaffold a microfrontend with a new repository from a template, change code through a pull request (`code_change_submit`), create projects (`project_create`) |
 
 Your role caps each project separately: on a project where you are a **viewer** every write is refused,
 whatever the grant says. Roles are read again on every request, so demoting a member takes write access
@@ -58,7 +61,8 @@ client asks you before calling them.
 
 A client changes code the same way a developer does: `repository_checkout_get` tells it how to clone the
 microfrontend's repository, it edits locally following the AI context, and `code_change_submit` opens a
-pull request. Repositories a client creates or renames end in `-fe`, for example `checkout-fe`.
+pull request against the base branch, which is never written directly. `repository_checkout_get` also returns
+the default branch and the AI context of the microfrontend. Repositories a client creates or renames end in `-fe`, for example `checkout-fe`.
 
 ### Several projects in one connection
 
@@ -76,8 +80,9 @@ consent is asked to reconnect.
 ### Left out on purpose
 
 API keys, creating or editing storages and repository connections (their input is a secret), deleting
-projects, organizations, members, invitations, your profile, bundle upload and the canvas layout. Those
-stay in the console.
+projects, organizations, members, invitations, the connected clients themselves, the pipeline templates
+of a project (`project_pipelines_set`, which only [Maestro](./assistant.md) runs), your profile, bundle
+upload and the canvas layout. Those stay in the console.
 
 ## Connect with an API key
 
@@ -115,10 +120,10 @@ in whenever the client supports it.
 
 ## Revoke access
 
-**Settings → AI assistants** lists the clients connected to the project, with the user, the access, when
+The **AI assistants** page lists the clients connected to the project, with the user, the access, when
 they connected and when they were last used. A project owner (or an organization admin) sees and revokes
 everyone's connections; other members see and revoke their own. Revoking removes the whole connection,
-all its projects, and takes effect on the client's next request.
+all its projects, and takes effect on the client's next request. Maestro can list and revoke them too, after your confirmation.
 
 A connection also ends by itself when you lose access to all its projects, after 30 days without use,
 and in any case after 90 days.

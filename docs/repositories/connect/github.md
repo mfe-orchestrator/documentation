@@ -23,7 +23,7 @@ resulting credential for you.
 
 ## Step 1: Navigate to Code Repositories
 
-1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator
+1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator (also reachable from the project **Settings**, **General** tab, under *Project resources*)
 ![The Code Repositories page](../../assets/code-repositories.png)
 2. Click the **Add Repository** button
 ![The Add Repository dialog, listing the available providers](../../assets/add-repository-provider.png)
@@ -47,7 +47,9 @@ repositories will not be listed in the meantime.
 
 Once you confirm, GitHub returns you to the console and the connection appears in the repository
 list. From there you can [create a microfrontend from a template](../../microfrontends/create-a-microfrontend.md),
-which scaffolds the repository and its pipeline for you.
+which scaffolds the repository and its pipeline for you. The pipeline's
+[deploy API key](../../ci-cd/api-keys.md#keys-created-for-you) is stored as a secret on GitHub and
+is valid for one year.
 
 ## Troubleshooting
 

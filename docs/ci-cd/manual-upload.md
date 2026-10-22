@@ -150,12 +150,15 @@ VERSION="${BUILD_SOURCEBRANCHNAME}"  # Azure DevOps
 
 | Symptom | Cause |
 | --- | --- |
-| `401` / authentication error | Missing, wrong, revoked or **expired** `api-key` |
+| `401` / authentication error | Missing, wrong, revoked or **expired** `api-key`; the message names which |
 | `File must be a ZIP archive` | Wrong MIME type or extension — send a real `.zip` |
 | Entity not found for the slug | No microfrontend with that slug in the key's project |
 | `Microfrontend host type is not supported` | The microfrontend is **Custom URL** |
 | Upload succeeds, app 404s | Entry point mismatch, or the ZIP has a directory prefix |
 | Upload succeeds, users see the old version | You have not deployed |
+
+A [Frontend](../microfrontends/main-frontend.md) refuses an upload with `FRONTEND_UPLOAD_NOT_ALLOWED`:
+it [registers an image version](./frontend-pipeline.md) instead.
 
 For the entry point: Vite Module Federation emits `assets/remoteEntry.js`, Webpack emits
 `remoteEntry.js`. The **Entry Point** field on the microfrontend must match what your build actually

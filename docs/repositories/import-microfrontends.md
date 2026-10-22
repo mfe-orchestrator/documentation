@@ -10,8 +10,8 @@ keywords: [import, repositories, bulk, adopt, microfrontends, slug]
 
 A project that already exists does not start from an empty microfrontend list: its
 microfrontends are repositories that have been around for months, one per team. Declaring them
-one by one in the console is the boring part of adopting the orchestrator, so the microfrontends
-dashboard can read the repositories reachable through a code repository connection and create
+one by one in the console is the boring part of adopting the orchestrator, so the **Design**
+page can read the repositories reachable through a code repository connection and create
 one microfrontend per repository, in a single pass.
 
 The import only creates and links the microfrontends. It does not clone, build or deploy
@@ -22,17 +22,17 @@ environment stays a separate, explicit step.
 
 The import needs a **code repository connection on the project** — a
 [GitHub](./connect/github.md) account or organization, a [GitLab](./connect/gitlab.md) group, or
-an [Azure DevOps](./connect/azure.dev-ops.md) project — configured under **Settings → Code
-repositories**. Until at least one connection exists the action is not shown at all, because
+an [Azure DevOps](./connect/azure.dev-ops.md) project — added under **Code Repositories**, which
+the project **Settings** link to from the **General** tab. Until at least one connection exists the action is not shown at all, because
 there would be nothing to list.
 
 ## Where the action is
 
-On the **Microfrontends** dashboard, **Import from repository** sits next to
+On the **Design** page, **Import from repository** sits next to
 **New microfrontend** in the page header, and again in the empty state of a project that has no
 microfrontend yet.
 
-![The Import from repository action in the microfrontends dashboard header](../assets/repository-import-action.png)
+![The Import from repository action in the header of the Design page](../assets/repository-import-action.png)
 
 ## Choosing what to import
 

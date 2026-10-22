@@ -27,7 +27,7 @@ Organization
 ├── Members (Owner, Admin, Member)
 └── Project
     ├── Environment (dev, uat, prod, …)
-    ├── Microfrontend (host or remote, versioned)
+    ├── Microfrontend (host, remote or frontend, versioned)
     ├── Storage / Bucket, Code Repository, API Key
     └── Members (Admin, Editor, Viewer)
 ```
@@ -60,9 +60,9 @@ are in.
 ![The console header showing the organization name, the project name and the open organization menu](../assets/organization-menu.png)
 
 The header reads as a breadcrumb — *organization › project* — and the organization name is a link to
-the [organization page](./managing-an-organization.md#the-organization-page). The button on the
+the [organization settings](./managing-an-organization.md#organization-settings). The button on the
 right is the single door to the organization level: settings, switching and creation all start
-there. Everything in the sidebar below it is about the project.
+there. The sidebar is about the project, and so is the **Settings** entry of the top project menu.
 
 :::info The selection is remembered per browser
 The organization and the project you are working in are stored in the browser, not on the server.
@@ -93,8 +93,8 @@ the organization switcher — not the project wizard, which would fail on submit
 
 - [Roles and project visibility](./roles-and-visibility.md) — who reaches which project, and how
   organization roles interact with project roles
-- [Managing an organization](./managing-an-organization.md) — switching, creating, members, settings
-  and deletion
+- [Managing an organization](./managing-an-organization.md) — switching, creating, and the settings
+  page with its General, Members and AI tabs
 - [Upgrading to organizations](./upgrading-to-organizations.md) — what happens to projects created
   before 4.0.0
 - [Project members and roles](../project-settings/users-and-roles.md) — the second, finer level of

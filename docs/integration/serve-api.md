@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 8
 title: Serve API reference
 sidebar_label: Serve API
 description: "Reference for the public, unauthenticated serve API your applications call: endpoints, response shapes, error codes, and which deployment each answers from."
@@ -81,7 +81,9 @@ GET <API_BASE>/serve/all/auto/{projectId}                # Referer or Host
     ?mfeSessionId=<uuid>&mfeDeviceId=<uuid>&mfeUserId=<optional>
 ```
 
-Returns the whole environment in one call: microfrontends with resolved URLs, and variables.
+Returns the whole environment in one call: microfrontends with resolved URLs, and variables. A
+microfrontend of kind **FRONTEND** is left out of `microfrontends`: it is never a remote, so no host
+loads it from the manifest.
 
 The third form names no environment at all: the caller says only which project it belongs to, and
 the platform picks the environment whose allowed domains match the request. It is what the
@@ -199,6 +201,9 @@ Returns a single entry in the same shape as the items in `microfrontends` above 
 and the version that entry resolves to, which is the canary-resolved one wherever a version canary
 applies, with the same [Based on URL caveat](#everything-about-an-environment).
 
+A **FRONTEND** microfrontend answers here with an empty `url` and its registered version: nothing of
+ours serves it, and any canary on it is ignored.
+
 Useful when a host wants to look up one remote lazily rather than fetching the whole environment.
 
 ## Microfrontend files
@@ -211,6 +216,9 @@ GET <API_BASE>/serve/mfe/files/{projectId}/{environmentSlug}/{mfeSlug}/{path}
 GET <API_BASE>/serve/mfe/files/auto/{projectId}/{mfeSlug}/{path}    # Referer or Host
 GET <API_BASE>/serve/mfe/files/{mfeId}/{path}                      # Referer required
 ```
+
+A **FRONTEND** microfrontend has no files here, since its own container serves them: asking for one
+answers `404` with `ENTITY_NOT_FOUND`.
 
 `{path}` is the file inside the build, for example `assets/remoteEntry.js` or
 `assets/index-4f2a.css`.

@@ -12,13 +12,15 @@ Every microfrontend declares **where its files live**. This is the *hosting type
 **Hosting Information** in the **Hosting** tab of the microfrontend form. It determines how
 MFE Orchestrator resolves a request for `remoteEntry.js` into actual bytes.
 
-There are three options.
+There are three options. A microfrontend created without one, by the assistant, an MCP client or an
+import from a repository, falls back to the project's default storage, or to the MFE Orchestrator Hub
+when the project has none.
 
 ![The Hosting Type list open, offering MFE Orchestrator Hub and Custom URL](../assets/microfrontend-hosting-type.png)
 
 :::note
 **Custom Source** only appears in the list once the project has at least one
-[storage](../buckets/overview.md) configured.
+[storage](../buckets/overview.md) configured, reached from the project's settings.
 :::
 
 ## MFE Orchestrator Hub

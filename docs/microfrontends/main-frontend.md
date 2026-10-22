@@ -42,6 +42,8 @@ page, its [AI context](../ai/ai-context.md) and [Edit with AI](./edit-with-ai.md
 In the **General** tab, the optional **Image repository** is where its pipeline pushes the image,
 without tag, for example `ghcr.io/acme/shell`.
 
+![The General tab of a Frontend: the Frontend kind selected and the image repository its pipeline pushes to](../assets/frontend-kind-form.png)
+
 ## Register a version
 
 After pushing the image, the pipeline registers the version with a `MANAGER` [API key](../ci-cd/api-keys.md):

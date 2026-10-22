@@ -29,7 +29,25 @@ git clone https://github.com/mfe-orchestrator/mfe-orchestrator.git
 cd mfe-orchestrator/terraform
 ```
 
-### 2. Initialize Terraform
+### 2. Set the variables
+
+The module needs two values that differ per server and are secret, so they stay out of the
+repository. Put them in a `terraform.tfvars` next to the configuration, or export them as
+`TF_VAR_<name>`:
+
+```hcl
+frontend_url = "http://localhost:8080"
+jwt_secret   = "<output of openssl rand -hex 32>"
+```
+
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `frontend_url` | *(required)* | Public URL of the console, without trailing slash. The MCP and OAuth URLs are derived from it. |
+| `jwt_secret` | *(required)* | Signing secret for console and MCP tokens, at least 32 bytes. |
+| `mcp_enabled` | `true` | Exposes the [MCP server](../ai/mcp-server.md) at `<frontend_url>/api/mcp`. |
+| `anthropic_api_key` | *(empty)* | When set, turns on the system AI with Claude. See the [AI variables](./environment-variables.md#ai). |
+
+### 3. Initialize Terraform
 
 Initialize Terraform to download the required providers:
 
@@ -39,7 +57,7 @@ terraform init
 
 This will download the Docker provider (kreuzwerker/docker v3.6.1) and initialize the backend.
 
-### 3. Review the Planned Changes And Apply
+### 4. Review the Planned Changes And Apply
 
 Before applying, review what Terraform will create:
 
@@ -69,7 +87,7 @@ Type `yes` when prompted to confirm the deployment.
 The apply process will create all necessary Docker resources to run MFE Orchestrator locally.
 :::
 
-### 4. Verify the Deployment
+### 5. Verify the Deployment
 
 After successful deployment, verify that containers are running:
 
@@ -89,19 +107,19 @@ whoever reaches it first owns the installation, and the project name you type be
 slug.
 
 
-## Pinned images
-
-The module names released image tags rather than floating ones, so a `terraform apply` run today
-and one run in three months bring up the same stack:
+## Images
 
 | Container | Image |
 | --- | --- |
-| MFE Orchestrator | `lory1990/mfe-orchestrator:4.0.0` |
+| MFE Orchestrator | `lory1990/mfe-orchestrator:development` |
 | MongoDB | `mongo:8-noble` |
 | Redis | `redis:8.0.2-alpine` |
 
-Upgrading is deliberate: change the tag in `terraform/modules/microfronted-orchestrator-hub.tf` and
-apply again.
+MongoDB and Redis are pinned. The orchestrator image follows the `development` tag, which is
+rebuilt on every push to the development branch and is pulled again whenever its digest changes. To
+run a release instead, change the tag in `terraform/modules/microfronted-orchestrator-hub.tf` to
+`5.0.0` and apply again: `terraform apply` run today and in three months then brings up the same
+stack.
 
 ## Before you call it production
 
@@ -109,13 +127,14 @@ The module is a local development stack, and two of its defaults are unsafe anyw
 
 - **MongoDB credentials are hardcoded.** `terraform/modules/mongo.tf` sets `root` / `example`, and
   the orchestrator's `NOSQL_DATABASE_URL` names the same pair. Change both, together.
-- **No `JWT_SECRET` is set.** The module passes none, so the backend signs its tokens with the
-  built-in default key — which means anybody who knows it can forge a token for the installation.
-  Add `JWT_SECRET=<a random value>` to the `env` list in
-  `terraform/modules/microfronted-orchestrator-hub.tf`, and a `SECRETS_ENCRYPTION_KEY` beside it if
-  the installation will hold storage credentials or repository tokens.
+- **No `SECRETS_ENCRYPTION_KEY` is set.** Add `SECRETS_ENCRYPTION_KEY=<openssl rand -base64 32>`
+  to the `env` list in `terraform/modules/microfronted-orchestrator-hub.tf` if the installation will
+  hold storage credentials or repository tokens. See [Encryption at rest](./encryption-at-rest.md).
 
-[Docker Compose](./docker-compose.md) warns about the same two defaults; the reasoning is there.
+The module also sets `REGISTRATION_ALLOWED=true`, which only shows the *Register* link; see
+[the first startup](./first-startup.md#the-endpoint-stays-open).
+
+[Docker Compose](./docker-compose.md) warns about the same defaults; the reasoning is there.
 
 ## Container Variables
 

@@ -14,13 +14,15 @@ link somebody received by email:
 | Route | Reached from | The link lives |
 | --- | --- | --- |
 | `/account-activation/:token` | The email sent after [registering](#registration-and-activation) | 24 hours |
-| `/reset-password-request` | The **Forgot your password?** link under the login form | — (it is a form, not a link) |
+| `/reset-password-request` | The **Forgot password?** link under the login form | — (it is a form, not a link) |
 | `/reset-password/:token` | The email sent by that form | 1 hour |
 | `/project-invitation/:token` | The email sent by [inviting somebody to a project](../project-settings/users-and-roles.md#inviting-a-member) | 5 days |
 | `/organization-invitation/:token` | The email sent by [inviting somebody to an organization](../organizations/managing-an-organization.md#inviting-a-member) | 5 days |
 
 The token is the whole of the authentication: whoever holds the link is whoever the email was sent
-to, so it is worth treating one like a password until it is used.
+to, so it is worth treating one like a password until it is used. For the same reason no API response
+ever carries an activation or a reset token: registering, for one, answers with the account and not
+with the token minted for it. The token reaches the person by email and nowhere else.
 
 :::danger Without SMTP an installation cannot do any of this
 Every one of those tokens is delivered by email and by no other means. There is no screen that
@@ -28,13 +30,13 @@ prints a link, no CLI that generates one, and no way to read one back out of the
 installation with no `EMAIL_SMTP_HOST` therefore **cannot activate an account, cannot reset a
 password and cannot confirm an invitation** — and it does not tell you so during installation.
 
-What it does instead differs per flow, and only one of the three fails visibly:
+What it does instead differs per flow:
 
 | Flow | On an installation with no SMTP |
 | --- | --- |
 | Registration | Silently skipped. No token is created, no email is attempted, and the new account is usable straight away. |
-| Invitations | Silently degraded. No token, no email: the address is added as an **already active member**, with nothing having proved the person owns it. |
-| **Password reset** | **Broken.** The token is written, the send is attempted against a host that is not configured, and the screen reports success anyway. |
+| Invitations | Silently degraded. No token, no email: the address is added as an **already active member**, with nothing having proved the person owns it. Resending an invitation is refused with `EMAIL_NOT_CONFIGURED`. |
+| **Password reset** | **Refused.** The request fails with `EMAIL_NOT_CONFIGURED` before anything is written to the account, and the screen says so. |
 
 Configure SMTP before you let anybody else near the console. See
 [`EMAIL_SMTP_HOST` and its siblings](../self-hosting/environment-variables.md).
@@ -70,20 +72,27 @@ form with "log in to access your account" instead of "we have sent you an email"
 
 ## Recovering a password
 
-**Forgot your password?** under the login form leads to `/reset-password-request`, which asks for one
+**Forgot password?** under the login form leads to `/reset-password-request`, which asks for one
 thing:
 
 ![The Recover Password form, asking for an email address](../assets/reset-password-request.png)
 
-Submitting it always ends the same way, whatever the address was: a message reading *"If an account
-exists with this email, you will receive a password reset link"*, and back to the login form. The
-screen is deliberately non-committal about whether the account exists.
+Submitting it for an account the installation can mail ends the same way: a message reading *"If an
+account exists with this email, you will receive a password reset link"*, and back to the login form.
 
-:::note The screen does not reveal whether the account exists. The API does.
+When the request is refused, the confirmation and the redirect are held back and the form stays where
+it is, with a message under the toast:
+
+| Answer | What the person reads |
+| --- | --- |
+| `EMAIL_NOT_CONFIGURED` | *This installation has no email server configured: resetting the password is not available. Contact an administrator.* |
+| Anything else, including an address with no account | *The password reset link could not be sent. Please try again.* |
+
+:::note The refusal for an unknown address is not an invisible one
 `POST /api/users/forgot-password` answers with an error for an address it has never seen, and the
-console shows its success message regardless of what came back. So the reassurance is real for
-somebody reading the page and not for somebody watching the response — worth knowing if you put the
-console behind a WAF or read its access logs.
+console reports it as a failed send rather than as success. Somebody trying addresses can therefore
+tell the accounts that exist from the ones that do not — worth knowing if you put the console behind
+a WAF or read its access logs.
 :::
 
 The email carries a link to `/reset-password/:token`, good for **one hour** and for one use — the
@@ -95,15 +104,11 @@ The new password must be at least 8 characters and the second field must match t
 are checked in the browser; the confirmation field exists only there, and the API is sent the
 password alone.
 
-:::danger On an installation without SMTP the reset says it worked and nothing was sent
-This is the one flow that does not check whether email can be delivered before it starts. The token
-is generated and stored on the account, the send is attempted against a transport with no host
-configured, and the request fails — but the console has already shown its "check your email"
-message, because it displays that message without waiting for the answer.
-
-The person is left waiting for an email that was never sent, on an account whose reset token is now
-ticking. There is no way out of it from the console: an operator has to reset the password out of
-band, or configure SMTP and have them ask again.
+:::info On an installation without SMTP the reset is refused, not pretended
+The password reset checks whether email can be delivered before it does anything. With no SMTP host
+configured it answers `EMAIL_NOT_CONFIGURED` and writes no token, so the account is left exactly as it
+was and nobody waits for an email that cannot come. An operator has to reset the password out of band,
+or configure SMTP and have the person ask again.
 :::
 
 ## Accepting an invitation

@@ -12,7 +12,9 @@ A **bucket** — a *storage* in the console — is a connection to object storag
 configured, microfrontend builds are stored in your own cloud account instead of on the platform,
 while MFE Orchestrator continues to handle versioning, deployments and serving.
 
-Buckets live under **Settings → Storages**.
+Storages are reached from **Project Settings** — open the project menu at the top, then the **General** tab —
+where the **Project resources** section lists them next to the environments and code repositories. Click
+**Storages** to open the list.
 
 ![The Storages page of a project with no bucket configured yet](../assets/storages-empty.png)
 
@@ -86,14 +88,15 @@ makes rollback instant: nothing is overwritten or deleted on a new release.
 
 ## Adding a storage
 
-1. Go to **Settings → Storages** and click **New Storage**.
+1. Open **Project Settings → General**, click **Storages** in **Project resources**, then **New Storage**.
 2. Give it a **Name** and pick the **Provider**.
 
    ![Choosing a storage provider](../assets/storage-providers.png)
 
 3. Fill in the provider-specific credentials — see the per-provider pages.
 4. Optionally set a **Path** prefix inside the bucket.
-5. Save.
+5. Click **Test connection** (see [Testing the connection](#testing-the-connection)).
+6. Save.
 
 ![The New Storage form, showing the Amazon S3 credential fields](../assets/storage-dialog.png)
 
@@ -102,8 +105,24 @@ A storage's provider type is fixed at creation. To move from S3 to GCS, create a
 re-point your microfrontends at it.
 :::
 
-You can mark one storage as the **default** for the project, which is then preselected for new
-microfrontends.
+You can mark one storage as the **default** for the project with the star in the list. It is
+preselected for new microfrontends. When a microfrontend is created without saying where it is
+served from — by the assistant or by an MCP client — it uses the project's default storage, or the
+MFE Orchestrator hub when the project has none.
+
+## Testing the connection
+
+The storage form has a **Test connection** button, so a wrong credential shows up before you save,
+not at the first upload. The test uploads a small probe file to the project's folder in the bucket
+and reads it back, which proves the credentials can write and read where the bundles will go.
+
+- For a storage you are creating, the console calls `POST /api/storages/test` with the form.
+- For an existing storage, it calls `POST /api/storages/:storageId/test`; credentials you do not
+  retype are taken from the stored ones, as long as the provider is the same.
+
+A refusal from the provider is the result of the test, not an error: the form shows **Connection
+failed** with what the provider answered. Testing is limited to a few attempts a minute per user, and
+a read-only member of the project cannot test, add, edit or delete a storage.
 
 ## Using a storage
 

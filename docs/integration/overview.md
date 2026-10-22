@@ -68,7 +68,7 @@ host, the `configure()` bootstrap for `src/main.tsx`, and how React is shared:
 
 A remote of these stacks gets the Vite library build it needs instead: an ES module emitting
 `dist/index.js` for single-spa, a UMD script emitting `dist/parcel.js` for micro-lc. In both cases
-React stays external. **Integrate my microfrontends** writes the host file and adds the runtime
+React stays external. Each model has its own page: [single-spa](./single-spa.md) and [micro-lc](./micro-lc.md). **Integrate my microfrontends** writes the host file and adds the runtime
 packages (`single-spa`, or `@micro-lc/orchestrator`) to `package.json`.
 
 ## The two integration models
@@ -147,6 +147,10 @@ resolved environment's deployment — the **active** one for everything except t
 | One microfrontend's URL and version | `/serve/mfe/config/...` |
 | A microfrontend's actual files | `/serve/mfe/files/...` |
 
+A microfrontend of kind **FRONTEND** — the project's main frontend, served by its own container — is
+not served as a bundle: it never appears in the manifest as a remote, its files endpoint answers `404`,
+and its config endpoint answers with an empty `url`.
+
 These endpoints are **public and unauthenticated** — they are meant to be called from browsers.
 The complete reference is in [Serve API](./serve-api.md).
 
@@ -162,5 +166,7 @@ the [allowed domains](../environments/domains.md) being right.
   delegates remote resolution to
 - [Vite](./module-federation-vite.md) — `@originjs/vite-plugin-federation`
 - [Webpack](./module-federation-webpack.md) — `ModuleFederationPlugin`
+- [single-spa](./single-spa.md) — root config and applications, React shared through an import map
+- [micro-lc](./micro-lc.md) — shell configuration and parcels, React shared through window globals
 - [Runtime configuration](./runtime-configuration.md) — reading environment variables in the browser
 - [Serve API](./serve-api.md) — the full public endpoint reference

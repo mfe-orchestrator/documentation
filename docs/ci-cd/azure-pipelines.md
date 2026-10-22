@@ -113,11 +113,9 @@ The group is created at **project** scope, so several microfrontend repositories
 DevOps project share it. That also means the connection must have a project selected: without an
 organization and a project id the injector returns without creating anything.
 
-:::note The key is dated 15 days out, and keeps working anyway
-The generated key's expiry is computed as 365 *hours*, not a year, so **Settings → API Keys** badges
-it **Expired** about two weeks after you connect the repository. The key keeps authenticating —
-the expiry date is recorded and never enforced, see
-[expiry is recorded, not enforced](./api-keys.md#expiry-is-recorded-not-enforced).
+:::note Deploy keys last a year
+The key is created with a one-year expiry, and an expired or revoked key is refused: recreate it
+before then. See [API keys](./api-keys.md#expiry-and-revocation-are-enforced).
 :::
 
 :::caution Pipeline authorization
@@ -190,6 +188,9 @@ Variants for other compilers and host types are in
 [`template-pipelines`](https://github.com/mfe-orchestrator/template-pipelines) under
 `<type>/<compiler>/azure_dev_ops/`.
 
+To make every new repository of the project start from your own pipeline instead of the official one,
+see [Pipeline templates](./pipeline-templates.md).
+
 ## Troubleshooting
 
 **Deploy stage skipped**
@@ -207,10 +208,10 @@ The extension is not installed in the organization. Install it, or use the `curl
 
 **Authentication failure on publish**
 
-The key is missing from the group, misnamed, or names a key that has been deleted. Check
-**Settings → API Keys** in the console — an **Expired** badge is not the cause, since expired keys
-still authenticate. If the connection has no Azure DevOps project selected, the group was never
-created at all.
+The error names the reason: `API key revoked`, `API key expired on <date>`, or `API key not found`.
+For the first two, create a new key and update the group. For the last, the key is missing from the
+group, misnamed, or names a key that was deleted: check the **API Keys** of the project settings. If
+the connection has no Azure DevOps project selected, the group was never created at all.
 
 **Wrong version published**
 

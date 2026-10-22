@@ -76,7 +76,7 @@ grants more than is needed. Contributor at container scope is the right level.
 
 ## Step 3: Add the storage in MFE Orchestrator
 
-Go to **Settings → Storages → New Storage** and select **Azure Blob Storage**. The fields depend on
+Open **Project Settings → General → Storages → New Storage** and select **Azure Blob Storage**. The fields depend on
 the **Authentication Type** you pick:
 
 ![The three authentication types offered for Azure Blob Storage](../assets/storage-form-azure-auth-types.png)
@@ -111,7 +111,7 @@ the **Authentication Type** you pick:
 
 ![The Azure Blob Storage form with Connection String selected](../assets/storage-form-azure-blob.png)
 
-Save.
+Click **Test connection** to check the credentials against the bucket, then save. See [Testing the connection](./overview.md#testing-the-connection).
 
 ## Step 4: Point a microfrontend at it
 

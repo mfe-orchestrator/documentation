@@ -17,7 +17,7 @@ This guide will walk you through connecting your Azure DevOps repositories to MF
 
 ## Step 1: Navigate to Code Repositories
 
-1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator
+1. Go to **[Code Repositories](https://console.mfe-orchestrator.dev/code-repositories)** in MFE Orchestrator (also reachable from the project **Settings**, **General** tab, under *Project resources*)
 ![The Code Repositories page](../../assets/code-repositories.png)
 2. Click the **Add Repository** button
 ![The Add Repository dialog, listing the available providers](../../assets/add-repository-provider.png)
@@ -127,6 +127,11 @@ Before saving, verify that everything is configured correctly clicking on **Test
 If the test is successful, you'll see a **green checkmark** and a success message. If it fails, double-check your organization name and PAT.
 :::
 
+The test reads the projects of the organization **and** their variable groups. A token that reaches
+the projects but lacks the **Variable Groups** scope fails the test with a message naming it:
+*create a PAT with the Variable Groups (Read, create, & manage) scope*. Create a new token with the
+scope and try again.
+
 ### 3.3 Select the Project
 
 The test does more than validate the token: it returns the projects in the organization, and a
@@ -144,6 +149,9 @@ deploy key — see
 1. With a project selected, click **Connect Azure Dev Ops**
 2. Your Azure DevOps connection is now active!
 
+Saving the connection also creates a [deploy API key](../../ci-cd/api-keys.md#keys-created-for-you),
+valid for one year, and stores it in the `MFE_ORCHESTRATOR_SECRETS` variable group.
+
 ## Troubleshooting
 
 ### Connection Test Fails
@@ -151,6 +159,7 @@ deploy key — see
 If the connection test fails, check the following:
 
 - **Invalid Organization Name**: Verify that the organization name matches exactly what appears in your Azure DevOps URL
+- **Missing Variable Groups scope**: the message says the token reaches the projects but not their variable groups; create a PAT that includes it
 - **Insufficient Permissions**: Ensure you selected all four required scopes — Code, Build and
   Release with "Read, write & manage", and Variable Groups with "Read, create, & manage"
 - **Expired Token**: Check if your PAT has expired and create a new one if needed

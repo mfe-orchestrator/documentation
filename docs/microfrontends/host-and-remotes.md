@@ -14,8 +14,8 @@ This page covers how MFE Orchestrator models those relationships, and what it do
 ## The relation graph
 
 Every microfrontend can have **parents** — the hosts that load it. In the **Diagram view** on
-the Microfrontends page, relations are the arrows between nodes; you create and remove them
-there directly.
+the **Design** page, relations are the arrows between nodes; you create and remove them
+there directly, and dragging or resizing a node saves its position and size.
 
 A typical setup looks like this:
 

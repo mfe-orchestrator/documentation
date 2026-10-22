@@ -31,7 +31,7 @@ const STRUCTURED_DATA = {
       name: 'MFE Orchestrator documentation',
       url: DOCS_URL,
       description:
-        'Documentation for MFE Orchestrator: the control plane for microfrontend architectures.',
+        'Documentation for MFE Orchestrator: the open-source orchestrator for micro frontends, with AI built in.',
       inLanguage: 'en',
       publisher: ORGANIZATION,
     },
@@ -42,8 +42,9 @@ const STRUCTURED_DATA = {
       operatingSystem: 'Any',
       url: SITE_URL,
       description:
-        'Control plane for microfrontend architectures: versions, environments, deployments and ' +
-        'rollbacks, with generated Module Federation configuration. Hosted or self-hosted.',
+        'Open-source orchestrator for micro frontends, with AI built in: versions, environments, ' +
+        'deployments and rollbacks, generated integration configuration for Module Federation, ' +
+        'single-spa and micro-lc, an AI agent and an MCP server. Hosted or self-hosted.',
       author: ORGANIZATION,
       publisher: ORGANIZATION,
     },
@@ -79,7 +80,8 @@ type Stat = {value: string; label: string};
 const STATS: Stat[] = [
   {value: '3', label: 'Git providers'},
   {value: '3', label: 'Cloud storages'},
-  {value: '2', label: 'Bundlers'},
+  {value: '3', label: 'Integration models'},
+  {value: 'AI', label: 'Agent, Edit with AI, MCP'},
   {value: '∞', label: 'Environments'},
   {value: '1 click', label: 'Rollback'},
 ];
@@ -122,10 +124,24 @@ const START_HERE: Card[] = [
 
 const CAPABILITIES: Card[] = [
   {
-    icon: '🧩',
-    title: 'Generated Module Federation config',
+    icon: '✨',
+    title: 'AI built in',
     description:
-      'Declare which host loads which remotes and the console produces the Vite or Webpack configuration, with URLs pointing at what is deployed.',
+      'An AI agent page with the Maestro assistant, jobs across several microfrontends and Edit with AI, on the AIs your organization chose. Every change waits for your approval.',
+    to: '/docs/ai/overview',
+  },
+  {
+    icon: '🔌',
+    title: 'MCP server',
+    description:
+      'Claude, Cursor or your own agent sign in with OAuth 2.1, read the project and its AI context, and submit code changes as a pull request.',
+    to: '/docs/ai/mcp-server',
+  },
+  {
+    icon: '🧩',
+    title: 'Generated integration config',
+    description:
+      'Declare which host loads which remotes and the console produces the configuration for Module Federation (Vite, webpack), single-spa or micro-lc.',
     to: '/docs/integration/overview',
   },
   {
@@ -181,7 +197,7 @@ const STEPS: Step[] = [
   {
     title: 'Create a microfrontend',
     description:
-      'Pick a template and the platform creates the repository, the configuration and the pipeline.',
+      'Pick a template on the Design page and the platform creates the repository, the configuration and the pipeline.',
     to: '/docs/microfrontends/create-a-microfrontend',
   },
   {
@@ -214,6 +230,17 @@ const DOC_SECTIONS: DocSection[] = [
     ],
   },
   {
+    title: 'AI',
+    links: [
+      {label: 'Overview', to: '/docs/ai/overview'},
+      {label: 'Maestro', to: '/docs/ai/assistant'},
+      {label: 'Edit with AI', to: '/docs/microfrontends/edit-with-ai'},
+      {label: 'MCP server', to: '/docs/ai/mcp-server'},
+      {label: 'AI models', to: '/docs/ai/ai-models'},
+      {label: 'AI context', to: '/docs/ai/ai-context'},
+    ],
+  },
+  {
     title: 'Microfrontends',
     links: [
       {label: 'Overview', to: '/docs/microfrontends/overview'},
@@ -222,6 +249,7 @@ const DOC_SECTIONS: DocSection[] = [
         to: '/docs/microfrontends/create-a-microfrontend',
       },
       {label: 'Hosts and remotes', to: '/docs/microfrontends/host-and-remotes'},
+      {label: 'The main frontend', to: '/docs/microfrontends/main-frontend'},
       {
         label: 'Versions and builds',
         to: '/docs/microfrontends/versions-and-builds',
@@ -329,14 +357,15 @@ function Hero() {
         <div className={styles.heroCopy}>
           <span className={styles.eyebrow}>Documentation</span>
           <Heading as="h1" className={styles.heroTitle}>
-            The <span className={styles.gradientText}>control plane</span> for
-            your microfrontends
+            The <span className={styles.gradientText}>orchestrator</span> for
+            micro frontends, with AI built in
           </Heading>
           <p className={styles.heroSubtitle}>
-            MFE Orchestrator keeps versions, environments, deployments and
-            rollbacks of a microfrontend architecture in one place — and
-            generates the Module Federation configuration your host application
-            needs. These pages cover both the hosted console and the
+            MFE Orchestrator is open source and keeps versions, environments,
+            deployments and rollbacks of a microfrontend architecture in one
+            place. It generates the configuration your host application needs
+            and brings an AI agent, Edit with AI and an MCP server into the
+            console. These pages cover both the hosted console and the
             self-hosted platform.
           </p>
           <div className={styles.heroActions}>
@@ -353,7 +382,8 @@ function Hero() {
           <ul className={styles.heroNotes}>
             <li>Hosted console or self-hosted</li>
             <li>GitHub, GitLab and Azure DevOps</li>
-            <li>Vite and Webpack</li>
+            <li>Module Federation, single-spa and micro-lc</li>
+            <li>Claude, Azure OpenAI and Gemini</li>
           </ul>
         </div>
         <div className={styles.heroVisual}>
@@ -525,7 +555,7 @@ function Ecosystem() {
   return (
     <section className={styles.sectionNarrow}>
       <p className={styles.ecosystemLabel}>
-        Templates ship for Vite, Webpack and Web Components. The platform itself
+        Templates ship for Vite, Webpack, single-spa, micro-lc and Web Components. The platform itself
         serves whatever your build produces.
       </p>
       <div className={styles.logoRow}>
@@ -612,8 +642,8 @@ function Help() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="The control plane for your microfrontends"
-      description="Documentation for MFE Orchestrator: versions, environments, deployments, rollback and generated Module Federation configuration, hosted or self-hosted.">
+      title="The orchestrator for micro frontends, with AI built in"
+      description="Documentation for MFE Orchestrator: versions, environments, deployments, rollback, generated integration configuration, an AI agent and an MCP server, hosted or self-hosted.">
       <Head>
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
