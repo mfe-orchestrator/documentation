@@ -108,6 +108,9 @@ const config: Config = {
       logo: {
         alt: 'MFE Orchestrator logo',
         src: 'img/logo.png',
+        // The logo and the title lead to the website home, not to the docs root.
+        href: 'https://mfe-orchestrator.dev/',
+        target: '_self',
       },
       items: [
         {
